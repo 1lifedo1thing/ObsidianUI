@@ -15,9 +15,9 @@ export function Demo() {
 return (
   <HoverImg
     projects={[
-      { title: "Shree Krishna", label: "The Supreme Personality of Godhead", imageSrc: "https://www.obsidianui.dev/hover-img/hover-img-img01-alt.jpg" },
-      { title: "Radha Krishna", label: "The Divine Couple", imageSrc: "https://www.obsidianui.dev/hover-img/hover-img-img02.jpg" },
-      { title: "Divine Love", label: "Eternal Bond", imageSrc: "https://www.obsidianui.dev/hover-img/hover-img-img03.jpg" },
+      { title: "Shree Krishna", label: "The Supreme Personality of Godhead", imageSrc: "https://pub-830233752de349e29c6104a501b309d4.r2.dev/hover-img/hover-img-img01-alt.jpg" },
+      { title: "Radha Krishna", label: "The Divine Couple", imageSrc: "https://pub-830233752de349e29c6104a501b309d4.r2.dev/hover-img/hover-img-img02.jpg" },
+      { title: "Divine Love", label: "Eternal Bond", imageSrc: "https://pub-830233752de349e29c6104a501b309d4.r2.dev/hover-img/hover-img-img03.jpg" },
     ]}
   />
 )
@@ -41,8 +41,6 @@ npm install gsap
 ```
 
 Resolve @components/, @ui/, @lib/, and @hooks/ targets through your components.json aliases. For example, @components/block/example.tsx maps to src/components/block/example.tsx when components is @/components and @/\* resolves to src/\*. Do not create a literal @components directory. Preserve existing files deliberately and keep the use client directive where present.
-
-Default demo media loads from ObsidianUI. Replace these URLs with your own assets for offline use.
 
 ### components/block/hover-img.css
 
@@ -228,17 +226,17 @@ const defaultProjects: ProjectItem[] = [
     {
         title: "Shree Krishna",
         label: "The Supreme Personality of Godhead",
-        imageSrc: "https://www.obsidianui.dev/hover-img/hover-img-img01-alt.jpg",
+        imageSrc: "https://pub-830233752de349e29c6104a501b309d4.r2.dev/hover-img/hover-img-img01-alt.jpg",
     },
     {
         title: "Radha Krishna",
         label: "The Divine Couple",
-        imageSrc: "https://www.obsidianui.dev/hover-img/hover-img-img02.jpg",
+        imageSrc: "https://pub-830233752de349e29c6104a501b309d4.r2.dev/hover-img/hover-img-img02.jpg",
     },
     {
         title: "Divine Love",
         label: "Eternal Bond",
-        imageSrc: "https://www.obsidianui.dev/hover-img/hover-img-img03.jpg",
+        imageSrc: "https://pub-830233752de349e29c6104a501b309d4.r2.dev/hover-img/hover-img-img03.jpg",
     },
 ];
 

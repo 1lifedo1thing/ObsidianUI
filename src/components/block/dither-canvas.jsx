@@ -2,7 +2,6 @@
 
 import { useEffect, useRef } from "react";
 import { cn } from "@/lib/utils";
-import { r2 } from "@/lib/r2";
 
 const FC = 80;
 const FR = 60;
@@ -177,8 +176,8 @@ function createFluid() {
  * @param {{ videoSrc?: string, imageSrc?: string, className?: string, style?: import("react").CSSProperties, paused?: boolean }} props
  */
 export function DitherCanvas({
-  videoSrc = r2("/effects/dither-canvas/dither-canvas-video.mp4"),
-  imageSrc = r2("/effects/dither-canvas/dither-canvas-poster.webp"),
+  videoSrc = "/effects/dither-canvas/dither-canvas-video.mp4",
+  imageSrc = "/effects/dither-canvas/dither-canvas-poster.webp",
   className,
   style,
   paused = false,

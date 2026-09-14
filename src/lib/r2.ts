@@ -1,4 +1,4 @@
-import manifest from "../../scripts/r2-manifest.json";
+import manifest from "./r2-manifest.json";
 
 const R2_BASE = (process.env.NEXT_PUBLIC_R2_URL || 'https://pub-830233752de349e29c6104a501b309d4.r2.dev').replace(/\/$/, '');
 const uploadedAssets = manifest as Record<string, string>;

@@ -159,10 +159,12 @@ async function main() {
 
   // Write manifest
   const manifestPath = path.join(ROOT, 'scripts', 'r2-manifest.json');
+  const srcManifestPath = path.join(ROOT, 'src', 'lib', 'r2-manifest.json');
   fs.writeFileSync(manifestPath, JSON.stringify(manifest, null, 2), 'utf-8');
+  fs.writeFileSync(srcManifestPath, JSON.stringify(manifest, null, 2), 'utf-8');
   console.log(`\n==================================================`);
   console.log(`  Upload finished: ${successCount} succeeded, ${failCount} failed.`);
-  console.log(`  Manifest saved to: scripts/r2-manifest.json`);
+  console.log(`  Manifest saved to: scripts/r2-manifest.json and src/lib/r2-manifest.json`);
   console.log(`==================================================`);
 }
 

@@ -2,7 +2,6 @@
 
 import { useEffect, useRef } from "react";
 import { cn } from "@/lib/utils";
-import { r2 } from "@/lib/r2";
 
 const MAX_TRAIL_POINTS = 240;
 const FULLSCREEN_TRIANGLE_VERTICES = new Float32Array([
@@ -253,8 +252,8 @@ function createTexture(gl, image, unit, shouldRepeat = false) {
  * @param {{ imageSrc?: string, noiseSrc?: string, iChannel0?: string | HTMLImageElement, iChannel1?: string | HTMLImageElement, className?: string, style?: import("react").CSSProperties, paused?: boolean, alt?: string }} props
  */
 export function InteractiveBlurReveal({
-  imageSrc = r2("/effects/interactive-blur-reveal/interactive-blur-reveal-img01.webp"),
-  noiseSrc = r2("/effects/interactive-blur-reveal/interactive-blur-reveal-noise.png"),
+  imageSrc = "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/interactive-blur-reveal/interactive-blur-reveal-img01.webp",
+  noiseSrc = "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/interactive-blur-reveal/interactive-blur-reveal-noise.png",
   iChannel0 = imageSrc,
   iChannel1 = noiseSrc,
   className,

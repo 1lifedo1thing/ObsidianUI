@@ -2,7 +2,6 @@
 /* eslint-disable react-hooks/immutability -- Three.js scene objects are mutable render resources owned by this component. */
 
 import { Suspense, useEffect, useMemo, useRef } from 'react'
-import { r2 } from '@/lib/r2'
 import { Canvas, useFrame, useLoader, useThree } from '@react-three/fiber'
 import { useGLTF } from '@react-three/drei'
 import * as THREE from 'three'
@@ -160,8 +159,8 @@ function ButterflyPool({ matcapMaterial, gltfScene, gltfAnimations, motionEnable
 }
 
 function ButterflyTrail({ motionEnabled }) {
-  const matcapTexture = useLoader(THREE.TextureLoader, r2('/effects/butterfly-trail-cursor/butterfly-trail-cursor-matcap.webp'))
-  const { scene, animations } = useGLTF(r2('/effects/butterfly-trail-cursor/butterfly3.glb'))
+  const matcapTexture = useLoader(THREE.TextureLoader, 'https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/butterfly-trail-cursor/butterfly-trail-cursor-matcap.webp')
+  const { scene, animations } = useGLTF('https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/butterfly-trail-cursor/butterfly3.glb')
 
   const matcapMaterial = useMemo(
     () =>

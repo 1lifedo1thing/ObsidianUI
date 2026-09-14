@@ -1,20 +1,19 @@
 "use client";
 import { useCallback, useEffect, useRef } from "react";
 import { cn } from "@/lib/utils";
-import { r2 } from "@/lib/r2";
 
 const imageUrls = [
-  r2("/effects/magnetic-image-trail/magnetic-image-trail-distortion.jpg"),
-  r2("/effects/magnetic-image-trail/magnetic-image-trail-img01.webp"),
-  r2("/effects/magnetic-image-trail/magnetic-image-trail-img02.webp"),
-  r2("/effects/magnetic-image-trail/magnetic-image-trail-img03.webp"),
-  r2("/effects/magnetic-image-trail/magnetic-image-trail-img04.png"),
-  r2("/effects/magnetic-image-trail/magnetic-image-trail-img05.png"),
-  r2("/effects/magnetic-image-trail/magnetic-image-trail-img06.png"),
-  r2("/effects/magnetic-image-trail/magnetic-image-trail-img07.png"),
-  r2("/effects/magnetic-image-trail/magnetic-image-trail-img08.jpg"),
-  r2("/effects/magnetic-image-trail/magnetic-image-trail-img09.jpg"),
-  r2("/effects/magnetic-image-trail/magnetic-image-trail-img10.jpg"),
+  "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/magnetic-image-trail/magnetic-image-trail-distortion.jpg",
+  "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/magnetic-image-trail/magnetic-image-trail-img01.webp",
+  "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/magnetic-image-trail/magnetic-image-trail-img02.webp",
+  "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/magnetic-image-trail/magnetic-image-trail-img03.webp",
+  "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/magnetic-image-trail/magnetic-image-trail-img04.png",
+  "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/magnetic-image-trail/magnetic-image-trail-img05.png",
+  "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/magnetic-image-trail/magnetic-image-trail-img06.png",
+  "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/magnetic-image-trail/magnetic-image-trail-img07.png",
+  "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/magnetic-image-trail/magnetic-image-trail-img08.jpg",
+  "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/magnetic-image-trail/magnetic-image-trail-img09.jpg",
+  "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/magnetic-image-trail/magnetic-image-trail-img10.jpg",
 ];
 
 const SLOTS = [

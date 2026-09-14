@@ -1,7 +1,6 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
-import { r2 } from "@/lib/r2";
 import gsap from "gsap";
 import { WebGLSurface, useEffectReducedMotion } from "@/lib/effects/shared/webgl-surface";
 
@@ -59,11 +58,11 @@ void main() {
 `;
 
 const defaultImages = [
-  r2("/effects/curved-plane/curved-plane-img01.webp"),
-  r2("/effects/curved-plane/curved-plane-img02.webp"),
-  r2("/effects/curved-plane/curved-plane-img03.webp"),
-  r2("/effects/curved-plane/curved-plane-img04.png"),
-  r2("/effects/curved-plane/curved-plane-img05.png"),
+  "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/curved-plane/curved-plane-img01.webp",
+  "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/curved-plane/curved-plane-img02.webp",
+  "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/curved-plane/curved-plane-img03.webp",
+  "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/curved-plane/curved-plane-img04.png",
+  "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/curved-plane/curved-plane-img05.png",
 ];
 
 const SWIPER_VISIBLE_IMAGES = 3;

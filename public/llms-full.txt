@@ -2749,9 +2749,9 @@ export function Demo() {
 return (
   <HoverImg
     projects={[
-      { title: "Shree Krishna", label: "The Supreme Personality of Godhead", imageSrc: "https://www.obsidianui.dev/hover-img/hover-img-img01-alt.jpg" },
-      { title: "Radha Krishna", label: "The Divine Couple", imageSrc: "https://www.obsidianui.dev/hover-img/hover-img-img02.jpg" },
-      { title: "Divine Love", label: "Eternal Bond", imageSrc: "https://www.obsidianui.dev/hover-img/hover-img-img03.jpg" },
+      { title: "Shree Krishna", label: "The Supreme Personality of Godhead", imageSrc: "https://pub-830233752de349e29c6104a501b309d4.r2.dev/hover-img/hover-img-img01-alt.jpg" },
+      { title: "Radha Krishna", label: "The Divine Couple", imageSrc: "https://pub-830233752de349e29c6104a501b309d4.r2.dev/hover-img/hover-img-img02.jpg" },
+      { title: "Divine Love", label: "Eternal Bond", imageSrc: "https://pub-830233752de349e29c6104a501b309d4.r2.dev/hover-img/hover-img-img03.jpg" },
     ]}
   />
 )
@@ -2775,8 +2775,6 @@ npm install gsap
 ```
 
 Resolve @components/, @ui/, @lib/, and @hooks/ targets through your components.json aliases. For example, @components/block/example.tsx maps to src/components/block/example.tsx when components is @/components and @/\* resolves to src/\*. Do not create a literal @components directory. Preserve existing files deliberately and keep the use client directive where present.
-
-Default demo media loads from ObsidianUI. Replace these URLs with your own assets for offline use.
 
 ### components/block/hover-img.css
 
@@ -2962,17 +2960,17 @@ const defaultProjects: ProjectItem[] = [
     {
         title: "Shree Krishna",
         label: "The Supreme Personality of Godhead",
-        imageSrc: "https://www.obsidianui.dev/hover-img/hover-img-img01-alt.jpg",
+        imageSrc: "https://pub-830233752de349e29c6104a501b309d4.r2.dev/hover-img/hover-img-img01-alt.jpg",
     },
     {
         title: "Radha Krishna",
         label: "The Divine Couple",
-        imageSrc: "https://www.obsidianui.dev/hover-img/hover-img-img02.jpg",
+        imageSrc: "https://pub-830233752de349e29c6104a501b309d4.r2.dev/hover-img/hover-img-img02.jpg",
     },
     {
         title: "Divine Love",
         label: "Eternal Bond",
-        imageSrc: "https://www.obsidianui.dev/hover-img/hover-img-img03.jpg",
+        imageSrc: "https://pub-830233752de349e29c6104a501b309d4.r2.dev/hover-img/hover-img-img03.jpg",
     },
 ];
 
@@ -6096,7 +6094,7 @@ import { DraggableMarquee } from "@/components/block/draggable-marquee";
 const items = [
   {
     "id": 1,
-    "src": "https://www.obsidianui.dev/effects/draggable-marquee/draggable-marquee-img01.jpg",
+    "src": "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/draggable-marquee/draggable-marquee-img01.jpg",
     "alt": "Landscape photograph 1",
     "width": 420,
     "height": 520,
@@ -6104,7 +6102,7 @@ const items = [
   },
   {
     "id": 2,
-    "src": "https://www.obsidianui.dev/effects/draggable-marquee/draggable-marquee-img02.jpg",
+    "src": "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/draggable-marquee/draggable-marquee-img02.jpg",
     "alt": "Landscape photograph 2",
     "width": 420,
     "height": 520,
@@ -6112,7 +6110,7 @@ const items = [
   },
   {
     "id": 3,
-    "src": "https://www.obsidianui.dev/effects/draggable-marquee/draggable-marquee-img03.jpg",
+    "src": "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/draggable-marquee/draggable-marquee-img03.jpg",
     "alt": "Landscape photograph 3",
     "width": 420,
     "height": 520,
@@ -6120,7 +6118,7 @@ const items = [
   },
   {
     "id": 4,
-    "src": "https://www.obsidianui.dev/effects/draggable-marquee/draggable-marquee-img04.jpg",
+    "src": "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/draggable-marquee/draggable-marquee-img04.jpg",
     "alt": "Landscape photograph 4",
     "width": 420,
     "height": 520,
@@ -6148,7 +6146,7 @@ import { DraggableMarquee } from "@/components/block/draggable-marquee";
 const items = [
   {
     "id": 1,
-    "src": "https://www.obsidianui.dev/effects/draggable-marquee/draggable-marquee-img01.jpg",
+    "src": "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/draggable-marquee/draggable-marquee-img01.jpg",
     "alt": "Landscape photograph 1",
     "width": 420,
     "height": 520,
@@ -6156,7 +6154,7 @@ const items = [
   },
   {
     "id": 2,
-    "src": "https://www.obsidianui.dev/effects/draggable-marquee/draggable-marquee-img02.jpg",
+    "src": "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/draggable-marquee/draggable-marquee-img02.jpg",
     "alt": "Landscape photograph 2",
     "width": 420,
     "height": 520,
@@ -6164,7 +6162,7 @@ const items = [
   },
   {
     "id": 3,
-    "src": "https://www.obsidianui.dev/effects/draggable-marquee/draggable-marquee-img03.jpg",
+    "src": "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/draggable-marquee/draggable-marquee-img03.jpg",
     "alt": "Landscape photograph 3",
     "width": 420,
     "height": 520,
@@ -6172,7 +6170,7 @@ const items = [
   },
   {
     "id": 4,
-    "src": "https://www.obsidianui.dev/effects/draggable-marquee/draggable-marquee-img04.jpg",
+    "src": "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/draggable-marquee/draggable-marquee-img04.jpg",
     "alt": "Landscape photograph 4",
     "width": 420,
     "height": 520,
@@ -7234,14 +7232,14 @@ import { SvgPathMarquee } from "@/components/block/svg-path-marquee";
 
 const path = "M1 209.434C58.5872 255.935 387.926 325.938 482.583 209.434C600.905 63.8051 525.516 -43.2211 427.332 19.9613C329.149 83.1436 352.902 242.723 515.041 267.302C644.752 286.966 943.56 181.94 995 156.5";
 const images = [
-  "https://www.obsidianui.dev/effects/svg-path-marquee/svg-path-marquee-img01.png",
-  "https://www.obsidianui.dev/effects/svg-path-marquee/svg-path-marquee-img02.png",
-  "https://www.obsidianui.dev/effects/svg-path-marquee/svg-path-marquee-img03.png",
-  "https://www.obsidianui.dev/effects/svg-path-marquee/svg-path-marquee-img04.png",
-  "https://www.obsidianui.dev/effects/svg-path-marquee/svg-path-marquee-img05.png",
-  "https://www.obsidianui.dev/effects/svg-path-marquee/svg-path-marquee-img06.png",
-  "https://www.obsidianui.dev/effects/svg-path-marquee/svg-path-marquee-img07.png",
-  "https://www.obsidianui.dev/effects/svg-path-marquee/svg-path-marquee-img08.png"
+  "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/svg-path-marquee/svg-path-marquee-img01.png",
+  "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/svg-path-marquee/svg-path-marquee-img02.png",
+  "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/svg-path-marquee/svg-path-marquee-img03.png",
+  "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/svg-path-marquee/svg-path-marquee-img04.png",
+  "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/svg-path-marquee/svg-path-marquee-img05.png",
+  "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/svg-path-marquee/svg-path-marquee-img06.png",
+  "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/svg-path-marquee/svg-path-marquee-img07.png",
+  "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/svg-path-marquee/svg-path-marquee-img08.png"
 ];
 
 export default function Demo() {
@@ -7265,14 +7263,14 @@ import { SvgPathMarquee } from "@/components/block/svg-path-marquee";
 
 const path = "M1 209.434C58.5872 255.935 387.926 325.938 482.583 209.434C600.905 63.8051 525.516 -43.2211 427.332 19.9613C329.149 83.1436 352.902 242.723 515.041 267.302C644.752 286.966 943.56 181.94 995 156.5";
 const images = [
-  "https://www.obsidianui.dev/effects/svg-path-marquee/svg-path-marquee-img01.png",
-  "https://www.obsidianui.dev/effects/svg-path-marquee/svg-path-marquee-img02.png",
-  "https://www.obsidianui.dev/effects/svg-path-marquee/svg-path-marquee-img03.png",
-  "https://www.obsidianui.dev/effects/svg-path-marquee/svg-path-marquee-img04.png",
-  "https://www.obsidianui.dev/effects/svg-path-marquee/svg-path-marquee-img05.png",
-  "https://www.obsidianui.dev/effects/svg-path-marquee/svg-path-marquee-img06.png",
-  "https://www.obsidianui.dev/effects/svg-path-marquee/svg-path-marquee-img07.png",
-  "https://www.obsidianui.dev/effects/svg-path-marquee/svg-path-marquee-img08.png"
+  "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/svg-path-marquee/svg-path-marquee-img01.png",
+  "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/svg-path-marquee/svg-path-marquee-img02.png",
+  "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/svg-path-marquee/svg-path-marquee-img03.png",
+  "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/svg-path-marquee/svg-path-marquee-img04.png",
+  "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/svg-path-marquee/svg-path-marquee-img05.png",
+  "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/svg-path-marquee/svg-path-marquee-img06.png",
+  "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/svg-path-marquee/svg-path-marquee-img07.png",
+  "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/svg-path-marquee/svg-path-marquee-img08.png"
 ];
 
 export default function Demo() {
@@ -7770,10 +7768,10 @@ import { useRef } from "react";
 import { ParallaxGallery } from "@/components/block/parallax-gallery";
 
 const images = [
-  "https://www.obsidianui.dev/effects/parallax-gallery/parallax-gallery-img01.jpg",
-  "https://www.obsidianui.dev/effects/parallax-gallery/parallax-gallery-img02.jpg",
-  "https://www.obsidianui.dev/effects/parallax-gallery/parallax-gallery-img03.jpg",
-  "https://www.obsidianui.dev/effects/parallax-gallery/parallax-gallery-img04.jpg"
+  "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/parallax-gallery/parallax-gallery-img01.jpg",
+  "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/parallax-gallery/parallax-gallery-img02.jpg",
+  "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/parallax-gallery/parallax-gallery-img03.jpg",
+  "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/parallax-gallery/parallax-gallery-img04.jpg"
 ];
 export default function Demo() {
   const scroller = useRef<HTMLDivElement>(null);
@@ -7797,10 +7795,10 @@ import { useRef } from "react";
 import { ParallaxGallery } from "@/components/block/parallax-gallery";
 
 const images = [
-  "https://www.obsidianui.dev/effects/parallax-gallery/parallax-gallery-img01.jpg",
-  "https://www.obsidianui.dev/effects/parallax-gallery/parallax-gallery-img02.jpg",
-  "https://www.obsidianui.dev/effects/parallax-gallery/parallax-gallery-img03.jpg",
-  "https://www.obsidianui.dev/effects/parallax-gallery/parallax-gallery-img04.jpg"
+  "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/parallax-gallery/parallax-gallery-img01.jpg",
+  "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/parallax-gallery/parallax-gallery-img02.jpg",
+  "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/parallax-gallery/parallax-gallery-img03.jpg",
+  "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/parallax-gallery/parallax-gallery-img04.jpg"
 ];
 export default function Demo() {
   const scroller = useRef<HTMLDivElement>(null);
@@ -8513,7 +8511,7 @@ export default function Demo() {
   const scroller = useRef<HTMLDivElement>(null);
   return <div ref={scroller} tabIndex={0} aria-label="Scroll effect preview" className="relative h-[400px] overflow-y-auto overscroll-contain" style={{ containerType: "size" }}>
     <div className="flex h-[45cqh] items-center justify-center">Scroll to reveal</div>
-    <SvgPixelReveal src="https://www.obsidianui.dev/effects/svg-pixel-reveal/svg-pixel-reveal-img01.png" alt="Landscape photograph" scroller={scroller} start="top 35%" style={{ width: "86%", height: "70cqh", margin: "0 auto" }} />
+    <SvgPixelReveal src="https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/svg-pixel-reveal/svg-pixel-reveal-img01.png" alt="Landscape photograph" scroller={scroller} start="top 35%" style={{ width: "86%", height: "70cqh", margin: "0 auto" }} />
     <div className="h-[50cqh]" />
   </div>;
 }
@@ -8537,7 +8535,7 @@ export default function Demo() {
   const scroller = useRef<HTMLDivElement>(null);
   return <div ref={scroller} tabIndex={0} aria-label="Scroll effect preview" className="relative h-[400px] overflow-y-auto overscroll-contain" style={{ containerType: "size" }}>
     <div className="flex h-[45cqh] items-center justify-center">Scroll to reveal</div>
-    <SvgPixelReveal src="https://www.obsidianui.dev/effects/svg-pixel-reveal/svg-pixel-reveal-img01.png" alt="Landscape photograph" scroller={scroller} start="top 35%" style={{ width: "86%", height: "70cqh", margin: "0 auto" }} />
+    <SvgPixelReveal src="https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/svg-pixel-reveal/svg-pixel-reveal-img01.png" alt="Landscape photograph" scroller={scroller} start="top 35%" style={{ width: "86%", height: "70cqh", margin: "0 auto" }} />
     <div className="h-[50cqh]" />
   </div>;
 }
@@ -8744,8 +8742,6 @@ npm install @react-three/drei @react-three/fiber clsx motion tailwind-merge thre
 
 Resolve @components/, @ui/, @lib/, and @hooks/ targets through your components.json aliases. For example, @components/block/example.tsx maps to src/components/block/example.tsx when components is @/components and @/\* resolves to src/\*. Do not create a literal @components directory. Preserve existing files deliberately and keep the use client directive where present.
 
-Default demo media loads from ObsidianUI. Replace these URLs with your own assets for offline use.
-
 ### components/block/butterfly-trail-cursor.jsx
 
 Installation target: `@components/block/butterfly-trail-cursor.jsx`
@@ -8912,8 +8908,8 @@ function ButterflyPool({ matcapMaterial, gltfScene, gltfAnimations, motionEnable
 }
 
 function ButterflyTrail({ motionEnabled }) {
-  const matcapTexture = useLoader(THREE.TextureLoader, 'https://www.obsidianui.dev/effects/butterfly-trail-cursor/butterfly-trail-cursor-matcap.webp')
-  const { scene, animations } = useGLTF('https://www.obsidianui.dev/effects/butterfly-trail-cursor/butterfly3.glb')
+  const matcapTexture = useLoader(THREE.TextureLoader, 'https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/butterfly-trail-cursor/butterfly-trail-cursor-matcap.webp')
+  const { scene, animations } = useGLTF('https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/butterfly-trail-cursor/butterfly3.glb')
 
   const matcapMaterial = useMemo(
     () =>
@@ -10516,8 +10512,6 @@ npm install clsx tailwind-merge
 
 Resolve @components/, @ui/, @lib/, and @hooks/ targets through your components.json aliases. For example, @components/block/example.tsx maps to src/components/block/example.tsx when components is @/components and @/\* resolves to src/\*. Do not create a literal @components directory. Preserve existing files deliberately and keep the use client directive where present.
 
-Default demo media loads from ObsidianUI. Replace these URLs with your own assets for offline use.
-
 ### components/block/magnetic-image-trail.jsx
 
 Installation target: `@components/block/magnetic-image-trail.jsx`
@@ -10528,17 +10522,17 @@ import { useCallback, useEffect, useRef } from "react";
 import { cn } from "@/lib/utils";
 
 const imageUrls = [
-  "https://www.obsidianui.dev/effects/magnetic-image-trail/magnetic-image-trail-distortion.jpg",
-  "https://www.obsidianui.dev/effects/magnetic-image-trail/magnetic-image-trail-img01.webp",
-  "https://www.obsidianui.dev/effects/magnetic-image-trail/magnetic-image-trail-img02.webp",
-  "https://www.obsidianui.dev/effects/magnetic-image-trail/magnetic-image-trail-img03.webp",
-  "https://www.obsidianui.dev/effects/magnetic-image-trail/magnetic-image-trail-img04.png",
-  "https://www.obsidianui.dev/effects/magnetic-image-trail/magnetic-image-trail-img05.png",
-  "https://www.obsidianui.dev/effects/magnetic-image-trail/magnetic-image-trail-img06.png",
-  "https://www.obsidianui.dev/effects/magnetic-image-trail/magnetic-image-trail-img07.png",
-  "https://www.obsidianui.dev/effects/magnetic-image-trail/magnetic-image-trail-img08.jpg",
-  "https://www.obsidianui.dev/effects/magnetic-image-trail/magnetic-image-trail-img09.jpg",
-  "https://www.obsidianui.dev/effects/magnetic-image-trail/magnetic-image-trail-img10.jpg",
+  "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/magnetic-image-trail/magnetic-image-trail-distortion.jpg",
+  "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/magnetic-image-trail/magnetic-image-trail-img01.webp",
+  "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/magnetic-image-trail/magnetic-image-trail-img02.webp",
+  "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/magnetic-image-trail/magnetic-image-trail-img03.webp",
+  "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/magnetic-image-trail/magnetic-image-trail-img04.png",
+  "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/magnetic-image-trail/magnetic-image-trail-img05.png",
+  "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/magnetic-image-trail/magnetic-image-trail-img06.png",
+  "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/magnetic-image-trail/magnetic-image-trail-img07.png",
+  "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/magnetic-image-trail/magnetic-image-trail-img08.jpg",
+  "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/magnetic-image-trail/magnetic-image-trail-img09.jpg",
+  "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/magnetic-image-trail/magnetic-image-trail-img10.jpg",
 ];
 
 const SLOTS = [
@@ -12468,8 +12462,6 @@ npm install @react-three/drei @react-three/fiber clsx maath tailwind-merge three
 
 Resolve @components/, @ui/, @lib/, and @hooks/ targets through your components.json aliases. For example, @components/block/example.tsx maps to src/components/block/example.tsx when components is @/components and @/\* resolves to src/\*. Do not create a literal @components directory. Preserve existing files deliberately and keep the use client directive where present.
 
-Default demo media loads from ObsidianUI. Replace these URLs with your own assets for offline use.
-
 ### components/block/book-flip.jsx
 
 Installation target: `@components/block/book-flip.jsx`
@@ -13000,7 +12992,7 @@ export const Experience = ({
  {...orbitControls}
  />
  <Book images={images} pathPattern={pathPattern} {...props} />
- <Environment files="https://www.obsidianui.dev/effects/book-flip/studio.hdr" />
+ <Environment files="https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/book-flip/studio.hdr" />
  <directionalLight
  position={[2, 5, 2]}
  intensity={2.5}
@@ -13163,8 +13155,6 @@ npm install clsx gsap tailwind-merge three
 
 Resolve @components/, @ui/, @lib/, and @hooks/ targets through your components.json aliases. For example, @components/block/example.tsx maps to src/components/block/example.tsx when components is @/components and @/\* resolves to src/\*. Do not create a literal @components directory. Preserve existing files deliberately and keep the use client directive where present.
 
-Default demo media loads from ObsidianUI. Replace these URLs with your own assets for offline use.
-
 ### components/block/curved-plane.jsx
 
 Installation target: `@components/block/curved-plane.jsx`
@@ -13230,11 +13220,11 @@ void main() {
 `;
 
 const defaultImages = [
-  "https://www.obsidianui.dev/effects/curved-plane/curved-plane-img01.webp",
-  "https://www.obsidianui.dev/effects/curved-plane/curved-plane-img02.webp",
-  "https://www.obsidianui.dev/effects/curved-plane/curved-plane-img03.webp",
-  "https://www.obsidianui.dev/effects/curved-plane/curved-plane-img04.png",
-  "https://www.obsidianui.dev/effects/curved-plane/curved-plane-img05.png",
+  "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/curved-plane/curved-plane-img01.webp",
+  "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/curved-plane/curved-plane-img02.webp",
+  "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/curved-plane/curved-plane-img03.webp",
+  "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/curved-plane/curved-plane-img04.png",
+  "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/curved-plane/curved-plane-img05.png",
 ];
 
 const SWIPER_VISIBLE_IMAGES = 3;
@@ -13706,8 +13696,6 @@ npm install clsx tailwind-merge three
 
 Resolve @components/, @ui/, @lib/, and @hooks/ targets through your components.json aliases. For example, @components/block/example.tsx maps to src/components/block/example.tsx when components is @/components and @/\* resolves to src/\*. Do not create a literal @components directory. Preserve existing files deliberately and keep the use client directive where present.
 
-Default demo media loads from ObsidianUI. Replace these URLs with your own assets for offline use.
-
 ### components/block/fractal-glass.jsx
 
 Installation target: `@components/block/fractal-glass.jsx`
@@ -13816,7 +13804,7 @@ const fragmentShader = `
 `;
 
 function GlassStripParallax({
- imageSrc ="https://www.obsidianui.dev/effects/fractal-glass/fractal-glass-img01.jpg", // ← new prop: path/URL to image file
+ imageSrc ="https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/fractal-glass/fractal-glass-img01.jpg", // ← new prop: path/URL to image file
  videoSrc = null, 
  mediaType ="image", 
  stripesFrequency = 8.0,
@@ -13974,7 +13962,7 @@ function GlassStripParallax({
 }
 
 /** @param {{ imageSrc?: string, videoSrc?: string | null, mediaType?: string, stripesFrequency?: number, glassStrength?: number, glassSmoothness?: number, parallaxStrength?: number, distortionMultiplier?: number, edgePadding?: number, className?: string, style?: import("react").CSSProperties }} props */
-export function FractalGlass({ imageSrc = "https://www.obsidianui.dev/effects/fractal-glass/fractal-glass-img01.jpg", className, style, ...props } = {}) {
+export function FractalGlass({ imageSrc = "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/fractal-glass/fractal-glass-img01.jpg", className, style, ...props } = {}) {
  return <WebGLSurface className={className} style={style} imageSrc={imageSrc} label="ObsidianUI refracted glass image">
    <GlassStripParallax imageSrc={imageSrc} {...props} />
  </WebGLSurface>;
@@ -14638,8 +14626,6 @@ npm install clsx gsap tailwind-merge three
 
 Resolve @components/, @ui/, @lib/, and @hooks/ targets through your components.json aliases. For example, @components/block/example.tsx maps to src/components/block/example.tsx when components is @/components and @/\* resolves to src/\*. Do not create a literal @components directory. Preserve existing files deliberately and keep the use client directive where present.
 
-Default demo media loads from ObsidianUI. Replace these URLs with your own assets for offline use.
-
 ### components/block/interactive-hover-slider.jsx
 
 Installation target: `@components/block/interactive-hover-slider.jsx`
@@ -15160,11 +15146,11 @@ const opacity = Math.max(0, baseOpacity - dist * 0.22) * anim.alpha;
 }
 
 const defaultItems = [
- { id: "01", title: "Soft Forms", focus: "Visual study", year: "2026", img: "https://www.obsidianui.dev/effects/interactive-hover-slider/interactive-hover-slider-img01.webp" },
- { id: "02", title: "Botanical", focus: "Art direction", year: "2026", img: "https://www.obsidianui.dev/effects/interactive-hover-slider/interactive-hover-slider-img02.webp" },
- { id: "03", title: "Afterlight", focus: "Identity", year: "2026", img: "https://www.obsidianui.dev/effects/interactive-hover-slider/interactive-hover-slider-img03.webp" },
- { id: "04", title: "Glasswork", focus: "Materials", year: "2026", img: "https://www.obsidianui.dev/effects/interactive-hover-slider/interactive-hover-slider-img04.png" },
- { id: "05", title: "Motion Study", focus: "Experiment", year: "2026", img: "https://www.obsidianui.dev/effects/interactive-hover-slider/interactive-hover-slider-img05.png" },
+ { id: "01", title: "Soft Forms", focus: "Visual study", year: "2026", img: "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/interactive-hover-slider/interactive-hover-slider-img01.webp" },
+ { id: "02", title: "Botanical", focus: "Art direction", year: "2026", img: "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/interactive-hover-slider/interactive-hover-slider-img02.webp" },
+ { id: "03", title: "Afterlight", focus: "Identity", year: "2026", img: "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/interactive-hover-slider/interactive-hover-slider-img03.webp" },
+ { id: "04", title: "Glasswork", focus: "Materials", year: "2026", img: "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/interactive-hover-slider/interactive-hover-slider-img04.png" },
+ { id: "05", title: "Motion Study", focus: "Experiment", year: "2026", img: "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/interactive-hover-slider/interactive-hover-slider-img05.png" },
 ];
 
 /** @param {{ items?: { id: string, title: string, focus: string, year: string, img: string }[], compact?: boolean, className?: string, style?: import("react").CSSProperties }} props */
@@ -15300,8 +15286,6 @@ npm install clsx tailwind-merge
 ```
 
 Resolve @components/, @ui/, @lib/, and @hooks/ targets through your components.json aliases. For example, @components/block/example.tsx maps to src/components/block/example.tsx when components is @/components and @/\* resolves to src/\*. Do not create a literal @components directory. Preserve existing files deliberately and keep the use client directive where present.
-
-Default demo media loads from ObsidianUI. Replace these URLs with your own assets for offline use.
 
 ### components/block/interactive-blur-reveal.jsx
 
@@ -15562,8 +15546,8 @@ function createTexture(gl, image, unit, shouldRepeat = false) {
  * @param {{ imageSrc?: string, noiseSrc?: string, iChannel0?: string | HTMLImageElement, iChannel1?: string | HTMLImageElement, className?: string, style?: import("react").CSSProperties, paused?: boolean, alt?: string }} props
  */
 export function InteractiveBlurReveal({
-  imageSrc = "https://www.obsidianui.dev/effects/interactive-blur-reveal/interactive-blur-reveal-img01.webp",
-  noiseSrc = "https://www.obsidianui.dev/effects/interactive-blur-reveal/interactive-blur-reveal-noise.png",
+  imageSrc = "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/interactive-blur-reveal/interactive-blur-reveal-img01.webp",
+  noiseSrc = "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/interactive-blur-reveal/interactive-blur-reveal-noise.png",
   iChannel0 = imageSrc,
   iChannel1 = noiseSrc,
   className,

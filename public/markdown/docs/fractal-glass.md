@@ -46,8 +46,6 @@ npm install clsx tailwind-merge three
 
 Resolve @components/, @ui/, @lib/, and @hooks/ targets through your components.json aliases. For example, @components/block/example.tsx maps to src/components/block/example.tsx when components is @/components and @/\* resolves to src/\*. Do not create a literal @components directory. Preserve existing files deliberately and keep the use client directive where present.
 
-Default demo media loads from ObsidianUI. Replace these URLs with your own assets for offline use.
-
 ### components/block/fractal-glass.jsx
 
 Installation target: `@components/block/fractal-glass.jsx`
@@ -156,7 +154,7 @@ const fragmentShader = `
 `;
 
 function GlassStripParallax({
- imageSrc ="https://www.obsidianui.dev/effects/fractal-glass/fractal-glass-img01.jpg", // ← new prop: path/URL to image file
+ imageSrc ="https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/fractal-glass/fractal-glass-img01.jpg", // ← new prop: path/URL to image file
  videoSrc = null, 
  mediaType ="image", 
  stripesFrequency = 8.0,
@@ -314,7 +312,7 @@ function GlassStripParallax({
 }
 
 /** @param {{ imageSrc?: string, videoSrc?: string | null, mediaType?: string, stripesFrequency?: number, glassStrength?: number, glassSmoothness?: number, parallaxStrength?: number, distortionMultiplier?: number, edgePadding?: number, className?: string, style?: import("react").CSSProperties }} props */
-export function FractalGlass({ imageSrc = "https://www.obsidianui.dev/effects/fractal-glass/fractal-glass-img01.jpg", className, style, ...props } = {}) {
+export function FractalGlass({ imageSrc = "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/fractal-glass/fractal-glass-img01.jpg", className, style, ...props } = {}) {
  return <WebGLSurface className={className} style={style} imageSrc={imageSrc} label="ObsidianUI refracted glass image">
    <GlassStripParallax imageSrc={imageSrc} {...props} />
  </WebGLSurface>;
