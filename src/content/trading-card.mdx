@@ -1,0 +1,121 @@
+import { PreviewVideo } from '@/components/media/preview-video'
+import { CodeBlock, Dependencies } from '@/components/docs/component-installation'
+import { CLICommand } from '@/components/docs/cli-command'
+import { PropsTable } from '@/components/docs/props-table'
+import { ComponentPreview } from '@/components/docs/component-preview'
+
+# Trading Card
+
+A 3D interactive trading card with perspective transforms that respond to mouse movement. Features smooth reveal animations and a premium holographic feel.
+
+<ComponentPreview
+  component={
+    <PreviewVideo showControls={false} src="https://cdn.obsidianui.dev/demos/trading-cards.mp4" label="Trading Card demo" className="w-full h-[450px] rounded-lg" />
+  }
+  code={`import TradingCard from '@/components/block/trading-card'
+
+export function Demo() {
+  return (
+    <TradingCard 
+      imageUrl="https://images.unsplash.com/photo-1534528741775-53994a69daeb"
+      rank={1}
+      name="Elena Martinez"
+      description="World Champion 2024"
+    />
+  )
+}`}
+/>
+
+## Install using CLI
+
+<CLICommand componentName="trading-card" />
+
+## Install Manually
+
+<Dependencies step={1} title="Install dependencies">
+    <CodeBlock code="npm install motion" />
+</Dependencies>
+
+<Dependencies step={2} title="Copy the source code" source="trading-card">
+    <p className="text-[13px] text-muted-foreground mt-2 mb-4">Copy into <code className="text-foreground font-mono text-xs bg-neutral-100 dark:bg-[#161616] px-2 py-1 rounded-md">components/block/trading-card.tsx</code></p>
+</Dependencies>
+
+```tsx
+import { motion, useAnimationControls } from 'motion/react';
+import Image from 'next/image';
+import React, { useRef } from 'react';
+
+interface TradingCardProps {
+  imageUrl: string;
+  rank: number;
+  name: string;
+  description: string;
+}
+
+const TradingCard: React.FC<TradingCardProps> = ({ imageUrl, rank, name, description }) => {
+  const cardRef = useRef<HTMLDivElement>(null);
+  const backgroundControls = useAnimationControls();
+  const contentControls = useAnimationControls();
+
+  const onMouseEnter = () => {
+    contentControls.start({ x: -300 });
+    backgroundControls.start({ scale: 1.05, opacity: 1 });
+  };
+
+  const onMouseLeave = () => {
+    contentControls.start({ x: 0, transition: { delay: 0.5 } });
+    backgroundControls.start({ scale: 0.95, opacity: 0.4 });
+  };
+
+  const onMouseMove: React.MouseEventHandler<HTMLDivElement> = (e) => {
+    if (!cardRef.current) return;
+    const rect = cardRef.current.getBoundingClientRect();
+    const mx = e.clientX - rect.left;
+    const my = e.clientY - rect.top;
+    const xd = (mx - rect.width / 2) / 10;
+    const yd = (rect.height / 2 - my) / 10;
+    cardRef.current.style.transform = `perspective(1000px) rotateY(${xd}deg) rotateX(${yd}deg)`;
+  };
+
+  return (
+    <motion.div
+      ref={cardRef}
+      onMouseMove={onMouseMove}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
+      className="flex flex-col hover:scale-105 transition-all items-start justify-end rounded-lg relative shadow-xl overflow-hidden h-[400px] w-[300px] cursor-pointer border border-neutral-800"
+    >
+      <motion.div
+        className="h-full w-full absolute z-0"
+        initial={{ opacity: 0.4, scale: 0.95 }}
+        animate={backgroundControls}
+        transition={{ duration: 0.7, ease: 'backOut' }}
+      >
+        <Image src={imageUrl} alt={name} fill className="object-cover" />
+      </motion.div>
+      <div className="font-semibold absolute top-5 right-5 z-10 text-white/70">#{rank}</div>
+      <motion.div
+        animate={contentControls}
+        transition={{ duration: 0.5, ease: 'backOut' }}
+        className="p-5 flex flex-col justify-end z-10"
+      >
+        <div className="text-4xl font-bold">{name}</div>
+        <p className="text-sm text-white/90">{description}</p>
+      </motion.div>
+    </motion.div>
+  );
+};
+
+export default TradingCard;
+```
+
+## Props
+
+<PropsTable
+  data={[
+    { prop: "imageUrl", type: "string", defaultValue: "-", description: "URL of the card background image" },
+    { prop: "rank", type: "number", defaultValue: "-", description: "Rank number displayed in corner" },
+    { prop: "name", type: "string", defaultValue: "-", description: "Name/title of the card" },
+    { prop: "description", type: "string", defaultValue: "-", description: "Description text" },
+  ]}
+/>

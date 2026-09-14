@@ -1,0 +1,1278 @@
+import { CodeBlock, Dependencies } from '@/components/docs/component-installation'
+import { CLICommand } from '@/components/docs/cli-command'
+import { ComponentPreview } from '@/components/docs/component-preview'
+import { ExpandableBlock } from '@/components/docs/expandable-block'
+import { EffectPreview } from '@/components/catalog/effect-preview'
+import { effectExamples } from '@/components/catalog/effect-examples'
+
+# Interactive Arrows
+
+Six canvas arrow and line patterns respond to the pointer with rotation, spacing, and opacity.
+
+<ComponentPreview component={<EffectPreview slug="interactive-arrows" />} code={effectExamples["interactive-arrows"]} description="Move across the arrows. In the full preview, choose another behavior." previewClassName="p-0 sm:p-0" />
+
+## Install using CLI
+
+<CLICommand componentName="interactive-arrows" />
+
+## Usage
+
+```jsx copy
+"use client";
+import { InteractiveArrows } from "@/components/block/interactive-arrows";
+
+export default function Demo() {
+  return <InteractiveArrows height={400} variant="arrows" showControls />;
+}
+```
+
+## Install Manually
+
+<Dependencies step={1} title="Install dependencies">
+  <CodeBlock code="npm install @radix-ui/react-select clsx lucide-react motion tailwind-merge" />
+</Dependencies>
+
+<Dependencies step={2} title="Copy the source code" className="docs-source-card">
+  <p className="mb-4 text-sm text-muted-foreground">Copy into <code className="rounded-full bg-muted px-2 py-1 font-mono text-xs text-foreground">components/block/interactive-arrows.jsx</code></p>
+
+<ExpandableBlock>
+```jsx copy
+"use client";
+
+import { useState } from "react";
+import { cn } from "@/lib/utils";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import Arrows from "@/lib/effects/interactive-arrows/arrows";
+import ArrowsOpacity from "@/lib/effects/interactive-arrows/arrows-opacity";
+import ArrowsLimit from "@/lib/effects/interactive-arrows/arrows-limit";
+import ArrowsPlay from "@/lib/effects/interactive-arrows/arrows-play";
+import Lines from "@/lib/effects/interactive-arrows/lines";
+import Points from "@/lib/effects/interactive-arrows/points";
+
+const engines = { arrows: Arrows, opacity: ArrowsOpacity, smooth: ArrowsLimit, playful: ArrowsPlay, lines: Lines, points: Points };
+const behaviors = [
+  { value: "arrows", label: "Responsive arrows" },
+  { value: "opacity", label: "Opacity" },
+  { value: "smooth", label: "Smooth arrows" },
+  { value: "playful", label: "Playful arrows" },
+  { value: "lines", label: "Lines" },
+  { value: "points", label: "Points" },
+];
+
+/** @param {{ variant?: "arrows" | "opacity" | "smooth" | "playful" | "lines" | "points", showControls?: boolean, className?: string, height?: import("react").CSSProperties["height"], style?: import("react").CSSProperties }} props */
+export function InteractiveArrows({ variant = "arrows", showControls = false, className, height = 400, style } = {}) {
+  const [selected, setSelected] = useState(variant);
+  const active = showControls ? selected : variant;
+  const Engine = engines[active] || Arrows;
+  const dark = active === "smooth" || active === "playful";
+
+  return <div className={cn("relative isolate flex w-full flex-col bg-background", className)} style={{ height, containerType: "inline-size", ...style }}>
+    <div data-arrow-stage="" className="relative min-h-0 flex-1 overflow-hidden rounded-xl" style={{ background: dark ? "#101010" : "#f5f4ef", color: dark ? "#fff" : "#111" }}>
+      <Engine />
+    </div>
+    {showControls && <div data-arrow-controls="" className="flex shrink-0 items-center justify-between gap-3 bg-background px-3 py-2.5 text-foreground">
+      <span className="text-xs text-muted-foreground">Arrow behavior</span>
+      <Select value={selected} onValueChange={setSelected}>
+        <SelectTrigger aria-label="Arrow behavior" className="h-9 min-w-[170px] rounded-lg border-border/70 bg-background text-xs shadow-none transition-[background-color,border-color] duration-150 hover:bg-muted/60 focus-visible:border-ring focus-visible:ring-2 focus-visible:ring-ring/20 dark:bg-background dark:hover:bg-muted/60 [&_svg]:transition-transform [&_svg]:duration-200 data-[state=open]:[&_svg]:rotate-180 motion-reduce:transition-none motion-reduce:[&_svg]:transition-none">
+          <SelectValue />
+        </SelectTrigger>
+        <SelectContent side="bottom" align="end" sideOffset={6} position="popper" className="rounded-xl border-border/70 p-1 shadow-[0_8px_28px_-12px_rgb(0_0_0/0.22)] data-[state=open]:duration-250 data-[state=closed]:duration-150 data-[state=open]:zoom-in-97 data-[state=closed]:zoom-out-99 motion-reduce:animate-none">
+          {behaviors.map(behavior => <SelectItem key={behavior.value} value={behavior.value} className="min-h-9 rounded-lg px-2.5 text-xs transition-colors duration-150 motion-reduce:transition-none">{behavior.label}</SelectItem>)}
+        </SelectContent>
+      </Select>
+    </div>}
+  </div>;
+}
+```
+</ExpandableBlock>
+</Dependencies>
+
+<Dependencies step={3} title="Add the supporting file" className="docs-source-card">
+  <p className="mb-4 text-sm text-muted-foreground">Copy into <code className="rounded-full bg-muted px-2 py-1 font-mono text-xs text-foreground">components/ui/select.tsx</code></p>
+
+<ExpandableBlock>
+```jsx copy
+"use client"
+
+import * as React from "react"
+import * as SelectPrimitive from "@radix-ui/react-select"
+import { CheckIcon, ChevronDownIcon, ChevronUpIcon } from "lucide-react"
+
+import { cn } from "@/lib/utils"
+
+function Select({
+  ...props
+}: React.ComponentProps<typeof SelectPrimitive.Root>) {
+  return <SelectPrimitive.Root data-slot="select" {...props} />
+}
+
+function SelectGroup({
+  ...props
+}: React.ComponentProps<typeof SelectPrimitive.Group>) {
+  return <SelectPrimitive.Group data-slot="select-group" {...props} />
+}
+
+function SelectValue({
+  ...props
+}: React.ComponentProps<typeof SelectPrimitive.Value>) {
+  return <SelectPrimitive.Value data-slot="select-value" {...props} />
+}
+
+function SelectTrigger({
+  className,
+  size = "default",
+  children,
+  ...props
+}: React.ComponentProps<typeof SelectPrimitive.Trigger> & {
+  size?: "sm" | "default"
+}) {
+  return (
+    <SelectPrimitive.Trigger
+      data-slot="select-trigger"
+      data-size={size}
+      className={cn(
+        "border-input data-[placeholder]:text-muted-foreground [&_svg:not([class*='text-'])]:text-muted-foreground focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive dark:bg-input/30 dark:hover:bg-input/50 flex w-fit items-center justify-between gap-2 rounded-md border bg-transparent px-3 py-2 text-sm whitespace-nowrap shadow-xs transition-[color,box-shadow] outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50 data-[size=default]:h-9 data-[size=sm]:h-8 *:data-[slot=select-value]:line-clamp-1 *:data-[slot=select-value]:flex *:data-[slot=select-value]:items-center *:data-[slot=select-value]:gap-2 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+        className
+      )}
+      {...props}
+    >
+      {children}
+      <SelectPrimitive.Icon asChild>
+        <ChevronDownIcon className="size-4 opacity-50" />
+      </SelectPrimitive.Icon>
+    </SelectPrimitive.Trigger>
+  )
+}
+
+function SelectContent({
+  className,
+  children,
+  position = "popper",
+  align = "center",
+  ...props
+}: React.ComponentProps<typeof SelectPrimitive.Content>) {
+  return (
+    <SelectPrimitive.Portal>
+      <SelectPrimitive.Content
+        data-slot="select-content"
+        className={cn(
+          "bg-popover text-popover-foreground data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 relative z-50 max-h-(--radix-select-content-available-height) min-w-[8rem] origin-(--radix-select-content-transform-origin) overflow-x-hidden overflow-y-auto rounded-md border shadow-md",
+          position === "popper" &&
+            "data-[side=bottom]:translate-y-1 data-[side=left]:-translate-x-1 data-[side=right]:translate-x-1 data-[side=top]:-translate-y-1",
+          className
+        )}
+        position={position}
+        align={align}
+        {...props}
+      >
+        <SelectScrollUpButton />
+        <SelectPrimitive.Viewport
+          className={cn(
+            "p-1",
+            position === "popper" &&
+              "h-[var(--radix-select-trigger-height)] w-full min-w-[var(--radix-select-trigger-width)] scroll-my-1"
+          )}
+        >
+          {children}
+        </SelectPrimitive.Viewport>
+        <SelectScrollDownButton />
+      </SelectPrimitive.Content>
+    </SelectPrimitive.Portal>
+  )
+}
+
+function SelectLabel({
+  className,
+  ...props
+}: React.ComponentProps<typeof SelectPrimitive.Label>) {
+  return (
+    <SelectPrimitive.Label
+      data-slot="select-label"
+      className={cn("text-muted-foreground px-2 py-1.5 text-xs", className)}
+      {...props}
+    />
+  )
+}
+
+function SelectItem({
+  className,
+  children,
+  ...props
+}: React.ComponentProps<typeof SelectPrimitive.Item>) {
+  return (
+    <SelectPrimitive.Item
+      data-slot="select-item"
+      className={cn(
+        "focus:bg-accent focus:text-accent-foreground [&_svg:not([class*='text-'])]:text-muted-foreground relative flex w-full cursor-default items-center gap-2 rounded-sm py-1.5 pr-8 pl-2 text-sm outline-hidden select-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 *:[span]:last:flex *:[span]:last:items-center *:[span]:last:gap-2",
+        className
+      )}
+      {...props}
+    >
+      <span className="absolute right-2 flex size-3.5 items-center justify-center">
+        <SelectPrimitive.ItemIndicator>
+          <CheckIcon className="size-4" />
+        </SelectPrimitive.ItemIndicator>
+      </span>
+      <SelectPrimitive.ItemText>{children}</SelectPrimitive.ItemText>
+    </SelectPrimitive.Item>
+  )
+}
+
+function SelectSeparator({
+  className,
+  ...props
+}: React.ComponentProps<typeof SelectPrimitive.Separator>) {
+  return (
+    <SelectPrimitive.Separator
+      data-slot="select-separator"
+      className={cn("bg-border pointer-events-none -mx-1 my-1 h-px", className)}
+      {...props}
+    />
+  )
+}
+
+function SelectScrollUpButton({
+  className,
+  ...props
+}: React.ComponentProps<typeof SelectPrimitive.ScrollUpButton>) {
+  return (
+    <SelectPrimitive.ScrollUpButton
+      data-slot="select-scroll-up-button"
+      className={cn(
+        "flex cursor-default items-center justify-center py-1",
+        className
+      )}
+      {...props}
+    >
+      <ChevronUpIcon className="size-4" />
+    </SelectPrimitive.ScrollUpButton>
+  )
+}
+
+function SelectScrollDownButton({
+  className,
+  ...props
+}: React.ComponentProps<typeof SelectPrimitive.ScrollDownButton>) {
+  return (
+    <SelectPrimitive.ScrollDownButton
+      data-slot="select-scroll-down-button"
+      className={cn(
+        "flex cursor-default items-center justify-center py-1",
+        className
+      )}
+      {...props}
+    >
+      <ChevronDownIcon className="size-4" />
+    </SelectPrimitive.ScrollDownButton>
+  )
+}
+
+export {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectScrollDownButton,
+  SelectScrollUpButton,
+  SelectSeparator,
+  SelectTrigger,
+  SelectValue,
+}
+```
+</ExpandableBlock>
+</Dependencies>
+
+<Dependencies step={4} title="Add the supporting file" className="docs-source-card">
+  <p className="mb-4 text-sm text-muted-foreground">Copy into <code className="rounded-full bg-muted px-2 py-1 font-mono text-xs text-foreground">lib/effects/interactive-arrows/arrows-limit.jsx</code></p>
+
+<ExpandableBlock>
+```jsx copy
+"use client";
+import { useEffect, useRef } from 'react';
+import { useReducedMotion } from 'motion/react';
+
+const ArrowsLimit = ({ rows = 3, columns = 6 }) => {
+  const canvasRef = useRef(null);
+  const motionEnabled = !useReducedMotion();
+  const mouseRef = useRef({ x: 0, y: 0 });
+  const arrowsRef = useRef([]);
+  const animationFrameRef = useRef(null);
+
+  useEffect(() => {
+    class Point {
+      constructor(x, y) {
+        this.x = x || 0;
+        this.y = y || 0;
+      }
+    }
+
+    class Arrow {
+      constructor(position) {
+        this.pos = position;
+        this.dx = 0;
+        this.dy = 0;
+        this.angle = 0;
+        this.ease = 0.1;
+      }
+
+      update(mouseX, mouseY) {
+        const targetDx = mouseX - this.pos.x;
+        const targetDy = mouseY - this.pos.y;
+        this.dx += (targetDx - this.dx) * this.ease * 0.35;
+        this.dy += (targetDy - this.dy) * this.ease * 0.35;
+        this.angle = Math.atan2(this.dy, this.dx);
+      }
+
+      draw(ctx) {
+        ctx.save();
+        ctx.translate(this.pos.x, this.pos.y);
+        ctx.rotate(this.angle);
+        const arrowScale = Math.min(1, canvasRef.current.width / 800);
+        ctx.scale(arrowScale, arrowScale);
+        ctx.beginPath();
+
+        ctx.moveTo(50, 0);
+        ctx.lineTo(-50, 0);
+        ctx.moveTo(50, 0);
+        ctx.lineTo(10, -40);
+        ctx.moveTo(50, 0);
+        ctx.lineTo(10, 40);
+        ctx.lineWidth = 2;
+        ctx.strokeStyle = 'white';
+        ctx.stroke();
+
+        ctx.restore();
+      }
+    }
+
+    const initializeArrows = (canvas) => {
+      const arrows = [];
+      const spacingX = canvas.width / (columns + 1);
+      const spacingY = canvas.height / (rows + 1);
+
+      for (let y = 1;y <= rows;y++) {
+        for (let x = 1;x <= columns;x++) {
+          arrows.push(
+            new Arrow(
+              new Point(
+                x * spacingX,
+                y * spacingY
+              )
+            )
+          );
+        }
+      }
+      return arrows;
+    };
+
+    const handleResize = () => {
+      const canvas = canvasRef.current;
+      if (canvas) {
+        canvas.width = canvas.parentElement.clientWidth || 1;
+        canvas.height = canvas.parentElement.clientHeight || 1;
+        arrowsRef.current = initializeArrows(canvas);
+      }
+    };
+
+    const handleMouseMove = (e) => {
+      if (!motionEnabled) return;
+      const canvas = canvasRef.current;
+      const rect = canvas.getBoundingClientRect();
+      if (
+        e.clientX >= rect.left &&
+        e.clientX <= rect.right &&
+        e.clientY >= rect.top &&
+        e.clientY <= rect.bottom
+      ) {
+        mouseRef.current = {
+          x: e.clientX - rect.left,
+          y: e.clientY - rect.top,
+        };
+      }
+    };
+
+    const main = () => {
+      const canvas = canvasRef.current;
+      const ctx = canvas?.getContext('2d');
+      if (!ctx) return;
+      const arrows = arrowsRef.current;
+      const mouse = mouseRef.current;
+
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      arrows.forEach(arrow => {
+        arrow.update(mouse.x, mouse.y);
+        arrow.draw(ctx);
+      });
+
+      if (motionEnabled) animationFrameRef.current = requestAnimationFrame(main);
+    };
+
+    const canvas = canvasRef.current;
+    if (!canvas || !canvas.getContext("2d")) return;
+    canvas.width = canvas.parentElement.clientWidth || 1;
+    canvas.height = canvas.parentElement.clientHeight || 1;
+
+    arrowsRef.current = initializeArrows(canvas);
+    const observer = new ResizeObserver(handleResize);
+    observer.observe(canvas.parentElement);
+    canvas.addEventListener('mousemove', handleMouseMove);
+
+    main();
+
+    return () => {
+      observer.disconnect();
+      canvas.removeEventListener('mousemove', handleMouseMove);
+      if (animationFrameRef.current) {
+        cancelAnimationFrame(animationFrameRef.current);
+      }
+    };
+  }, [rows, columns, motionEnabled]);
+
+  return (
+    <div className="w-full h-full">
+      <canvas
+        ref={canvasRef} aria-hidden="true"
+        className="w-full h-full "
+      />
+    </div>
+  );
+};
+
+export default ArrowsLimit;
+```
+</ExpandableBlock>
+</Dependencies>
+
+<Dependencies step={5} title="Add the supporting file" className="docs-source-card">
+  <p className="mb-4 text-sm text-muted-foreground">Copy into <code className="rounded-full bg-muted px-2 py-1 font-mono text-xs text-foreground">lib/effects/interactive-arrows/arrows-opacity.jsx</code></p>
+
+<ExpandableBlock>
+```jsx copy
+"use client";
+import { useEffect, useRef } from 'react';
+import { useReducedMotion } from 'motion/react';
+
+const ArrowsOpacity = () => {
+  const canvasRef = useRef(null);
+  const motionEnabled = !useReducedMotion();
+  const requestIdRef = useRef(null);
+  const arrowArrRef = useRef([]);
+  const mouseRef = useRef({ x: 0, y: 0 });
+
+  useEffect(() => {
+    class Point {
+      constructor(x, y) {
+        this.x = x || 0;
+        this.y = y || 0;
+      }
+    }
+
+    class Arrow {
+      constructor(position) {
+        this.pos = position;
+        this.dx = 0;
+        this.dy = 0;
+        this.angle = 0;
+        this.dist = 0;
+      }
+
+      update(mx, my) {
+        this.dx = mx - this.pos.x;
+        this.dy = my - this.pos.y;
+        this.dist = Math.sqrt(this.dx * this.dx + this.dy * this.dy);
+        this.angle = Math.atan2(this.dy, this.dx);
+      }
+
+      draw(ctx) {
+        ctx.save();
+        ctx.translate(this.pos.x, this.pos.y);
+        ctx.rotate(this.angle);
+        ctx.beginPath();
+        ctx.moveTo(30, 0);
+        ctx.lineTo(-30, 0);
+        ctx.moveTo(30, 0);
+        ctx.lineTo(5, -30);
+        ctx.moveTo(30, 0);
+        ctx.lineTo(5, 30);
+        ctx.lineWidth = 5;
+        const alpha = 1 - (this.dist / 300);
+        ctx.strokeStyle = `rgba(0, 0, 0, ${Math.max(0, alpha)})`;
+        ctx.stroke();
+        ctx.restore();
+      }
+    }
+
+    const initializeArrows = (canvas) => {
+      arrowArrRef.current = [];
+      for (let y = 0;y < canvas.height / 20;y++) {
+        for (let x = 0;x < canvas.width / 50;x++) {
+          const arr = new Arrow(new Point(x * 75, y * 75));
+          arrowArrRef.current.push(arr);
+        }
+      }
+    };
+
+    const handleResize = () => {
+      const canvas = canvasRef.current;
+      canvas.width = canvas.parentElement.clientWidth || 1;
+      canvas.height = canvas.parentElement.clientHeight || 1;
+      initializeArrows(canvas);
+    };
+
+    const handleMouseMove = (e) => {
+      if (!motionEnabled) return;
+      const canvas = canvasRef.current;
+      const rect = canvas.getBoundingClientRect();
+      const scaleX = canvas.width / rect.width;
+      const scaleY = canvas.height / rect.height;
+      const mouseX = (e.clientX - rect.left) * scaleX;
+      const mouseY = (e.clientY - rect.top) * scaleY;
+      if (mouseX >= 0 && mouseX <= canvas.width && mouseY >= 0 && mouseY <= canvas.height) {
+        mouseRef.current = { x: mouseX, y: mouseY };
+      }
+    };
+
+    const animate = () => {
+      const canvas = canvasRef.current;
+      const ctx = canvas?.getContext('2d');
+      if (!ctx) return;
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      const { x: mx, y: my } = mouseRef.current;
+      for (let y = 0;y < canvas.height / 20;y++) {
+        for (let x = 0;x < canvas.width / 50;x++) {
+          const arrow = arrowArrRef.current[y * Math.ceil(canvas.width / 50) + x];
+          if (arrow) {
+            arrow.update(mx, my);
+            arrow.draw(ctx);
+          }
+        }
+      }
+      if (motionEnabled) requestIdRef.current = requestAnimationFrame(animate);
+    };
+
+    const canvas = canvasRef.current;
+    if (!canvas || !canvas.getContext("2d")) return;
+    canvas.width = canvas.parentElement.clientWidth || 1;
+    canvas.height = canvas.parentElement.clientHeight || 1;
+    initializeArrows(canvas);
+    const observer = new ResizeObserver(handleResize);
+    observer.observe(canvas.parentElement);
+    canvas.addEventListener('mousemove', handleMouseMove);
+    animate();
+    return () => {
+      observer.disconnect();
+      canvas.removeEventListener('mousemove', handleMouseMove);
+      if (requestIdRef.current) cancelAnimationFrame(requestIdRef.current);
+    };
+  }, [motionEnabled]);
+
+  return (
+    <canvas ref={canvasRef} aria-hidden="true" style={{ width: '100%', height: '100%', pointerEvents: 'auto' }} />
+  );
+};
+
+export default ArrowsOpacity;
+```
+</ExpandableBlock>
+</Dependencies>
+
+<Dependencies step={6} title="Add the supporting file" className="docs-source-card">
+  <p className="mb-4 text-sm text-muted-foreground">Copy into <code className="rounded-full bg-muted px-2 py-1 font-mono text-xs text-foreground">lib/effects/interactive-arrows/arrows-play.jsx</code></p>
+
+<ExpandableBlock>
+```jsx copy
+"use client";
+import { useEffect, useRef } from 'react';
+import { useReducedMotion } from 'motion/react';
+
+const ArrowsPlay = () => {
+  const canvasRef = useRef(null);
+  const motionEnabled = !useReducedMotion();
+  const mouseRef = useRef({ x: 0, y: 0 });
+  const arrowsRef = useRef([]);
+  const animationFrameRef = useRef(null);
+  const divRef = useRef(null); // For the center div with text
+
+  useEffect(() => {
+    class Point {
+      constructor(x, y) {
+        this.x = x || 0;
+        this.y = y || 0;
+      }
+    }
+
+    class Arrow {
+      constructor(position) {
+        this.pos = position;
+        this.dx = 0;
+        this.dy = 0;
+        this.angle = 0;
+        this.rotationEase = 0.12;
+      }
+
+      update(mouseX, mouseY) {
+        this.dx = mouseX - this.pos.x;
+        this.dy = mouseY - this.pos.y;
+        const targetAngle = Math.atan2(this.dy, this.dx);
+
+        // Ease rotation across the shortest arc so large direction changes do not snap.
+        let delta = targetAngle - this.angle;
+        while (delta > Math.PI) delta -= Math.PI * 2;
+        while (delta < -Math.PI) delta += Math.PI * 2;
+
+        this.angle += delta * this.rotationEase;
+      }
+
+      draw(ctx) {
+        ctx.save();
+        ctx.translate(this.pos.x, this.pos.y);
+        ctx.rotate(this.angle);
+        ctx.beginPath();
+        ctx.moveTo(30, 0);
+        ctx.lineTo(-30, 0);
+        ctx.moveTo(30, 0);
+        ctx.lineTo(10, -20);
+        ctx.moveTo(30, 0);
+        ctx.lineTo(10, 20);
+        ctx.lineWidth = 2.5;
+        ctx.strokeStyle = 'white';
+        ctx.stroke();
+        ctx.restore();
+      }
+    }
+
+    const initializeArrows = (canvas) => {
+      const arrows = [];
+      const spacing = 120;
+
+      const cols = Math.floor(canvas.width / spacing);
+      const rows = Math.floor(canvas.height / spacing);
+
+      const xPadding = (canvas.width - (cols * spacing)) / 2;
+      const yPadding = (canvas.height - (rows * spacing)) / 2;
+
+      // Get div position relative to canvas
+      const divRect = divRef.current.getBoundingClientRect();
+      const canvasRect = canvas.getBoundingClientRect();
+
+      const divLeft = divRect.left - canvasRect.left;
+      const divRight = divRect.right - canvasRect.left;
+      const divTop = divRect.top - canvasRect.top;
+      const divBottom = divRect.bottom - canvasRect.top;
+
+      for (let y = 0;y <= rows;y++) {
+        for (let x = 0;x <= cols;x++) {
+          const arrowPos = new Point(
+            x * spacing + xPadding,
+            y * spacing + yPadding
+          );
+
+
+          if (
+            arrowPos.x >= divLeft &&
+            arrowPos.x <= divRight &&
+            arrowPos.y >= divTop &&
+            arrowPos.y <= divBottom
+          ) {
+            continue;
+          }
+
+          arrows.push(new Arrow(arrowPos));
+        }
+      }
+      return arrows;
+    };
+
+
+    const handleResize = () => {
+      const canvas = canvasRef.current;
+      if (canvas) {
+        canvas.width = canvas.parentElement.clientWidth || 1;
+        canvas.height = canvas.parentElement.clientHeight || 1;
+        arrowsRef.current = initializeArrows(canvas);
+      }
+    };
+
+    const handleMouseMove = (e) => {
+      if (!motionEnabled) return;
+      const canvas = canvasRef.current;
+      const rect = canvas.getBoundingClientRect();
+
+      if (
+        e.clientX >= rect.left &&
+        e.clientX <= rect.right &&
+        e.clientY >= rect.top &&
+        e.clientY <= rect.bottom
+      ) {
+        mouseRef.current = {
+          x: e.clientX - rect.left,
+          y: e.clientY - rect.top,
+        };
+      }
+    };
+
+    const main = () => {
+      const canvas = canvasRef.current;
+      const ctx = canvas?.getContext('2d');
+      if (!ctx) return;
+      const arrows = arrowsRef.current;
+      const mouse = mouseRef.current;
+
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      arrows.forEach(arrow => {
+        arrow.update(mouse.x, mouse.y);
+        arrow.draw(ctx);
+      });
+
+      if (motionEnabled) animationFrameRef.current = requestAnimationFrame(main);
+    };
+
+    const canvas = canvasRef.current;
+    if (!canvas || !canvas.getContext("2d")) return;
+    canvas.width = canvas.parentElement.clientWidth || 1;
+    canvas.height = canvas.parentElement.clientHeight || 1;
+    mouseRef.current = {
+      x: canvas.width / 2,
+      y: canvas.height / 2,
+    };
+
+    arrowsRef.current = initializeArrows(canvas);
+    const observer = new ResizeObserver(handleResize);
+    observer.observe(canvas.parentElement);
+    canvas.addEventListener('mousemove', handleMouseMove);
+
+    main();
+
+    return () => {
+      observer.disconnect();
+      canvas.removeEventListener('mousemove', handleMouseMove);
+      if (animationFrameRef.current) {
+        cancelAnimationFrame(animationFrameRef.current);
+      }
+    };
+  }, [motionEnabled]);
+
+  return (
+    <div className="relative w-full h-full ">
+      <canvas
+        ref={canvasRef} aria-hidden="true"
+        className="w-full h-full"
+        style={{ cursor: 'pointer' }}
+      />
+      <div
+        ref={divRef}
+        className="pointer-events-none absolute left-1/2 top-1/2 z-10 flex -translate-x-1/2 -translate-y-1/2 items-center justify-center"
+        style={{
+          cursor: "pointer",
+          height: "25cqw",
+          width: "32cqw",
+          backgroundColor: "transparent",
+        }}
+      >
+        <p className='text-center text-[15cqw] leading-none text-white transition-all duration-500 ease'>
+          Play
+        </p>
+      </div>
+    </div>
+  );
+};
+
+export default ArrowsPlay;
+```
+</ExpandableBlock>
+</Dependencies>
+
+<Dependencies step={7} title="Add the supporting file" className="docs-source-card">
+  <p className="mb-4 text-sm text-muted-foreground">Copy into <code className="rounded-full bg-muted px-2 py-1 font-mono text-xs text-foreground">lib/effects/interactive-arrows/arrows.jsx</code></p>
+
+<ExpandableBlock>
+```jsx copy
+"use client";
+import { useEffect, useRef } from 'react';
+import { useReducedMotion } from 'motion/react';
+
+const Arrows = () => {
+  const canvasRef = useRef(null);
+  const motionEnabled = !useReducedMotion();
+  const mouseRef = useRef({ x: 0, y: 0 });
+  const arrowsRef = useRef([]);
+  const animationFrameRef = useRef(null);
+
+  useEffect(() => {
+    class Point {
+      constructor(x, y) {
+        this.x = x || 0;
+        this.y = y || 0;
+      }
+    }
+
+    class Arrow {
+      constructor(position) {
+        this.pos = position;
+        this.dx = 0;
+        this.dy = 0;
+        this.angle = 0;
+        this.isHovered = false;
+        this.originalPos = { ...position };
+        this.targetPos = { ...position };
+      }
+
+      update(mouseX, mouseY) {
+        this.dx = mouseX - this.pos.x;
+        this.dy = mouseY - this.pos.y;
+
+        const targetAngle = Math.atan2(this.dy, this.dx) * 0.95;
+
+        // Lerp angle via shortest arc to avoid wrap-around jumps
+        let delta = targetAngle - this.angle;
+        while (delta > Math.PI) delta -= 2 * Math.PI;
+        while (delta < -Math.PI) delta += 2 * Math.PI;
+        this.angle += delta * 0.15;
+
+        // Check if mouse is near this arrow
+        const distance = Math.sqrt(
+          Math.pow(mouseX - this.pos.x, 2) +
+          Math.pow(mouseY - this.pos.y, 2)
+        );
+
+        const wasHovered = this.isHovered;
+        this.isHovered = distance < 30;
+
+        // Handle spacing animation
+        if (this.isHovered !== wasHovered) {
+          if (this.isHovered) {
+            // Push surrounding arrows away
+            arrowsRef.current.forEach(otherArrow => {
+              if (otherArrow !== this) {
+                const dx = otherArrow.pos.x - this.pos.x;
+                const dy = otherArrow.pos.y - this.pos.y;
+                const dist = Math.sqrt(dx * dx + dy * dy);
+                if (dist < 70) {
+                  const pushForce = (70 - dist) / 70;
+                  otherArrow.targetPos = {
+                    x: otherArrow.originalPos.x + (dx / dist) * 20 * pushForce,
+                    y: otherArrow.originalPos.y + (dy / dist) * 20 * pushForce
+                  };
+                }
+              }
+            });
+          } else {
+            // Reset surrounding arrows
+            arrowsRef.current.forEach(arrow => {
+              arrow.targetPos = { ...arrow.originalPos };
+            });
+          }
+        }
+
+        // Smooth position transition
+        this.pos.x += (this.targetPos.x - this.pos.x) * 0.1;
+        this.pos.y += (this.targetPos.y - this.pos.y) * 0.1;
+      }
+
+      draw(ctx) {
+        ctx.save();
+        ctx.translate(this.pos.x, this.pos.y);
+        ctx.rotate(this.angle);
+        ctx.beginPath();
+
+        ctx.moveTo(20, 0);
+        ctx.lineTo(-20, 0);
+        ctx.moveTo(20, 0);
+        ctx.lineTo(5, -15);
+        ctx.moveTo(20, 0);
+        ctx.lineTo(5, 15);
+        ctx.lineWidth = this.isHovered ? 3 : 2;
+        ctx.strokeStyle = 'black';
+        ctx.stroke();
+        ctx.restore();
+      }
+    }
+
+    const initializeArrows = (canvas) => {
+      const arrows = [];
+      const spacing = 50;
+      const cols = Math.floor(canvas.width / spacing);
+      const rows = Math.floor(canvas.height / spacing);
+      const xPadding = (canvas.width - (cols * spacing)) / 2;
+      const yPadding = (canvas.height - (rows * spacing)) / 2;
+      for (let y = 0;y <= rows;y++) {
+        for (let x = 0;x <= cols;x++) {
+          arrows.push(new Arrow(new Point(x * spacing + xPadding, y * spacing + yPadding)));
+        }
+      }
+      return arrows;
+    };
+
+    const handleResize = () => {
+      const canvas = canvasRef.current;
+      if (canvas) {
+        canvas.width = canvas.parentElement.clientWidth || 1;
+        canvas.height = canvas.parentElement.clientHeight || 1;
+        arrowsRef.current = initializeArrows(canvas);
+      }
+    };
+
+    const handleMouseMove = (e) => {
+      if (!motionEnabled) return;
+      const canvas = canvasRef.current;
+      if (canvas) {
+        const rect = canvas.getBoundingClientRect();
+        const scaleX = canvas.width / rect.width;
+        const scaleY = canvas.height / rect.height;
+        mouseRef.current = {
+          x: (e.clientX - rect.left) * scaleX,
+          y: (e.clientY - rect.top) * scaleY,
+        };
+      }
+    };
+
+    const main = () => {
+      const canvas = canvasRef.current;
+      const ctx = canvas?.getContext('2d');
+      if (!ctx) return;
+      const arrows = arrowsRef.current;
+      const mouse = mouseRef.current;
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      arrows.forEach(arrow => {
+        arrow.update(mouse.x, mouse.y);
+        arrow.draw(ctx);
+      });
+      if (motionEnabled) animationFrameRef.current = requestAnimationFrame(main);
+    };
+
+    const canvas = canvasRef.current;
+    if (!canvas || !canvas.getContext("2d")) return;
+    canvas.width = canvas.parentElement.clientWidth || 1;
+    canvas.height = canvas.parentElement.clientHeight || 1;
+    arrowsRef.current = initializeArrows(canvas);
+    const observer = new ResizeObserver(handleResize);
+    observer.observe(canvas.parentElement);
+    canvas.addEventListener('mousemove', handleMouseMove);
+    main();
+    return () => {
+      observer.disconnect();
+      canvas.removeEventListener('mousemove', handleMouseMove);
+      if (animationFrameRef.current) {
+        cancelAnimationFrame(animationFrameRef.current);
+      }
+    };
+  }, [motionEnabled]);
+
+  return (
+    // <div className="w-full h-full bg-white">
+    <canvas ref={canvasRef} aria-hidden="true" className="w-full h-full" />
+    // </div>
+  );
+};
+
+export default Arrows;
+```
+</ExpandableBlock>
+</Dependencies>
+
+<Dependencies step={8} title="Add the supporting file" className="docs-source-card">
+  <p className="mb-4 text-sm text-muted-foreground">Copy into <code className="rounded-full bg-muted px-2 py-1 font-mono text-xs text-foreground">lib/effects/interactive-arrows/lines.jsx</code></p>
+
+<ExpandableBlock>
+```jsx copy
+"use client";
+import { useEffect, useRef } from 'react';
+import { useReducedMotion } from 'motion/react';
+
+const Lines = () => {
+  const canvasRef = useRef(null);
+  const motionEnabled = !useReducedMotion();
+  const mouseRef = useRef({ x: 0, y: 0 });
+  const pointsRef = useRef([]);
+  const animationFrameRef = useRef(null);
+
+  const lineLength = 30;
+
+  useEffect(() => {
+    class Point {
+      constructor(x, y) {
+        this.x = x || 0;
+        this.y = y || 0;
+      }
+
+      draw(ctx, mouseX, mouseY) {
+        const dx = mouseX - this.x;
+        const dy = mouseY - this.y;
+        const distance = Math.sqrt(dx * dx + dy * dy) || 1;
+        const unitX = dx / distance;
+        const unitY = dy / distance;
+        const lineEndX = this.x + unitX * lineLength;
+        const lineEndY = this.y + unitY * lineLength;
+
+        ctx.beginPath();
+        ctx.moveTo(this.x, this.y);
+        ctx.lineTo(lineEndX, lineEndY);
+        ctx.strokeStyle = 'black';
+        ctx.lineWidth = 1.5;
+        ctx.stroke();
+      }
+    }
+
+    const initializePoints = (canvas) => {
+      const points = [];
+      const spacing = 60;
+      const cols = Math.floor(canvas.width / spacing);
+      const rows = Math.floor(canvas.height / spacing);
+
+      for (let y = 0;y <= rows;y++) {
+        for (let x = 0;x <= cols;x++) {
+          points.push(new Point(x * spacing, y * spacing));
+        }
+      }
+      return points;
+    };
+
+    const handleResize = () => {
+      const canvas = canvasRef.current;
+      if (canvas) {
+        canvas.width = canvas.parentElement.clientWidth || 1;
+        canvas.height = canvas.parentElement.clientHeight || 1;
+        pointsRef.current = initializePoints(canvas);
+      }
+    };
+
+    const handleMouseMove = (e) => {
+      if (!motionEnabled) return;
+      const canvas = canvasRef.current;
+      const rect = canvas.getBoundingClientRect();
+      const scaleX = canvas.width / rect.width;
+      const scaleY = canvas.height / rect.height;
+      mouseRef.current = {
+        x: (e.clientX - rect.left) * scaleX,
+        y: (e.clientY - rect.top) * scaleY,
+      };
+    };
+
+    const main = () => {
+      const canvas = canvasRef.current;
+      const ctx = canvas?.getContext('2d');
+      if (!ctx) return;
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      pointsRef.current.forEach(point => point.draw(ctx, mouseRef.current.x, mouseRef.current.y));
+      if (motionEnabled) animationFrameRef.current = requestAnimationFrame(main);
+    };
+
+    const canvas = canvasRef.current;
+    if (!canvas || !canvas.getContext("2d")) return;
+    canvas.width = canvas.parentElement.clientWidth || 1;
+    canvas.height = canvas.parentElement.clientHeight || 1;
+    pointsRef.current = initializePoints(canvas);
+    const observer = new ResizeObserver(handleResize);
+    observer.observe(canvas.parentElement);
+    canvas.addEventListener('mousemove', handleMouseMove);
+    main();
+    return () => {
+      observer.disconnect();
+      canvas.removeEventListener('mousemove', handleMouseMove);
+      cancelAnimationFrame(animationFrameRef.current);
+    };
+  }, [motionEnabled]);
+
+  return <canvas ref={canvasRef} aria-hidden="true" className="w-full h-full " style={{ cursor: 'pointer' }} />;
+};
+
+export default Lines;
+```
+</ExpandableBlock>
+</Dependencies>
+
+<Dependencies step={9} title="Add the supporting file" className="docs-source-card">
+  <p className="mb-4 text-sm text-muted-foreground">Copy into <code className="rounded-full bg-muted px-2 py-1 font-mono text-xs text-foreground">lib/effects/interactive-arrows/points.jsx</code></p>
+
+<ExpandableBlock>
+```jsx copy
+"use client";
+import { useEffect, useRef } from 'react';
+import { useReducedMotion } from 'motion/react';
+
+const Points = () => {
+  const canvasRef = useRef(null);
+  const motionEnabled = !useReducedMotion();
+  const mouseRef = useRef({ x: 0, y: 0 });
+  const pointsRef = useRef([]);
+  const animationFrameRef = useRef(null);
+  const mouseEnteredRef = useRef(false);
+  const lineLengthRef = useRef(0);
+  const maxLineLength = 25;
+  const easingSpeed = 0.05;
+
+  useEffect(() => {
+    class Point {
+      constructor(x, y) {
+        this.x = x || 0;
+        this.y = y || 0;
+      }
+
+      draw(ctx, mouseX, mouseY) {
+        if (mouseEnteredRef.current) {
+          const dx = mouseX - this.x;
+          const dy = mouseY - this.y;
+
+
+          const distance = Math.sqrt(dx * dx + dy * dy) || 1;
+          const unitX = dx / distance;
+          const unitY = dy / distance;
+
+
+          const lineEndX = this.x + unitX * lineLengthRef.current;
+          const lineEndY = this.y + unitY * lineLengthRef.current;
+
+
+          ctx.beginPath();
+          ctx.moveTo(this.x, this.y);
+          ctx.lineTo(lineEndX, lineEndY);
+          ctx.strokeStyle = 'black';
+          ctx.lineWidth = 1.5;
+          ctx.stroke();
+        } else {
+          ctx.beginPath();
+          ctx.arc(this.x, this.y, 2, 0, Math.PI * 2);
+          ctx.fillStyle = 'black';
+          ctx.fill();
+        }
+      }
+    }
+
+    const initializePoints = (canvas) => {
+      const points = [];
+      const spacing = 60;
+      const cols = Math.floor(canvas.width / spacing);
+      const rows = Math.floor(canvas.height / spacing);
+
+      const xPadding = (canvas.width - (cols * spacing)) / 2;
+      const yPadding = (canvas.height - (rows * spacing)) / 2;
+
+      for (let y = 0;y <= rows;y++) {
+        for (let x = 0;x <= cols;x++) {
+          points.push(new Point(
+            x * spacing + xPadding,
+            y * spacing + yPadding
+          ));
+        }
+      }
+      return points;
+    };
+
+    const handleResize = () => {
+      const canvas = canvasRef.current;
+      if (canvas) {
+        canvas.width = canvas.parentElement.clientWidth || 1;
+        canvas.height = canvas.parentElement.clientHeight || 1;
+        pointsRef.current = initializePoints(canvas);
+      }
+    };
+
+    const handleMouseMove = (e) => {
+      if (!motionEnabled) return;
+      const canvas = canvasRef.current;
+      const rect = canvas.getBoundingClientRect();
+      const scaleX = canvas.width / rect.width;
+      const scaleY = canvas.height / rect.height;
+      mouseRef.current = {
+        x: (e.clientX - rect.left) * scaleX,
+        y: (e.clientY - rect.top) * scaleY,
+      };
+    };
+
+    const handleMouseEnter = () => {
+      mouseEnteredRef.current = true;
+    }
+
+    const handleMouseLeave = () => {
+      mouseEnteredRef.current = false;
+    };
+
+    const updateLineLength = () => {
+      if (mouseEnteredRef.current && lineLengthRef.current < maxLineLength) {
+        lineLengthRef.current = Math.min(lineLengthRef.current + easingSpeed, maxLineLength);
+      } else if (!mouseEnteredRef.current && lineLengthRef.current > 0) {
+        lineLengthRef.current = Math.max(lineLengthRef.current - easingSpeed, 0);
+      }
+    };
+
+    const main = () => {
+      const canvas = canvasRef.current;
+      const ctx = canvas?.getContext('2d');
+      if (!ctx) return;
+      const points = pointsRef.current;
+      const mouse = mouseRef.current;
+
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      updateLineLength();
+
+      points.forEach(point => {
+        point.draw(ctx, mouse.x, mouse.y);
+      });
+
+      if (motionEnabled) animationFrameRef.current = requestAnimationFrame(main);
+    };
+
+    const canvas = canvasRef.current;
+    if (!canvas || !canvas.getContext("2d")) return;
+    canvas.width = canvas.parentElement.clientWidth || 1;
+    canvas.height = canvas.parentElement.clientHeight || 1;
+
+    pointsRef.current = initializePoints(canvas);
+    const observer = new ResizeObserver(handleResize);
+    observer.observe(canvas.parentElement);
+    canvas.addEventListener('mousemove', handleMouseMove);
+    canvas.addEventListener('mouseenter', handleMouseEnter);
+    canvas.addEventListener('mouseleave', handleMouseLeave);
+
+    main();
+
+    return () => {
+      observer.disconnect();
+      canvas.removeEventListener('mousemove', handleMouseMove);
+      canvas.removeEventListener('mouseenter', handleMouseEnter);
+      canvas.removeEventListener('mouseleave', handleMouseLeave);
+      if (animationFrameRef.current) {
+        cancelAnimationFrame(animationFrameRef.current);
+      }
+    };
+  }, [motionEnabled]);
+
+  return (
+    <div className="w-full h-full ">
+      <canvas
+        ref={canvasRef} aria-hidden="true"
+        className="w-full h-full"
+        style={{ cursor: 'pointer' }}
+      />
+    </div>
+  );
+};
+
+export default Points;
+```
+</ExpandableBlock>
+</Dependencies>
+
+<Dependencies step={10} title="Add the supporting file" className="docs-source-card">
+  <p className="mb-4 text-sm text-muted-foreground">Copy into <code className="rounded-full bg-muted px-2 py-1 font-mono text-xs text-foreground">lib/utils.ts</code></p>
+
+<ExpandableBlock>
+```ts copy
+import { clsx, type ClassValue } from "clsx"
+import { twMerge } from "tailwind-merge"
+
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs))
+}
+```
+</ExpandableBlock>
+</Dependencies>
+
+
+
+## Preview behavior
+
+Move across the arrows. In the full preview, choose another behavior. The effect stays inside its container and respects reduced motion preferences.

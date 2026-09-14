@@ -1,0 +1,149 @@
+# ObsidianUI
+
+> Open-source React components with complete source downloads, usage examples, and interactive previews.
+
+Use ObsidianUI to add buttons, navigation, galleries, scroll animations, cursor effects, text reveals, canvas backgrounds, and WebGL effects to React interfaces. The source is yours to customize. Public reads require no account, API key, or JavaScript.
+
+For installation, GET /r/registry.json, choose an existing item name, then GET /r/{name}.json. Copy every files[].content to its resolved files[].target and install the listed dependencies. Target prefixes @ui/, @components/, @lib/, and @hooks/ resolve through your project's components.json aliases; do not create literal @-named directories. Preserve CSS files, client directives, and required local helpers. Replace remote demo assets as appropriate. The documented CLI is npx shadcn@latest add "https://www.obsidianui.dev/r/{name}.json". Read the agent guide before changing project files.
+
+Request any published page with Accept: text/markdown or read its direct Markdown URL. /llm.txt is an identical compatibility alias of this /llms.txt index. The repository has a local stdio MCP resource server (npm run mcp), not a hosted HTTP MCP endpoint. ObsidianUI is MIT licensed; preserve applicable notices and respect third-party package and asset licenses.
+
+## When to use
+
+- [Agent instructions](https://www.obsidianui.dev/agent-instructions.md): Choose components for React UI tasks, retrieve complete manifests, resolve file targets, install dependencies, and handle missing resources.
+
+## Developer resources
+
+- [Developer portal](https://www.obsidianui.dev/markdown/developers.md): ObsidianUI documentation, registry downloads, API, authentication, and MCP entry points.
+- [API documentation](https://www.obsidianui.dev/markdown/api.md): Read-only registry and Markdown HTTP endpoints.
+- [OpenAPI specification](https://www.obsidianui.dev/openapi.json): Machine-readable HTTP API contract.
+- [Authentication](https://www.obsidianui.dev/markdown/authentication.md): Public read access requires no credentials.
+- [MCP server](https://www.obsidianui.dev/markdown/mcp.md): Local stdio resources/list and resources/read at obsidian://{name}.
+- [Registry catalogue](https://www.obsidianui.dev/r/registry.json): 100 complete registry items, including supporting UI primitives.
+- [Sitemap](https://www.obsidianui.dev/sitemap.xml): Published page discovery.
+
+## Getting started
+
+- [Install Next.js](https://www.obsidianui.dev/markdown/docs/installation.md): ObsidianUI setup documentation.
+- [Install Tailwind CSS](https://www.obsidianui.dev/markdown/docs/install-tailwind.md): ObsidianUI setup documentation.
+- [Add utilities](https://www.obsidianui.dev/markdown/docs/add-utilities.md): ObsidianUI setup documentation.
+- [CLI](https://www.obsidianui.dev/markdown/docs/cli.md): ObsidianUI setup documentation.
+
+## Components
+
+- [Arrow Fill Button](https://www.obsidianui.dev/markdown/docs/arrow-fill-button.md): [download all source files](https://www.obsidianui.dev/r/arrow-fill-button.json) and [interactive preview](https://www.obsidianui.dev/docs/arrow-fill-button).
+- [Folder Preview](https://www.obsidianui.dev/markdown/docs/folder-preview.md): [download all source files](https://www.obsidianui.dev/r/folder-preview.json) and [interactive preview](https://www.obsidianui.dev/docs/folder-preview).
+- [Hover Image](https://www.obsidianui.dev/markdown/docs/hover-img.md): [download all source files](https://www.obsidianui.dev/r/hover-img.json) and [interactive preview](https://www.obsidianui.dev/docs/hover-img).
+- [Masonry Grid](https://www.obsidianui.dev/markdown/docs/masonry-grid.md): [download all source files](https://www.obsidianui.dev/r/masonry-grid.json) and [interactive preview](https://www.obsidianui.dev/docs/masonry-grid).
+- [Pixelated Carousel](https://www.obsidianui.dev/markdown/docs/pixelated-carousel.md): [download all source files](https://www.obsidianui.dev/r/pixelated-carousel.json) and [interactive preview](https://www.obsidianui.dev/docs/pixelated-carousel).
+- [Apple Spotlight](https://www.obsidianui.dev/markdown/docs/apple-spotlight.md): [download all source files](https://www.obsidianui.dev/r/apple-spotlight.json) and [interactive preview](https://www.obsidianui.dev/docs/apple-spotlight).
+- [Circle Menu](https://www.obsidianui.dev/markdown/docs/circle-menu.md): [download all source files](https://www.obsidianui.dev/r/circle-menu.json) and [interactive preview](https://www.obsidianui.dev/docs/circle-menu).
+- [Magnet Tabs](https://www.obsidianui.dev/markdown/docs/magnet-tabs.md): [download all source files](https://www.obsidianui.dev/r/magnet-tabs.json) and [interactive preview](https://www.obsidianui.dev/docs/magnet-tabs).
+- [Trading Card](https://www.obsidianui.dev/markdown/docs/trading-card.md): [download all source files](https://www.obsidianui.dev/r/trading-card.json) and [interactive preview](https://www.obsidianui.dev/docs/trading-card).
+- [Jelly Loader](https://www.obsidianui.dev/markdown/docs/jelly-loader.md): [download all source files](https://www.obsidianui.dev/r/jelly-loader.json) and [interactive preview](https://www.obsidianui.dev/docs/jelly-loader).
+- [OTP Input](https://www.obsidianui.dev/markdown/docs/otp-input.md): [download all source files](https://www.obsidianui.dev/r/otp-input.json) and [interactive preview](https://www.obsidianui.dev/docs/otp-input).
+- [Flip Text](https://www.obsidianui.dev/markdown/docs/flip-text.md): [download all source files](https://www.obsidianui.dev/r/flip-text.json) and [interactive preview](https://www.obsidianui.dev/docs/flip-text).
+- [Rectangular Text Reveal](https://www.obsidianui.dev/markdown/docs/rectangular-text-reveal.md): [download all source files](https://www.obsidianui.dev/r/rectangular-text-reveal.json) and [interactive preview](https://www.obsidianui.dev/docs/rectangular-text-reveal).
+- [Text Fill Animation](https://www.obsidianui.dev/markdown/docs/text-fill-animation.md): [download all source files](https://www.obsidianui.dev/r/text-fill-animation.json) and [interactive preview](https://www.obsidianui.dev/docs/text-fill-animation).
+- [Text Stream](https://www.obsidianui.dev/markdown/docs/text-stream.md): [download all source files](https://www.obsidianui.dev/r/text-stream.json) and [interactive preview](https://www.obsidianui.dev/docs/text-stream).
+- [Draggable Marquee](https://www.obsidianui.dev/markdown/docs/draggable-marquee.md): [download all source files](https://www.obsidianui.dev/r/draggable-marquee.json) and [interactive preview](https://www.obsidianui.dev/docs/draggable-marquee).
+- [Flip Scroll](https://www.obsidianui.dev/markdown/docs/flip-scroll.md): [download all source files](https://www.obsidianui.dev/r/flip-scroll.json) and [interactive preview](https://www.obsidianui.dev/docs/flip-scroll).
+- [Flow Scroll](https://www.obsidianui.dev/markdown/docs/flow-scroll.md): [download all source files](https://www.obsidianui.dev/r/flow-scroll.json) and [interactive preview](https://www.obsidianui.dev/docs/flow-scroll).
+- [Glowing Scroll Indicator](https://www.obsidianui.dev/markdown/docs/glowing-scroll-indicator.md): [download all source files](https://www.obsidianui.dev/r/glowing-scroll-indicator.json) and [interactive preview](https://www.obsidianui.dev/docs/glowing-scroll-indicator).
+- [Horizontal Scroll](https://www.obsidianui.dev/markdown/docs/horizontal-scroll.md): [download all source files](https://www.obsidianui.dev/r/horizontal-scroll.json) and [interactive preview](https://www.obsidianui.dev/docs/horizontal-scroll).
+- [Marquee on SVG Path](https://www.obsidianui.dev/markdown/docs/svg-path-marquee.md): [download all source files](https://www.obsidianui.dev/r/svg-path-marquee.json) and [interactive preview](https://www.obsidianui.dev/docs/svg-path-marquee).
+- [Parallax Gallery](https://www.obsidianui.dev/markdown/docs/parallax-gallery.md): [download all source files](https://www.obsidianui.dev/r/parallax-gallery.json) and [interactive preview](https://www.obsidianui.dev/docs/parallax-gallery).
+- [Scroll Effect](https://www.obsidianui.dev/markdown/docs/scroll-effect.md): [download all source files](https://www.obsidianui.dev/r/scroll-effect.json) and [interactive preview](https://www.obsidianui.dev/docs/scroll-effect).
+- [Scroll Stack](https://www.obsidianui.dev/markdown/docs/scroll-stack.md): [download all source files](https://www.obsidianui.dev/r/scroll-stack.json) and [interactive preview](https://www.obsidianui.dev/docs/scroll-stack).
+- [SVG Pixel Reveal](https://www.obsidianui.dev/markdown/docs/svg-pixel-reveal.md): [download all source files](https://www.obsidianui.dev/r/svg-pixel-reveal.json) and [interactive preview](https://www.obsidianui.dev/docs/svg-pixel-reveal).
+- [Butterfly Trail Cursor](https://www.obsidianui.dev/markdown/docs/butterfly-trail-cursor.md): [download all source files](https://www.obsidianui.dev/r/butterfly-trail-cursor.json) and [interactive preview](https://www.obsidianui.dev/docs/butterfly-trail-cursor).
+- [Colorful Cursor Aura](https://www.obsidianui.dev/markdown/docs/colorful-cursor-aura.md): [download all source files](https://www.obsidianui.dev/r/colorful-cursor-aura.json) and [interactive preview](https://www.obsidianui.dev/docs/colorful-cursor-aura).
+- [Interactive Arrows](https://www.obsidianui.dev/markdown/docs/interactive-arrows.md): [download all source files](https://www.obsidianui.dev/r/interactive-arrows.json) and [interactive preview](https://www.obsidianui.dev/docs/interactive-arrows).
+- [Magnetic Image Trail](https://www.obsidianui.dev/markdown/docs/magnetic-image-trail.md): [download all source files](https://www.obsidianui.dev/r/magnetic-image-trail.json) and [interactive preview](https://www.obsidianui.dev/docs/magnetic-image-trail).
+- [Mask Cursor Effect](https://www.obsidianui.dev/markdown/docs/mask-cursor-effect.md): [download all source files](https://www.obsidianui.dev/r/mask-cursor-effect.json) and [interactive preview](https://www.obsidianui.dev/docs/mask-cursor-effect).
+- [Rope Cursor](https://www.obsidianui.dev/markdown/docs/rope-cursor.md): [download all source files](https://www.obsidianui.dev/r/rope-cursor.json) and [interactive preview](https://www.obsidianui.dev/docs/rope-cursor).
+- [Dither Canvas](https://www.obsidianui.dev/markdown/docs/dither-canvas.md): [download all source files](https://www.obsidianui.dev/r/dither-canvas.json) and [interactive preview](https://www.obsidianui.dev/docs/dither-canvas).
+- [Dotted Grid](https://www.obsidianui.dev/markdown/docs/dotted-grid.md): [download all source files](https://www.obsidianui.dev/r/dotted-grid.json) and [interactive preview](https://www.obsidianui.dev/docs/dotted-grid).
+- [Book Flip](https://www.obsidianui.dev/markdown/docs/book-flip.md): [download all source files](https://www.obsidianui.dev/r/book-flip.json) and [interactive preview](https://www.obsidianui.dev/docs/book-flip).
+- [Curved Plane](https://www.obsidianui.dev/markdown/docs/curved-plane.md): [download all source files](https://www.obsidianui.dev/r/curved-plane.json) and [interactive preview](https://www.obsidianui.dev/docs/curved-plane).
+- [Fractal Glass](https://www.obsidianui.dev/markdown/docs/fractal-glass.md): [download all source files](https://www.obsidianui.dev/r/fractal-glass.json) and [interactive preview](https://www.obsidianui.dev/docs/fractal-glass).
+- [Grid Lift](https://www.obsidianui.dev/markdown/docs/grid-lift.md): [download all source files](https://www.obsidianui.dev/r/grid-lift.json) and [interactive preview](https://www.obsidianui.dev/docs/grid-lift).
+- [Hover Slider](https://www.obsidianui.dev/markdown/docs/interactive-hover-slider.md): [download all source files](https://www.obsidianui.dev/r/interactive-hover-slider.json) and [interactive preview](https://www.obsidianui.dev/docs/interactive-hover-slider).
+- [Interactive Blur Reveal](https://www.obsidianui.dev/markdown/docs/interactive-blur-reveal.md): [download all source files](https://www.obsidianui.dev/r/interactive-blur-reveal.json) and [interactive preview](https://www.obsidianui.dev/docs/interactive-blur-reveal).
+
+## Supporting registry items
+
+- [alert](https://www.obsidianui.dev/r/alert.json): Complete registry:ui source and dependencies.
+- [avatar](https://www.obsidianui.dev/r/avatar.json): Complete registry:ui source and dependencies.
+- [badge](https://www.obsidianui.dev/r/badge.json): Complete registry:ui source and dependencies.
+- [breadcrumb](https://www.obsidianui.dev/r/breadcrumb.json): Complete registry:ui source and dependencies.
+- [button](https://www.obsidianui.dev/r/button.json): Complete registry:ui source and dependencies.
+- [button-group](https://www.obsidianui.dev/r/button-group.json): Complete registry:ui source and dependencies.
+- [calendar](https://www.obsidianui.dev/r/calendar.json): Complete registry:ui source and dependencies.
+- [card](https://www.obsidianui.dev/r/card.json): Complete registry:ui source and dependencies.
+- [carousel](https://www.obsidianui.dev/r/carousel.json): Complete registry:ui source and dependencies.
+- [chart](https://www.obsidianui.dev/r/chart.json): Complete registry:ui source and dependencies.
+- [checkbox](https://www.obsidianui.dev/r/checkbox.json): Complete registry:ui source and dependencies.
+- [click-spark](https://www.obsidianui.dev/r/click-spark.json): Complete registry:block source and dependencies.
+- [collapsible](https://www.obsidianui.dev/r/collapsible.json): Complete registry:ui source and dependencies.
+- [command](https://www.obsidianui.dev/r/command.json): Complete registry:ui source and dependencies.
+- [context-menu](https://www.obsidianui.dev/r/context-menu.json): Complete registry:ui source and dependencies.
+- [dialog](https://www.obsidianui.dev/r/dialog.json): Complete registry:ui source and dependencies.
+- [drawer](https://www.obsidianui.dev/r/drawer.json): Complete registry:ui source and dependencies.
+- [dropdown-menu](https://www.obsidianui.dev/r/dropdown-menu.json): Complete registry:ui source and dependencies.
+- [empty](https://www.obsidianui.dev/r/empty.json): Complete registry:ui source and dependencies.
+- [field](https://www.obsidianui.dev/r/field.json): Complete registry:ui source and dependencies.
+- [file-input](https://www.obsidianui.dev/r/file-input.json): Complete registry:block source and dependencies.
+- [footer](https://www.obsidianui.dev/r/footer.json): Complete registry:block source and dependencies.
+- [form](https://www.obsidianui.dev/r/form.json): Complete registry:ui source and dependencies.
+- [hover-card](https://www.obsidianui.dev/r/hover-card.json): Complete registry:ui source and dependencies.
+- [input](https://www.obsidianui.dev/r/input.json): Complete registry:ui source and dependencies.
+- [input-group](https://www.obsidianui.dev/r/input-group.json): Complete registry:ui source and dependencies.
+- [input-otp](https://www.obsidianui.dev/r/input-otp.json): Complete registry:ui source and dependencies.
+- [interactive-hover-button](https://www.obsidianui.dev/r/interactive-hover-button.json): Complete registry:block source and dependencies.
+- [item](https://www.obsidianui.dev/r/item.json): Complete registry:ui source and dependencies.
+- [kbd](https://www.obsidianui.dev/r/kbd.json): Complete registry:ui source and dependencies.
+- [label](https://www.obsidianui.dev/r/label.json): Complete registry:ui source and dependencies.
+- [liquid-metal](https://www.obsidianui.dev/r/liquid-metal.json): Complete registry:block source and dependencies.
+- [menubar](https://www.obsidianui.dev/r/menubar.json): Complete registry:ui source and dependencies.
+- [navigation-menu](https://www.obsidianui.dev/r/navigation-menu.json): Complete registry:ui source and dependencies.
+- [pagination](https://www.obsidianui.dev/r/pagination.json): Complete registry:ui source and dependencies.
+- [playground-button](https://www.obsidianui.dev/r/playground-button.json): Complete registry:block source and dependencies.
+- [playground-navbar](https://www.obsidianui.dev/r/playground-navbar.json): Complete registry:block source and dependencies.
+- [popover](https://www.obsidianui.dev/r/popover.json): Complete registry:ui source and dependencies.
+- [progress](https://www.obsidianui.dev/r/progress.json): Complete registry:ui source and dependencies.
+- [radio-group](https://www.obsidianui.dev/r/radio-group.json): Complete registry:ui source and dependencies.
+- [resizable](https://www.obsidianui.dev/r/resizable.json): Complete registry:ui source and dependencies.
+- [scroll-area](https://www.obsidianui.dev/r/scroll-area.json): Complete registry:ui source and dependencies.
+- [select](https://www.obsidianui.dev/r/select.json): Complete registry:ui source and dependencies.
+- [separator](https://www.obsidianui.dev/r/separator.json): Complete registry:ui source and dependencies.
+- [sheet](https://www.obsidianui.dev/r/sheet.json): Complete registry:ui source and dependencies.
+- [sidebar](https://www.obsidianui.dev/r/sidebar.json): Complete registry:ui source and dependencies.
+- [sidebar-stackbits](https://www.obsidianui.dev/r/sidebar-stackbits.json): Complete registry:block source and dependencies.
+- [skeleton](https://www.obsidianui.dev/r/skeleton.json): Complete registry:ui source and dependencies.
+- [skeumorphic-music-card](https://www.obsidianui.dev/r/skeumorphic-music-card.json): Complete registry:block source and dependencies.
+- [slider](https://www.obsidianui.dev/r/slider.json): Complete registry:ui source and dependencies.
+- [smooth-scroll](https://www.obsidianui.dev/r/smooth-scroll.json): Complete registry:block source and dependencies.
+- [sonner](https://www.obsidianui.dev/r/sonner.json): Complete registry:ui source and dependencies.
+- [spinner](https://www.obsidianui.dev/r/spinner.json): Complete registry:ui source and dependencies.
+- [switch](https://www.obsidianui.dev/r/switch.json): Complete registry:ui source and dependencies.
+- [table](https://www.obsidianui.dev/r/table.json): Complete registry:ui source and dependencies.
+- [tabs](https://www.obsidianui.dev/r/tabs.json): Complete registry:ui source and dependencies.
+- [textarea](https://www.obsidianui.dev/r/textarea.json): Complete registry:ui source and dependencies.
+- [toggle](https://www.obsidianui.dev/r/toggle.json): Complete registry:ui source and dependencies.
+- [toggle-group](https://www.obsidianui.dev/r/toggle-group.json): Complete registry:ui source and dependencies.
+- [tooltip](https://www.obsidianui.dev/r/tooltip.json): Complete registry:ui source and dependencies.
+- [visitor-count](https://www.obsidianui.dev/r/visitor-count.json): Complete registry:block source and dependencies.
+
+## Site pages
+
+- [ObsidianUI home](https://www.obsidianui.dev/markdown/index.md): Product overview and installation workflow.
+- [Component showcase](https://www.obsidianui.dev/markdown/components.md): Published component catalogue with Markdown documentation and downloads.
+- [Templates](https://www.obsidianui.dev/markdown/templates.md): Template catalogue.
+- [Project One](https://www.obsidianui.dev/markdown/project-one.md): Template preview and separate source repository.
+- [Playground](https://www.obsidianui.dev/markdown/playground.md): Experimental navbar and button previews.
+
+## Optional
+
+- [All documentation in one file](https://www.obsidianui.dev/llms-full.txt): Complete Markdown documentation and source blocks; use individual documents to keep context small.
+- [Source repository](https://github.com/Atharvsinh-codez/ObsidianUI): Source, contribution history, and MIT license.

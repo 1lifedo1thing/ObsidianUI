@@ -1,0 +1,82 @@
+import { PreviewVideo } from '@/components/media/preview-video'
+import { CodeBlock, Dependencies } from '@/components/docs/component-installation'
+import { CLICommand } from '@/components/docs/cli-command'
+import { PropsTable } from '@/components/docs/props-table'
+import { ComponentPreview } from '@/components/docs/component-preview'
+
+# Circle Menu
+
+A radial navigation menu that expands in a circular pattern with smooth spring animations and hover effects.
+
+<ComponentPreview
+  component={
+    <div className="relative w-full rounded-lg overflow-hidden bg-black">
+      <PreviewVideo showControls={false} src="https://cdn.obsidianui.dev/demos/circle-menu.mp4" label="Circle Menu demo" className="w-full aspect-video" />
+    </div>
+  }
+  code={`import { CircleMenu } from '@/components/block/circle-menu'
+import { Home, User, Settings, Mail, Heart } from 'lucide-react'
+
+export function Demo() {
+  return (
+    <CircleMenu items={[
+      { label: "Home", icon: <Home size={18} /> },
+      { label: "User", icon: <User size={18} /> },
+      { label: "Settings", icon: <Settings size={18} /> },
+      { label: "Mail", icon: <Mail size={18} /> },
+      { label: "Favorites", icon: <Heart size={18} /> }
+    ]} />
+  )
+}`}
+/>
+
+## Install using CLI
+
+<CLICommand componentName="circle-menu" />
+
+## Install Manually
+
+<Dependencies step={1} title="Install dependencies">
+    <CodeBlock code="npm install motion lucide-react clsx tailwind-merge" />
+</Dependencies>
+
+<Dependencies step={2} title="Add util file">
+    <p className="text-[13px] text-muted-foreground mt-2 mb-4">Create a file <code className="text-foreground font-mono text-xs bg-neutral-100 dark:bg-[#161616] border border-neutral-200 dark:border-neutral-800 px-2 py-1 rounded-md">lib/utils.ts</code>:</p>
+    <CodeBlock language="tsx" code={`import { ClassValue, clsx } from 'clsx';
+import { twMerge } from 'tailwind-merge';
+
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs));
+}`} />
+</Dependencies>
+
+<Dependencies step={3} title="Copy the source code" source="circle-menu">
+    <p className="text-[13px] text-muted-foreground mt-2 mb-8">Copy the code into <code className="text-foreground font-mono text-xs bg-neutral-100 dark:bg-[#161616] border border-neutral-200 dark:border-neutral-800 px-2 py-1 rounded-md mx-1">components/block/circle-menu.tsx</code></p>
+</Dependencies>
+
+## Usage
+
+<CodeBlock language="tsx" code={`import { CircleMenu } from "@/components/block/circle-menu"
+import { Home, User, Settings, Mail, Heart } from "lucide-react"
+
+export function Demo() {
+  return (
+    <CircleMenu
+      items={[
+        { label: "Home", icon: <Home size={18} />, href: "/" },
+        { label: "User", icon: <User size={18} />, href: "/profile" },
+        { label: "Settings", icon: <Settings size={18} />, href: "/settings" }
+      ]}
+    />
+  )
+}`} />
+
+## Props
+
+<PropsTable
+  data={[
+    { prop: "items", type: "{ label, icon, href?, onClick? }[]", defaultValue: "-", description: "Array of menu items" },
+    { prop: "openIcon", type: "React.ReactNode", defaultValue: "<Menu />", description: "Icon when closed" },
+    { prop: "closeIcon", type: "React.ReactNode", defaultValue: "<X />", description: "Icon when open" }
+  ]}
+/>

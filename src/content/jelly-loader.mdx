@@ -1,0 +1,117 @@
+import { CodeBlock, Dependencies } from '@/components/docs/component-installation'
+import { CLICommand } from '@/components/docs/cli-command'
+import { PropsTable } from '@/components/docs/props-table'
+import { ComponentPreview } from '@/components/docs/component-preview'
+import JellyLoader from '@/components/block/jelly-loader'
+
+# Jelly Loader
+
+A beautiful loading animation with stacked, rotating elliptical shapes that create a mesmerizing jelly-like effect. Uses a gradient color palette from light pink to deep magenta.
+
+<ComponentPreview
+  component={
+    <div className="relative w-full h-[300px] rounded-lg overflow-hidden bg-zinc-950 flex items-center justify-center">
+      <JellyLoader />
+    </div>
+  }
+  code={`import JellyLoader from '@/components/block/jelly-loader'
+
+export function Demo() {
+  return <JellyLoader />
+}`}
+/>
+
+## Install using CLI
+
+<CLICommand componentName="jelly-loader" />
+
+## Install Manually
+
+<Dependencies step={1} title="Install dependencies">
+    <CodeBlock code="npm install motion" />
+</Dependencies>
+
+<Dependencies step={2} title="Copy the source code" source="jelly-loader">
+    <p className="text-[13px] text-muted-foreground mt-2 mb-4">Copy into <code className="text-foreground font-mono text-xs bg-neutral-100 dark:bg-[#161616] px-2 py-1 rounded-md">components/block/jelly-loader.tsx</code></p>
+</Dependencies>
+
+```tsx
+'use client';
+
+import React from 'react';
+import { motion, Transition } from 'motion/react';
+
+type JellyLoaderProps = {
+    numberOfCubes?: number;
+    colors?: string[];
+};
+
+export function JellyLoader({
+    numberOfCubes = 8,
+    colors = ['#FFE4E1', '#FFB6C1', '#FF8A95', '#FF6B8A', '#E91E63', '#C2185B', '#AD1457', '#880E4F']
+}: JellyLoaderProps) {
+    const transition: Transition = {
+        duration: 1.5,
+        repeat: Infinity,
+        repeatDelay: 0.5,
+        ease: 'easeOut'
+    };
+
+    return (
+        <div className="-translate-x-1/5 flex items-center justify-center">
+            {Array.from({ length: numberOfCubes }).map((_, index) => {
+                const x = index * 10;
+                const y = -index * 10;
+
+                return (
+                    <motion.span
+                        key={index}
+                        className="h-[70px] w-[100px] absolute rounded-full"
+                        style={{
+                            x,
+                            y,
+                            zIndex: numberOfCubes - index,
+                            backgroundColor: colors[index % colors.length],
+                            opacity: 1 - index * 0.05
+                        }}
+                        initial={{ scale: 1 }}
+                        animate={{ scale: [1, 0.75, 1], rotate: [0, 360] }}
+                        transition={{
+                            ...transition,
+                            delay: index * 0.05
+                        }}
+                    />
+                );
+            })}
+        </div>
+    );
+}
+
+export default JellyLoader;
+```
+
+## Props
+
+<PropsTable
+  data={[
+    { prop: "numberOfCubes", type: "number", defaultValue: "8", description: "Number of stacked ellipses" },
+    { prop: "colors", type: "string[]", defaultValue: "[...pinkGradient]", description: "Array of colors for each layer" },
+  ]}
+/>
+
+## Examples
+
+### Custom Colors
+
+```tsx
+<JellyLoader 
+  numberOfCubes={6}
+  colors={['#3B82F6', '#60A5FA', '#93C5FD', '#BFDBFE', '#DBEAFE', '#EFF6FF']}
+/>
+```
+
+### Fewer Layers
+
+```tsx
+<JellyLoader numberOfCubes={4} />
+```

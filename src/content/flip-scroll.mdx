@@ -1,0 +1,52 @@
+import { PreviewVideo } from '@/components/media/preview-video'
+import { CodeBlock, Dependencies } from '@/components/docs/component-installation'
+import { CLICommand } from '@/components/docs/cli-command'
+import { PropsTable } from '@/components/docs/props-table'
+import { ComponentPreview } from '@/components/docs/component-preview'
+
+# Flip Scroll
+
+A scroll-triggered flip animation where elements rotate and transform as you scroll. Creates a dynamic, engaging scroll experience.
+
+<ComponentPreview
+  component={
+    <PreviewVideo showControls={false} src="https://cdn.obsidianui.dev/demos/flip-scroll.mp4" label="Flip Scroll demo" className="w-full h-[400px] rounded-lg" />
+  }
+  code={`import FlipScroll from '@/components/block/flip-scroll'
+
+export function Demo() {
+  const items = [
+    { image: '/images/one.jpg' },
+    { image: '/images/two.jpg' },
+    { image: '/images/three.jpg' },
+    { image: '/images/four.jpg' },
+  ]
+  
+  return <div className="h-[600px]"><FlipScroll items={items} /></div>
+}`}
+/>
+
+## Install using CLI
+
+<CLICommand componentName="flip-scroll" />
+
+## Install Manually
+
+<Dependencies step={1} title="Install dependencies">
+    <CodeBlock code="npm install motion clsx tailwind-merge" />
+</Dependencies>
+
+<Dependencies step={2} title="Copy the source code" source="flip-scroll">
+    <p className="text-[13px] text-muted-foreground mt-2 mb-4">Copy into <code className="text-foreground font-mono text-xs bg-neutral-100 dark:bg-[#161616] px-2 py-1 rounded-md">components/block/flip-scroll.tsx</code></p>
+</Dependencies>
+
+> **Note**: Install via CLI for the full scroll-triggered animation implementation.
+
+## Props
+
+<PropsTable
+  data={[
+    { prop: "items", type: "{ image: string }[]", defaultValue: "Required", description: "Images to flip through inside a parent with a fixed height" },
+    { prop: "mode", type: "'normal' | 'alternate'", defaultValue: "'normal'", description: "Animation mode" },
+  ]}
+/>

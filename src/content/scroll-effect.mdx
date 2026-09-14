@@ -1,0 +1,45 @@
+import { PreviewVideo } from '@/components/media/preview-video'
+import { CodeBlock, Dependencies } from '@/components/docs/component-installation'
+import { CLICommand } from '@/components/docs/cli-command'
+import { PropsTable } from '@/components/docs/props-table'
+import { ComponentPreview } from '@/components/docs/component-preview'
+
+# Scroll Effect
+
+A stacking card scroll effect where cards stack on top of each other as you scroll.
+
+<ComponentPreview
+  component={
+    <div className="relative w-full rounded-lg overflow-hidden bg-black">
+      <PreviewVideo showControls={false} src="https://cdn.obsidianui.dev/demos/stack-scroll.mp4" label="Scroll Effect demo" className="w-full aspect-video" />
+    </div>
+  }
+  code={`import { ScrollEffect } from '@/components/block/scroll-effect'
+
+export function Demo() {
+  return <ScrollEffect images={{ start: ["/images/one.jpg", "/images/two.jpg"], middle: ["/images/three.jpg", "/images/four.jpg"], featured: "/images/featured.jpg" }} />
+}`}
+/>
+
+## Install using CLI
+
+<CLICommand componentName="scroll-effect" />
+
+## Install Manually
+
+<Dependencies step={1} title="Install dependencies">
+    <CodeBlock code="npm install motion" />
+</Dependencies>
+
+<Dependencies step={2} title="Copy the source code" source="scroll-effect">
+    <p className="text-[13px] text-muted-foreground mt-2 mb-8">Copy into <code className="text-foreground font-mono text-xs bg-neutral-100 dark:bg-[#161616] px-2 py-1 rounded-md">components/block/scroll-effect.tsx</code></p>
+</Dependencies>
+
+## Props
+
+<PropsTable
+  data={[
+    { prop: "images", type: "{ start: string[]; middle: string[]; featured: string }", defaultValue: "Required", description: "Image groups and the featured image revealed during scrolling" },
+    { prop: "className", type: "string", defaultValue: "-", description: "Additional classes for the scroll section" }
+  ]}
+/>

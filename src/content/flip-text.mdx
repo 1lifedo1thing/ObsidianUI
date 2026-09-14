@@ -1,0 +1,88 @@
+import { CodeBlock, Dependencies } from '@/components/docs/component-installation'
+import { CLICommand } from '@/components/docs/cli-command'
+import { PropsTable } from '@/components/docs/props-table'
+import { ComponentPreview } from '@/components/docs/component-preview'
+import FlipText from '@/components/block/flip-text'
+
+# Flip Text
+
+An animated text component where each character flips and rotates on hover. Creates a playful, interactive typography effect.
+
+<ComponentPreview
+  component={
+    <div className="relative w-full h-[300px] rounded-lg overflow-hidden bg-white dark:bg-zinc-950 flex items-center justify-center">
+      <FlipText className="text-4xl font-bold text-black dark:text-white">ObsidianUI</FlipText>
+    </div>
+  }
+  code={`import FlipText from '@/components/block/flip-text'
+
+export function Demo() {
+  return (
+    <FlipText className="text-4xl font-bold">
+      Hover Me
+    </FlipText>
+  )
+}`}
+/>
+
+## Install using CLI
+
+<CLICommand componentName="flip-text" />
+
+## Install Manually
+
+<Dependencies step={1} title="Install dependencies">
+    <CodeBlock code="npm install motion clsx tailwind-merge" />
+</Dependencies>
+
+<Dependencies step={2} title="Copy the source code" source="flip-text">
+    <p className="text-[13px] text-muted-foreground mt-2 mb-4">Copy into <code className="text-foreground font-mono text-xs bg-neutral-100 dark:bg-[#161616] px-2 py-1 rounded-md">components/block/flip-text.tsx</code></p>
+</Dependencies>
+
+```tsx
+"use client";
+
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'motion/react';
+import { cn } from '@/lib/utils';
+
+interface FlipTextProps {
+  children: string;
+  className?: string;
+}
+
+export function FlipText({ children, className }: FlipTextProps) {
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+
+  return (
+    <span className={cn("inline-flex", className)}>
+      {children.split('').map((char, index) => (
+        <motion.span
+          key={index}
+          className="inline-block cursor-pointer"
+          onMouseEnter={() => setHoveredIndex(index)}
+          onMouseLeave={() => setHoveredIndex(null)}
+          animate={{
+            rotateX: hoveredIndex === index ? 360 : 0,
+            y: hoveredIndex === index ? -8 : 0,
+          }}
+          transition={{ duration: 0.4, ease: "easeOut" }}
+        >
+          {char === ' ' ? '\u00A0' : char}
+        </motion.span>
+      ))}
+    </span>
+  );
+}
+
+export default FlipText;
+```
+
+## Props
+
+<PropsTable
+  data={[
+    { prop: "children", type: "string", defaultValue: "-", description: "Text content to display" },
+    { prop: "className", type: "string", defaultValue: "-", description: "Additional CSS classes" },
+  ]}
+/>

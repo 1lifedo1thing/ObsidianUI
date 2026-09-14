@@ -1,0 +1,80 @@
+import { PreviewVideo } from '@/components/media/preview-video'
+import { CodeBlock, Dependencies } from '@/components/docs/component-installation'
+import { CLICommand } from '@/components/docs/cli-command'
+import { PropsTable } from '@/components/docs/props-table'
+import { ComponentPreview } from '@/components/docs/component-preview'
+
+# Apple Spotlight
+
+A macOS-style spotlight search component with animated shortcuts and search results. Features a beautiful blur effect, animated shortcut buttons, and live search results.
+
+<ComponentPreview
+  component={
+    <div className="w-full max-w-[600px] overflow-hidden rounded-lg shadow-2xl">
+      <PreviewVideo showControls={false} src="https://cdn.obsidianui.dev/demos/apple-spotlight.mp4" label="Apple Spotlight demo" className="w-full aspect-video" />
+    </div>
+  }
+  code={`import { AppleSpotlight } from '@/components/block/apple-spotlight'
+import { useState } from 'react'
+
+export function Demo() {
+  const [isOpen, setIsOpen] = useState(false)
+  
+  return (
+    <>
+      <button onClick={() => setIsOpen(true)}>Open Spotlight</button>
+      <AppleSpotlight isOpen={isOpen} handleClose={() => setIsOpen(false)} />
+    </>
+  )
+}`}
+/>
+
+## Install using CLI
+
+<CLICommand componentName="apple-spotlight" />
+
+## Install Manually
+
+<Dependencies step={1} title="Install dependencies">
+    <CodeBlock code="npm install motion lucide-react clsx tailwind-merge" />
+</Dependencies>
+
+<Dependencies step={2} title="Add util file">
+    <p className="text-[13px] text-muted-foreground mt-2 mb-4">Create a file <code className="text-foreground font-mono text-xs bg-neutral-100 dark:bg-[#161616] border border-neutral-200 dark:border-neutral-800 px-2 py-1 rounded-md">lib/utils.ts</code>:</p>
+    <CodeBlock language="tsx" code={`import { ClassValue, clsx } from 'clsx';
+import { twMerge } from 'tailwind-merge';
+
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs));
+}`} />
+</Dependencies>
+
+<Dependencies step={3} title="Copy the source code" source="apple-spotlight">
+    <p className="text-[13px] text-muted-foreground mt-2 mb-8">Copy the code into <code className="text-foreground font-mono text-xs bg-neutral-100 dark:bg-[#161616] border border-neutral-200 dark:border-neutral-800 px-2 py-1 rounded-md mx-1">components/block/apple-spotlight.tsx</code></p>
+</Dependencies>
+
+## Usage
+
+<CodeBlock language="tsx" code={`import { AppleSpotlight } from "@/components/block/apple-spotlight"
+import { useState } from "react"
+
+export function Demo() {
+  const [isOpen, setIsOpen] = useState(false)
+  
+  return (
+    <>
+      <button onClick={() => setIsOpen(true)}>Open Spotlight</button>
+      <AppleSpotlight isOpen={isOpen} handleClose={() => setIsOpen(false)} />
+    </>
+  )
+}`} />
+
+## Props
+
+<PropsTable
+  data={[
+    { prop: "isOpen", type: "boolean", defaultValue: "true", description: "Controls visibility of spotlight" },
+    { prop: "handleClose", type: "() => void", defaultValue: "-", description: "Callback when spotlight is closed" },
+    { prop: "shortcuts", type: "Shortcut[]", defaultValue: "default shortcuts", description: "Array of shortcut buttons" }
+  ]}
+/>

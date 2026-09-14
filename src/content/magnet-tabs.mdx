@@ -1,0 +1,74 @@
+import { PreviewVideo } from '@/components/media/preview-video'
+import { CodeBlock, Dependencies } from '@/components/docs/component-installation'
+import { CLICommand } from '@/components/docs/cli-command'
+import { PropsTable } from '@/components/docs/props-table'
+import { ComponentPreview } from '@/components/docs/component-preview'
+
+# Magnet Tabs
+
+Animated tab navigation with magnetic hover effect and smooth indicator transitions.
+
+<ComponentPreview
+  component={
+    <div className="relative w-full h-[350px] rounded-lg overflow-hidden bg-white dark:bg-zinc-950">
+      <PreviewVideo showControls={false} src="https://cdn.obsidianui.dev/demos/magnet-tabs.mp4" label="Magnet Tabs demo" className="w-full aspect-video" />
+    </div>
+  }
+  code={`import { MagnetTabs } from '@/components/block/magnet-tabs'
+import { useState } from 'react'
+
+export function Demo() {
+  const [activeTab, setActiveTab] = useState("All")
+  return (
+    <MagnetTabs
+      slug="demo"
+      options={["All", "Latest", "Popular", "Featured"]}
+      activeTab={activeTab}
+      onSelect={setActiveTab}
+    />
+  )
+}`}
+/>
+
+## Install using CLI
+
+<CLICommand componentName="magnet-tabs" />
+
+## Install Manually
+
+<Dependencies step={1} title="Install dependencies">
+    <CodeBlock code="npm install motion" />
+</Dependencies>
+
+<Dependencies step={2} title="Copy the source code" source="magnet-tabs">
+    <p className="text-[13px] text-muted-foreground mt-2 mb-8">Copy the code into <code className="text-foreground font-mono text-xs bg-neutral-100 dark:bg-[#161616] border border-neutral-200 dark:border-neutral-800 px-2 py-1 rounded-md mx-1">components/block/magnet-tabs.tsx</code></p>
+</Dependencies>
+
+## Usage
+
+<CodeBlock language="tsx" code={`import { MagnetTabs } from "@/components/block/magnet-tabs"
+import { useState } from "react"
+
+export function Demo() {
+  const [activeTab, setActiveTab] = useState("All")
+  
+  return (
+    <MagnetTabs
+      slug="my-tabs"
+      options={["All", "Latest", "Popular", "Featured"]}
+      activeTab={activeTab}
+      onSelect={setActiveTab}
+    />
+  )
+}`} />
+
+## Props
+
+<PropsTable
+  data={[
+    { prop: "slug", type: "string", defaultValue: "-", description: "Unique ID for animations" },
+    { prop: "options", type: "string[]", defaultValue: "-", description: "Array of tab labels" },
+    { prop: "activeTab", type: "string", defaultValue: "-", description: "Currently selected tab" },
+    { prop: "onSelect", type: "(option: string) => void", defaultValue: "-", description: "Callback when selected" }
+  ]}
+/>

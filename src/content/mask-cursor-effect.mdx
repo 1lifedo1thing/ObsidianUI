@@ -1,0 +1,80 @@
+import { PreviewVideo } from '@/components/media/preview-video'
+import { CodeBlock, Dependencies } from '@/components/docs/component-installation'
+import { CLICommand } from '@/components/docs/cli-command'
+import { PropsTable } from '@/components/docs/props-table'
+import { ComponentPreview } from '@/components/docs/component-preview'
+
+# Mask Cursor Effect
+
+A cursor-following mask effect that reveals hidden content on hover. Creates an engaging reveal experience.
+
+<ComponentPreview
+  component={
+    <div className="relative w-full rounded-lg overflow-hidden bg-black">
+      <PreviewVideo showControls={false} src="https://cdn.obsidianui.dev/demos/mask-cursor-effect.mp4" label="Mask Cursor Effect demo" className="w-full aspect-video" />
+    </div>
+  }
+  code={`import { MaskCursorEffect } from '@/components/block/mask-cursor-effect'
+
+export function Demo() {
+  return (
+    <MaskCursorEffect
+      hiddenComponent={<h1 className="text-6xl font-bold">SECRET</h1>}
+      backgroundColor="#EA5A47"
+    >
+      <h1 className="text-6xl font-bold">HOVER ME</h1>
+    </MaskCursorEffect>
+  )
+}`}
+/>
+
+## Install using CLI
+
+<CLICommand componentName="mask-cursor-effect" />
+
+## Install Manually
+
+<Dependencies step={1} title="Install dependencies">
+    <CodeBlock code="npm install motion clsx tailwind-merge" />
+</Dependencies>
+
+<Dependencies step={2} title="Add util file">
+    <p className="text-[13px] text-muted-foreground mt-2 mb-4">Create a file <code className="text-foreground font-mono text-xs bg-neutral-100 dark:bg-[#161616] border border-neutral-200 dark:border-neutral-800 px-2 py-1 rounded-md">lib/utils.ts</code>:</p>
+    <CodeBlock language="tsx" code={`import { ClassValue, clsx } from 'clsx';
+import { twMerge } from 'tailwind-merge';
+
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs));
+}`} />
+</Dependencies>
+
+<Dependencies step={3} title="Copy the source code" source="mask-cursor-effect">
+    <p className="text-[13px] text-muted-foreground mt-2 mb-8">Copy the code into <code className="text-foreground font-mono text-xs bg-neutral-100 dark:bg-[#161616] border border-neutral-200 dark:border-neutral-800 px-2 py-1 rounded-md mx-1">components/block/mask-cursor-effect.tsx</code></p>
+</Dependencies>
+
+## Usage
+
+<CodeBlock language="tsx" code={`import { MaskCursorEffect } from "@/components/block/mask-cursor-effect"
+
+export function Demo() {
+  return (
+    <MaskCursorEffect
+      hiddenComponent={<h1 className="text-6xl font-bold">SECRET</h1>}
+      backgroundColor="#EA5A47"
+      expandedMaskSize={350}
+    >
+      <h1 className="text-6xl font-bold">HOVER ME</h1>
+    </MaskCursorEffect>
+  )
+}`} />
+
+## Props
+
+<PropsTable
+  data={[
+    { prop: "children", type: "React.ReactNode", defaultValue: "-", description: "Visible content" },
+    { prop: "hiddenComponent", type: "React.ReactNode", defaultValue: "-", description: "Content revealed on hover" },
+    { prop: "backgroundColor", type: "string", defaultValue: "'#EA5A47'", description: "Mask background color" },
+    { prop: "expandedMaskSize", type: "number", defaultValue: "350", description: "Mask size on hover" }
+  ]}
+/>

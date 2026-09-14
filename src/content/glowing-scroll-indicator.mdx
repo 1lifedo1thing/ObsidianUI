@@ -1,0 +1,67 @@
+import { PreviewVideo } from '@/components/media/preview-video'
+import { CodeBlock, Dependencies } from '@/components/docs/component-installation'
+import { CLICommand } from '@/components/docs/cli-command'
+import { PropsTable } from '@/components/docs/props-table'
+import { ComponentPreview } from '@/components/docs/component-preview'
+
+# Glowing Scroll Indicator
+
+An animated scroll progress indicator with glowing bars that light up as you scroll.
+
+<ComponentPreview
+  component={
+    <div className="relative w-full rounded-lg overflow-hidden bg-black">
+      <PreviewVideo showControls={false} src="https://cdn.obsidianui.dev/demos/glowing-dot-scroll-indicator.mp4" label="Glowing Scroll Indicator demo" className="w-full aspect-video" />
+    </div>
+  }
+  code={`import { GlowingScrollIndicator } from '@/components/block/glowing-scroll-indicator'
+
+export function Demo() {
+  return (
+    <>
+      <GlowingScrollIndicator scrollContainerId="scroll-area" />
+      <div id="scroll-area" className="h-[400px] overflow-y-auto">
+        {/* Scrollable content */}
+      </div>
+    </>
+  )
+}`}
+/>
+
+## Install using CLI
+
+<CLICommand componentName="glowing-scroll-indicator" />
+
+## Install Manually
+
+<Dependencies step={1} title="Install dependencies">
+    <CodeBlock code="npm install motion" />
+</Dependencies>
+
+<Dependencies step={2} title="Copy the source code" source="glowing-scroll-indicator">
+    <p className="text-[13px] text-muted-foreground mt-2 mb-8">Copy the code into <code className="text-foreground font-mono text-xs bg-neutral-100 dark:bg-[#161616] border border-neutral-200 dark:border-neutral-800 px-2 py-1 rounded-md mx-1">components/block/glowing-scroll-indicator.tsx</code></p>
+</Dependencies>
+
+## Usage
+
+<CodeBlock language="tsx" code={`import { GlowingScrollIndicator } from "@/components/block/glowing-scroll-indicator"
+
+export function Demo() {
+  return (
+    <>
+      <GlowingScrollIndicator scrollContainerId="scroll-area" direction="vertical" />
+      <div id="scroll-area" className="h-[400px] overflow-y-auto">
+        {/* Scrollable content */}
+      </div>
+    </>
+  )
+}`} />
+
+## Props
+
+<PropsTable
+  data={[
+    { prop: "scrollContainerId", type: "string", defaultValue: "'scroll-target'", description: "Container ID" },
+    { prop: "direction", type: "'vertical' | 'horizontal'", defaultValue: "'vertical'", description: "Direction" }
+  ]}
+/>

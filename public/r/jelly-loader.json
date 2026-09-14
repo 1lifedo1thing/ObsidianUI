@@ -1,0 +1,16 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "jelly-loader",
+  "type": "registry:block",
+  "dependencies": [
+    "motion"
+  ],
+  "files": [
+    {
+      "path": "components/block/jelly-loader.tsx",
+      "target": "@components/block/jelly-loader.tsx",
+      "type": "registry:block",
+      "content": "'use client';\n\nimport React from 'react';\nimport { motion, Transition } from 'motion/react';\n\ntype JellyLoaderProps = {\n    numberOfCubes?: number;\n    colors?: string[];\n};\n\nexport function JellyLoader({\n    numberOfCubes = 8,\n    colors = ['#FFE4E1', '#FFB6C1', '#FF8A95', '#FF6B8A', '#E91E63', '#C2185B', '#AD1457', '#880E4F']\n}: JellyLoaderProps) {\n    const transition: Transition = {\n        duration: 1.5,\n        repeat: Infinity,\n        repeatDelay: 0.5,\n        ease: 'easeOut'\n    };\n\n    return (\n        <div className=\"-translate-x-1/5 flex items-center justify-center\">\n            {Array.from({ length: numberOfCubes }).map((_, index) => {\n                const x = index * 10;\n                const y = -index * 10;\n\n                return (\n                    <motion.span\n                        key={index}\n                        className=\"h-[70px] w-[100px] absolute rounded-full\"\n                        style={{\n                            x,\n                            y,\n                            zIndex: numberOfCubes - index,\n                            backgroundColor: colors[index % colors.length],\n                            opacity: 1 - index * 0.05\n                        }}\n                        initial={{ scale: 1 }}\n                        animate={{ scale: [1, 0.75, 1], rotate: [0, 360] }}\n                        transition={{\n                            ...transition,\n                            delay: index * 0.05\n                        }}\n                    />\n                );\n            })}\n        </div>\n    );\n}\n\nexport default JellyLoader;\n"
+    }
+  ]
+}

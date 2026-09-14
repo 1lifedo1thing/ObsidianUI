@@ -1,0 +1,48 @@
+import { PreviewVideo } from '@/components/media/preview-video'
+import { CodeBlock, Dependencies } from '@/components/docs/component-installation'
+import { CLICommand } from '@/components/docs/cli-command'
+import { PropsTable } from '@/components/docs/props-table'
+import { ComponentPreview } from '@/components/docs/component-preview'
+
+# Horizontal Scroll
+
+A smooth horizontal scrolling section that transforms vertical scroll into horizontal movement. Perfect for portfolios, galleries, and feature showcases.
+
+<ComponentPreview
+  component={
+    <PreviewVideo showControls={false} src="https://cdn.obsidianui.dev/demos/horizontal-scroll.mp4" label="Horizontal Scroll demo" className="w-full h-[400px] rounded-lg" />
+  }
+  code={`import HorizontalScroll from '@/components/block/horizontal-scroll'
+
+export function Demo() {
+  return (
+    <div className="h-[600px]">
+      <HorizontalScroll items={[{ image: "/images/one.jpg" }, { image: "/images/two.jpg" }, { image: "/images/three.jpg" }, { image: "/images/four.jpg" }]} />
+    </div>
+  )
+}`}
+/>
+
+## Install using CLI
+
+<CLICommand componentName="horizontal-scroll" />
+
+## Install Manually
+
+<Dependencies step={1} title="Install dependencies">
+    <CodeBlock code="npm install motion clsx tailwind-merge" />
+</Dependencies>
+
+<Dependencies step={2} title="Copy the source code" source="horizontal-scroll">
+    <p className="text-[13px] text-muted-foreground mt-2 mb-4">Copy into <code className="text-foreground font-mono text-xs bg-neutral-100 dark:bg-[#161616] px-2 py-1 rounded-md">components/block/horizontal-scroll.tsx</code></p>
+</Dependencies>
+
+> **Note**: This component uses scroll transforms. Check the source for implementation details.
+
+## Props
+
+<PropsTable
+  data={[
+    { prop: "items", type: "{ image: string }[]", defaultValue: "Required", description: "Image items. Give the parent a fixed height to enable scrolling." },
+  ]}
+/>

@@ -1,0 +1,33 @@
+/* Copy Page menu adapted from EvilCharts. See THIRD_PARTY_NOTICES.md. */
+.docs-page-actions { position: relative; float: right; margin: 0 0 12px 16px; }
+.docs-page-copy-group { display: flex; align-items: stretch; padding: 2px; border-radius: 8px; background: var(--muted); user-select: none; }
+.docs-page-copy-button { position: relative; height: 28px; gap: 6px; padding: 0 6px; border: 1px solid var(--border); border-radius: 6px; background: var(--background); color: var(--foreground); font-size: 12px; font-weight: 400; box-shadow: 0 1px 2px #00000005; transition: border-color 150ms, color 150ms; }
+.docs-page-copy-button:hover { background: var(--background); border-color: color-mix(in oklch, var(--foreground) 20%, transparent); }
+.docs-page-copy-button > svg { width: 16px; height: 16px; }
+.docs-page-copy-label { display: grid; align-items: center; text-align: center; }
+.docs-page-copy-label > span { grid-area: 1 / 1; transition: opacity 150ms, transform 150ms cubic-bezier(0.22, 1, 0.36, 1); }
+.docs-page-copy-idle.is-hidden { opacity: 0; transform: translateY(-3px); }
+.docs-page-copy-success { opacity: 0; transform: translateY(3px); }
+.docs-page-copy-success.is-visible { opacity: 1; transform: translateY(0); }
+.docs-page-menu-trigger { width: 24px; height: 28px; padding: 0; border-radius: 4px; color: var(--muted-foreground); background: transparent; }
+.docs-page-menu-trigger:hover, .docs-page-menu-trigger[data-state="open"] { color: var(--foreground); background: transparent; }
+.docs-page-menu-trigger > svg { transition: transform 150ms cubic-bezier(0.22, 1, 0.36, 1); }
+.docs-page-menu-trigger[data-state="open"] > svg { transform: rotate(180deg); }
+.docs-page-menu { min-width: 176px; padding: 4px; border: 1px solid var(--border); border-radius: 8px; background: var(--background); box-shadow: 0 2px 5px #0000000d, 0 8px 18px #00000005; transform-origin: var(--radix-dropdown-menu-content-transform-origin); }
+.docs-page-menu .docs-page-menu-item { min-height: 32px; margin: 0; padding: 6px 8px; gap: 8px; border-radius: 4px; color: var(--muted-foreground); font-size: 13px; line-height: 20px; font-weight: 400; text-decoration: none; cursor: pointer; transition: color 150ms, background-color 150ms; }
+.docs-page-menu .docs-page-menu-item[data-highlighted] { background: var(--muted); color: var(--foreground); }
+.docs-page-menu .docs-page-menu-item svg { width: 16px; height: 16px; color: var(--foreground); opacity: 0.8; }
+.docs-page-copy-status:not(.sr-only) { position: absolute; top: calc(100% + 4px); right: 0; z-index: 40; width: 220px; padding: 8px; border: 1px solid var(--border); border-radius: 6px; background: var(--background); color: var(--foreground); font-size: 12px; box-shadow: 0 2px 5px #0000000d; }
+@media (prefers-reduced-motion: no-preference) {
+  .docs-page-menu[data-state="open"] { animation: docs-page-menu-in 200ms cubic-bezier(0.22, 1, 0.36, 1); }
+  .docs-page-menu[data-state="closed"] { animation: docs-page-menu-out 150ms cubic-bezier(0.22, 1, 0.36, 1); }
+}
+@keyframes docs-page-menu-in { from { opacity: 0; transform: translateY(-4px) scale(0.97); } to { opacity: 1; transform: translateY(0) scale(1); } }
+@keyframes docs-page-menu-out { from { opacity: 1; transform: translateY(0) scale(1); } to { opacity: 0; transform: translateY(-2px) scale(0.99); } }
+@media (prefers-reduced-motion: reduce) {
+  .docs-page-menu { animation: none; }
+  .docs-page-copy-label > span, .docs-page-menu-trigger > svg { transition: none; }
+  .docs-page-copy-label > span { transform: none; }
+}
+@media (width < 640px) { .docs-page-actions { float: none; display: flex; justify-content: flex-end; margin: 0 0 16px; } }
+@media print { .docs-page-actions { display: none; } }
