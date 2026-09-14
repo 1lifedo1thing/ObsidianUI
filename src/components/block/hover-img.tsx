@@ -2,6 +2,7 @@
 
 import React, { useRef, useEffect } from "react";
 import gsap from "gsap";
+import { r2 } from "@/lib/r2";
 import "@/components/block/hover-img.css";
 
 interface ProjectItem {
@@ -14,17 +15,17 @@ const defaultProjects: ProjectItem[] = [
     {
         title: "Shree Krishna",
         label: "The Supreme Personality of Godhead",
-        imageSrc: "/hover-img/hover-img-img01-alt.jpg",
+        imageSrc: r2("/hover-img/hover-img-img01-alt.jpg"),
     },
     {
         title: "Radha Krishna",
         label: "The Divine Couple",
-        imageSrc: "/hover-img/hover-img-img02.jpg",
+        imageSrc: r2("/hover-img/hover-img-img02.jpg"),
     },
     {
         title: "Divine Love",
         label: "Eternal Bond",
-        imageSrc: "/hover-img/hover-img-img03.jpg",
+        imageSrc: r2("/hover-img/hover-img-img03.jpg"),
     },
 ];
 

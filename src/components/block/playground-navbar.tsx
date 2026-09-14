@@ -1,4 +1,5 @@
 "use client";
+import { r2 } from "@/lib/r2";
 import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
@@ -35,14 +36,14 @@ export const Navbar1 = ({ items = navItems }: { items?: typeof navItems }) => {
     >
       <Link href={"/"} aria-label="ObsidianUI home">
         <Image
-          src="/logo/bg-less.png"
+          src={r2("/logo/bg-less.png")}
           alt=""
           width={32}
           height={32}
           className="w-8 h-auto dark:hidden block "
         />
         <Image
-          src="/logo/final-dark.png"
+          src={r2("/logo/final-dark.png")}
           alt=""
           width={32}
           height={32}

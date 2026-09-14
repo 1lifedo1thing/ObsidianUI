@@ -5,6 +5,7 @@ import { motion } from 'motion/react'
 import Link from 'next/link'
 import { useState, useRef } from 'react'
 import { PreviewVideo } from '@/components/media/preview-video'
+import { r2 } from '@/lib/r2'
 import { useReducedMotion } from 'motion/react'
 import { cn } from '@/lib/utils'
 import { EffectPreview } from './effect-preview'
@@ -46,9 +47,9 @@ const LivePreviews: Record<string, React.ReactNode> = {
             <div className="w-full h-full flex items-center">
                 <HoverImg
                     projects={[
-                        { title: "Shree Krishna", label: "Divine", imageSrc: "/hover-img/hover-img-img01-alt.jpg" },
-                        { title: "Radha Krishna", label: "Love", imageSrc: "/hover-img/hover-img-img02.jpg" },
-                        { title: "Divine Love", label: "Eternal", imageSrc: "/hover-img/hover-img-img03.jpg" },
+                        { title: "Shree Krishna", label: "Divine", imageSrc: r2("/hover-img/hover-img-img01-alt.jpg") },
+                        { title: "Radha Krishna", label: "Love", imageSrc: r2("/hover-img/hover-img-img02.jpg") },
+                        { title: "Divine Love", label: "Eternal", imageSrc: r2("/hover-img/hover-img-img03.jpg") },
                     ]}
                     compact={true}
                     isContained={true}

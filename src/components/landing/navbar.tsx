@@ -1,4 +1,5 @@
 "use client";
+import { r2 } from "@/lib/r2";
 import { useHydrated } from "@/hooks/use-hydrated";
 
 import { useState, useCallback, useRef } from "react"
@@ -17,7 +18,7 @@ import { CommandMenu } from "@/components/site/command-menu"
 const ThemeToggle = () => {
   const { theme, setTheme, resolvedTheme } = useTheme()
   const mounted = useHydrated();
-  const playClick = useSound("/audio/ui-sounds/click.wav");
+  const playClick = useSound(r2("/audio/ui-sounds/click.wav"));
 
   const isDark = (theme === 'dark' || resolvedTheme === 'dark')
 
@@ -140,7 +141,7 @@ const Navbar = ({ className, logo, ...props }: React.HTMLAttributes<HTMLElement>
                 {logo || (
                   <Link href="/" className="transition-opacity hover:opacity-80">
                     <Image
-                      src="/logo/bg-less.png"
+                      src={r2("/logo/bg-less.png")}
                       width={32}
                       height={32}
                       alt="ObsidianUI"
@@ -167,7 +168,7 @@ const Navbar = ({ className, logo, ...props }: React.HTMLAttributes<HTMLElement>
                 {logo || (
                   <Link href="/" className="transition-opacity hover:opacity-80">
                     <Image
-                      src="/logo/bg-less.png"
+                      src={r2("/logo/bg-less.png")}
                       width={32}
                       height={32}
                       alt="ObsidianUI"

@@ -3,6 +3,7 @@
 import dynamic from "next/dynamic";
 import { useRef } from "react";
 import Image from "next/image";
+import { r2 } from "@/lib/r2";
 import { scrollEffects, scrollGalleryImages, scrollMarqueeImages, scrollStackCards, svgMarqueeImages, svgMarqueePath, type ScrollSlug } from "./scroll-effects";
 
 const DraggableMarquee = dynamic(() => import("@/components/block/draggable-marquee").then(module => module.DraggableMarquee), { ssr: false });
@@ -22,6 +23,6 @@ export function ScrollPreview({ slug, compact }: { slug: ScrollSlug; compact: bo
     {slug === "svg-path-marquee" && <div className="h-[180cqh]"><div className="sticky top-0 h-[100cqh]"><SvgPathMarquee path={svgMarqueePath} viewBox="0 0 996 330" className="h-full w-full" responsive draggable grabCursor baseVelocity={8} repeat={2} scrollContainer={scroller} slowdownOnHover useScrollVelocity>
       {svgMarqueeImages.map((src, index) => <Image key={src} src={src} alt={`Landscape photograph ${index + 1}`} width={compact ? 170 : 100} height={compact ? 240 : 140} draggable={false} className="h-auto object-cover" />)}
     </SvgPathMarquee></div></div>}
-    {slug === "svg-pixel-reveal" && <><div className="flex h-[45cqh] items-center justify-center text-sm text-white/65">Scroll to reveal</div><SvgPixelReveal src="/effects/svg-pixel-reveal/svg-pixel-reveal-img01.png" alt="Landscape photograph" scroller={scroller} start="top 35%" style={{ width: "86%", height: "70cqh", margin: "0 auto", borderRadius: 16, overflow: "hidden" }} /><div className="h-[50cqh]" /></>}
+    {slug === "svg-pixel-reveal" && <><div className="flex h-[45cqh] items-center justify-center text-sm text-white/65">Scroll to reveal</div><SvgPixelReveal src={r2("/effects/svg-pixel-reveal/svg-pixel-reveal-img01.png")} alt="Landscape photograph" scroller={scroller} start="top 35%" style={{ width: "86%", height: "70cqh", margin: "0 auto", borderRadius: 16, overflow: "hidden" }} /><div className="h-[50cqh]" /></>}
   </div>;
 }

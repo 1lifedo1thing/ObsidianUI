@@ -1,4 +1,5 @@
 "use client";
+import { r2 } from "@/lib/r2";
 
 // Layout and camera motion adapted from EvilCharts (MIT).
 // See THIRD_PARTY_NOTICES.md for the original copyright and license.
@@ -206,7 +207,7 @@ export function ShowcaseHero() {
     <header className="showcase-hero landing-typography">
       <div className="showcase-hero-copy">
         <div className="showcase-hero-copy-inner">
-          <h1 className="showcase-wordmark landing-title"><Image src="/logo/bg-less.png" alt="" width={40} height={40} priority />ObsidianUI<span className="sr-only"> component showcase</span></h1>
+          <h1 className="showcase-wordmark landing-title"><Image src={r2("/logo/bg-less.png")} alt="" width={40} height={40} priority />ObsidianUI<span className="sr-only"> component showcase</span></h1>
           <p className="showcase-description landing-copy">Animated, interactive components for React. Built with Tailwind CSS and Motion, ready to copy, customize, and ship your next great interface.</p>
           <div className="showcase-hero-actions">
             <Button asChild><a href="#component-gallery">Browse Components<ArrowDown aria-hidden="true" /></a></Button>

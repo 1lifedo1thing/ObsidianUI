@@ -5,6 +5,7 @@ import { Canvas, useThree } from "@react-three/fiber";
 import { Experience } from "@/lib/effects/book-flip/Experience";
 import { PageProvider, usePage } from "@/lib/effects/book-flip/PageContext";
 import { WebGLSurface, useEffectReducedMotion } from "@/lib/effects/shared/webgl-surface";
+import { r2 } from "@/lib/r2";
 
 const defaultImages = Array.from({ length: 14 }, (_, index) => `book-flip-img${String(index + 1).padStart(2, "0")}`);
 const defaultCameraDistance = { mobile: 5.5, desktop: 4 };
@@ -56,7 +57,7 @@ function BookScene({ images, pathPattern, bgColor, cameraDistance, showUI }) {
  * Images are PNG page names without their extension, resolved against pathPattern.
  * @param {{ images?: string[], pathPattern?: string, bgColor?: string, cameraDistance?: { mobile: number, desktop: number }, showUI?: boolean, className?: string, style?: import("react").CSSProperties }} props
  */
-export function BookFlip({ images = defaultImages, pathPattern = "/effects/book-flip", bgColor = "#000000", cameraDistance = defaultCameraDistance, showUI = true, className, style } = {}) {
+export function BookFlip({ images = defaultImages, pathPattern = r2("/effects/book-flip"), bgColor = "#000000", cameraDistance = defaultCameraDistance, showUI = true, className, style } = {}) {
   return <WebGLSurface className={className} style={style} imageSrc={`${pathPattern}/${images[0] || "book-flip-img01"}.png`} label="ObsidianUI interactive nature book">
     <BookScene images={images} pathPattern={pathPattern} bgColor={bgColor} cameraDistance={cameraDistance} showUI={showUI} />
   </WebGLSurface>;

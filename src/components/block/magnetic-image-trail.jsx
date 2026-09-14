@@ -1,19 +1,20 @@
 "use client";
 import { useCallback, useEffect, useRef } from "react";
 import { cn } from "@/lib/utils";
+import { r2 } from "@/lib/r2";
 
 const imageUrls = [
-  "/effects/magnetic-image-trail/magnetic-image-trail-distortion.jpg",
-  "/effects/magnetic-image-trail/magnetic-image-trail-img01.webp",
-  "/effects/magnetic-image-trail/magnetic-image-trail-img02.webp",
-  "/effects/magnetic-image-trail/magnetic-image-trail-img03.webp",
-  "/effects/magnetic-image-trail/magnetic-image-trail-img04.png",
-  "/effects/magnetic-image-trail/magnetic-image-trail-img05.png",
-  "/effects/magnetic-image-trail/magnetic-image-trail-img06.png",
-  "/effects/magnetic-image-trail/magnetic-image-trail-img07.png",
-  "/effects/magnetic-image-trail/magnetic-image-trail-img08.jpg",
-  "/effects/magnetic-image-trail/magnetic-image-trail-img09.jpg",
-  "/effects/magnetic-image-trail/magnetic-image-trail-img10.jpg",
+  r2("/effects/magnetic-image-trail/magnetic-image-trail-distortion.jpg"),
+  r2("/effects/magnetic-image-trail/magnetic-image-trail-img01.webp"),
+  r2("/effects/magnetic-image-trail/magnetic-image-trail-img02.webp"),
+  r2("/effects/magnetic-image-trail/magnetic-image-trail-img03.webp"),
+  r2("/effects/magnetic-image-trail/magnetic-image-trail-img04.png"),
+  r2("/effects/magnetic-image-trail/magnetic-image-trail-img05.png"),
+  r2("/effects/magnetic-image-trail/magnetic-image-trail-img06.png"),
+  r2("/effects/magnetic-image-trail/magnetic-image-trail-img07.png"),
+  r2("/effects/magnetic-image-trail/magnetic-image-trail-img08.jpg"),
+  r2("/effects/magnetic-image-trail/magnetic-image-trail-img09.jpg"),
+  r2("/effects/magnetic-image-trail/magnetic-image-trail-img10.jpg"),
 ];
 
 const SLOTS = [

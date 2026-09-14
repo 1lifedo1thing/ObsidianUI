@@ -1,4 +1,5 @@
 "use client";
+import { r2 } from "@/lib/r2";
 
 import Link from "next/link";
 import Image from "next/image";
@@ -55,7 +56,7 @@ export default function Footer() {
         <div className="site-footer-main">
           <div className="site-footer-brand">
             <Link href="/" className="site-footer-logo" aria-label="ObsidianUI home">
-              <Image src="/logo/bg-less.png" width={28} height={28} alt="" />
+              <Image src={r2("/logo/bg-less.png")} width={28} height={28} alt="" />
               <span>ObsidianUI</span>
             </Link>
             <p className="site-footer-copyright">

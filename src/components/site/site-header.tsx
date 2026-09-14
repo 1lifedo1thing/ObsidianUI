@@ -1,4 +1,5 @@
 "use client";
+import { r2 } from "@/lib/r2";
 
 import { useState } from "react";
 import Image from "next/image";
@@ -66,7 +67,7 @@ export function SiteHeader() {
         <path d="M0 0q10 0 20 10l24 24q10 10 20 10H410" stroke="var(--border)" vectorEffect="non-scaling-stroke" />
       </svg>
       <Link href="/" aria-label="ObsidianUI home" className="site-brand">
-        <Image src="/logo/bg-less.png" alt="" width={28} height={28} priority />
+        <Image src={r2("/logo/bg-less.png")} alt="" width={28} height={28} priority />
         <span>ObsidianUI</span>
       </Link>
       <div className="site-header-navigation">

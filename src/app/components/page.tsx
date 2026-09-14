@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { ComponentsGrid } from "@/components/catalog/components-grid";
 import { ShowcaseHero } from "@/components/catalog/showcase-hero";
+import { r2 } from "@/lib/r2";
 
 export const metadata: Metadata = {
     title: "React UI Components | ObsidianUI",
@@ -14,8 +15,8 @@ export const metadata: Metadata = {
         type: "website",
         images: [
             {
-                url: "https://www.obsidianui.dev/og-image.png",
-                secureUrl: "https://www.obsidianui.dev/og-image.png",
+                url: r2("/og-image.png"),
+                secureUrl: r2("/og-image.png"),
                 width: 1917,
                 height: 1078,
                 type: "image/png",
@@ -31,7 +32,7 @@ export const metadata: Metadata = {
         creator: "@athrix_codes",
         images: [
             {
-                url: "https://www.obsidianui.dev/og-image.png",
+                url: r2("/og-image.png"),
                 width: 1917,
                 height: 1078,
                 alt: "ObsidianUI - React UI Components",

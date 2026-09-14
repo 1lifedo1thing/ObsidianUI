@@ -6,6 +6,7 @@ import { ThemeProvider } from "@/components/providers/theme-provider";
 import Footer from "@/components/landing/footer";
 import { ClickSpark } from "@/components/block/click-spark";
 import { SiteHeader } from "@/components/site/site-header";
+import { r2 } from "@/lib/r2";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -87,8 +88,8 @@ export const metadata: Metadata = {
     siteName: "ObsidianUI",
     images: [
       {
-        url: "https://www.obsidianui.dev/og-image.png",
-        secureUrl: "https://www.obsidianui.dev/og-image.png",
+        url: r2("/og-image.png"),
+        secureUrl: r2("/og-image.png"),
         width: 1917,
         height: 1078,
         type: "image/png",
@@ -106,7 +107,7 @@ export const metadata: Metadata = {
     creator: "@athrix_codes",
     images: [
       {
-        url: "https://www.obsidianui.dev/og-image.png",
+        url: r2("/og-image.png"),
         width: 1917,
         height: 1078,
         alt: "ObsidianUI - Design Less. Ship Better.",
@@ -159,7 +160,7 @@ const jsonLd = {
       url: "https://www.obsidianui.dev",
       logo: {
         "@type": "ImageObject",
-        url: "https://www.obsidianui.dev/logo/bg-less.png",
+        url: r2("/logo/bg-less.png"),
       },
       sameAs: [
         "https://github.com/Atharvsinh-codez/ObsidianUI",

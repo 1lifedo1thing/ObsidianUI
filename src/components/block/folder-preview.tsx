@@ -1,4 +1,5 @@
 "use client";
+import { r2 } from "@/lib/r2";
 
 import * as React from "react";
 import { motion } from "motion/react";
@@ -987,11 +988,11 @@ export const FolderPreview = React.forwardRef<HTMLDivElement, FolderPreviewProps
         const sizes = sizeConfig[size];
 
         const defaultImages = [
-            "/folder-preview/user1.svg",
-            "/folder-preview/user2.svg",
-            "/folder-preview/user3.svg",
-            "/folder-preview/user4.svg",
-            "/folder-preview/user5.svg",
+            r2("/folder-preview/user1.svg"),
+            r2("/folder-preview/user2.svg"),
+            r2("/folder-preview/user3.svg"),
+            r2("/folder-preview/user4.svg"),
+            r2("/folder-preview/user5.svg"),
         ];
 
         const defaultFiles = [

@@ -3,6 +3,7 @@ import { redirect } from 'next/navigation';
 import { generateStaticParamsFor, importPage } from 'nextra/pages';
 import { useMDXComponents as getMDXComponents } from '@/mdx-components';
 import { DocsCopyPage } from '@/components/docs/docs-copy-page';
+import { r2 } from '@/lib/r2';
 
 type PageProps = { params: Promise<{ mdxPath?: string[] }> };
 export const generateStaticParams = generateStaticParamsFor('mdxPath');
@@ -31,8 +32,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
             type: 'article',
             images: [
                 {
-                    url: 'https://www.obsidianui.dev/og-image.png',
-                    secureUrl: 'https://www.obsidianui.dev/og-image.png',
+                    url: r2('/og-image.png'),
+                    secureUrl: r2('/og-image.png'),
                     width: 1917,
                     height: 1078,
                     type: 'image/png',
@@ -48,7 +49,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
             creator: '@athrix_codes',
             images: [
                 {
-                    url: 'https://www.obsidianui.dev/og-image.png',
+                    url: r2('/og-image.png'),
                     width: 1917,
                     height: 1078,
                     alt: `${title} - ObsidianUI`,

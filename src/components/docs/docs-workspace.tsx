@@ -1,4 +1,5 @@
 "use client";
+import { r2 } from "@/lib/r2";
 
 import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from "react";
 import { createPortal } from "react-dom";
@@ -111,7 +112,7 @@ export function DocsNavigation({ onNavigate }: { onNavigate?: () => void }) {
 function DocsBrand() {
   return (
     <Link className="docs-brand" href="/" aria-label="ObsidianUI home">
-      <Image src="/logo/bg-less.png" alt="" width={26} height={26} />
+      <Image src={r2("/logo/bg-less.png")} alt="" width={26} height={26} />
       <span>ObsidianUI</span>
     </Link>
   );

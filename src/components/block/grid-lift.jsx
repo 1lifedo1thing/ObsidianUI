@@ -1,13 +1,14 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from"react";
+import { r2 } from "@/lib/r2";
 import { cn } from "@/lib/utils";
 import { useEffectReducedMotion } from "@/lib/effects/shared/webgl-surface";
 
 const lerp = (start, end, amount) => start + (end - start) * amount;
 
 /** @param {{ text?: string, imageSrc?: string, showControls?: boolean, className?: string, style?: import("react").CSSProperties }} props */
-export function GridLift({ text = "OBSIDIANUI", imageSrc = "/effects/grid-lift/obsidianui-wordmark.svg", showControls = false, className, style } = {}) {
+export function GridLift({ text = "OBSIDIANUI", imageSrc = r2("/effects/grid-lift/obsidianui-wordmark.svg"), showControls = false, className, style } = {}) {
  const reducedMotion = useEffectReducedMotion();
  const canvasRef = useRef(null);
  const fileInputRef = useRef(null);

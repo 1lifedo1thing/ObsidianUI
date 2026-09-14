@@ -1,4 +1,5 @@
 "use client";
+import { r2 } from "@/lib/r2";
 
 import * as React from "react";
 import { FolderPreview, FolderVariant } from "@/components/block/folder-preview";
@@ -46,11 +47,11 @@ export function FolderPreviewSingle() {
                 label="Shared Files"
                 size="lg"
                 images={[
-                    "/folder-preview/user1.svg",
-                    "/folder-preview/user2.svg",
-                    "/folder-preview/user3.svg",
-                    "/folder-preview/user4.svg",
-                    "/folder-preview/user5.svg",
+                    r2("/folder-preview/user1.svg"),
+                    r2("/folder-preview/user2.svg"),
+                    r2("/folder-preview/user3.svg"),
+                    r2("/folder-preview/user4.svg"),
+                    r2("/folder-preview/user5.svg"),
                 ]}
             />
         </div>
@@ -69,14 +70,14 @@ export function FolderPreviewCustom() {
                 label="Photos"
                 size="lg"
                 images={[
-                    "/folder-preview/folder-preview-photo01.png",
-                    "/folder-preview/folder-preview-photo02.png",
-                    "/folder-preview/folder-preview-photo03.png",
-                    "/folder-preview/folder-preview-photo04.png",
-                    "/folder-preview/folder-preview-photo05.png",
-                    "/folder-preview/folder-preview-photo06.png",
-                    "/folder-preview/folder-preview-photo07.png",
-                    "/folder-preview/folder-preview-photo08.png",
+                    r2("/folder-preview/folder-preview-photo01.png"),
+                    r2("/folder-preview/folder-preview-photo02.png"),
+                    r2("/folder-preview/folder-preview-photo03.png"),
+                    r2("/folder-preview/folder-preview-photo04.png"),
+                    r2("/folder-preview/folder-preview-photo05.png"),
+                    r2("/folder-preview/folder-preview-photo06.png"),
+                    r2("/folder-preview/folder-preview-photo07.png"),
+                    r2("/folder-preview/folder-preview-photo08.png"),
                 ]}
             />
 
@@ -85,9 +86,9 @@ export function FolderPreviewCustom() {
                 label="Gallery"
                 size="lg"
                 images={[
-                    "/folder-preview/folder-preview-photo13.png",
-                    "/folder-preview/folder-preview-photo14.png",
-                    "/folder-preview/folder-preview-photo15.png",
+                    r2("/folder-preview/folder-preview-photo13.png"),
+                    r2("/folder-preview/folder-preview-photo14.png"),
+                    r2("/folder-preview/folder-preview-photo15.png"),
                 ]}
             />
         </div>
