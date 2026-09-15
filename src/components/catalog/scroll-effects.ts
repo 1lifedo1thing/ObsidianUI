@@ -1,4 +1,4 @@
-import { r2c } from "@/lib/r2";
+import { r2, r2c } from "@/lib/r2";
 
 export const scrollEffects = [
   { slug: "draggable-marquee", title: "Draggable Marquee", description: "A continuous image marquee with drag momentum and a seamless looping track.", hint: "Drag the images, or focus the marquee and use the left and right arrow keys." },
@@ -13,7 +13,7 @@ export type ScrollSlug = typeof scrollEffects[number]["slug"];
 export const scrollGalleryImages = [1, 2, 3, 4].map(index => r2c(`/effects/parallax-gallery/parallax-gallery-img${String(index).padStart(2, "0")}.jpg`));
 export const scrollMarqueeImages = [1, 2, 3, 4].map(index => ({
   id: index,
-  src: r2c(`/effects/draggable-marquee/draggable-marquee-img${String(index).padStart(2, "0")}.jpg`),
+  src: r2(`/effects/draggable-marquee/draggable-marquee-img${String(index).padStart(2, "0")}.jpg`),
   alt: `Landscape photograph ${index}`,
   width: 420,
   height: 520,
@@ -25,7 +25,7 @@ export const scrollStackCards = [
   { id: "build", title: "Make it yours.", description: "Build something worth sharing with ObsidianUI.", bgColor: "#f7c698", textColor: "#432d1c" },
 ];
 export const svgMarqueePath = "M1 209.434C58.5872 255.935 387.926 325.938 482.583 209.434C600.905 63.8051 525.516 -43.2211 427.332 19.9613C329.149 83.1436 352.902 242.723 515.041 267.302C644.752 286.966 943.56 181.94 995 156.5";
-export const svgMarqueeImages = Array.from({ length: 8 }, (_, index) => r2c(`/effects/svg-path-marquee/svg-path-marquee-img${String(index + 1).padStart(2, "0")}.png`));
+export const svgMarqueeImages = Array.from({ length: 8 }, (_, index) => r2(`/effects/svg-path-marquee/svg-path-marquee-img${String(index + 1).padStart(2, "0")}.png`));
 
 const hosted = (value: unknown) => JSON.stringify(value, null, 2).replaceAll('"/effects/', '"https://www.obsidianui.dev/effects/');
 const scrollFrame = (content: string) => `"use client";\nimport { useRef } from "react";\nIMPORT\n\nDATA\nexport default function Demo() {\n  const scroller = useRef<HTMLDivElement>(null);\n  return <div ref={scroller} tabIndex={0} aria-label="Scroll effect preview" className="relative h-[400px] overflow-y-auto overscroll-contain" style={{ containerType: "size" }}>\n    ${content}\n  </div>;\n}`;
