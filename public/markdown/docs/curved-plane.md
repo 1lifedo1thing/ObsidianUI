@@ -46,6 +46,8 @@ npm install clsx gsap tailwind-merge three
 
 Resolve @components/, @ui/, @lib/, and @hooks/ targets through your components.json aliases. For example, @components/block/example.tsx maps to src/components/block/example.tsx when components is @/components and @/\* resolves to src/\*. Do not create a literal @components directory. Preserve existing files deliberately and keep the use client directive where present.
 
+Default demo media loads from ObsidianUI. Replace these URLs with your own assets for offline use.
+
 ### components/block/curved-plane.jsx
 
 Installation target: `@components/block/curved-plane.jsx`
@@ -111,11 +113,11 @@ void main() {
 `;
 
 const defaultImages = [
-  "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/curved-plane/curved-plane-img01.webp",
-  "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/curved-plane/curved-plane-img02.webp",
-  "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/curved-plane/curved-plane-img03.webp",
-  "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/curved-plane/curved-plane-img04.png",
-  "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/curved-plane/curved-plane-img05.png",
+  "https://www.obsidianui.dev/effects/curved-plane/curved-plane-img01.webp",
+  "https://www.obsidianui.dev/effects/curved-plane/curved-plane-img02.webp",
+  "https://www.obsidianui.dev/effects/curved-plane/curved-plane-img03.webp",
+  "https://www.obsidianui.dev/effects/curved-plane/curved-plane-img04.png",
+  "https://www.obsidianui.dev/effects/curved-plane/curved-plane-img05.png",
 ];
 
 const SWIPER_VISIBLE_IMAGES = 3;

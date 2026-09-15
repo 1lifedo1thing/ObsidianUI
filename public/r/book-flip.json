@@ -27,7 +27,7 @@
       "path": "lib/effects/book-flip/Experience.jsx",
       "target": "@lib/effects/book-flip/Experience.jsx",
       "type": "registry:lib",
-      "content": "'use client'\nimport { Environment, OrbitControls } from\"@react-three/drei\";\nimport { Book } from\"./Book\";\n\nexport const Experience = ({\n images = [],\n pathPattern =\"/assets/nature\",\n orbitControls = {},\n ...props\n}) => {\n return (\n <>\n <OrbitControls\n enableDamping\n enablePan={false}\n enableZoom={false}\n target={[0, 0, 0]}\n {...orbitControls}\n />\n <Book images={images} pathPattern={pathPattern} {...props} />\n <Environment files=\"https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/book-flip/studio.hdr\" />\n <directionalLight\n position={[2, 5, 2]}\n intensity={2.5}\n />\n </>\n );\n};\n"
+      "content": "'use client'\nimport { Environment, OrbitControls } from\"@react-three/drei\";\nimport { Book } from\"./Book\";\n\nexport const Experience = ({\n images = [],\n pathPattern =\"/assets/nature\",\n orbitControls = {},\n ...props\n}) => {\n return (\n <>\n <OrbitControls\n enableDamping\n enablePan={false}\n enableZoom={false}\n target={[0, 0, 0]}\n {...orbitControls}\n />\n <Book images={images} pathPattern={pathPattern} {...props} />\n <Environment files=\"https://www.obsidianui.dev/effects/book-flip/studio.hdr\" />\n <directionalLight\n position={[2, 5, 2]}\n intensity={2.5}\n />\n </>\n );\n};\n"
     },
     {
       "path": "lib/effects/book-flip/PageContext.jsx",
@@ -47,5 +47,11 @@
       "type": "registry:lib",
       "content": "import { clsx, type ClassValue } from \"clsx\"\nimport { twMerge } from \"tailwind-merge\"\n\nexport function cn(...inputs: ClassValue[]) {\n  return twMerge(clsx(inputs))\n}\n"
     }
-  ]
+  ],
+  "docs": "Default demo media loads from ObsidianUI. Replace these URLs with your own assets for offline use.",
+  "meta": {
+    "remoteAssets": [
+      "https://www.obsidianui.dev/effects/book-flip/studio.hdr"
+    ]
+  }
 }

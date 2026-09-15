@@ -46,6 +46,8 @@ npm install @react-three/drei @react-three/fiber clsx maath tailwind-merge three
 
 Resolve @components/, @ui/, @lib/, and @hooks/ targets through your components.json aliases. For example, @components/block/example.tsx maps to src/components/block/example.tsx when components is @/components and @/\* resolves to src/\*. Do not create a literal @components directory. Preserve existing files deliberately and keep the use client directive where present.
 
+Default demo media loads from ObsidianUI. Replace these URLs with your own assets for offline use.
+
 ### components/block/book-flip.jsx
 
 Installation target: `@components/block/book-flip.jsx`
@@ -576,7 +578,7 @@ export const Experience = ({
  {...orbitControls}
  />
  <Book images={images} pathPattern={pathPattern} {...props} />
- <Environment files="https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/book-flip/studio.hdr" />
+ <Environment files="https://www.obsidianui.dev/effects/book-flip/studio.hdr" />
  <directionalLight
  position={[2, 5, 2]}
  intensity={2.5}

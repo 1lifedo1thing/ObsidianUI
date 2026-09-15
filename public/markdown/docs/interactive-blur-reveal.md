@@ -48,6 +48,8 @@ npm install clsx tailwind-merge
 
 Resolve @components/, @ui/, @lib/, and @hooks/ targets through your components.json aliases. For example, @components/block/example.tsx maps to src/components/block/example.tsx when components is @/components and @/\* resolves to src/\*. Do not create a literal @components directory. Preserve existing files deliberately and keep the use client directive where present.
 
+Default demo media loads from ObsidianUI. Replace these URLs with your own assets for offline use.
+
 ### components/block/interactive-blur-reveal.jsx
 
 Installation target: `@components/block/interactive-blur-reveal.jsx`
@@ -307,8 +309,8 @@ function createTexture(gl, image, unit, shouldRepeat = false) {
  * @param {{ imageSrc?: string, noiseSrc?: string, iChannel0?: string | HTMLImageElement, iChannel1?: string | HTMLImageElement, className?: string, style?: import("react").CSSProperties, paused?: boolean, alt?: string }} props
  */
 export function InteractiveBlurReveal({
-  imageSrc = "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/interactive-blur-reveal/interactive-blur-reveal-img01.webp",
-  noiseSrc = "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/interactive-blur-reveal/interactive-blur-reveal-noise.png",
+  imageSrc = "https://www.obsidianui.dev/effects/interactive-blur-reveal/interactive-blur-reveal-img01.webp",
+  noiseSrc = "https://www.obsidianui.dev/effects/interactive-blur-reveal/interactive-blur-reveal-noise.png",
   iChannel0 = imageSrc,
   iChannel1 = noiseSrc,
   className,

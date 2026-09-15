@@ -2749,9 +2749,9 @@ export function Demo() {
 return (
   <HoverImg
     projects={[
-      { title: "Shree Krishna", label: "The Supreme Personality of Godhead", imageSrc: "https://pub-830233752de349e29c6104a501b309d4.r2.dev/hover-img/hover-img-img01-alt.jpg" },
-      { title: "Radha Krishna", label: "The Divine Couple", imageSrc: "https://pub-830233752de349e29c6104a501b309d4.r2.dev/hover-img/hover-img-img02.jpg" },
-      { title: "Divine Love", label: "Eternal Bond", imageSrc: "https://pub-830233752de349e29c6104a501b309d4.r2.dev/hover-img/hover-img-img03.jpg" },
+      { title: "Shree Krishna", label: "The Supreme Personality of Godhead", imageSrc: "https://www.obsidianui.dev/hover-img/hover-img-img01-alt.jpg" },
+      { title: "Radha Krishna", label: "The Divine Couple", imageSrc: "https://www.obsidianui.dev/hover-img/hover-img-img02.jpg" },
+      { title: "Divine Love", label: "Eternal Bond", imageSrc: "https://www.obsidianui.dev/hover-img/hover-img-img03.jpg" },
     ]}
   />
 )
@@ -2775,6 +2775,8 @@ npm install gsap
 ```
 
 Resolve @components/, @ui/, @lib/, and @hooks/ targets through your components.json aliases. For example, @components/block/example.tsx maps to src/components/block/example.tsx when components is @/components and @/\* resolves to src/\*. Do not create a literal @components directory. Preserve existing files deliberately and keep the use client directive where present.
+
+Default demo media loads from ObsidianUI. Replace these URLs with your own assets for offline use.
 
 ### components/block/hover-img.css
 
@@ -2960,17 +2962,17 @@ const defaultProjects: ProjectItem[] = [
     {
         title: "Shree Krishna",
         label: "The Supreme Personality of Godhead",
-        imageSrc: "https://pub-830233752de349e29c6104a501b309d4.r2.dev/hover-img/hover-img-img01-alt.jpg",
+        imageSrc: "https://www.obsidianui.dev/hover-img/hover-img-img01-alt.jpg",
     },
     {
         title: "Radha Krishna",
         label: "The Divine Couple",
-        imageSrc: "https://pub-830233752de349e29c6104a501b309d4.r2.dev/hover-img/hover-img-img02.jpg",
+        imageSrc: "https://www.obsidianui.dev/hover-img/hover-img-img02.jpg",
     },
     {
         title: "Divine Love",
         label: "Eternal Bond",
-        imageSrc: "https://pub-830233752de349e29c6104a501b309d4.r2.dev/hover-img/hover-img-img03.jpg",
+        imageSrc: "https://www.obsidianui.dev/hover-img/hover-img-img03.jpg",
     },
 ];
 
@@ -12466,6 +12468,8 @@ npm install @react-three/drei @react-three/fiber clsx maath tailwind-merge three
 
 Resolve @components/, @ui/, @lib/, and @hooks/ targets through your components.json aliases. For example, @components/block/example.tsx maps to src/components/block/example.tsx when components is @/components and @/\* resolves to src/\*. Do not create a literal @components directory. Preserve existing files deliberately and keep the use client directive where present.
 
+Default demo media loads from ObsidianUI. Replace these URLs with your own assets for offline use.
+
 ### components/block/book-flip.jsx
 
 Installation target: `@components/block/book-flip.jsx`
@@ -12996,7 +13000,7 @@ export const Experience = ({
  {...orbitControls}
  />
  <Book images={images} pathPattern={pathPattern} {...props} />
- <Environment files="https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/book-flip/studio.hdr" />
+ <Environment files="https://www.obsidianui.dev/effects/book-flip/studio.hdr" />
  <directionalLight
  position={[2, 5, 2]}
  intensity={2.5}
@@ -13159,6 +13163,8 @@ npm install clsx gsap tailwind-merge three
 
 Resolve @components/, @ui/, @lib/, and @hooks/ targets through your components.json aliases. For example, @components/block/example.tsx maps to src/components/block/example.tsx when components is @/components and @/\* resolves to src/\*. Do not create a literal @components directory. Preserve existing files deliberately and keep the use client directive where present.
 
+Default demo media loads from ObsidianUI. Replace these URLs with your own assets for offline use.
+
 ### components/block/curved-plane.jsx
 
 Installation target: `@components/block/curved-plane.jsx`
@@ -13224,11 +13230,11 @@ void main() {
 `;
 
 const defaultImages = [
-  "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/curved-plane/curved-plane-img01.webp",
-  "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/curved-plane/curved-plane-img02.webp",
-  "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/curved-plane/curved-plane-img03.webp",
-  "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/curved-plane/curved-plane-img04.png",
-  "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/curved-plane/curved-plane-img05.png",
+  "https://www.obsidianui.dev/effects/curved-plane/curved-plane-img01.webp",
+  "https://www.obsidianui.dev/effects/curved-plane/curved-plane-img02.webp",
+  "https://www.obsidianui.dev/effects/curved-plane/curved-plane-img03.webp",
+  "https://www.obsidianui.dev/effects/curved-plane/curved-plane-img04.png",
+  "https://www.obsidianui.dev/effects/curved-plane/curved-plane-img05.png",
 ];
 
 const SWIPER_VISIBLE_IMAGES = 3;
@@ -14632,6 +14638,8 @@ npm install clsx gsap tailwind-merge three
 
 Resolve @components/, @ui/, @lib/, and @hooks/ targets through your components.json aliases. For example, @components/block/example.tsx maps to src/components/block/example.tsx when components is @/components and @/\* resolves to src/\*. Do not create a literal @components directory. Preserve existing files deliberately and keep the use client directive where present.
 
+Default demo media loads from ObsidianUI. Replace these URLs with your own assets for offline use.
+
 ### components/block/interactive-hover-slider.jsx
 
 Installation target: `@components/block/interactive-hover-slider.jsx`
@@ -15152,11 +15160,11 @@ const opacity = Math.max(0, baseOpacity - dist * 0.22) * anim.alpha;
 }
 
 const defaultItems = [
- { id: "01", title: "Soft Forms", focus: "Visual study", year: "2026", img: "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/interactive-hover-slider/interactive-hover-slider-img01.webp" },
- { id: "02", title: "Botanical", focus: "Art direction", year: "2026", img: "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/interactive-hover-slider/interactive-hover-slider-img02.webp" },
- { id: "03", title: "Afterlight", focus: "Identity", year: "2026", img: "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/interactive-hover-slider/interactive-hover-slider-img03.webp" },
- { id: "04", title: "Glasswork", focus: "Materials", year: "2026", img: "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/interactive-hover-slider/interactive-hover-slider-img04.png" },
- { id: "05", title: "Motion Study", focus: "Experiment", year: "2026", img: "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/interactive-hover-slider/interactive-hover-slider-img05.png" },
+ { id: "01", title: "Soft Forms", focus: "Visual study", year: "2026", img: "https://www.obsidianui.dev/effects/interactive-hover-slider/interactive-hover-slider-img01.webp" },
+ { id: "02", title: "Botanical", focus: "Art direction", year: "2026", img: "https://www.obsidianui.dev/effects/interactive-hover-slider/interactive-hover-slider-img02.webp" },
+ { id: "03", title: "Afterlight", focus: "Identity", year: "2026", img: "https://www.obsidianui.dev/effects/interactive-hover-slider/interactive-hover-slider-img03.webp" },
+ { id: "04", title: "Glasswork", focus: "Materials", year: "2026", img: "https://www.obsidianui.dev/effects/interactive-hover-slider/interactive-hover-slider-img04.png" },
+ { id: "05", title: "Motion Study", focus: "Experiment", year: "2026", img: "https://www.obsidianui.dev/effects/interactive-hover-slider/interactive-hover-slider-img05.png" },
 ];
 
 /** @param {{ items?: { id: string, title: string, focus: string, year: string, img: string }[], compact?: boolean, className?: string, style?: import("react").CSSProperties }} props */
@@ -15292,6 +15300,8 @@ npm install clsx tailwind-merge
 ```
 
 Resolve @components/, @ui/, @lib/, and @hooks/ targets through your components.json aliases. For example, @components/block/example.tsx maps to src/components/block/example.tsx when components is @/components and @/\* resolves to src/\*. Do not create a literal @components directory. Preserve existing files deliberately and keep the use client directive where present.
+
+Default demo media loads from ObsidianUI. Replace these URLs with your own assets for offline use.
 
 ### components/block/interactive-blur-reveal.jsx
 
@@ -15552,8 +15562,8 @@ function createTexture(gl, image, unit, shouldRepeat = false) {
  * @param {{ imageSrc?: string, noiseSrc?: string, iChannel0?: string | HTMLImageElement, iChannel1?: string | HTMLImageElement, className?: string, style?: import("react").CSSProperties, paused?: boolean, alt?: string }} props
  */
 export function InteractiveBlurReveal({
-  imageSrc = "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/interactive-blur-reveal/interactive-blur-reveal-img01.webp",
-  noiseSrc = "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/interactive-blur-reveal/interactive-blur-reveal-noise.png",
+  imageSrc = "https://www.obsidianui.dev/effects/interactive-blur-reveal/interactive-blur-reveal-img01.webp",
+  noiseSrc = "https://www.obsidianui.dev/effects/interactive-blur-reveal/interactive-blur-reveal-noise.png",
   iChannel0 = imageSrc,
   iChannel1 = noiseSrc,
   className,
