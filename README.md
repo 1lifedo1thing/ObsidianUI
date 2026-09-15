@@ -28,7 +28,7 @@ ObsidianUI is React component library featuring 30+ components, blocks, and land
 
 ---
 
-### Highlights & Features
+### Highlights & Features.
 
 - **35+ Components, Blocks, Landing Pages & Templates**: From fluid cursor effects, 3D book flips, and magnetic image trails to complete landing page templates like Project One.
 - **Added AI Agents MCP Server**: Native Model Context Protocol server (`npm run mcp`), `llms.txt`, and markdown endpoints (`Accept: text/markdown`) so AI coding agents (Claude, Cursor, Copilot, Antigravity) can seamlessly discover and install components.
