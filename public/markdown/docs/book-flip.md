@@ -109,7 +109,7 @@ function BookScene({ images, pathPattern, bgColor, cameraDistance, showUI }) {
  * Images are PNG page names without their extension, resolved against pathPattern.
  * @param {{ images?: string[], pathPattern?: string, bgColor?: string, cameraDistance?: { mobile: number, desktop: number }, showUI?: boolean, className?: string, style?: import("react").CSSProperties }} props
  */
-export function BookFlip({ images = defaultImages, pathPattern = "https://cdn-athrix.milliondollarinternet.lol/effects/book-flip", bgColor = "#000000", cameraDistance = defaultCameraDistance, showUI = true, className, style } = {}) {
+export function BookFlip({ images = defaultImages, pathPattern = "https://cdn-new.obsidianui.dev/effects/book-flip", bgColor = "#000000", cameraDistance = defaultCameraDistance, showUI = true, className, style } = {}) {
   return <WebGLSurface className={className} style={style} imageSrc={`${pathPattern}/${images[0] || "book-flip-img01"}.png`} label="ObsidianUI interactive nature book">
     <BookScene images={images} pathPattern={pathPattern} bgColor={bgColor} cameraDistance={cameraDistance} showUI={showUI} />
   </WebGLSurface>;
@@ -576,7 +576,7 @@ export const Experience = ({
  {...orbitControls}
  />
  <Book images={images} pathPattern={pathPattern} {...props} />
- <Environment files="https://cdn-athrix.milliondollarinternet.lol/effects/book-flip/studio.hdr" />
+ <Environment files="https://cdn-new.obsidianui.dev/effects/book-flip/studio.hdr" />
  <directionalLight
  position={[2, 5, 2]}
  intensity={2.5}

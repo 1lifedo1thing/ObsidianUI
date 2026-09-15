@@ -18,7 +18,7 @@ export const Experience = ({
  {...orbitControls}
  />
  <Book images={images} pathPattern={pathPattern} {...props} />
- <Environment files="https://cdn-athrix.milliondollarinternet.lol/effects/book-flip/studio.hdr" />
+ <Environment files="https://cdn-new.obsidianui.dev/effects/book-flip/studio.hdr" />
  <directionalLight
  position={[2, 5, 2]}
  intensity={2.5}

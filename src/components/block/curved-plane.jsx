@@ -58,11 +58,11 @@ void main() {
 `;
 
 const defaultImages = [
-  "https://cdn-athrix.milliondollarinternet.lol/effects/curved-plane/curved-plane-img01.webp",
-  "https://cdn-athrix.milliondollarinternet.lol/effects/curved-plane/curved-plane-img02.webp",
-  "https://cdn-athrix.milliondollarinternet.lol/effects/curved-plane/curved-plane-img03.webp",
-  "https://cdn-athrix.milliondollarinternet.lol/effects/curved-plane/curved-plane-img04.png",
-  "https://cdn-athrix.milliondollarinternet.lol/effects/curved-plane/curved-plane-img05.png",
+  "https://cdn-new.obsidianui.dev/effects/curved-plane/curved-plane-img01.webp",
+  "https://cdn-new.obsidianui.dev/effects/curved-plane/curved-plane-img02.webp",
+  "https://cdn-new.obsidianui.dev/effects/curved-plane/curved-plane-img03.webp",
+  "https://cdn-new.obsidianui.dev/effects/curved-plane/curved-plane-img04.png",
+  "https://cdn-new.obsidianui.dev/effects/curved-plane/curved-plane-img05.png",
 ];
 
 const SWIPER_VISIBLE_IMAGES = 3;

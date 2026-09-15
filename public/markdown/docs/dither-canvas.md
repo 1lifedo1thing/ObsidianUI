@@ -231,8 +231,8 @@ function createFluid() {
  * @param {{ videoSrc?: string, imageSrc?: string, className?: string, style?: import("react").CSSProperties, paused?: boolean }} props
  */
 export function DitherCanvas({
-  videoSrc = "https://cdn-athrix.milliondollarinternet.lol/effects/dither-canvas/dither-canvas-video.mp4",
-  imageSrc = "https://cdn-athrix.milliondollarinternet.lol/effects/dither-canvas/dither-canvas-poster.webp",
+  videoSrc = "https://cdn-new.obsidianui.dev/effects/dither-canvas/dither-canvas-video.mp4",
+  imageSrc = "https://cdn-new.obsidianui.dev/effects/dither-canvas/dither-canvas-poster.webp",
   className,
   style,
   paused = false,

@@ -53,7 +53,7 @@ const nextConfig = {
         remotePatterns: [
             {
                 protocol: 'https',
-                hostname: 'cdn-athrix.milliondollarinternet.lol',
+                hostname: 'cdn-new.obsidianui.dev',
             },
             {
                 protocol: 'https',
