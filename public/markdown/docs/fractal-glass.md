@@ -79,6 +79,8 @@ const fragmentShader = `
 
  varying vec2 vUv;
 
+ #define M_PI 3.1415926535897932384626433832795
+
  vec2 getCoverUV(vec2 uv, vec2 textureSize) {
  if (textureSize.x < 1.0 || textureSize.y < 1.0) return uv;
 
@@ -91,28 +93,12 @@ const fragmentShader = `
  return (uv * uResolution - offset) / scaledSize;
  }
 
- float displacement(float x, float num_stripes, float strength) {
- float modulus = 1.0 / num_stripes;
- return mod(x, modulus) * strength;
- }
-
- float fractalGlass(float x) {
- float stripeWidth = 1.0 / uStripesFrequency;
- float sampleStep = uGlassSmoothness * stripeWidth;
- float d = 0.0;
- for (int i = -5; i <= 5; i++) {
- d += displacement(x + float(i) * sampleStep, uStripesFrequency, uGlassStrength);
- }
- d = d / 11.0;
- return x + d;
- }
-
  float smoothEdge(float x, float padding) {
  float edge = padding;
  if (x < edge) {
  return smoothstep(0.0, edge, x);
  } else if (x > 1.0 - edge) {
- return smoothstep(1.0, 1.0 - edge, x);
+ return 1.0 - smoothstep(1.0 - edge, 1.0, x);
  }
  return 1.0;
  }
@@ -120,26 +106,18 @@ const fragmentShader = `
  void main() {
  vec2 uv = vUv;
 
- float originalX = uv.x;
+ float edgeFactor = smoothEdge(uv.x, uEdgePadding);
+ float stripeCount = max(2.0, uStripesFrequency);
+ float stripeIndex = floor(uv.x * stripeCount);
+ float stripeCurve = sin(fract(uv.x * stripeCount) * M_PI);
+ float stripeDirection = mod(stripeIndex, 2.0) * 2.0 - 1.0;
+ float pointer = (uMouse.x - 0.5) * 2.0;
+ float refractionStrength = 0.7 + min(uDistortionMultiplier, 10.0) * 0.03;
+ float staticRefraction = stripeDirection * (0.018 + stripeCurve * 0.045) * uGlassStrength;
+ float pointerRefraction = pointer * (0.035 + stripeCurve * 0.105) * uParallaxStrength;
 
- float edgeFactor = smoothEdge(originalX, uEdgePadding);
-
- float distortedX = fractalGlass(originalX);
-
- uv.x = mix(originalX, distortedX, edgeFactor);
-
- float distortionFactor = uv.x - originalX;
-
- float parallaxDirection = -sign(0.5 - uMouse.x);
-
- vec2 parallaxOffset = vec2(
- parallaxDirection * abs(uMouse.x - 0.5) * uParallaxStrength * (1.0 + abs(distortionFactor) * uDistortionMultiplier),
- 0.0
- );
-
- parallaxOffset *= edgeFactor;
-
- uv += parallaxOffset;
+ uv.x += (staticRefraction + pointerRefraction) * refractionStrength * edgeFactor;
+ uv.y += sin((uv.x + uMouse.y * 0.35) * stripeCount * M_PI) * stripeCurve * 0.009 * uGlassSmoothness * edgeFactor;
 
  vec2 coverUV = getCoverUV(uv, uTextureSize);
 
@@ -148,6 +126,9 @@ const fragmentShader = `
  }
 
  vec4 color = texture2D(uTexture, coverUV);
+ float glassHighlight = pow(stripeCurve, 3.0) * (0.05 + abs(pointer) * 0.12) * edgeFactor;
+ color.rgb *= 0.96 + stripeCurve * 0.08 * uGlassStrength;
+ color.rgb += vec3(0.10, 0.15, 0.30) * glassHighlight;
 
  gl_FragColor = color;
  }
