@@ -159,8 +159,8 @@ function ButterflyPool({ matcapMaterial, gltfScene, gltfAnimations, motionEnable
 }
 
 function ButterflyTrail({ motionEnabled }) {
-  const matcapTexture = useLoader(THREE.TextureLoader, 'https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/butterfly-trail-cursor/butterfly-trail-cursor-matcap.webp')
-  const { scene, animations } = useGLTF('https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/butterfly-trail-cursor/butterfly3.glb')
+  const matcapTexture = useLoader(THREE.TextureLoader, '/effects/butterfly-trail-cursor/butterfly-trail-cursor-matcap.webp')
+  const { scene, animations } = useGLTF('/effects/butterfly-trail-cursor/butterfly3.glb')
 
   const matcapMaterial = useMemo(
     () =>

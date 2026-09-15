@@ -2749,9 +2749,9 @@ export function Demo() {
 return (
   <HoverImg
     projects={[
-      { title: "Shree Krishna", label: "The Supreme Personality of Godhead", imageSrc: "https://pub-830233752de349e29c6104a501b309d4.r2.dev/hover-img/hover-img-img01-alt.jpg" },
-      { title: "Radha Krishna", label: "The Divine Couple", imageSrc: "https://pub-830233752de349e29c6104a501b309d4.r2.dev/hover-img/hover-img-img02.jpg" },
-      { title: "Divine Love", label: "Eternal Bond", imageSrc: "https://pub-830233752de349e29c6104a501b309d4.r2.dev/hover-img/hover-img-img03.jpg" },
+      { title: "Shree Krishna", label: "The Supreme Personality of Godhead", imageSrc: "https://cdn-athrix.milliondollarinternet.lol/hover-img/hover-img-img01-alt.jpg" },
+      { title: "Radha Krishna", label: "The Divine Couple", imageSrc: "https://cdn-athrix.milliondollarinternet.lol/hover-img/hover-img-img02.jpg" },
+      { title: "Divine Love", label: "Eternal Bond", imageSrc: "https://cdn-athrix.milliondollarinternet.lol/hover-img/hover-img-img03.jpg" },
     ]}
   />
 )
@@ -2960,17 +2960,17 @@ const defaultProjects: ProjectItem[] = [
     {
         title: "Shree Krishna",
         label: "The Supreme Personality of Godhead",
-        imageSrc: "https://pub-830233752de349e29c6104a501b309d4.r2.dev/hover-img/hover-img-img01-alt.jpg",
+        imageSrc: "https://cdn-athrix.milliondollarinternet.lol/hover-img/hover-img-img01-alt.jpg",
     },
     {
         title: "Radha Krishna",
         label: "The Divine Couple",
-        imageSrc: "https://pub-830233752de349e29c6104a501b309d4.r2.dev/hover-img/hover-img-img02.jpg",
+        imageSrc: "https://cdn-athrix.milliondollarinternet.lol/hover-img/hover-img-img02.jpg",
     },
     {
         title: "Divine Love",
         label: "Eternal Bond",
-        imageSrc: "https://pub-830233752de349e29c6104a501b309d4.r2.dev/hover-img/hover-img-img03.jpg",
+        imageSrc: "https://cdn-athrix.milliondollarinternet.lol/hover-img/hover-img-img03.jpg",
     },
 ];
 
@@ -6094,7 +6094,7 @@ import { DraggableMarquee } from "@/components/block/draggable-marquee";
 const items = [
   {
     "id": 1,
-    "src": "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/draggable-marquee/draggable-marquee-img01.jpg",
+    "src": "https://cdn-athrix.milliondollarinternet.lol/effects/draggable-marquee/draggable-marquee-img01.jpg",
     "alt": "Landscape photograph 1",
     "width": 420,
     "height": 520,
@@ -6102,7 +6102,7 @@ const items = [
   },
   {
     "id": 2,
-    "src": "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/draggable-marquee/draggable-marquee-img02.jpg",
+    "src": "https://cdn-athrix.milliondollarinternet.lol/effects/draggable-marquee/draggable-marquee-img02.jpg",
     "alt": "Landscape photograph 2",
     "width": 420,
     "height": 520,
@@ -6110,7 +6110,7 @@ const items = [
   },
   {
     "id": 3,
-    "src": "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/draggable-marquee/draggable-marquee-img03.jpg",
+    "src": "https://cdn-athrix.milliondollarinternet.lol/effects/draggable-marquee/draggable-marquee-img03.jpg",
     "alt": "Landscape photograph 3",
     "width": 420,
     "height": 520,
@@ -6118,7 +6118,7 @@ const items = [
   },
   {
     "id": 4,
-    "src": "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/draggable-marquee/draggable-marquee-img04.jpg",
+    "src": "https://cdn-athrix.milliondollarinternet.lol/effects/draggable-marquee/draggable-marquee-img04.jpg",
     "alt": "Landscape photograph 4",
     "width": 420,
     "height": 520,
@@ -6146,7 +6146,7 @@ import { DraggableMarquee } from "@/components/block/draggable-marquee";
 const items = [
   {
     "id": 1,
-    "src": "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/draggable-marquee/draggable-marquee-img01.jpg",
+    "src": "https://cdn-athrix.milliondollarinternet.lol/effects/draggable-marquee/draggable-marquee-img01.jpg",
     "alt": "Landscape photograph 1",
     "width": 420,
     "height": 520,
@@ -6154,7 +6154,7 @@ const items = [
   },
   {
     "id": 2,
-    "src": "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/draggable-marquee/draggable-marquee-img02.jpg",
+    "src": "https://cdn-athrix.milliondollarinternet.lol/effects/draggable-marquee/draggable-marquee-img02.jpg",
     "alt": "Landscape photograph 2",
     "width": 420,
     "height": 520,
@@ -6162,7 +6162,7 @@ const items = [
   },
   {
     "id": 3,
-    "src": "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/draggable-marquee/draggable-marquee-img03.jpg",
+    "src": "https://cdn-athrix.milliondollarinternet.lol/effects/draggable-marquee/draggable-marquee-img03.jpg",
     "alt": "Landscape photograph 3",
     "width": 420,
     "height": 520,
@@ -6170,7 +6170,7 @@ const items = [
   },
   {
     "id": 4,
-    "src": "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/draggable-marquee/draggable-marquee-img04.jpg",
+    "src": "https://cdn-athrix.milliondollarinternet.lol/effects/draggable-marquee/draggable-marquee-img04.jpg",
     "alt": "Landscape photograph 4",
     "width": 420,
     "height": 520,
@@ -7232,14 +7232,14 @@ import { SvgPathMarquee } from "@/components/block/svg-path-marquee";
 
 const path = "M1 209.434C58.5872 255.935 387.926 325.938 482.583 209.434C600.905 63.8051 525.516 -43.2211 427.332 19.9613C329.149 83.1436 352.902 242.723 515.041 267.302C644.752 286.966 943.56 181.94 995 156.5";
 const images = [
-  "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/svg-path-marquee/svg-path-marquee-img01.png",
-  "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/svg-path-marquee/svg-path-marquee-img02.png",
-  "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/svg-path-marquee/svg-path-marquee-img03.png",
-  "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/svg-path-marquee/svg-path-marquee-img04.png",
-  "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/svg-path-marquee/svg-path-marquee-img05.png",
-  "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/svg-path-marquee/svg-path-marquee-img06.png",
-  "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/svg-path-marquee/svg-path-marquee-img07.png",
-  "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/svg-path-marquee/svg-path-marquee-img08.png"
+  "https://cdn-athrix.milliondollarinternet.lol/effects/svg-path-marquee/svg-path-marquee-img01.png",
+  "https://cdn-athrix.milliondollarinternet.lol/effects/svg-path-marquee/svg-path-marquee-img02.png",
+  "https://cdn-athrix.milliondollarinternet.lol/effects/svg-path-marquee/svg-path-marquee-img03.png",
+  "https://cdn-athrix.milliondollarinternet.lol/effects/svg-path-marquee/svg-path-marquee-img04.png",
+  "https://cdn-athrix.milliondollarinternet.lol/effects/svg-path-marquee/svg-path-marquee-img05.png",
+  "https://cdn-athrix.milliondollarinternet.lol/effects/svg-path-marquee/svg-path-marquee-img06.png",
+  "https://cdn-athrix.milliondollarinternet.lol/effects/svg-path-marquee/svg-path-marquee-img07.png",
+  "https://cdn-athrix.milliondollarinternet.lol/effects/svg-path-marquee/svg-path-marquee-img08.png"
 ];
 
 export default function Demo() {
@@ -7263,14 +7263,14 @@ import { SvgPathMarquee } from "@/components/block/svg-path-marquee";
 
 const path = "M1 209.434C58.5872 255.935 387.926 325.938 482.583 209.434C600.905 63.8051 525.516 -43.2211 427.332 19.9613C329.149 83.1436 352.902 242.723 515.041 267.302C644.752 286.966 943.56 181.94 995 156.5";
 const images = [
-  "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/svg-path-marquee/svg-path-marquee-img01.png",
-  "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/svg-path-marquee/svg-path-marquee-img02.png",
-  "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/svg-path-marquee/svg-path-marquee-img03.png",
-  "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/svg-path-marquee/svg-path-marquee-img04.png",
-  "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/svg-path-marquee/svg-path-marquee-img05.png",
-  "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/svg-path-marquee/svg-path-marquee-img06.png",
-  "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/svg-path-marquee/svg-path-marquee-img07.png",
-  "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/svg-path-marquee/svg-path-marquee-img08.png"
+  "https://cdn-athrix.milliondollarinternet.lol/effects/svg-path-marquee/svg-path-marquee-img01.png",
+  "https://cdn-athrix.milliondollarinternet.lol/effects/svg-path-marquee/svg-path-marquee-img02.png",
+  "https://cdn-athrix.milliondollarinternet.lol/effects/svg-path-marquee/svg-path-marquee-img03.png",
+  "https://cdn-athrix.milliondollarinternet.lol/effects/svg-path-marquee/svg-path-marquee-img04.png",
+  "https://cdn-athrix.milliondollarinternet.lol/effects/svg-path-marquee/svg-path-marquee-img05.png",
+  "https://cdn-athrix.milliondollarinternet.lol/effects/svg-path-marquee/svg-path-marquee-img06.png",
+  "https://cdn-athrix.milliondollarinternet.lol/effects/svg-path-marquee/svg-path-marquee-img07.png",
+  "https://cdn-athrix.milliondollarinternet.lol/effects/svg-path-marquee/svg-path-marquee-img08.png"
 ];
 
 export default function Demo() {
@@ -7768,10 +7768,10 @@ import { useRef } from "react";
 import { ParallaxGallery } from "@/components/block/parallax-gallery";
 
 const images = [
-  "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/parallax-gallery/parallax-gallery-img01.jpg",
-  "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/parallax-gallery/parallax-gallery-img02.jpg",
-  "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/parallax-gallery/parallax-gallery-img03.jpg",
-  "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/parallax-gallery/parallax-gallery-img04.jpg"
+  "https://cdn-athrix.milliondollarinternet.lol/effects/parallax-gallery/parallax-gallery-img01.jpg",
+  "https://cdn-athrix.milliondollarinternet.lol/effects/parallax-gallery/parallax-gallery-img02.jpg",
+  "https://cdn-athrix.milliondollarinternet.lol/effects/parallax-gallery/parallax-gallery-img03.jpg",
+  "https://cdn-athrix.milliondollarinternet.lol/effects/parallax-gallery/parallax-gallery-img04.jpg"
 ];
 export default function Demo() {
   const scroller = useRef<HTMLDivElement>(null);
@@ -7795,10 +7795,10 @@ import { useRef } from "react";
 import { ParallaxGallery } from "@/components/block/parallax-gallery";
 
 const images = [
-  "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/parallax-gallery/parallax-gallery-img01.jpg",
-  "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/parallax-gallery/parallax-gallery-img02.jpg",
-  "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/parallax-gallery/parallax-gallery-img03.jpg",
-  "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/parallax-gallery/parallax-gallery-img04.jpg"
+  "https://cdn-athrix.milliondollarinternet.lol/effects/parallax-gallery/parallax-gallery-img01.jpg",
+  "https://cdn-athrix.milliondollarinternet.lol/effects/parallax-gallery/parallax-gallery-img02.jpg",
+  "https://cdn-athrix.milliondollarinternet.lol/effects/parallax-gallery/parallax-gallery-img03.jpg",
+  "https://cdn-athrix.milliondollarinternet.lol/effects/parallax-gallery/parallax-gallery-img04.jpg"
 ];
 export default function Demo() {
   const scroller = useRef<HTMLDivElement>(null);
@@ -8511,7 +8511,7 @@ export default function Demo() {
   const scroller = useRef<HTMLDivElement>(null);
   return <div ref={scroller} tabIndex={0} aria-label="Scroll effect preview" className="relative h-[400px] overflow-y-auto overscroll-contain" style={{ containerType: "size" }}>
     <div className="flex h-[45cqh] items-center justify-center">Scroll to reveal</div>
-    <SvgPixelReveal src="https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/svg-pixel-reveal/svg-pixel-reveal-img01.png" alt="Landscape photograph" scroller={scroller} start="top 35%" style={{ width: "86%", height: "70cqh", margin: "0 auto" }} />
+    <SvgPixelReveal src="https://cdn-athrix.milliondollarinternet.lol/effects/svg-pixel-reveal/svg-pixel-reveal-img01.png" alt="Landscape photograph" scroller={scroller} start="top 35%" style={{ width: "86%", height: "70cqh", margin: "0 auto" }} />
     <div className="h-[50cqh]" />
   </div>;
 }
@@ -8535,7 +8535,7 @@ export default function Demo() {
   const scroller = useRef<HTMLDivElement>(null);
   return <div ref={scroller} tabIndex={0} aria-label="Scroll effect preview" className="relative h-[400px] overflow-y-auto overscroll-contain" style={{ containerType: "size" }}>
     <div className="flex h-[45cqh] items-center justify-center">Scroll to reveal</div>
-    <SvgPixelReveal src="https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/svg-pixel-reveal/svg-pixel-reveal-img01.png" alt="Landscape photograph" scroller={scroller} start="top 35%" style={{ width: "86%", height: "70cqh", margin: "0 auto" }} />
+    <SvgPixelReveal src="https://cdn-athrix.milliondollarinternet.lol/effects/svg-pixel-reveal/svg-pixel-reveal-img01.png" alt="Landscape photograph" scroller={scroller} start="top 35%" style={{ width: "86%", height: "70cqh", margin: "0 auto" }} />
     <div className="h-[50cqh]" />
   </div>;
 }
@@ -8742,6 +8742,8 @@ npm install @react-three/drei @react-three/fiber clsx motion tailwind-merge thre
 
 Resolve @components/, @ui/, @lib/, and @hooks/ targets through your components.json aliases. For example, @components/block/example.tsx maps to src/components/block/example.tsx when components is @/components and @/\* resolves to src/\*. Do not create a literal @components directory. Preserve existing files deliberately and keep the use client directive where present.
 
+Default demo media loads from ObsidianUI. Replace these URLs with your own assets for offline use.
+
 ### components/block/butterfly-trail-cursor.jsx
 
 Installation target: `@components/block/butterfly-trail-cursor.jsx`
@@ -8908,8 +8910,8 @@ function ButterflyPool({ matcapMaterial, gltfScene, gltfAnimations, motionEnable
 }
 
 function ButterflyTrail({ motionEnabled }) {
-  const matcapTexture = useLoader(THREE.TextureLoader, 'https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/butterfly-trail-cursor/butterfly-trail-cursor-matcap.webp')
-  const { scene, animations } = useGLTF('https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/butterfly-trail-cursor/butterfly3.glb')
+  const matcapTexture = useLoader(THREE.TextureLoader, 'https://www.obsidianui.dev/effects/butterfly-trail-cursor/butterfly-trail-cursor-matcap.webp')
+  const { scene, animations } = useGLTF('https://www.obsidianui.dev/effects/butterfly-trail-cursor/butterfly3.glb')
 
   const matcapMaterial = useMemo(
     () =>
@@ -10522,17 +10524,17 @@ import { useCallback, useEffect, useRef } from "react";
 import { cn } from "@/lib/utils";
 
 const imageUrls = [
-  "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/magnetic-image-trail/magnetic-image-trail-distortion.jpg",
-  "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/magnetic-image-trail/magnetic-image-trail-img01.webp",
-  "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/magnetic-image-trail/magnetic-image-trail-img02.webp",
-  "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/magnetic-image-trail/magnetic-image-trail-img03.webp",
-  "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/magnetic-image-trail/magnetic-image-trail-img04.png",
-  "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/magnetic-image-trail/magnetic-image-trail-img05.png",
-  "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/magnetic-image-trail/magnetic-image-trail-img06.png",
-  "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/magnetic-image-trail/magnetic-image-trail-img07.png",
-  "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/magnetic-image-trail/magnetic-image-trail-img08.jpg",
-  "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/magnetic-image-trail/magnetic-image-trail-img09.jpg",
-  "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/magnetic-image-trail/magnetic-image-trail-img10.jpg",
+  "https://cdn-athrix.milliondollarinternet.lol/effects/magnetic-image-trail/magnetic-image-trail-distortion.jpg",
+  "https://cdn-athrix.milliondollarinternet.lol/effects/magnetic-image-trail/magnetic-image-trail-img01.webp",
+  "https://cdn-athrix.milliondollarinternet.lol/effects/magnetic-image-trail/magnetic-image-trail-img02.webp",
+  "https://cdn-athrix.milliondollarinternet.lol/effects/magnetic-image-trail/magnetic-image-trail-img03.webp",
+  "https://cdn-athrix.milliondollarinternet.lol/effects/magnetic-image-trail/magnetic-image-trail-img04.png",
+  "https://cdn-athrix.milliondollarinternet.lol/effects/magnetic-image-trail/magnetic-image-trail-img05.png",
+  "https://cdn-athrix.milliondollarinternet.lol/effects/magnetic-image-trail/magnetic-image-trail-img06.png",
+  "https://cdn-athrix.milliondollarinternet.lol/effects/magnetic-image-trail/magnetic-image-trail-img07.png",
+  "https://cdn-athrix.milliondollarinternet.lol/effects/magnetic-image-trail/magnetic-image-trail-img08.jpg",
+  "https://cdn-athrix.milliondollarinternet.lol/effects/magnetic-image-trail/magnetic-image-trail-img09.jpg",
+  "https://cdn-athrix.milliondollarinternet.lol/effects/magnetic-image-trail/magnetic-image-trail-img10.jpg",
 ];
 
 const SLOTS = [
@@ -10939,8 +10941,6 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 ```
-
-Default demo media loads from ObsidianUI. Replace these URLs with your own assets for offline use.
 
 ## Preview behavior
 
@@ -11594,8 +11594,8 @@ function createFluid() {
  * @param {{ videoSrc?: string, imageSrc?: string, className?: string, style?: import("react").CSSProperties, paused?: boolean }} props
  */
 export function DitherCanvas({
-  videoSrc = "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/dither-canvas/dither-canvas-video.mp4",
-  imageSrc = "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/dither-canvas/dither-canvas-poster.webp",
+  videoSrc = "https://cdn-athrix.milliondollarinternet.lol/effects/dither-canvas/dither-canvas-video.mp4",
+  imageSrc = "https://cdn-athrix.milliondollarinternet.lol/effects/dither-canvas/dither-canvas-poster.webp",
   className,
   style,
   paused = false,
@@ -11900,8 +11900,6 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 ```
-
-Default demo media loads from ObsidianUI. Replace these URLs with your own assets for offline use.
 
 ## Preview behavior
 
@@ -12523,7 +12521,7 @@ function BookScene({ images, pathPattern, bgColor, cameraDistance, showUI }) {
  * Images are PNG page names without their extension, resolved against pathPattern.
  * @param {{ images?: string[], pathPattern?: string, bgColor?: string, cameraDistance?: { mobile: number, desktop: number }, showUI?: boolean, className?: string, style?: import("react").CSSProperties }} props
  */
-export function BookFlip({ images = defaultImages, pathPattern = "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/book-flip", bgColor = "#000000", cameraDistance = defaultCameraDistance, showUI = true, className, style } = {}) {
+export function BookFlip({ images = defaultImages, pathPattern = "https://cdn-athrix.milliondollarinternet.lol/effects/book-flip", bgColor = "#000000", cameraDistance = defaultCameraDistance, showUI = true, className, style } = {}) {
   return <WebGLSurface className={className} style={style} imageSrc={`${pathPattern}/${images[0] || "book-flip-img01"}.png`} label="ObsidianUI interactive nature book">
     <BookScene images={images} pathPattern={pathPattern} bgColor={bgColor} cameraDistance={cameraDistance} showUI={showUI} />
   </WebGLSurface>;
@@ -12990,7 +12988,7 @@ export const Experience = ({
  {...orbitControls}
  />
  <Book images={images} pathPattern={pathPattern} {...props} />
- <Environment files="https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/book-flip/studio.hdr" />
+ <Environment files="https://cdn-athrix.milliondollarinternet.lol/effects/book-flip/studio.hdr" />
  <directionalLight
  position={[2, 5, 2]}
  intensity={2.5}
@@ -13095,8 +13093,6 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 ```
-
-Default demo media loads from ObsidianUI. Replace these URLs with your own assets for offline use.
 
 ## Preview behavior
 
@@ -13218,11 +13214,11 @@ void main() {
 `;
 
 const defaultImages = [
-  "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/curved-plane/curved-plane-img01.webp",
-  "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/curved-plane/curved-plane-img02.webp",
-  "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/curved-plane/curved-plane-img03.webp",
-  "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/curved-plane/curved-plane-img04.png",
-  "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/curved-plane/curved-plane-img05.png",
+  "https://cdn-athrix.milliondollarinternet.lol/effects/curved-plane/curved-plane-img01.webp",
+  "https://cdn-athrix.milliondollarinternet.lol/effects/curved-plane/curved-plane-img02.webp",
+  "https://cdn-athrix.milliondollarinternet.lol/effects/curved-plane/curved-plane-img03.webp",
+  "https://cdn-athrix.milliondollarinternet.lol/effects/curved-plane/curved-plane-img04.png",
+  "https://cdn-athrix.milliondollarinternet.lol/effects/curved-plane/curved-plane-img05.png",
 ];
 
 const SWIPER_VISIBLE_IMAGES = 3;
@@ -13637,8 +13633,6 @@ export function cn(...inputs: ClassValue[]) {
 }
 ```
 
-Default demo media loads from ObsidianUI. Replace these URLs with your own assets for offline use.
-
 ## Preview behavior
 
 Drag the images or scroll over the canvas. The effect stays inside its container and respects reduced motion preferences.
@@ -13694,6 +13688,8 @@ npm install clsx tailwind-merge three
 
 Resolve @components/, @ui/, @lib/, and @hooks/ targets through your components.json aliases. For example, @components/block/example.tsx maps to src/components/block/example.tsx when components is @/components and @/\* resolves to src/\*. Do not create a literal @components directory. Preserve existing files deliberately and keep the use client directive where present.
 
+Default demo media loads from ObsidianUI. Replace these URLs with your own assets for offline use.
+
 ### components/block/fractal-glass.jsx
 
 Installation target: `@components/block/fractal-glass.jsx`
@@ -13727,8 +13723,6 @@ const fragmentShader = `
 
  varying vec2 vUv;
 
- #define M_PI 3.1415926535897932384626433832795
-
  vec2 getCoverUV(vec2 uv, vec2 textureSize) {
  if (textureSize.x < 1.0 || textureSize.y < 1.0) return uv;
 
@@ -13741,12 +13735,28 @@ const fragmentShader = `
  return (uv * uResolution - offset) / scaledSize;
  }
 
+ float displacement(float x, float num_stripes, float strength) {
+ float modulus = 1.0 / num_stripes;
+ return mod(x, modulus) * strength;
+ }
+
+ float fractalGlass(float x) {
+ float stripeWidth = 1.0 / uStripesFrequency;
+ float sampleStep = uGlassSmoothness * stripeWidth;
+ float d = 0.0;
+ for (int i = -5; i <= 5; i++) {
+ d += displacement(x + float(i) * sampleStep, uStripesFrequency, uGlassStrength);
+ }
+ d = d / 11.0;
+ return x + d;
+ }
+
  float smoothEdge(float x, float padding) {
  float edge = padding;
  if (x < edge) {
  return smoothstep(0.0, edge, x);
  } else if (x > 1.0 - edge) {
- return 1.0 - smoothstep(1.0 - edge, 1.0, x);
+ return smoothstep(1.0, 1.0 - edge, x);
  }
  return 1.0;
  }
@@ -13754,18 +13764,26 @@ const fragmentShader = `
  void main() {
  vec2 uv = vUv;
 
- float edgeFactor = smoothEdge(uv.x, uEdgePadding);
- float stripeCount = max(2.0, uStripesFrequency);
- float stripeIndex = floor(uv.x * stripeCount);
- float stripeCurve = sin(fract(uv.x * stripeCount) * M_PI);
- float stripeDirection = mod(stripeIndex, 2.0) * 2.0 - 1.0;
- float pointer = (uMouse.x - 0.5) * 2.0;
- float refractionStrength = 0.7 + min(uDistortionMultiplier, 10.0) * 0.03;
- float staticRefraction = stripeDirection * (0.018 + stripeCurve * 0.045) * uGlassStrength;
- float pointerRefraction = pointer * (0.035 + stripeCurve * 0.105) * uParallaxStrength;
+ float originalX = uv.x;
 
- uv.x += (staticRefraction + pointerRefraction) * refractionStrength * edgeFactor;
- uv.y += sin((uv.x + uMouse.y * 0.35) * stripeCount * M_PI) * stripeCurve * 0.009 * uGlassSmoothness * edgeFactor;
+ float edgeFactor = smoothEdge(originalX, uEdgePadding);
+
+ float distortedX = fractalGlass(originalX);
+
+ uv.x = mix(originalX, distortedX, edgeFactor);
+
+ float distortionFactor = uv.x - originalX;
+
+ float parallaxDirection = -sign(0.5 - uMouse.x);
+
+ vec2 parallaxOffset = vec2(
+ parallaxDirection * abs(uMouse.x - 0.5) * uParallaxStrength * (1.0 + abs(distortionFactor) * uDistortionMultiplier),
+ 0.0
+ );
+
+ parallaxOffset *= edgeFactor;
+
+ uv += parallaxOffset;
 
  vec2 coverUV = getCoverUV(uv, uTextureSize);
 
@@ -13774,16 +13792,13 @@ const fragmentShader = `
  }
 
  vec4 color = texture2D(uTexture, coverUV);
- float glassHighlight = pow(stripeCurve, 3.0) * (0.05 + abs(pointer) * 0.12) * edgeFactor;
- color.rgb *= 0.96 + stripeCurve * 0.08 * uGlassStrength;
- color.rgb += vec3(0.10, 0.15, 0.30) * glassHighlight;
 
  gl_FragColor = color;
  }
 `;
 
 function GlassStripParallax({
- imageSrc ="https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/fractal-glass/fractal-glass-img01.jpg?v=2", // ← new prop: path/URL to image file
+ imageSrc ="https://www.obsidianui.dev/effects/fractal-glass/fractal-glass-img01.jpg", // ← new prop: path/URL to image file
  videoSrc = null, 
  mediaType ="image", 
  stripesFrequency = 8.0,
@@ -13881,7 +13896,6 @@ function GlassStripParallax({
  const geo = new THREE.PlaneGeometry(2, 2);
  const mat = new THREE.ShaderMaterial({ vertexShader, fragmentShader, uniforms });
  scene.add(new THREE.Mesh(geo, mat));
- renderer.render(scene, camera);
 
  const target = { x: 0.5, y: 0.5 };
  const current = { x: 0.5, y: 0.5 };
@@ -13942,7 +13956,7 @@ function GlassStripParallax({
 }
 
 /** @param {{ imageSrc?: string, videoSrc?: string | null, mediaType?: string, stripesFrequency?: number, glassStrength?: number, glassSmoothness?: number, parallaxStrength?: number, distortionMultiplier?: number, edgePadding?: number, className?: string, style?: import("react").CSSProperties }} props */
-export function FractalGlass({ imageSrc = "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/fractal-glass/fractal-glass-img01.jpg?v=2", className, style, ...props } = {}) {
+export function FractalGlass({ imageSrc = "https://www.obsidianui.dev/effects/fractal-glass/fractal-glass-img01.jpg", className, style, ...props } = {}) {
  return <WebGLSurface className={className} style={style} imageSrc={imageSrc} label="ObsidianUI refracted glass image">
    <GlassStripParallax imageSrc={imageSrc} {...props} />
  </WebGLSurface>;
@@ -14087,7 +14101,7 @@ import { useEffectReducedMotion } from "@/lib/effects/shared/webgl-surface";
 const lerp = (start, end, amount) => start + (end - start) * amount;
 
 /** @param {{ text?: string, imageSrc?: string, showControls?: boolean, className?: string, style?: import("react").CSSProperties }} props */
-export function GridLift({ text = "OBSIDIANUI", imageSrc = "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/grid-lift/obsidianui-wordmark.svg", showControls = false, className, style } = {}) {
+export function GridLift({ text = "OBSIDIANUI", imageSrc = "https://cdn-athrix.milliondollarinternet.lol/effects/grid-lift/obsidianui-wordmark.svg", showControls = false, className, style } = {}) {
  const reducedMotion = useEffectReducedMotion();
  const canvasRef = useRef(null);
  const fileInputRef = useRef(null);
@@ -15118,11 +15132,11 @@ const opacity = Math.max(0, baseOpacity - dist * 0.22) * anim.alpha;
 }
 
 const defaultItems = [
- { id: "01", title: "Soft Forms", focus: "Visual study", year: "2026", img: "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/interactive-hover-slider/interactive-hover-slider-img01.webp" },
- { id: "02", title: "Botanical", focus: "Art direction", year: "2026", img: "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/interactive-hover-slider/interactive-hover-slider-img02.webp" },
- { id: "03", title: "Afterlight", focus: "Identity", year: "2026", img: "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/interactive-hover-slider/interactive-hover-slider-img03.webp" },
- { id: "04", title: "Glasswork", focus: "Materials", year: "2026", img: "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/interactive-hover-slider/interactive-hover-slider-img04.png" },
- { id: "05", title: "Motion Study", focus: "Experiment", year: "2026", img: "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/interactive-hover-slider/interactive-hover-slider-img05.png" },
+ { id: "01", title: "Soft Forms", focus: "Visual study", year: "2026", img: "https://cdn-athrix.milliondollarinternet.lol/effects/interactive-hover-slider/interactive-hover-slider-img01.webp" },
+ { id: "02", title: "Botanical", focus: "Art direction", year: "2026", img: "https://cdn-athrix.milliondollarinternet.lol/effects/interactive-hover-slider/interactive-hover-slider-img02.webp" },
+ { id: "03", title: "Afterlight", focus: "Identity", year: "2026", img: "https://cdn-athrix.milliondollarinternet.lol/effects/interactive-hover-slider/interactive-hover-slider-img03.webp" },
+ { id: "04", title: "Glasswork", focus: "Materials", year: "2026", img: "https://cdn-athrix.milliondollarinternet.lol/effects/interactive-hover-slider/interactive-hover-slider-img04.png" },
+ { id: "05", title: "Motion Study", focus: "Experiment", year: "2026", img: "https://cdn-athrix.milliondollarinternet.lol/effects/interactive-hover-slider/interactive-hover-slider-img05.png" },
 ];
 
 /** @param {{ items?: { id: string, title: string, focus: string, year: string, img: string }[], compact?: boolean, className?: string, style?: import("react").CSSProperties }} props */
@@ -15199,8 +15213,6 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 ```
-
-Default demo media loads from ObsidianUI. Replace these URLs with your own assets for offline use.
 
 ## Preview behavior
 
@@ -15518,8 +15530,8 @@ function createTexture(gl, image, unit, shouldRepeat = false) {
  * @param {{ imageSrc?: string, noiseSrc?: string, iChannel0?: string | HTMLImageElement, iChannel1?: string | HTMLImageElement, className?: string, style?: import("react").CSSProperties, paused?: boolean, alt?: string }} props
  */
 export function InteractiveBlurReveal({
-  imageSrc = "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/interactive-blur-reveal/interactive-blur-reveal-img01.webp",
-  noiseSrc = "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/interactive-blur-reveal/interactive-blur-reveal-noise.png",
+  imageSrc = "https://cdn-athrix.milliondollarinternet.lol/effects/interactive-blur-reveal/interactive-blur-reveal-img01.webp",
+  noiseSrc = "https://cdn-athrix.milliondollarinternet.lol/effects/interactive-blur-reveal/interactive-blur-reveal-noise.png",
   iChannel0 = imageSrc,
   iChannel1 = noiseSrc,
   className,
@@ -15806,8 +15818,6 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 ```
-
-Default demo media loads from ObsidianUI. Replace these URLs with your own assets for offline use.
 
 ## Preview behavior
 

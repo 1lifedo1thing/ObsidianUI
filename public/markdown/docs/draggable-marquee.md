@@ -17,7 +17,7 @@ import { DraggableMarquee } from "@/components/block/draggable-marquee";
 const items = [
   {
     "id": 1,
-    "src": "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/draggable-marquee/draggable-marquee-img01.jpg",
+    "src": "https://cdn-athrix.milliondollarinternet.lol/effects/draggable-marquee/draggable-marquee-img01.jpg",
     "alt": "Landscape photograph 1",
     "width": 420,
     "height": 520,
@@ -25,7 +25,7 @@ const items = [
   },
   {
     "id": 2,
-    "src": "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/draggable-marquee/draggable-marquee-img02.jpg",
+    "src": "https://cdn-athrix.milliondollarinternet.lol/effects/draggable-marquee/draggable-marquee-img02.jpg",
     "alt": "Landscape photograph 2",
     "width": 420,
     "height": 520,
@@ -33,7 +33,7 @@ const items = [
   },
   {
     "id": 3,
-    "src": "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/draggable-marquee/draggable-marquee-img03.jpg",
+    "src": "https://cdn-athrix.milliondollarinternet.lol/effects/draggable-marquee/draggable-marquee-img03.jpg",
     "alt": "Landscape photograph 3",
     "width": 420,
     "height": 520,
@@ -41,7 +41,7 @@ const items = [
   },
   {
     "id": 4,
-    "src": "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/draggable-marquee/draggable-marquee-img04.jpg",
+    "src": "https://cdn-athrix.milliondollarinternet.lol/effects/draggable-marquee/draggable-marquee-img04.jpg",
     "alt": "Landscape photograph 4",
     "width": 420,
     "height": 520,
@@ -69,7 +69,7 @@ import { DraggableMarquee } from "@/components/block/draggable-marquee";
 const items = [
   {
     "id": 1,
-    "src": "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/draggable-marquee/draggable-marquee-img01.jpg",
+    "src": "https://cdn-athrix.milliondollarinternet.lol/effects/draggable-marquee/draggable-marquee-img01.jpg",
     "alt": "Landscape photograph 1",
     "width": 420,
     "height": 520,
@@ -77,7 +77,7 @@ const items = [
   },
   {
     "id": 2,
-    "src": "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/draggable-marquee/draggable-marquee-img02.jpg",
+    "src": "https://cdn-athrix.milliondollarinternet.lol/effects/draggable-marquee/draggable-marquee-img02.jpg",
     "alt": "Landscape photograph 2",
     "width": 420,
     "height": 520,
@@ -85,7 +85,7 @@ const items = [
   },
   {
     "id": 3,
-    "src": "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/draggable-marquee/draggable-marquee-img03.jpg",
+    "src": "https://cdn-athrix.milliondollarinternet.lol/effects/draggable-marquee/draggable-marquee-img03.jpg",
     "alt": "Landscape photograph 3",
     "width": 420,
     "height": 520,
@@ -93,7 +93,7 @@ const items = [
   },
   {
     "id": 4,
-    "src": "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/draggable-marquee/draggable-marquee-img04.jpg",
+    "src": "https://cdn-athrix.milliondollarinternet.lol/effects/draggable-marquee/draggable-marquee-img04.jpg",
     "alt": "Landscape photograph 4",
     "width": 420,
     "height": 520,

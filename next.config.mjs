@@ -53,7 +53,7 @@ const nextConfig = {
         remotePatterns: [
             {
                 protocol: 'https',
-                hostname: 'pub-830233752de349e29c6104a501b309d4.r2.dev',
+                hostname: 'cdn-athrix.milliondollarinternet.lol',
             },
             {
                 protocol: 'https',

@@ -14,17 +14,17 @@ const defaultProjects: ProjectItem[] = [
     {
         title: "Shree Krishna",
         label: "The Supreme Personality of Godhead",
-        imageSrc: "https://pub-830233752de349e29c6104a501b309d4.r2.dev/hover-img/hover-img-img01-alt.jpg",
+        imageSrc: "https://cdn-athrix.milliondollarinternet.lol/hover-img/hover-img-img01-alt.jpg",
     },
     {
         title: "Radha Krishna",
         label: "The Divine Couple",
-        imageSrc: "https://pub-830233752de349e29c6104a501b309d4.r2.dev/hover-img/hover-img-img02.jpg",
+        imageSrc: "https://cdn-athrix.milliondollarinternet.lol/hover-img/hover-img-img02.jpg",
     },
     {
         title: "Divine Love",
         label: "Eternal Bond",
-        imageSrc: "https://pub-830233752de349e29c6104a501b309d4.r2.dev/hover-img/hover-img-img03.jpg",
+        imageSrc: "https://cdn-athrix.milliondollarinternet.lol/hover-img/hover-img-img03.jpg",
     },
 ];
 

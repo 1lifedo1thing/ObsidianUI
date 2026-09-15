@@ -1,13 +1,13 @@
 import manifest from "./r2-manifest.json";
 
-const R2_BASE = (process.env.NEXT_PUBLIC_R2_URL || 'https://pub-830233752de349e29c6104a501b309d4.r2.dev').replace(/\/$/, '');
+const R2_BASE = (process.env.NEXT_PUBLIC_R2_URL || 'https://cdn-athrix.milliondollarinternet.lol').replace(/\/$/, '');
 const uploadedAssets = manifest as Record<string, string>;
 
 /**
  * Resolves a public asset path to the Cloudflare R2 CDN URL.
  * If the path is already a full URL, returns it directly.
  * Example: r2('/effects/book-flip/book-flip-img01.png')
- *       -> 'https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/book-flip/book-flip-img01.png'
+ *       -> 'https://cdn-athrix.milliondollarinternet.lol/effects/book-flip/book-flip-img01.png'
  */
 export function r2(assetPath: string): string {
   if (!assetPath) return '';

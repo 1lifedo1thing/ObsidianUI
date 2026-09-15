@@ -111,11 +111,11 @@ void main() {
 `;
 
 const defaultImages = [
-  "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/curved-plane/curved-plane-img01.webp",
-  "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/curved-plane/curved-plane-img02.webp",
-  "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/curved-plane/curved-plane-img03.webp",
-  "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/curved-plane/curved-plane-img04.png",
-  "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/curved-plane/curved-plane-img05.png",
+  "https://cdn-athrix.milliondollarinternet.lol/effects/curved-plane/curved-plane-img01.webp",
+  "https://cdn-athrix.milliondollarinternet.lol/effects/curved-plane/curved-plane-img02.webp",
+  "https://cdn-athrix.milliondollarinternet.lol/effects/curved-plane/curved-plane-img03.webp",
+  "https://cdn-athrix.milliondollarinternet.lol/effects/curved-plane/curved-plane-img04.png",
+  "https://cdn-athrix.milliondollarinternet.lol/effects/curved-plane/curved-plane-img05.png",
 ];
 
 const SWIPER_VISIBLE_IMAGES = 3;
@@ -529,8 +529,6 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 ```
-
-Default demo media loads from ObsidianUI. Replace these URLs with your own assets for offline use.
 
 ## Preview behavior
 

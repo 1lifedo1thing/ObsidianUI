@@ -231,8 +231,8 @@ function createFluid() {
  * @param {{ videoSrc?: string, imageSrc?: string, className?: string, style?: import("react").CSSProperties, paused?: boolean }} props
  */
 export function DitherCanvas({
-  videoSrc = "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/dither-canvas/dither-canvas-video.mp4",
-  imageSrc = "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/dither-canvas/dither-canvas-poster.webp",
+  videoSrc = "https://cdn-athrix.milliondollarinternet.lol/effects/dither-canvas/dither-canvas-video.mp4",
+  imageSrc = "https://cdn-athrix.milliondollarinternet.lol/effects/dither-canvas/dither-canvas-poster.webp",
   className,
   style,
   paused = false,
@@ -537,8 +537,6 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 ```
-
-Default demo media loads from ObsidianUI. Replace these URLs with your own assets for offline use.
 
 ## Preview behavior
 

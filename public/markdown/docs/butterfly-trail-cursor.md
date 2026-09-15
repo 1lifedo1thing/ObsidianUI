@@ -48,6 +48,8 @@ npm install @react-three/drei @react-three/fiber clsx motion tailwind-merge thre
 
 Resolve @components/, @ui/, @lib/, and @hooks/ targets through your components.json aliases. For example, @components/block/example.tsx maps to src/components/block/example.tsx when components is @/components and @/\* resolves to src/\*. Do not create a literal @components directory. Preserve existing files deliberately and keep the use client directive where present.
 
+Default demo media loads from ObsidianUI. Replace these URLs with your own assets for offline use.
+
 ### components/block/butterfly-trail-cursor.jsx
 
 Installation target: `@components/block/butterfly-trail-cursor.jsx`
@@ -214,8 +216,8 @@ function ButterflyPool({ matcapMaterial, gltfScene, gltfAnimations, motionEnable
 }
 
 function ButterflyTrail({ motionEnabled }) {
-  const matcapTexture = useLoader(THREE.TextureLoader, 'https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/butterfly-trail-cursor/butterfly-trail-cursor-matcap.webp')
-  const { scene, animations } = useGLTF('https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/butterfly-trail-cursor/butterfly3.glb')
+  const matcapTexture = useLoader(THREE.TextureLoader, 'https://www.obsidianui.dev/effects/butterfly-trail-cursor/butterfly-trail-cursor-matcap.webp')
+  const { scene, animations } = useGLTF('https://www.obsidianui.dev/effects/butterfly-trail-cursor/butterfly3.glb')
 
   const matcapMaterial = useMemo(
     () =>
