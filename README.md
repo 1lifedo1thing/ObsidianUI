@@ -99,6 +99,8 @@ After updating a component or registry source, rebuild the registry output with 
 
 Issues and pull requests are welcome. Read [CONTRIBUTING.md](CONTRIBUTING.md) for the full walkthrough, from creating a component to a working install command.
 
+## Fixed!
+
 <div align="center">
   <br />
   <img src="public/logo/bg-less.png" alt="ObsidianUI" width="28" />
