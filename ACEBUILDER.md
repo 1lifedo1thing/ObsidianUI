@@ -299,6 +299,16 @@ src/
 - Do not create `tailwind.config.js` when Tailwind v4 and `@tailwindcss/postcss` are already configured; tokens live in CSS.
 - Never write `.env` files in the sandbox; request needed environment variables through the platform.
 
+### Registry component constraints (critical for shadcn registry builds)
+
+Files under `components/block/` and `components/ui/` are **registry entrypoints** — the shadcn registry builder (`scripts/registry.ts`) bundles every transitive import into the installable JSON package. This means:
+
+- **NEVER import `@/lib/r2` (or `src/lib/r2-manifest.json`) inside a block or ui component.** `lib/r2.ts` is a runtime-only server helper; bundling it into a shadcn package pulls in environment assumptions and JSON manifests that escape `src/`, breaking the Vercel build.
+- For default prop values that point to Cloudflare R2 assets, **hard-code the direct CDN URL** (e.g. `https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/...`) rather than calling `r2()`.
+- `@/lib/r2` is safe to use anywhere else: `src/app/`, `src/components/catalog/`, `src/components/site/`, `src/components/landing/`, `src/components/pages/` — i.e., any file that is not itself a registry item.
+- The `REGISTRY_EXCLUDE` set in `scripts/registry.ts` enforces this at build time and will throw a clear error if a block component accidentally imports r2.
+- Run `npm run registry:build` after touching any block/ui component to verify no registry contamination.
+
 ## 5. Agent workflow
 
 1. Read existing pages and components before editing.

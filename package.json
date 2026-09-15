@@ -21,7 +21,8 @@
     "db:init": "tsx scripts/init-visitors.ts",
     "check": "npm run lint && npm run typecheck && npm test && npm run build",
     "r2:upload": "node scripts/upload-r2.mjs",
-    "r2:dry": "node scripts/upload-r2.mjs --dry-run"
+    "r2:dry": "node scripts/upload-r2.mjs --dry-run",
+    "sync:r2-manifest": "node -e \"require('fs').copyFileSync('scripts/r2-manifest.json','src/lib/r2-manifest.json');console.log('r2-manifest synced to src/lib/');\""
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",

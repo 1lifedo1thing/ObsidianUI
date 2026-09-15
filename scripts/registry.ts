@@ -19,6 +19,19 @@ export interface RegistryItem {
 export interface Registry { $schema: string; name: string; homepage: string; items: RegistryItem[] }
 const slash = (value: string) => value.split(path.sep).join('/');
 
+/**
+ * Source-relative paths (from `src/`) that must never be bundled into registry
+ * items. These are runtime-only server helpers; installing them via the shadcn
+ * registry would pull in environment secrets or out-of-tree imports.
+ *
+ * If a block component accidentally imports one of these, registry.ts emits a
+ * clear error rather than silently packaging a broken or leaking file.
+ */
+export const REGISTRY_EXCLUDE = new Set([
+    'lib/r2.ts',
+    'lib/r2-manifest.json',
+]);
+
 export function isWithin(directory: string, filename: string): boolean {
     const relative = path.relative(directory, filename);
     return relative !== '' && !relative.startsWith(`..${path.sep}`) && relative !== '..' && !path.isAbsolute(relative);
@@ -85,6 +98,13 @@ export function buildRegistry(projectRoot: string, origin = REGISTRY_ORIGIN): Re
         };
         const visit = (filename: string) => {
             if (files.has(filename)) return;
+            const relPath = slash(path.relative(sourceRoot, filename));
+            if (REGISTRY_EXCLUDE.has(relPath)) {
+                throw new Error(
+                    `Registry component imports a runtime-only module that cannot be installed: "${relPath}".\n` +
+                    `Use a direct CDN URL for default prop values instead of importing @/lib/r2 in block/ui components.`
+                );
+            }
             let content = fs.readFileSync(filename, 'utf8').replace(/\r\n/g, '\n');
             const file = { ...describeFile(sourceRoot, filename), content };
             files.set(filename, file); // Mark before following cyclic imports.
