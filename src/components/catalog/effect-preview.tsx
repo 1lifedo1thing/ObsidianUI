@@ -6,11 +6,11 @@ import { cn } from "@/lib/utils";
 import { newEffects, type NewEffectSlug } from "./new-effects";
 
 const compactMagneticImages = [
-    "/effects/magnetic-image-trail/magnetic-image-trail-distortion.jpg",
-    "/effects/magnetic-image-trail/magnetic-image-trail-img01.webp",
-    "/effects/magnetic-image-trail/magnetic-image-trail-img02.webp",
-    "/effects/magnetic-image-trail/magnetic-image-trail-img03.webp",
-    "/effects/magnetic-image-trail/magnetic-image-trail-img04.png",
+    "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/magnetic-image-trail/magnetic-image-trail-distortion.jpg",
+    "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/magnetic-image-trail/magnetic-image-trail-img01.webp",
+    "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/magnetic-image-trail/magnetic-image-trail-img02.webp",
+    "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/magnetic-image-trail/magnetic-image-trail-img03.webp",
+    "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/magnetic-image-trail/magnetic-image-trail-img04.png",
 ];
 
 const MagneticImageTrail = dynamic(() => import("@/components/block/magnetic-image-trail").then(module => module.MagneticImageTrail));

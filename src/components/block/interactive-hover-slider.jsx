@@ -513,11 +513,11 @@ const opacity = Math.max(0, baseOpacity - dist * 0.22) * anim.alpha;
 }
 
 const defaultItems = [
- { id: "01", title: "Soft Forms", focus: "Visual study", year: "2026", img: "/effects/interactive-hover-slider/interactive-hover-slider-img01.webp" },
- { id: "02", title: "Botanical", focus: "Art direction", year: "2026", img: "/effects/interactive-hover-slider/interactive-hover-slider-img02.webp" },
- { id: "03", title: "Afterlight", focus: "Identity", year: "2026", img: "/effects/interactive-hover-slider/interactive-hover-slider-img03.webp" },
- { id: "04", title: "Glasswork", focus: "Materials", year: "2026", img: "/effects/interactive-hover-slider/interactive-hover-slider-img04.png" },
- { id: "05", title: "Motion Study", focus: "Experiment", year: "2026", img: "/effects/interactive-hover-slider/interactive-hover-slider-img05.png" },
+ { id: "01", title: "Soft Forms", focus: "Visual study", year: "2026", img: "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/interactive-hover-slider/interactive-hover-slider-img01.webp" },
+ { id: "02", title: "Botanical", focus: "Art direction", year: "2026", img: "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/interactive-hover-slider/interactive-hover-slider-img02.webp" },
+ { id: "03", title: "Afterlight", focus: "Identity", year: "2026", img: "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/interactive-hover-slider/interactive-hover-slider-img03.webp" },
+ { id: "04", title: "Glasswork", focus: "Materials", year: "2026", img: "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/interactive-hover-slider/interactive-hover-slider-img04.png" },
+ { id: "05", title: "Motion Study", focus: "Experiment", year: "2026", img: "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/interactive-hover-slider/interactive-hover-slider-img05.png" },
 ];
 
 /** @param {{ items?: { id: string, title: string, focus: string, year: string, img: string }[], compact?: boolean, className?: string, style?: import("react").CSSProperties }} props */

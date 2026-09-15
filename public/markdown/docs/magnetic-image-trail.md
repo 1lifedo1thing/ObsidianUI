@@ -48,8 +48,6 @@ npm install clsx tailwind-merge
 
 Resolve @components/, @ui/, @lib/, and @hooks/ targets through your components.json aliases. For example, @components/block/example.tsx maps to src/components/block/example.tsx when components is @/components and @/\* resolves to src/\*. Do not create a literal @components directory. Preserve existing files deliberately and keep the use client directive where present.
 
-Default demo media loads from ObsidianUI. Replace these URLs with your own assets for offline use.
-
 ### components/block/magnetic-image-trail.jsx
 
 Installation target: `@components/block/magnetic-image-trail.jsx`
@@ -60,17 +58,17 @@ import { useCallback, useEffect, useRef } from "react";
 import { cn } from "@/lib/utils";
 
 const imageUrls = [
-  "https://www.obsidianui.dev/effects/magnetic-image-trail/magnetic-image-trail-distortion.jpg",
-  "https://www.obsidianui.dev/effects/magnetic-image-trail/magnetic-image-trail-img01.webp",
-  "https://www.obsidianui.dev/effects/magnetic-image-trail/magnetic-image-trail-img02.webp",
-  "https://www.obsidianui.dev/effects/magnetic-image-trail/magnetic-image-trail-img03.webp",
-  "https://www.obsidianui.dev/effects/magnetic-image-trail/magnetic-image-trail-img04.png",
-  "https://www.obsidianui.dev/effects/magnetic-image-trail/magnetic-image-trail-img05.png",
-  "https://www.obsidianui.dev/effects/magnetic-image-trail/magnetic-image-trail-img06.png",
-  "https://www.obsidianui.dev/effects/magnetic-image-trail/magnetic-image-trail-img07.png",
-  "https://www.obsidianui.dev/effects/magnetic-image-trail/magnetic-image-trail-img08.jpg",
-  "https://www.obsidianui.dev/effects/magnetic-image-trail/magnetic-image-trail-img09.jpg",
-  "https://www.obsidianui.dev/effects/magnetic-image-trail/magnetic-image-trail-img10.jpg",
+  "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/magnetic-image-trail/magnetic-image-trail-distortion.jpg",
+  "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/magnetic-image-trail/magnetic-image-trail-img01.webp",
+  "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/magnetic-image-trail/magnetic-image-trail-img02.webp",
+  "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/magnetic-image-trail/magnetic-image-trail-img03.webp",
+  "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/magnetic-image-trail/magnetic-image-trail-img04.png",
+  "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/magnetic-image-trail/magnetic-image-trail-img05.png",
+  "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/magnetic-image-trail/magnetic-image-trail-img06.png",
+  "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/magnetic-image-trail/magnetic-image-trail-img07.png",
+  "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/magnetic-image-trail/magnetic-image-trail-img08.jpg",
+  "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/magnetic-image-trail/magnetic-image-trail-img09.jpg",
+  "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/magnetic-image-trail/magnetic-image-trail-img10.jpg",
 ];
 
 const SLOTS = [

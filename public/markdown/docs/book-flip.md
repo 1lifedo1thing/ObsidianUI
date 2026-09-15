@@ -46,8 +46,6 @@ npm install @react-three/drei @react-three/fiber clsx maath tailwind-merge three
 
 Resolve @components/, @ui/, @lib/, and @hooks/ targets through your components.json aliases. For example, @components/block/example.tsx maps to src/components/block/example.tsx when components is @/components and @/\* resolves to src/\*. Do not create a literal @components directory. Preserve existing files deliberately and keep the use client directive where present.
 
-Default demo media loads from ObsidianUI. Replace these URLs with your own assets for offline use.
-
 ### components/block/book-flip.jsx
 
 Installation target: `@components/block/book-flip.jsx`
@@ -111,7 +109,7 @@ function BookScene({ images, pathPattern, bgColor, cameraDistance, showUI }) {
  * Images are PNG page names without their extension, resolved against pathPattern.
  * @param {{ images?: string[], pathPattern?: string, bgColor?: string, cameraDistance?: { mobile: number, desktop: number }, showUI?: boolean, className?: string, style?: import("react").CSSProperties }} props
  */
-export function BookFlip({ images = defaultImages, pathPattern = "/effects/book-flip", bgColor = "#000000", cameraDistance = defaultCameraDistance, showUI = true, className, style } = {}) {
+export function BookFlip({ images = defaultImages, pathPattern = "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/book-flip", bgColor = "#000000", cameraDistance = defaultCameraDistance, showUI = true, className, style } = {}) {
   return <WebGLSurface className={className} style={style} imageSrc={`${pathPattern}/${images[0] || "book-flip-img01"}.png`} label="ObsidianUI interactive nature book">
     <BookScene images={images} pathPattern={pathPattern} bgColor={bgColor} cameraDistance={cameraDistance} showUI={showUI} />
   </WebGLSurface>;
@@ -578,7 +576,7 @@ export const Experience = ({
  {...orbitControls}
  />
  <Book images={images} pathPattern={pathPattern} {...props} />
- <Environment files="https://www.obsidianui.dev/effects/book-flip/studio.hdr" />
+ <Environment files="https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/book-flip/studio.hdr" />
  <directionalLight
  position={[2, 5, 2]}
  intensity={2.5}

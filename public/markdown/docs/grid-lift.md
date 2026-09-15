@@ -60,7 +60,7 @@ import { useEffectReducedMotion } from "@/lib/effects/shared/webgl-surface";
 const lerp = (start, end, amount) => start + (end - start) * amount;
 
 /** @param {{ text?: string, imageSrc?: string, showControls?: boolean, className?: string, style?: import("react").CSSProperties }} props */
-export function GridLift({ text = "OBSIDIANUI", imageSrc = "/effects/grid-lift/obsidianui-wordmark.svg", showControls = false, className, style } = {}) {
+export function GridLift({ text = "OBSIDIANUI", imageSrc = "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/grid-lift/obsidianui-wordmark.svg", showControls = false, className, style } = {}) {
  const reducedMotion = useEffectReducedMotion();
  const canvasRef = useRef(null);
  const fileInputRef = useRef(null);
@@ -514,14 +514,6 @@ import { twMerge } from "tailwind-merge"
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
-```
-
-### public/effects/grid-lift/obsidianui-wordmark.svg
-
-Installation target: `public/effects/grid-lift/obsidianui-wordmark.svg`
-
-```svg
-<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="260" viewBox="0 0 1400 260"><text x="700" y="200" text-anchor="middle" fill="white" font-family="Impact,Arial Black,sans-serif" font-weight="900" font-size="215" textLength="1370" lengthAdjust="spacingAndGlyphs">OBSIDIANUI</text></svg>
 ```
 
 ## Preview behavior

@@ -48,8 +48,6 @@ npm install clsx tailwind-merge
 
 Resolve @components/, @ui/, @lib/, and @hooks/ targets through your components.json aliases. For example, @components/block/example.tsx maps to src/components/block/example.tsx when components is @/components and @/\* resolves to src/\*. Do not create a literal @components directory. Preserve existing files deliberately and keep the use client directive where present.
 
-Default demo media loads from ObsidianUI. Replace these URLs with your own assets for offline use.
-
 ### components/block/dither-canvas.jsx
 
 Installation target: `@components/block/dither-canvas.jsx`
@@ -233,8 +231,8 @@ function createFluid() {
  * @param {{ videoSrc?: string, imageSrc?: string, className?: string, style?: import("react").CSSProperties, paused?: boolean }} props
  */
 export function DitherCanvas({
-  videoSrc = "https://www.obsidianui.dev/effects/dither-canvas/dither-canvas-video.mp4",
-  imageSrc = "https://www.obsidianui.dev/effects/dither-canvas/dither-canvas-poster.webp",
+  videoSrc = "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/dither-canvas/dither-canvas-video.mp4",
+  imageSrc = "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/dither-canvas/dither-canvas-poster.webp",
   className,
   style,
   paused = false,

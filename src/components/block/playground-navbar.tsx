@@ -35,14 +35,14 @@ export const Navbar1 = ({ items = navItems }: { items?: typeof navItems }) => {
     >
       <Link href={"/"} aria-label="ObsidianUI home">
         <Image
-          src="/logo/bg-less.png"
+          src="https://pub-830233752de349e29c6104a501b309d4.r2.dev/logo/bg-less.png"
           alt=""
           width={32}
           height={32}
           className="w-8 h-auto dark:hidden block "
         />
         <Image
-          src="/logo/final-dark.png"
+          src="https://pub-830233752de349e29c6104a501b309d4.r2.dev/logo/final-dark.png"
           alt=""
           width={32}
           height={32}
