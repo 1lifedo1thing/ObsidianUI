@@ -5,6 +5,14 @@ import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 import { newEffects, type NewEffectSlug } from "./new-effects";
 
+const compactMagneticImages = [
+    "/effects/magnetic-image-trail/magnetic-image-trail-distortion.jpg",
+    "/effects/magnetic-image-trail/magnetic-image-trail-img01.webp",
+    "/effects/magnetic-image-trail/magnetic-image-trail-img02.webp",
+    "/effects/magnetic-image-trail/magnetic-image-trail-img03.webp",
+    "/effects/magnetic-image-trail/magnetic-image-trail-img04.png",
+];
+
 const MagneticImageTrail = dynamic(() => import("@/components/block/magnetic-image-trail").then(module => module.MagneticImageTrail));
 const ArrowFillButton = dynamic(() => import("@/components/block/arrow-fill-button").then(module => module.ArrowFillButton));
 const DottedGrid = dynamic(() => import("@/components/block/dotted-grid").then(module => module.DottedGrid));
@@ -28,7 +36,7 @@ function Effect({ slug, compact }: { slug: NewEffectSlug; compact: boolean }) {
     if (webglEffects.some(effect => effect.slug === slug)) return <WebglPreview slug={slug as (typeof webglEffects)[number]["slug"]} compact={compact} />;
     switch (slug) {
         case "magnetic-image-trail":
-            return <MagneticImageTrail height="100%" className="h-full w-full" />;
+            return <MagneticImageTrail images={compactMagneticImages} height="100%" className="h-full w-full" />;
         case "arrow-fill-button":
             return <div className="flex h-full items-center justify-center bg-background p-6"><ArrowFillButton href="/components#component-gallery">Explore ObsidianUI</ArrowFillButton></div>;
         case "dotted-grid":
@@ -54,6 +62,7 @@ function Effect({ slug, compact }: { slug: NewEffectSlug; compact: boolean }) {
 export function EffectPreview({ slug, compact = false }: { slug: NewEffectSlug; compact?: boolean }) {
     const frame = useRef<HTMLDivElement>(null);
     const [visible, setVisible] = useState(false);
+    const [hasBeenVisible, setHasBeenVisible] = useState(false);
     const effect = newEffects.find(effect => effect.slug === slug)!;
 
     useEffect(() => {
@@ -63,12 +72,17 @@ export function EffectPreview({ slug, compact = false }: { slug: NewEffectSlug; 
             const id = requestAnimationFrame(() => setVisible(true));
             return () => cancelAnimationFrame(id);
         }
-        const observer = new IntersectionObserver(([entry]) => setVisible(entry.isIntersecting), { rootMargin: "100px" });
+        const observer = new IntersectionObserver(([entry]) => {
+            if (entry.isIntersecting) {
+                setVisible(true);
+                setHasBeenVisible(true);
+            }
+        }, { rootMargin: "100px" });
         observer.observe(element);
         return () => observer.disconnect();
     }, []);
 
     return <div ref={frame} data-effect-preview={slug} className={cn("relative isolate w-full min-w-0 overflow-hidden rounded-lg bg-muted font-body [container-type:inline-size] [&_*]:[scrollbar-width:thin] [&_*]:[scrollbar-color:var(--border)_transparent]", compact ? "h-full" : "h-[400px]")} aria-label={`${effect.title} interactive preview`}>
-        {visible ? <Effect slug={slug} compact={compact} /> : <div className="flex h-full items-center justify-center text-sm text-muted-foreground">{effect.title}</div>}
+        {visible || hasBeenVisible ? <Effect slug={slug} compact={compact} /> : <div className="flex h-full items-center justify-center text-sm text-muted-foreground">{effect.title}</div>}
     </div>;
 }
