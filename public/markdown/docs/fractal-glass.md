@@ -252,6 +252,7 @@ function GlassStripParallax({
  const geo = new THREE.PlaneGeometry(2, 2);
  const mat = new THREE.ShaderMaterial({ vertexShader, fragmentShader, uniforms });
  scene.add(new THREE.Mesh(geo, mat));
+ renderer.render(scene, camera);
 
  const target = { x: 0.5, y: 0.5 };
  const current = { x: 0.5, y: 0.5 };
