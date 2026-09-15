@@ -16,10 +16,10 @@ import { useRef } from "react";
 import { ParallaxGallery } from "@/components/block/parallax-gallery";
 
 const images = [
-  "https://cdn-new.obsidianui.dev/effects/parallax-gallery/parallax-gallery-img01.jpg",
-  "https://cdn-new.obsidianui.dev/effects/parallax-gallery/parallax-gallery-img02.jpg",
-  "https://cdn-new.obsidianui.dev/effects/parallax-gallery/parallax-gallery-img03.jpg",
-  "https://cdn-new.obsidianui.dev/effects/parallax-gallery/parallax-gallery-img04.jpg"
+  "https://cdn-new.obsidianui.dev/effects/parallax-gallery/parallax-gallery-img01.jpg?v=3",
+  "https://cdn-new.obsidianui.dev/effects/parallax-gallery/parallax-gallery-img02.jpg?v=3",
+  "https://cdn-new.obsidianui.dev/effects/parallax-gallery/parallax-gallery-img03.jpg?v=3",
+  "https://cdn-new.obsidianui.dev/effects/parallax-gallery/parallax-gallery-img04.jpg?v=3"
 ];
 export default function Demo() {
   const scroller = useRef<HTMLDivElement>(null);
@@ -43,10 +43,10 @@ import { useRef } from "react";
 import { ParallaxGallery } from "@/components/block/parallax-gallery";
 
 const images = [
-  "https://cdn-new.obsidianui.dev/effects/parallax-gallery/parallax-gallery-img01.jpg",
-  "https://cdn-new.obsidianui.dev/effects/parallax-gallery/parallax-gallery-img02.jpg",
-  "https://cdn-new.obsidianui.dev/effects/parallax-gallery/parallax-gallery-img03.jpg",
-  "https://cdn-new.obsidianui.dev/effects/parallax-gallery/parallax-gallery-img04.jpg"
+  "https://cdn-new.obsidianui.dev/effects/parallax-gallery/parallax-gallery-img01.jpg?v=3",
+  "https://cdn-new.obsidianui.dev/effects/parallax-gallery/parallax-gallery-img02.jpg?v=3",
+  "https://cdn-new.obsidianui.dev/effects/parallax-gallery/parallax-gallery-img03.jpg?v=3",
+  "https://cdn-new.obsidianui.dev/effects/parallax-gallery/parallax-gallery-img04.jpg?v=3"
 ];
 export default function Demo() {
   const scroller = useRef<HTMLDivElement>(null);

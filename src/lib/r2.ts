@@ -7,7 +7,7 @@ const uploadedAssets = manifest as Record<string, string>;
  * Resolves a public asset path to the Cloudflare R2 CDN URL.
  * If the path is already a full URL, returns it directly.
  * Example: r2('/effects/book-flip/book-flip-img01.png')
- *       -> 'https://cdn-new.obsidianui.dev/effects/book-flip/book-flip-img01.png'
+ *       -> 'https://cdn-new.obsidianui.dev/effects/book-flip/book-flip-img01.png?v=3'
  */
 export function r2(assetPath: string): string {
   if (!assetPath) return '';
