@@ -127,8 +127,8 @@ const generatePages = (imageArray) => {
  */
 const preloadTextures = (pages, pathPattern) => {
  pages.forEach((page) => {
- useTexture.preload(`${pathPattern}/${page.front}.png`);
- useTexture.preload(`${pathPattern}/${page.back}.png`);
+ useTexture.preload(`${pathPattern}/${page.front}.png?v=3`);
+ useTexture.preload(`${pathPattern}/${page.back}.png?v=3`);
  });
 };
 
@@ -144,8 +144,8 @@ const preloadTextures = (pages, pathPattern) => {
 const Page = ({  number,  front,  back,  page,  opened,  bookClosed,
  pathPattern,
  ...props }) => {
- const frontPath = `${pathPattern}/${front}.png`;
- const backPath = `${pathPattern}/${back}.png`;
+ const frontPath = `${pathPattern}/${front}.png?v=3`;
+ const backPath = `${pathPattern}/${back}.png?v=3`;
 
  const pictures = useTexture([frontPath, backPath]);
  const [picture, picture2] = useMemo(() => pictures.map((original) => {
