@@ -8,7 +8,7 @@
 
 # ObsidianUI
 
-**Design Less. Ship Better**  
+**Design Less. Ship Better.**  
 ObsidianUI is React component library featuring 30+ components, blocks, and landing page templates build with Motion and Tailwind CSS.
 
 <p align="center">
