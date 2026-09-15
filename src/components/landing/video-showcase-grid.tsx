@@ -99,7 +99,7 @@ export function VideoShowcaseGrid() {
                                 </div>
                             </div>
 
-                            <Link href={demo.docPath} className="landing-arrow-link shrink-0 p-4 flex items-center justify-between gap-3 focus-visible:outline-2 focus-visible:outline-offset-[-3px] focus-visible:outline-ring">
+                            <Link href={demo.docPath} prefetch={false} className="landing-arrow-link shrink-0 p-4 flex items-center justify-between gap-3 focus-visible:outline-2 focus-visible:outline-offset-[-3px] focus-visible:outline-ring">
                                 <span className="landing-button landing-title text-sm font-medium text-card-foreground px-1 py-1.5">
                                     {demo.name}
                                 </span>

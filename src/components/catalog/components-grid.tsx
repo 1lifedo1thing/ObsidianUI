@@ -143,7 +143,7 @@ export const ComponentsGrid = () => {
                             {/* Details Area */}
                             <div className="px-3 pt-4 pb-2 flex items-center justify-between">
                                 <div>
-                                    <Link href={component.href} className="block">
+                                    <Link href={component.href} prefetch={false} className="block">
                                         <h3 className="
                                             text-sm font-semibold transition-colors
                                             text-neutral-900 dark:text-neutral-100
@@ -155,6 +155,7 @@ export const ComponentsGrid = () => {
                                 </div>
                                 <Link
                                     href={component.href}
+                                    prefetch={false}
                                     aria-label={`View ${component.title} documentation`}
                                     className="
                                         w-7 h-7 flex items-center justify-center rounded-full transition-all hover:scale-105

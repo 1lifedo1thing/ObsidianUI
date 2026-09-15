@@ -19,18 +19,28 @@ const nextConfig = {
             { key: 'X-Content-Type-Options', value: 'nosniff' },
             { key: 'Link', value: '</llms.txt>; rel="describedby"' },
         ];
-        // Docs pages: ISR-friendly cache. s-maxage tells the Vercel edge to cache the
-        // rendered HTML; stale-while-revalidate serves stale while regenerating in background.
-        const docsCacheHeaders = [
+        // Docs & page cache: s-maxage caches on Vercel edge CDN; stale-while-revalidate serves stale during revalidation.
+        const pageCacheHeaders = [
             { key: 'Cache-Control', value: 'public, s-maxage=3600, stale-while-revalidate=86400' },
         ];
+        // Static assets: cache forever in browser and CDN (immutable).
+        const staticAssetHeaders = [
+            { key: 'Cache-Control', value: 'public, max-age=31536000, immutable' },
+        ];
         return [
+            { source: '/effects/:path*', headers: staticAssetHeaders },
+            { source: '/logo/:path*', headers: staticAssetHeaders },
+            { source: '/folder-preview/:path*', headers: staticAssetHeaders },
             { source: '/r/:path*', headers: publicReadHeaders },
             { source: '/markdown/:path*', headers: [...publicReadHeaders, { key: 'Content-Type', value: 'text/markdown; charset=utf-8' }] },
             { source: '/agent-instructions.md', headers: [...publicReadHeaders, { key: 'Content-Type', value: 'text/markdown; charset=utf-8' }] },
             ...['/llms.txt', '/llm.txt', '/llms-full.txt', '/robots.txt'].map(source => ({ source, headers: [...publicReadHeaders, { key: 'Content-Type', value: 'text/plain; charset=utf-8' }] })),
-            { source: '/docs', headers: docsCacheHeaders },
-            { source: '/docs/:path*', headers: docsCacheHeaders },
+            { source: '/', headers: pageCacheHeaders },
+            { source: '/components', headers: pageCacheHeaders },
+            { source: '/templates', headers: pageCacheHeaders },
+            { source: '/playground', headers: pageCacheHeaders },
+            { source: '/docs', headers: pageCacheHeaders },
+            { source: '/docs/:path*', headers: pageCacheHeaders },
         ];
     },
     turbopack: {

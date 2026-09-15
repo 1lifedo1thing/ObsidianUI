@@ -74,5 +74,7 @@ export function proxy(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/((?!_next/|_pagefind/|api/|r/|markdown/).*)"],
+  matcher: [
+    "/((?!_next/|_pagefind/|api/|r/|markdown/|effects/|folder-preview/|logo/|templates/|favicon\\.ico|sitemap\\.xml|robots\\.txt|.*\\.(?:png|jpg|jpeg|gif|svg|webp|mp4|webm|ogg|mp3|wav|glb|gltf|hdr|woff|woff2|ttf|ico|css|js)).*)",
+  ],
 };
