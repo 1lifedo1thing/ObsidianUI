@@ -60,7 +60,7 @@ import { useEffectReducedMotion } from "@/lib/effects/shared/webgl-surface";
 const lerp = (start, end, amount) => start + (end - start) * amount;
 
 /** @param {{ text?: string, imageSrc?: string, showControls?: boolean, className?: string, style?: import("react").CSSProperties }} props */
-export function GridLift({ text = "OBSIDIANUI", imageSrc = "https://cdn-new.obsidianui.dev/effects/grid-lift/obsidianui-wordmark.svg?v=3", showControls = false, className, style } = {}) {
+export function GridLift({ text = "OBSIDIANUI", imageSrc = "/cdn/effects/grid-lift/obsidianui-wordmark.svg?v=3", showControls = false, className, style } = {}) {
  const reducedMotion = useEffectReducedMotion();
  const canvasRef = useRef(null);
  const fileInputRef = useRef(null);

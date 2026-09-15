@@ -124,7 +124,7 @@ function BookScene({ images, pageColors, pageCount, pathPattern, bgColor, camera
  * Colour pages render by default with zero network requests. Pass images plus pathPattern for textured pages.
  * @param {{ images?: string[], pageColors?: string[], pathPattern?: string, bgColor?: string, cameraDistance?: { mobile: number, desktop: number }, showUI?: boolean, className?: string, style?: import("react").CSSProperties }} props
  */
-export function BookFlip({ images, pageColors = defaultPageColors, pathPattern = "https://cdn-new.obsidianui.dev/effects/book-flip", bgColor = "#000000", cameraDistance = defaultCameraDistance, showUI = true, className, style } = {}) {
+export function BookFlip({ images, pageColors = defaultPageColors, pathPattern = "/cdn/effects/book-flip", bgColor = "#000000", cameraDistance = defaultCameraDistance, showUI = true, className, style } = {}) {
   const sourceLength = images && images.length > 0 ? images.length : pageColors.length;
   const pageCount = Math.ceil(sourceLength / 2);
   return <WebGLSurface className={className} style={style} label="ObsidianUI interactive nature book">
@@ -619,7 +619,7 @@ export const Experience = ({
  {...orbitControls}
  />
  <Book images={images} pageColors={pageColors} pathPattern={pathPattern} {...props} />
- <Environment files="https://cdn-new.obsidianui.dev/effects/book-flip/studio.hdr?v=3" />
+ <Environment files="/cdn/effects/book-flip/studio.hdr?v=3" />
  <directionalLight
  position={[2, 5, 2]}
  intensity={2.5}

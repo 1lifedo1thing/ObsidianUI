@@ -15,9 +15,9 @@ export function Demo() {
 return (
   <HoverImg
     projects={[
-      { title: "Shree Krishna", label: "The Supreme Personality of Godhead", imageSrc: "https://cdn-new.obsidianui.dev/hover-img/hover-img-img01-alt.jpg?v=3" },
-      { title: "Radha Krishna", label: "The Divine Couple", imageSrc: "https://cdn-new.obsidianui.dev/hover-img/hover-img-img02.jpg?v=3" },
-      { title: "Divine Love", label: "Eternal Bond", imageSrc: "https://cdn-new.obsidianui.dev/hover-img/hover-img-img03.jpg?v=3" },
+      { title: "Shree Krishna", label: "The Supreme Personality of Godhead", imageSrc: "/cdn/hover-img/hover-img-img01-alt.jpg?v=3" },
+      { title: "Radha Krishna", label: "The Divine Couple", imageSrc: "/cdn/hover-img/hover-img-img02.jpg?v=3" },
+      { title: "Divine Love", label: "Eternal Bond", imageSrc: "/cdn/hover-img/hover-img-img03.jpg?v=3" },
     ]}
   />
 )
@@ -226,17 +226,17 @@ const defaultProjects: ProjectItem[] = [
     {
         title: "Shree Krishna",
         label: "The Supreme Personality of Godhead",
-        imageSrc: "https://cdn-new.obsidianui.dev/hover-img/hover-img-img01-alt.jpg?v=3",
+        imageSrc: "/cdn/hover-img/hover-img-img01-alt.jpg?v=3",
     },
     {
         title: "Radha Krishna",
         label: "The Divine Couple",
-        imageSrc: "https://cdn-new.obsidianui.dev/hover-img/hover-img-img02.jpg?v=3",
+        imageSrc: "/cdn/hover-img/hover-img-img02.jpg?v=3",
     },
     {
         title: "Divine Love",
         label: "Eternal Bond",
-        imageSrc: "https://cdn-new.obsidianui.dev/hover-img/hover-img-img03.jpg?v=3",
+        imageSrc: "/cdn/hover-img/hover-img-img03.jpg?v=3",
     },
 ];
 

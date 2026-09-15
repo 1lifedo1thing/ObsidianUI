@@ -28,6 +28,7 @@ const nextConfig = {
             { key: 'Cache-Control', value: 'public, max-age=31536000, immutable' },
         ];
         return [
+            { source: '/cdn/:path*', headers: staticAssetHeaders },
             { source: '/effects/:path*', headers: staticAssetHeaders },
             { source: '/logo/:path*', headers: staticAssetHeaders },
             { source: '/folder-preview/:path*', headers: staticAssetHeaders },
@@ -42,6 +43,9 @@ const nextConfig = {
             { source: '/docs', headers: pageCacheHeaders },
             { source: '/docs/:path*', headers: pageCacheHeaders },
         ];
+    },
+    async rewrites() {
+        return [{ source: '/cdn/:path*', destination: 'https://cdn-new.obsidianui.dev/:path*' }];
     },
     turbopack: {
         resolveAlias: {

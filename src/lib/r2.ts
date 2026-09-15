@@ -22,6 +22,25 @@ export function r2(assetPath: string): string {
   return uploadedUrl;
 }
 
+const R2_CDN_HOSTS = new Set(["cdn-new.obsidianui.dev", "pub-830233752de349e29c6104a501b309d4.r2.dev"]);
+
+export function toSameOrigin(url: string): string {
+  if (!url) return '';
+  if (url.startsWith('/cdn/')) return url;
+  try {
+    const parsed = new URL(url);
+    if (!R2_CDN_HOSTS.has(parsed.hostname)) return url;
+    return `/cdn${parsed.pathname}${parsed.search}${parsed.hash}`;
+  } catch {
+    return url;
+  }
+}
+
+/** Same-origin `/cdn/...` URL for images read by WebGL or 2D canvas. Never use for OG/meta tags. */
+export function r2c(assetPath: string): string {
+  return toSameOrigin(r2(assetPath));
+}
+
 /** Resolves a directory containing at least one uploaded R2 asset. */
 export function r2Prefix(prefix: string): string {
   const cleanPrefix = prefix.replace(/^\/+|\/+$/g, '');
