@@ -59,7 +59,22 @@ import { Experience } from "@/lib/effects/book-flip/Experience";
 import { PageProvider, usePage } from "@/lib/effects/book-flip/PageContext";
 import { WebGLSurface, useEffectReducedMotion } from "@/lib/effects/shared/webgl-surface";
 
-const defaultImages = Array.from({ length: 14 }, (_, index) => `book-flip-img${String(index + 1).padStart(2, "0")}`);
+const defaultPageColors = [
+  "#1e1b4b",
+  "#7c3aed",
+  "#7c3aed",
+  "#0ea5e9",
+  "#0ea5e9",
+  "#10b981",
+  "#10b981",
+  "#f59e0b",
+  "#f59e0b",
+  "#ef4444",
+  "#ef4444",
+  "#ec4899",
+  "#ec4899",
+  "#0f172a",
+];
 const defaultCameraDistance = { mobile: 5.5, desktop: 4 };
 
 function CameraFit({ cameraDistance }) {
@@ -71,9 +86,9 @@ function CameraFit({ cameraDistance }) {
   return null;
 }
 
-function BookNavigation({ images }) {
+function BookNavigation({ pageCount }) {
   const { page, setPage } = usePage();
-  const count = Math.ceil(images.length / 2);
+  const count = pageCount;
   return <div className="pointer-events-none absolute inset-x-0 top-0 z-10 flex justify-center p-3">
     <div role="group" aria-label="Book pages" className="pointer-events-auto flex max-w-full gap-2 overflow-x-auto rounded-full bg-black/20 p-1">
       {Array.from({ length: count + 1 }, (_, index) => <button
@@ -87,7 +102,7 @@ function BookNavigation({ images }) {
   </div>;
 }
 
-function BookScene({ images, pathPattern, bgColor, cameraDistance, showUI }) {
+function BookScene({ images, pageColors, pageCount, pathPattern, bgColor, cameraDistance, showUI }) {
   const reducedMotion = useEffectReducedMotion();
   return <PageProvider>
     <Canvas
@@ -98,20 +113,22 @@ function BookScene({ images, pathPattern, bgColor, cameraDistance, showUI }) {
     >
       <CameraFit cameraDistance={cameraDistance} />
       <Suspense fallback={null}>
-        <Experience images={images} pathPattern={pathPattern} orbitControls={{ minAzimuthAngle: -Math.PI * 0.06, maxAzimuthAngle: Math.PI * 0.06, minPolarAngle: 1.07, maxPolarAngle: 1.58, rotateSpeed: 0.2, enableDamping: !reducedMotion }} />
+        <Experience images={images} pageColors={pageColors} pathPattern={pathPattern} orbitControls={{ minAzimuthAngle: -Math.PI * 0.06, maxAzimuthAngle: Math.PI * 0.06, minPolarAngle: 1.07, maxPolarAngle: 1.58, rotateSpeed: 0.2, enableDamping: !reducedMotion }} />
       </Suspense>
     </Canvas>
-    {showUI && <BookNavigation images={images} />}
+    {showUI && <BookNavigation pageCount={pageCount} />}
   </PageProvider>;
 }
 
 /**
- * Images are PNG page names without their extension, resolved against pathPattern.
- * @param {{ images?: string[], pathPattern?: string, bgColor?: string, cameraDistance?: { mobile: number, desktop: number }, showUI?: boolean, className?: string, style?: import("react").CSSProperties }} props
+ * Colour pages render by default with zero network requests. Pass images plus pathPattern for textured pages.
+ * @param {{ images?: string[], pageColors?: string[], pathPattern?: string, bgColor?: string, cameraDistance?: { mobile: number, desktop: number }, showUI?: boolean, className?: string, style?: import("react").CSSProperties }} props
  */
-export function BookFlip({ images = defaultImages, pathPattern = "https://cdn-new.obsidianui.dev/effects/book-flip", bgColor = "#000000", cameraDistance = defaultCameraDistance, showUI = true, className, style } = {}) {
-  return <WebGLSurface className={className} style={style} imageSrc={`${pathPattern}/${images[0] || "book-flip-img01"}.png?v=3`} label="ObsidianUI interactive nature book">
-    <BookScene images={images} pathPattern={pathPattern} bgColor={bgColor} cameraDistance={cameraDistance} showUI={showUI} />
+export function BookFlip({ images, pageColors = defaultPageColors, pathPattern = "https://cdn-new.obsidianui.dev/effects/book-flip", bgColor = "#000000", cameraDistance = defaultCameraDistance, showUI = true, className, style } = {}) {
+  const sourceLength = images && images.length > 0 ? images.length : pageColors.length;
+  const pageCount = Math.ceil(sourceLength / 2);
+  return <WebGLSurface className={className} style={style} label="ObsidianUI interactive nature book">
+    <BookScene images={images} pageColors={pageColors} pageCount={pageCount} pathPattern={pathPattern} bgColor={bgColor} cameraDistance={cameraDistance} showUI={showUI} />
   </WebGLSurface>;
 }
 ```
@@ -216,32 +233,52 @@ const pageMaterials = [
  * Helper function to generate page pairs from image array
  * Creates front/back pairs: [0,1], [2,3], [4,5], etc.
  */
-const generatePages = (imageArray) => {
- if (!imageArray || imageArray.length === 0) {
+const BLANK_PIXEL = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7";
+const colorTextureCache = new Map();
+function shadeHex(hex, amount) {
+ const n = String(hex).replace("#", "");
+ const full = n.length === 3 ? n.split("").map((c) => c + c).join("") : n;
+ const num = parseInt(full, 16);
+ const cl = (v) => Math.max(0, Math.min(255, v + amount));
+ const r = cl((num >> 16) & 255);
+ const g = cl((num >> 8) & 255);
+ const b = cl(num & 255);
+ return "#" + ((r << 16) | (g << 8) | b).toString(16).padStart(6, "0");
+}
+function colorToDataURL(hex) {
+ const hit = colorTextureCache.get(hex);
+ if (hit) return hit;
+ if (typeof document === "undefined") return BLANK_PIXEL;
+ const canvas = document.createElement("canvas");
+ canvas.width = 4;
+ canvas.height = 256;
+ const ctx = canvas.getContext("2d");
+ if (!ctx) return BLANK_PIXEL;
+ const grad = ctx.createLinearGradient(0, 0, 0, 256);
+ grad.addColorStop(0, hex);
+ grad.addColorStop(1, shadeHex(hex, -28));
+ ctx.fillStyle = grad;
+ ctx.fillRect(0, 0, 4, 256);
+ const url = canvas.toDataURL("image/png");
+ colorTextureCache.set(hex, url);
+ return url;
+}
+const generatePages = (imageArray, colorArray) => {
+ const names = imageArray && imageArray.length > 0 ? imageArray : null;
+ const colors = colorArray && colorArray.length > 0 ? colorArray : null;
+ const total = Math.max(names ? names.length : 0, colors ? colors.length : 0);
+ if (total === 0) {
  return [];
  }
-
- const pages = [
- {
- front: imageArray[0],
- back: imageArray[1] || imageArray[0],
- },
- ];
-
- for (let i = 2; i < imageArray.length - 1; i += 2) {
+ const pages = [];
+ for (let i = 0; i < total; i += 2) {
  pages.push({
- front: imageArray[i],
- back: imageArray[i + 1],
+ front: names ? names[i % names.length] : undefined,
+ back: names ? names[(i + 1) % names.length] : undefined,
+ frontColor: colors ? colors[i % colors.length] : undefined,
+ backColor: colors ? colors[(i + 1) % colors.length] : undefined,
  });
  }
-
- if (imageArray.length % 2 === 1) {
- pages.push({
- front: imageArray[imageArray.length - 1],
- back: imageArray[0],
- });
- }
-
  return pages;
 };
 
@@ -250,8 +287,12 @@ const generatePages = (imageArray) => {
  */
 const preloadTextures = (pages, pathPattern) => {
  pages.forEach((page) => {
+ if (page.front && !page.frontColor) {
  useTexture.preload(`${pathPattern}/${page.front}.png?v=3`);
+ }
+ if (page.back && !page.backColor) {
  useTexture.preload(`${pathPattern}/${page.back}.png?v=3`);
+ }
  });
 };
 
@@ -264,13 +305,13 @@ const preloadTextures = (pages, pathPattern) => {
  * - Inner bones curve more (3D effect), outer bones curve less
  * - During turning, bones follow a sine wave for smooth animation
  */
-const Page = ({  number,  front,  back,  page,  opened,  bookClosed,
+const Page = ({  number,  front,  back,  frontColor,  backColor,  page,  opened,  bookClosed,
  pathPattern,
  ...props }) => {
- const frontPath = `${pathPattern}/${front}.png?v=3`;
- const backPath = `${pathPattern}/${back}.png?v=3`;
+ const frontSrc = frontColor ? colorToDataURL(frontColor) : `${pathPattern}/${front}.png?v=3`;
+ const backSrc = backColor ? colorToDataURL(backColor) : `${pathPattern}/${back}.png?v=3`;
 
- const pictures = useTexture([frontPath, backPath]);
+ const pictures = useTexture([frontSrc, backSrc]);
  const [picture, picture2] = useMemo(() => pictures.map((original) => {
    const texture = original.clone();
    texture.colorSpace = SRGBColorSpace;
@@ -483,6 +524,7 @@ const Page = ({  number,  front,  back,  page,  opened,  bookClosed,
  * 4. Pages animate their bones based on opened state
  */
 export const Book = ({  images = [],
+ pageColors = [],
  pathPattern ="/assets/nature",
  ...props }) => {
  const { page } = usePage();
@@ -490,7 +532,7 @@ export const Book = ({  images = [],
  const [delayedPage, setDelayedPage] = useState(page);
 
  // Generate pages from image array
- const pages = useMemo(() => generatePages(images), [images]);
+ const pages = useMemo(() => generatePages(images, pageColors), [images, pageColors]);
 
  // Preload textures
  useEffect(() => {
@@ -562,6 +604,7 @@ import { Book } from"./Book";
 
 export const Experience = ({
  images = [],
+ pageColors = [],
  pathPattern ="/assets/nature",
  orbitControls = {},
  ...props
@@ -575,7 +618,7 @@ export const Experience = ({
  target={[0, 0, 0]}
  {...orbitControls}
  />
- <Book images={images} pathPattern={pathPattern} {...props} />
+ <Book images={images} pageColors={pageColors} pathPattern={pathPattern} {...props} />
  <Environment files="https://cdn-new.obsidianui.dev/effects/book-flip/studio.hdr?v=3" />
  <directionalLight
  position={[2, 5, 2]}

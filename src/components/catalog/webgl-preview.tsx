@@ -13,7 +13,7 @@ const compactBookCamera = { mobile: 2.7, desktop: 2.7 };
 
 export function WebglPreview({ slug, compact }: { slug: WebglSlug; compact: boolean }) {
   switch (slug) {
-    case "book-flip": return <BookFlip images={compact ? ["book-flip-img01", "book-flip-img02", "book-flip-img03", "book-flip-img04"] : undefined} className="h-full" showUI={!compact} cameraDistance={compact ? compactBookCamera : undefined} />;
+    case "book-flip": return <BookFlip pageColors={compact ? ["#1e1b4b", "#7c3aed", "#0ea5e9", "#10b981"] : undefined} className="h-full" showUI={!compact} cameraDistance={compact ? compactBookCamera : undefined} />;
     case "curved-plane": return <CurvedPlane className="h-full" />;
     case "fractal-glass": return <FractalGlass className="h-full" />;
     case "grid-lift": return <GridLift className="h-full" />;

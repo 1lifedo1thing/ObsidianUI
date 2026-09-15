@@ -6,7 +6,22 @@ import { Experience } from "@/lib/effects/book-flip/Experience";
 import { PageProvider, usePage } from "@/lib/effects/book-flip/PageContext";
 import { WebGLSurface, useEffectReducedMotion } from "@/lib/effects/shared/webgl-surface";
 
-const defaultImages = Array.from({ length: 14 }, (_, index) => `book-flip-img${String(index + 1).padStart(2, "0")}`);
+const defaultPageColors = [
+  "#1e1b4b",
+  "#7c3aed",
+  "#7c3aed",
+  "#0ea5e9",
+  "#0ea5e9",
+  "#10b981",
+  "#10b981",
+  "#f59e0b",
+  "#f59e0b",
+  "#ef4444",
+  "#ef4444",
+  "#ec4899",
+  "#ec4899",
+  "#0f172a",
+];
 const defaultCameraDistance = { mobile: 5.5, desktop: 4 };
 
 function CameraFit({ cameraDistance }) {
@@ -18,9 +33,9 @@ function CameraFit({ cameraDistance }) {
   return null;
 }
 
-function BookNavigation({ images }) {
+function BookNavigation({ pageCount }) {
   const { page, setPage } = usePage();
-  const count = Math.ceil(images.length / 2);
+  const count = pageCount;
   return <div className="pointer-events-none absolute inset-x-0 top-0 z-10 flex justify-center p-3">
     <div role="group" aria-label="Book pages" className="pointer-events-auto flex max-w-full gap-2 overflow-x-auto rounded-full bg-black/20 p-1">
       {Array.from({ length: count + 1 }, (_, index) => <button
@@ -34,7 +49,7 @@ function BookNavigation({ images }) {
   </div>;
 }
 
-function BookScene({ images, pathPattern, bgColor, cameraDistance, showUI }) {
+function BookScene({ images, pageColors, pageCount, pathPattern, bgColor, cameraDistance, showUI }) {
   const reducedMotion = useEffectReducedMotion();
   return <PageProvider>
     <Canvas
@@ -45,19 +60,21 @@ function BookScene({ images, pathPattern, bgColor, cameraDistance, showUI }) {
     >
       <CameraFit cameraDistance={cameraDistance} />
       <Suspense fallback={null}>
-        <Experience images={images} pathPattern={pathPattern} orbitControls={{ minAzimuthAngle: -Math.PI * 0.06, maxAzimuthAngle: Math.PI * 0.06, minPolarAngle: 1.07, maxPolarAngle: 1.58, rotateSpeed: 0.2, enableDamping: !reducedMotion }} />
+        <Experience images={images} pageColors={pageColors} pathPattern={pathPattern} orbitControls={{ minAzimuthAngle: -Math.PI * 0.06, maxAzimuthAngle: Math.PI * 0.06, minPolarAngle: 1.07, maxPolarAngle: 1.58, rotateSpeed: 0.2, enableDamping: !reducedMotion }} />
       </Suspense>
     </Canvas>
-    {showUI && <BookNavigation images={images} />}
+    {showUI && <BookNavigation pageCount={pageCount} />}
   </PageProvider>;
 }
 
 /**
- * Images are PNG page names without their extension, resolved against pathPattern.
- * @param {{ images?: string[], pathPattern?: string, bgColor?: string, cameraDistance?: { mobile: number, desktop: number }, showUI?: boolean, className?: string, style?: import("react").CSSProperties }} props
+ * Colour pages render by default with zero network requests. Pass images plus pathPattern for textured pages.
+ * @param {{ images?: string[], pageColors?: string[], pathPattern?: string, bgColor?: string, cameraDistance?: { mobile: number, desktop: number }, showUI?: boolean, className?: string, style?: import("react").CSSProperties }} props
  */
-export function BookFlip({ images = defaultImages, pathPattern = "https://cdn-new.obsidianui.dev/effects/book-flip", bgColor = "#000000", cameraDistance = defaultCameraDistance, showUI = true, className, style } = {}) {
-  return <WebGLSurface className={className} style={style} imageSrc={`${pathPattern}/${images[0] || "book-flip-img01"}.png?v=3`} label="ObsidianUI interactive nature book">
-    <BookScene images={images} pathPattern={pathPattern} bgColor={bgColor} cameraDistance={cameraDistance} showUI={showUI} />
+export function BookFlip({ images, pageColors = defaultPageColors, pathPattern = "https://cdn-new.obsidianui.dev/effects/book-flip", bgColor = "#000000", cameraDistance = defaultCameraDistance, showUI = true, className, style } = {}) {
+  const sourceLength = images && images.length > 0 ? images.length : pageColors.length;
+  const pageCount = Math.ceil(sourceLength / 2);
+  return <WebGLSurface className={className} style={style} label="ObsidianUI interactive nature book">
+    <BookScene images={images} pageColors={pageColors} pageCount={pageCount} pathPattern={pathPattern} bgColor={bgColor} cameraDistance={cameraDistance} showUI={showUI} />
   </WebGLSurface>;
 }

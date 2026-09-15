@@ -4,6 +4,7 @@ import { Book } from"./Book";
 
 export const Experience = ({
  images = [],
+ pageColors = [],
  pathPattern ="/assets/nature",
  orbitControls = {},
  ...props
@@ -17,7 +18,7 @@ export const Experience = ({
  target={[0, 0, 0]}
  {...orbitControls}
  />
- <Book images={images} pathPattern={pathPattern} {...props} />
+ <Book images={images} pageColors={pageColors} pathPattern={pathPattern} {...props} />
  <Environment files="https://cdn-new.obsidianui.dev/effects/book-flip/studio.hdr?v=3" />
  <directionalLight
  position={[2, 5, 2]}
