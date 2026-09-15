@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Analytics } from "@vercel/analytics/react";
+import Script from "next/script";
 import { Inter, Geist, Inter_Tight, Pixelify_Sans, Playfair_Display, Outfit, Six_Caps } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/providers/theme-provider";
@@ -221,6 +222,12 @@ export default function RootLayout({
           {children}
           <Footer />
           <Analytics />
+          <Script
+            src="https://datafa.st/js/script.js"
+            data-website-id="dfid_Exy24Q8EhrQggK8rDSaJT"
+            data-domain="obsidianui.dev"
+            strategy="afterInteractive"
+          />
         </ThemeProvider>
       </body>
     </html>
