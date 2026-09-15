@@ -101,7 +101,7 @@ const fragmentShader = `
 `;
 
 function GlassStripParallax({
- imageSrc ="https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/fractal-glass/fractal-glass-img01.jpg", // ← new prop: path/URL to image file
+ imageSrc ="/effects/fractal-glass/fractal-glass-img01.jpg", // ← new prop: path/URL to image file
  videoSrc = null, 
  mediaType ="image", 
  stripesFrequency = 8.0,
@@ -259,7 +259,7 @@ function GlassStripParallax({
 }
 
 /** @param {{ imageSrc?: string, videoSrc?: string | null, mediaType?: string, stripesFrequency?: number, glassStrength?: number, glassSmoothness?: number, parallaxStrength?: number, distortionMultiplier?: number, edgePadding?: number, className?: string, style?: import("react").CSSProperties }} props */
-export function FractalGlass({ imageSrc = "https://pub-830233752de349e29c6104a501b309d4.r2.dev/effects/fractal-glass/fractal-glass-img01.jpg", className, style, ...props } = {}) {
+export function FractalGlass({ imageSrc = "/effects/fractal-glass/fractal-glass-img01.jpg", className, style, ...props } = {}) {
  return <WebGLSurface className={className} style={style} imageSrc={imageSrc} label="ObsidianUI refracted glass image">
    <GlassStripParallax imageSrc={imageSrc} {...props} />
  </WebGLSurface>;
