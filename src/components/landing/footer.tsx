@@ -79,6 +79,7 @@ export default function Footer() {
                       <li key={link.title}>
                         <Link
                           href={link.href}
+                          prefetch={false}
                           target={external ? "_blank" : undefined}
                           rel={external ? "noopener noreferrer" : undefined}
                         >
