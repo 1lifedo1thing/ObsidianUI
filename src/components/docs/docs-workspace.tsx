@@ -81,6 +81,7 @@ export function DocsNavigation({ onNavigate }: { onNavigate?: () => void }) {
                 <li key={item.href}>
                   <Link
                     href={item.href}
+                    prefetch={false}
                     onClick={event => {
                       if (event.defaultPrevented) return;
                       markSeen(item.href);

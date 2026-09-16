@@ -24,7 +24,7 @@ function TemplateCard({ template }: { template: typeof templates[0] }) {
                 <PreviewVideo src={template.videoUrl} label={`${template.title} template preview`} poster={template.poster} playOnHover showControls={false} className="aspect-video" />
 
                 {/* Footer */}
-                <Link href={template.href} className="p-4 flex items-center justify-between gap-3 focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-ring">
+                <Link href={template.href} prefetch={false} className="p-4 flex items-center justify-between gap-3 focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-ring">
                     <div className="flex flex-wrap items-center gap-3">
                         <h3 className="font-heading text-sm font-normal text-zinc-900 dark:text-white">
                             {template.title}

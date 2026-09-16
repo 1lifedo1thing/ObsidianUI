@@ -17,7 +17,7 @@ export function DeveloperResourcePage({ pathname }: { pathname: string }) {
             <ul className="mt-5 space-y-3">
               {section.links.map(link => (
                 <li key={link.href} className="landing-copy text-base leading-7">
-                  <Link href={link.href} className="text-foreground underline decoration-border underline-offset-4 hover:decoration-current">{link.title}</Link>
+                  <Link href={link.href} prefetch={false} className="text-foreground underline decoration-border underline-offset-4 hover:decoration-current">{link.title}</Link>
                   {link.description && <> — {link.description}</>}
                 </li>
               ))}
