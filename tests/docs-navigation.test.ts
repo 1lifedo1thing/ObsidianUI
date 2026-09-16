@@ -58,8 +58,8 @@ test("component search includes all sections alphabetically without setup pages 
 
   assert.deepEqual(componentLinks, expected);
   assert.equal(new Set(componentLinks.map(link => link.href)).size, componentLinks.length);
-  assert.deepEqual(componentLinks.slice(0, 4).map(link => link.name), [
-    "Apple Spotlight", "Arrow Fill Button", "Book Flip", "Butterfly Trail Cursor",
+  assert.deepEqual(componentLinks.slice(0, 5).map(link => link.name), [
+    "Apple Spotlight", "Arrow Fill Button", "Art Gallery", "Book Flip", "Butterfly Trail Cursor",
   ]);
   for (const slug of [...installationSlugs, "photo-gallery", "index", "---1", "---2"]) {
     assert.ok(!componentLinks.some(link => link.href === `/docs/${slug}`));

@@ -38,11 +38,11 @@ describe("new documentation component markers", () => {
   });
   afterEach(() => vi.restoreAllMocks());
 
-  it("marks exactly the 22 new effects, including the current page, and excludes older docs", async () => {
+  it("marks exactly the 23 new effects, including the current page, and excludes older docs", async () => {
     const user = userEvent.setup();
     const { container } = renderNavigation();
     const marked = Array.from(container.querySelectorAll('.docs-nav-link[data-new="true"]'));
-    expect(newEffects).toHaveLength(22);
+    expect(newEffects).toHaveLength(23);
     expect(marked.map(link => link.getAttribute("href")).sort()).toEqual(
       newEffects.map(({ slug }) => `/docs/${slug}`).sort(),
     );
@@ -70,7 +70,7 @@ describe("new documentation component markers", () => {
     const clicked = screen.getByRole("link", { name: "Magnetic Image Trail" });
     expect(clicked).toHaveAttribute("data-new", "false");
     expect(clicked.querySelector(".docs-nav-new-dot")).toHaveAttribute("data-visible", "false");
-    expect(container.querySelectorAll('.docs-nav-link[data-new="true"]')).toHaveLength(21);
+    expect(container.querySelectorAll('.docs-nav-link[data-new="true"]')).toHaveLength(22);
     expect(screen.getByRole("link", { name: "Arrow Fill Button, new component" })).toHaveAttribute("data-new", "true");
     expect(JSON.parse(window.localStorage.getItem(STORAGE_KEY)!)).toEqual([magneticHref]);
     expect(onNavigate).toHaveBeenCalledOnce();
@@ -123,11 +123,11 @@ describe("new documentation component markers", () => {
   it("ignores malformed or unknown stored entries and accepts only known new component paths", () => {
     window.localStorage.setItem(STORAGE_KEY, "{not-json");
     const { container } = renderNavigation();
-    expect(container.querySelectorAll('.docs-nav-link[data-new="true"]')).toHaveLength(22);
+    expect(container.querySelectorAll('.docs-nav-link[data-new="true"]')).toHaveLength(23);
     storageChange(JSON.stringify({ seen: [magneticHref] }));
-    expect(container.querySelectorAll('.docs-nav-link[data-new="true"]')).toHaveLength(22);
+    expect(container.querySelectorAll('.docs-nav-link[data-new="true"]')).toHaveLength(23);
     storageChange(JSON.stringify([magneticHref, magneticHref, "/docs/flip-text", "__proto__", 42, null]));
-    expect(container.querySelectorAll('.docs-nav-link[data-new="true"]')).toHaveLength(21);
+    expect(container.querySelectorAll('.docs-nav-link[data-new="true"]')).toHaveLength(22);
     expect(screen.getByRole("link", { name: "Magnetic Image Trail" })).toHaveAttribute("data-new", "false");
   });
 

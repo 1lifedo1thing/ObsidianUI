@@ -45,3 +45,4 @@ Installation guides and complete component source.
 - [Grid Lift](https://www.obsidianui.dev/markdown/docs/grid-lift.md)
 - [Hover Slider](https://www.obsidianui.dev/markdown/docs/interactive-hover-slider.md)
 - [Interactive Blur Reveal](https://www.obsidianui.dev/markdown/docs/interactive-blur-reveal.md)
+- [Art Gallery](https://www.obsidianui.dev/markdown/docs/art-gallery.md)

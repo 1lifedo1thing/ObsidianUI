@@ -245,7 +245,7 @@ html::-webkit-scrollbar {
 
 
 .dark {
-  --site-chrome: oklch(0.145 0 0);
+  --site-chrome: #0f0f0f;
   --docs-panel: oklch(0.17 0 0);
   --background: #000000;
   --foreground: oklch(0.985 0 0);

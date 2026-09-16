@@ -4,6 +4,7 @@ export const webglEffects = [
   { slug: "fractal-glass", title: "Fractal Glass", description: "Glass strips refract an image with fractal distortion and pointer-driven parallax.", hint: "Move your pointer across the glass." },
   { slug: "grid-lift", title: "Grid Lift", description: "A fine grid lifts into a dimensional text or SVG mask around your pointer.", hint: "Move across the grid to reveal the raised wordmark." },
   { slug: "interactive-hover-slider", title: "Hover Slider", description: "An editorial list reveals a curved image stack with elastic image transitions.", hint: "Hover or focus a project row to reveal its image." },
+  { slug: "art-gallery", title: "Art Gallery", description: "A lensed photo grid you can drag through, with barrel distortion and infinite tiled studies.", hint: "Drag inside the preview to pan the gallery." },
 ] as const;
 
 export type WebglSlug = typeof webglEffects[number]["slug"];
@@ -33,5 +34,10 @@ export default function Demo() {
 
 export default function Demo() {
   return <InteractiveHoverSlider className="h-[400px]" />;
+}`,
+  "art-gallery": `import { ArtGallery } from "@/components/block/art-gallery";
+
+export default function Demo() {
+  return <ArtGallery className="h-[400px]" />;
 }`,
 };

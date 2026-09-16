@@ -11,7 +11,7 @@ test("new effects have discoverable docs, complete copyable source, and self-con
     const root = process.cwd();
     const registry = buildRegistry(root);
     const installed = JSON.parse(fs.readFileSync(path.join(root, "package.json"), "utf8")).dependencies;
-    assert.equal(new Set(newEffects.map(effect => effect.slug)).size, 22);
+    assert.equal(new Set(newEffects.map(effect => effect.slug)).size, 23);
     for (const effect of newEffects) {
         assert.equal(navigation[effect.slug], effect.title);
         const item = registry.items.find(item => item.name === effect.slug);
@@ -38,7 +38,7 @@ test("new effects have discoverable docs, complete copyable source, and self-con
 
 
 test("keeps the selected effects and excludes removed components", () => {
-    const selected = ["draggable-marquee","parallax-gallery","scroll-stack","svg-path-marquee","svg-pixel-reveal","butterfly-trail-cursor","colorful-cursor-aura","interactive-arrows","rope-cursor","book-flip","curved-plane","fractal-glass","grid-lift","interactive-hover-slider"];
+    const selected = ["draggable-marquee","parallax-gallery","scroll-stack","svg-path-marquee","svg-pixel-reveal","butterfly-trail-cursor","colorful-cursor-aura","interactive-arrows","rope-cursor","book-flip","curved-plane","fractal-glass","grid-lift","interactive-hover-slider","art-gallery"];
     const existing = ["magnetic-image-trail", "arrow-fill-button", "dotted-grid", "interactive-blur-reveal", "text-fill-animation", "rectangular-text-reveal", "text-stream", "dither-canvas"];
     assert.deepEqual(newEffects.map(effect => effect.slug).sort(), [...selected, ...existing].sort());
     const registry = buildRegistry(process.cwd());

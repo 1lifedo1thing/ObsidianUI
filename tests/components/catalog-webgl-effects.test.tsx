@@ -42,6 +42,7 @@ import { BookFlip } from "@/components/block/book-flip";
 import { FractalGlass } from "@/components/block/fractal-glass";
 import { GridLift } from "@/components/block/grid-lift";
 import { InteractiveHoverSlider } from "@/components/block/interactive-hover-slider";
+import { ArtGallery } from "@/components/block/art-gallery";
 
 describe("WebGL effect lifecycles", () => {
   const frames = new Map<number, FrameRequestCallback>();
@@ -124,6 +125,26 @@ describe("WebGL effect lifecycles", () => {
     expect(renderer.dispose).toHaveBeenCalledOnce();
     expect(frames.size).toBe(0);
     expect(disconnect).toHaveBeenCalledOnce();
+  });
+
+  it("pans the art gallery from pointer drags and disposes its renderer", async () => {
+    const { container, unmount } = render(<ArtGallery className="h-[400px]" />);
+    await waitFor(() => expect(environment.renderers).toHaveLength(1));
+    await act(async () => {
+      for (let index = 0; index < 40; index += 1) await Promise.resolve();
+    });
+    const renderer = environment.renderers[0];
+    expect(renderer.setSize).toHaveBeenCalledWith(400, 300);
+    const surface = container.querySelector("canvas")!.parentElement!;
+    fireEvent.pointerDown(surface, { clientX: 180, clientY: 140, pointerId: 1 });
+    fireEvent.pointerMove(surface, { clientX: 240, clientY: 90, pointerId: 1 });
+    const [id, frame] = frames.entries().next().value!;
+    frames.delete(id);
+    frame(16);
+    expect(renderer.render).toHaveBeenCalled();
+    unmount();
+    expect(renderer.dispose).toHaveBeenCalledOnce();
+    expect(frames.size).toBe(0);
   });
 
   it("lets a keyboard user select a hover-slider project without pointer movement", async () => {

@@ -4,7 +4,7 @@ Animated, interactive components for React. Built with Tailwind CSS and animatio
 
 ## Explore the components
 
-Find your next detail. Preview it, read the usage example, and copy all required files from its JSON manifest. 39 components have published documentation. The [complete registry](https://www.obsidianui.dev/r/registry.json) also includes supporting UI primitives.
+Find your next detail. Preview it, read the usage example, and copy all required files from its JSON manifest. 40 components have published documentation. The [complete registry](https://www.obsidianui.dev/r/registry.json) also includes supporting UI primitives.
 
 - [Arrow Fill Button](https://www.obsidianui.dev/markdown/docs/arrow-fill-button.md): [download all source files](https://www.obsidianui.dev/r/arrow-fill-button.json) and [interactive preview](https://www.obsidianui.dev/docs/arrow-fill-button).
 - [Folder Preview](https://www.obsidianui.dev/markdown/docs/folder-preview.md): [download all source files](https://www.obsidianui.dev/r/folder-preview.json) and [interactive preview](https://www.obsidianui.dev/docs/folder-preview).
@@ -45,6 +45,7 @@ Find your next detail. Preview it, read the usage example, and copy all required
 - [Grid Lift](https://www.obsidianui.dev/markdown/docs/grid-lift.md): [download all source files](https://www.obsidianui.dev/r/grid-lift.json) and [interactive preview](https://www.obsidianui.dev/docs/grid-lift).
 - [Hover Slider](https://www.obsidianui.dev/markdown/docs/interactive-hover-slider.md): [download all source files](https://www.obsidianui.dev/r/interactive-hover-slider.json) and [interactive preview](https://www.obsidianui.dev/docs/interactive-hover-slider).
 - [Interactive Blur Reveal](https://www.obsidianui.dev/markdown/docs/interactive-blur-reveal.md): [download all source files](https://www.obsidianui.dev/r/interactive-blur-reveal.json) and [interactive preview](https://www.obsidianui.dev/docs/interactive-blur-reveal).
+- [Art Gallery](https://www.obsidianui.dev/markdown/docs/art-gallery.md): [download all source files](https://www.obsidianui.dev/r/art-gallery.json) and [interactive preview](https://www.obsidianui.dev/docs/art-gallery).
 
 ## Installation
 

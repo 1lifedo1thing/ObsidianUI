@@ -93,7 +93,8 @@ const meta = {
     "fractal-glass": "Fractal Glass",
     "grid-lift": "Grid Lift",
     "interactive-hover-slider": "Hover Slider",
-    "interactive-blur-reveal": "Interactive Blur Reveal"
+    "interactive-blur-reveal": "Interactive Blur Reveal",
+    "art-gallery": "Art Gallery"
 };
 
 export default meta;

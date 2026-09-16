@@ -1,6 +1,7 @@
 :root { --site-header-height: 52px; }
 .site-header { position: sticky; top: 0; z-index: 40; display: flex; align-items: center; height: var(--site-header-height); overflow-x: clip; background: var(--site-chrome); color: var(--foreground); font-family: var(--font-geist), sans-serif; isolation: isolate; transition: background-color 220ms ease, color 220ms ease; }
 .site-header-panel { position: absolute; z-index: -2; inset: 6px 0 0 240px; border: 1px solid var(--border); border-right: 0; border-bottom: 0; border-radius: 14px 0 0 0; background: var(--background); transition: background-color 220ms ease, border-color 220ms ease; }
+.dark .site-header-panel { background: var(--site-chrome); }
 .site-header-left-join { position: absolute; z-index: -1; bottom: 0; left: -16px; width: 258px; height: 8px; pointer-events: none; }
 .site-header-curve { position: absolute; z-index: -1; top: 6.5px; right: 8.5px; width: 410px; height: 36px; overflow: visible; pointer-events: none; }
 .site-brand { display: inline-flex; flex-shrink: 0; align-items: center; gap: 8px; width: 240px; padding: 0 20px 6px; font-family: var(--font-inter), sans-serif; font-size: 22px; font-weight: 400; font-style: normal; letter-spacing: -0.055em; }
