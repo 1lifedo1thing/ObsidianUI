@@ -53,10 +53,11 @@ Installation target: `@components/block/art-gallery.jsx`
 ```jsx
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 import { WebGLSurface, useEffectReducedMotion } from "@/lib/effects/shared/webgl-surface";
 import { cn } from "@/lib/utils";
+import { RipplePulseLoader } from "@/components/ui/ripple-pulse-loader";
 
 const defaultConfig = {
   cellSize: 0.75,
@@ -273,7 +274,8 @@ function loadImageTexture(src) {
     const image = new Image();
     if (/^https?:\/\//.test(src)) image.crossOrigin = "anonymous";
     image.decoding = "async";
-    image.onload = () => {
+    image.onload = async () => {
+      try { await image.decode(); } catch {}
       const texture = new THREE.Texture(image);
       texture.wrapS = THREE.ClampToEdgeWrapping;
       texture.wrapT = THREE.ClampToEdgeWrapping;
@@ -319,10 +321,12 @@ function createTextureAtlas(textures, isText = false) {
 
 function ArtGalleryScene({ images, items, cellSize, zoomLevel, showHint, reducedMotion }) {
   const containerRef = useRef(null);
+  const [ready, setReady] = useState(false);
 
   useEffect(() => {
     const container = containerRef.current;
     if (!container) return;
+    setReady(false);
 
     let cancelled = false;
     let animFrameId = 0;
@@ -472,6 +476,7 @@ function ArtGalleryScene({ images, items, cellSize, zoomLevel, showHint, reduced
       container.addEventListener("pointerleave", onPointerLeave);
       window.addEventListener("resize", onResize);
       animate();
+      setReady(true);
     };
 
     init();
@@ -497,8 +502,13 @@ function ArtGalleryScene({ images, items, cellSize, zoomLevel, showHint, reduced
 
   return (
     <div className="absolute inset-0 cursor-grab active:cursor-grabbing" style={{ touchAction: "none" }}>
-      <div ref={containerRef} className="absolute inset-0" />
-      {showHint ? (
+      <div ref={containerRef} className="absolute inset-0" style={{ opacity: ready ? 1 : 0 }} />
+      {!ready ? (
+        <div className="absolute inset-0 z-20 flex items-center justify-center bg-black text-white" role="status" aria-live="polite">
+          <RipplePulseLoader size={150} />
+        </div>
+      ) : null}
+      {ready && showHint ? (
         <div className="pointer-events-none absolute bottom-6 left-1/2 z-10 -translate-x-1/2 font-mono text-[0.6rem] uppercase tracking-[0.2em] text-white/20">
           drag to explore
         </div>
@@ -522,7 +532,7 @@ export function ArtGallery({
   const captions = tiles.map((_, index) => items[index % items.length] ?? { title: `Study ${index + 1}`, year: "2024" });
 
   return (
-    <WebGLSurface className={cn("bg-black", className)} style={style} imageSrc={tiles[0]} label="ObsidianUI Art Gallery">
+    <WebGLSurface className={cn("bg-black", className)} style={style} label="ObsidianUI Art Gallery">
       <ArtGalleryScene
         images={tiles}
         items={captions}
@@ -534,6 +544,47 @@ export function ArtGallery({
     </WebGLSurface>
   );
 }
+```
+
+### components/ui/ripple-pulse-loader.tsx
+
+Installation target: `@ui/ripple-pulse-loader.tsx`
+
+```tsx
+"use client";
+
+import type { CSSProperties } from "react";
+import { cn } from "@/lib/utils";
+
+const logoSrc = "https://cdn-new.obsidianui.dev/logo/bg-less.png?v=3";
+
+type RipplePulseLoaderProps = {
+  className?: string;
+  size?: number;
+};
+
+export function RipplePulseLoader({ className, size = 150 }: RipplePulseLoaderProps) {
+  return (
+    <div
+      className={cn("ripple-pulse-loader", className)}
+      style={{ "--ripple-size": `${size}px` } as CSSProperties}
+      role="status"
+      aria-label="Loading"
+    >
+      <div className="box">
+        <div className="logo">
+          <img src={logoSrc} alt="" className="svg" />
+        </div>
+      </div>
+      <div className="box" />
+      <div className="box" />
+      <div className="box" />
+      <div className="box" />
+    </div>
+  );
+}
+
+export default RipplePulseLoader;
 ```
 
 ### lib/effects/shared/webgl-surface.jsx

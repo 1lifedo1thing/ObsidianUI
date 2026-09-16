@@ -9,6 +9,7 @@ import { r2 } from '@/lib/r2'
 import { useReducedMotion } from 'motion/react'
 import { cn } from '@/lib/utils'
 import { EffectPreview } from './effect-preview'
+import { RipplePulseLoader } from '@/components/ui/ripple-pulse-loader'
 import { newEffects } from './new-effects'
 
 // Import live components for previews
@@ -130,8 +131,8 @@ export const ComponentsGrid = () => {
                                     ) : component.livePreview && LivePreviews[component.livePreview] ? (
                                         LivePreviews[component.livePreview]
                                     ) : (
-                                        <div className="flex items-center justify-center w-full h-full text-neutral-400 dark:text-neutral-600 text-sm">
-                                            {component.title}
+                                        <div className="flex items-center justify-center w-full h-full text-foreground">
+                                            <RipplePulseLoader size={92} />
                                         </div>
                                     )}
                                 </div>

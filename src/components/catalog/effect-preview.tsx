@@ -3,6 +3,7 @@
 import dynamic from "next/dynamic";
 import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
+import { RipplePulseLoader } from "@/components/ui/ripple-pulse-loader";
 import { newEffects, type NewEffectSlug } from "./new-effects";
 
 const compactMagneticImages = [
@@ -28,6 +29,47 @@ import { cursorEffects } from "./cursor-effects";
 const CursorPreview = dynamic(() => import("./cursor-preview").then(module => module.CursorPreview));
 import { webglEffects } from "./webgl-effects";
 const WebglPreview = dynamic(() => import("./webgl-preview").then(module => module.WebglPreview));
+
+
+function PreviewLoadGate({ children, compact = false }: { children: React.ReactNode; compact?: boolean }) {
+    const frame = useRef<HTMLDivElement>(null);
+    const [ready, setReady] = useState(false);
+
+    useEffect(() => {
+        const root = frame.current;
+        if (!root) return;
+        let cancelled = false;
+        const isReady = () => {
+            const images = [...root.querySelectorAll("img")];
+            const videos = [...root.querySelectorAll("video")];
+            const pendingImages = images.some(image => !image.complete);
+            const pendingVideos = videos.some(video => video.readyState < 2);
+            return !pendingImages && !pendingVideos;
+        };
+        const tick = () => {
+            if (!cancelled && isReady()) setReady(true);
+        };
+        const interval = window.setInterval(tick, 120);
+        const timeout = window.setTimeout(() => { if (!cancelled) setReady(true); }, 5000);
+        tick();
+        return () => {
+            cancelled = true;
+            window.clearInterval(interval);
+            window.clearTimeout(timeout);
+        };
+    }, []);
+
+    return (
+        <div ref={frame} className="relative h-full w-full">
+            <div className={cn("h-full w-full", !ready && "invisible")}>{children}</div>
+            {!ready ? (
+                <div className="absolute inset-0 z-10 flex items-center justify-center bg-muted text-foreground">
+                    <RipplePulseLoader size={compact ? 92 : 132} />
+                </div>
+            ) : null}
+        </div>
+    );
+}
 
 function Effect({ slug, compact }: { slug: NewEffectSlug; compact: boolean }) {
     const scroller = useRef<HTMLDivElement>(null);
@@ -83,6 +125,10 @@ export function EffectPreview({ slug, compact = false }: { slug: NewEffectSlug; 
     }, []);
 
     return <div ref={frame} data-effect-preview={slug} className={cn("relative isolate w-full min-w-0 overflow-hidden rounded-lg bg-muted font-body [container-type:inline-size] [&_*]:[scrollbar-width:thin] [&_*]:[scrollbar-color:var(--border)_transparent]", compact ? "h-full" : "h-[400px]")} aria-label={`${effect.title} interactive preview`}>
-        {visible || hasBeenVisible ? <Effect slug={slug} compact={compact} /> : <div className="flex h-full items-center justify-center text-sm text-muted-foreground">{effect.title}</div>}
+        {visible || hasBeenVisible ? <PreviewLoadGate compact={compact}><Effect slug={slug} compact={compact} /></PreviewLoadGate> : (
+            <div className="flex h-full items-center justify-center text-foreground">
+                <RipplePulseLoader size={compact ? 92 : 132} />
+            </div>
+        )}
     </div>;
 }

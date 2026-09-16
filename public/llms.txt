@@ -19,7 +19,7 @@ Request any published page with Accept: text/markdown or read its direct Markdow
 - [OpenAPI specification](https://www.obsidianui.dev/openapi.json): Machine-readable HTTP API contract.
 - [Authentication](https://www.obsidianui.dev/markdown/authentication.md): Public read access requires no credentials.
 - [MCP server](https://www.obsidianui.dev/markdown/mcp.md): Local stdio resources/list and resources/read at obsidian://{name}.
-- [Registry catalogue](https://www.obsidianui.dev/r/registry.json): 101 complete registry items, including supporting UI primitives.
+- [Registry catalogue](https://www.obsidianui.dev/r/registry.json): 102 complete registry items, including supporting UI primitives.
 - [Sitemap](https://www.obsidianui.dev/sitemap.xml): Published page discovery.
 
 ## Getting started
@@ -115,6 +115,7 @@ Request any published page with Accept: text/markdown or read its direct Markdow
 - [progress](https://www.obsidianui.dev/r/progress.json): Complete registry:ui source and dependencies.
 - [radio-group](https://www.obsidianui.dev/r/radio-group.json): Complete registry:ui source and dependencies.
 - [resizable](https://www.obsidianui.dev/r/resizable.json): Complete registry:ui source and dependencies.
+- [ripple-pulse-loader](https://www.obsidianui.dev/r/ripple-pulse-loader.json): Complete registry:ui source and dependencies.
 - [scroll-area](https://www.obsidianui.dev/r/scroll-area.json): Complete registry:ui source and dependencies.
 - [select](https://www.obsidianui.dev/r/select.json): Complete registry:ui source and dependencies.
 - [separator](https://www.obsidianui.dev/r/separator.json): Complete registry:ui source and dependencies.
