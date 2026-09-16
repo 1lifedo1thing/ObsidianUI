@@ -4,7 +4,6 @@ import { useEffect, useRef, useState } from "react";
 import { Pause, Play } from "lucide-react";
 import { useReducedMotion } from "motion/react";
 import { cn } from "@/lib/utils";
-import { RipplePulseLoader } from "@/components/ui/ripple-pulse-loader";
 
 interface PreviewVideoProps {
   src: string;
@@ -35,7 +34,6 @@ function PreviewVideoPlayer({
   const [hovered, setHovered] = useState(false);
   const [playRequested, setPlayRequested] = useState<boolean | null>(null);
   const [failed, setFailed] = useState(false);
-  const [loaded, setLoaded] = useState(false);
   const shouldPlay = inView && !failed && (
     playRequested ?? (reduceMotion === false && (!playOnHover || hovered))
   );
@@ -80,14 +78,8 @@ function PreviewVideoPlayer({
         muted
         playsInline
         preload="metadata"
-        onLoadedData={() => setLoaded(true)}
         onError={() => setFailed(true)}
       />
-      {!failed && !loaded ? (
-        <div className="absolute inset-0 z-10 flex items-center justify-center bg-background/90 text-foreground">
-          <RipplePulseLoader size={92} />
-        </div>
-      ) : null}
       {failed ? (
         <p role="status" className="absolute inset-0 flex items-center justify-center bg-background/90 p-4 text-center text-sm text-muted-foreground">
           Preview unavailable. Open the component details to explore it.
