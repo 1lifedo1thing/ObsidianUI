@@ -1,8 +1,11 @@
 <div align="center">
-  <a href="https://www.obsidianui.dev">
-    <img src="public/og-image.png" alt="ObsidianUI - React & Tailwind CSS Components Library" width="100%" />
-  </a>
-</div>
+<a href="https://www.obsidianui.dev">
+  <img
+    src="https://cdn-new.obsidianui.dev/og-image.png"
+    alt="ObsidianUI - React & Tailwind CSS Components Library"
+    width="100%"
+  />
+</a></div>
 
 <div align="center">
 
