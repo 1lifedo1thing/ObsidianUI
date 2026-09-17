@@ -104,6 +104,6 @@ Issues and pull requests are welcome. Read [CONTRIBUTING.md](CONTRIBUTING.md) fo
 
 <div align="center">
   <br />
-  <img src="public/logo/bg-less.png" alt="ObsidianUI" width="28" />
+  <img src="https://cdn-new.obsidianui.dev/logo/bg-less.png" alt="ObsidianUI" width="28" />
   <p><sub>Built by <a href="https://x.com/athrix_codes">@athrix_codes</a></sub></p>
 </div>
