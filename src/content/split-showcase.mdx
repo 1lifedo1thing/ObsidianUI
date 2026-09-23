@@ -1,0 +1,58 @@
+import { CodeBlock, Dependencies } from '@/components/docs/component-installation'
+import { CLICommand } from '@/components/docs/cli-command'
+import { PropsTable } from '@/components/docs/props-table'
+import { ComponentPreview } from '@/components/docs/component-preview'
+import { SplitShowcase } from '@/components/block/split-showcase'
+
+# Split Showcase
+
+A split showcase component with two interactive partner cards separated by a dotted divider. Features outward spring shift on hover, expanding rounded corners, and smooth Apple-style transitions.
+
+<ComponentPreview
+  component={
+    <div className="w-full max-w-4xl p-4 sm:p-6">
+      <SplitShowcase />
+    </div>
+  }
+  code={`import { SplitShowcase } from '@/components/block/split-showcase'
+
+export function Demo() {
+  return (
+    <SplitShowcase />
+  )
+}`}
+/>
+
+## Install using CLI
+
+<CLICommand componentName="split-showcase" />
+
+## Install Manually
+
+<Dependencies step={1} title="Install dependencies">
+    <CodeBlock code="npm install motion clsx tailwind-merge" />
+</Dependencies>
+
+<Dependencies step={2} title="Add util file">
+    <p className="text-[13px] text-muted-foreground mt-2 mb-4">Create a file <code className="text-foreground font-mono text-xs bg-neutral-100 dark:bg-[#161616] border border-neutral-200 dark:border-neutral-800 px-2 py-1 rounded-md">lib/utils.ts</code>:</p>
+    <CodeBlock language="tsx" code={`import { ClassValue, clsx } from 'clsx';
+import { twMerge } from 'tailwind-merge';
+
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs));
+}`} />
+</Dependencies>
+
+<Dependencies step={3} title="Copy the source code" source="split-showcase">
+    <p className="text-[13px] text-muted-foreground mt-2 mb-8">Copy the code into <code className="text-foreground font-mono text-xs bg-neutral-100 dark:bg-[#161616] border border-neutral-200 dark:border-neutral-800 px-2 py-1 rounded-md mx-1">components/block/split-showcase.tsx</code></p>
+</Dependencies>
+
+## Props
+
+<PropsTable
+  data={[
+    { prop: "items", type: "[SplitShowcaseItem, SplitShowcaseItem]", defaultValue: "Vercel & Tracwell", description: "Array of two items to display in the split showcase cards" },
+    { prop: "className", type: "string", defaultValue: "-", description: "Optional custom CSS class names for the showcase grid" },
+    { prop: "children", type: "ReactNode", defaultValue: "-", description: "Optional custom children to override the default split layout" },
+  ]}
+/>

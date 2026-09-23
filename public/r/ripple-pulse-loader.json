@@ -1,0 +1,23 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "ripple-pulse-loader",
+  "type": "registry:ui",
+  "dependencies": [
+    "clsx",
+    "tailwind-merge"
+  ],
+  "files": [
+    {
+      "path": "components/ui/ripple-pulse-loader.tsx",
+      "target": "@ui/ripple-pulse-loader.tsx",
+      "type": "registry:ui",
+      "content": "\"use client\";\n\nimport type { CSSProperties } from \"react\";\nimport { cn } from \"@/lib/utils\";\n\nconst logoSrc = \"https://cdn-new.obsidianui.dev/logo/bg-less.png?v=3\";\n\ntype RipplePulseLoaderProps = {\n  className?: string;\n  size?: number;\n};\n\nexport function RipplePulseLoader({ className, size = 150 }: RipplePulseLoaderProps) {\n  return (\n    <div\n      className={cn(\"ripple-pulse-loader\", className)}\n      style={{ \"--ripple-size\": `${size}px` } as CSSProperties}\n      role=\"status\"\n      aria-label=\"Loading\"\n    >\n      <div className=\"box\">\n        <div className=\"logo\">\n          <img src={logoSrc} alt=\"\" className=\"svg\" />\n        </div>\n      </div>\n      <div className=\"box\" />\n      <div className=\"box\" />\n      <div className=\"box\" />\n      <div className=\"box\" />\n    </div>\n  );\n}\n\nexport default RipplePulseLoader;\n"
+    },
+    {
+      "path": "lib/utils.ts",
+      "target": "@lib/utils.ts",
+      "type": "registry:lib",
+      "content": "import { clsx, type ClassValue } from \"clsx\"\nimport { twMerge } from \"tailwind-merge\"\n\nexport function cn(...inputs: ClassValue[]) {\n  return twMerge(clsx(inputs))\n}\n"
+    }
+  ]
+}

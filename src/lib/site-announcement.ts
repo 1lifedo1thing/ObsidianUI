@@ -1,0 +1,2 @@
+export const siteAnnouncement =
+  "Now it’s time to be different. Everyone on the internet has already used ready-made components, from images to the smallest details. Atharv (@athrix_codes on X) is taking a big step to build a next-level UI library, because he knows Claude, Gemini, Codex, and any AI can create components in a few minutes. Thank you for supporting us through every moment, guys! We’re going big. Stay tuned!";

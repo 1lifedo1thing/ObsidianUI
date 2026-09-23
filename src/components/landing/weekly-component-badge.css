@@ -1,0 +1,79 @@
+.weekly-folder {
+  /* Keep the miniature paper previews light, including inside the dark hero. */
+  color-scheme: light;
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.145 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.145 0 0);
+  --primary: oklch(0.205 0 0);
+  --primary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.97 0 0);
+  --muted-foreground: oklch(0.556 0 0);
+  --border: oklch(0.922 0 0);
+  position: absolute;
+  top: 50%;
+  left: 11px;
+  width: 24px;
+  height: 18px;
+  translate: 0 -50%;
+  perspective: 400px;
+  pointer-events: none;
+}
+
+.weekly-folder-back,
+.weekly-folder-front {
+  position: absolute;
+  inset: 0;
+  border-radius: 3px;
+  background: linear-gradient(180deg, #fbbf24, #f59e0b);
+  box-shadow: 0 1px 2px #78350f20;
+}
+
+.weekly-folder-tab {
+  position: absolute;
+  top: -3px;
+  left: 1.5px;
+  width: 9px;
+  height: 4.5px;
+  border-radius: 2px 2px 0 0;
+  background: linear-gradient(180deg, #fde68a, #fcd34d);
+}
+
+.weekly-folder-card {
+  position: absolute;
+  bottom: 6px;
+  left: 50%;
+  width: 46px;
+  height: 32px;
+  margin-left: -23px;
+  overflow: hidden;
+  border-radius: 3px;
+  transform-origin: bottom center;
+  box-shadow: 0 2px 6px #00000014;
+}
+
+.weekly-folder-preview {
+  position: absolute;
+  inset: 0;
+  width: 230px;
+  height: 160px;
+  transform: scale(0.2);
+  transform-origin: top left;
+}
+
+.weekly-folder-front {
+  top: auto;
+  z-index: 20;
+  height: 85%;
+  transform-origin: bottom;
+  background: linear-gradient(180deg, #fcd34d, #fbbf24 35%, #f59e0b);
+}
+
+.weekly-folder-highlight {
+  position: absolute;
+  top: 3px;
+  right: 3px;
+  left: 3px;
+  height: 1px;
+  background: #fef3c7b3;
+}
