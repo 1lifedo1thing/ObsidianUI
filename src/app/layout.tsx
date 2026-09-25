@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { siteAnnouncement } from "@/lib/site-announcement";
 import { Analytics } from "@vercel/analytics/react";
-import { Inter, Geist, Inter_Tight, Pixelify_Sans, Playfair_Display, Outfit, Six_Caps } from "next/font/google";
+import { Inter, Geist, Inter_Tight, Pixelify_Sans, Playfair_Display, Six_Caps } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import { TracwellAnalytics } from "@/components/providers/tracwell-analytics";
@@ -29,12 +29,6 @@ const interTight = Inter_Tight({
   variable: "--font-inter-tight",
   subsets: ["latin"],
   weight: ["400", "500", "700"],
-});
-
-const outfit = Outfit({
-  variable: "--font-outfit",
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "700", "900"],
 });
 
 // Ultra-condensed font for animated text
@@ -198,6 +192,7 @@ export default function RootLayout({
         <link href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,700,900&display=swap" rel="stylesheet" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300..900&display=swap" rel="stylesheet" />
         {/* App Router root layout shares this named font across every route and demo. */}
         {/* eslint-disable-next-line @next/next/no-page-custom-font */}
         <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet" />
@@ -207,7 +202,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${inter.variable} ${geist.variable} ${interTight.variable} ${pixelify.variable} ${playfair.variable} ${outfit.variable} ${sixCaps.variable} antialiased`}
+        className={`${inter.variable} ${geist.variable} ${interTight.variable} ${pixelify.variable} ${playfair.variable} ${sixCaps.variable} antialiased`}
       >
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <a href="#main-content" className="fixed left-4 top-4 z-[9999] -translate-y-24 rounded-lg bg-background px-4 py-3 text-foreground shadow-lg focus:translate-y-0 focus-visible:outline-2 focus-visible:outline-ring">

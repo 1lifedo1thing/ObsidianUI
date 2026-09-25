@@ -6,6 +6,7 @@
 
 :root {
   --font-inter-tight: "Inter Tight", sans-serif;
+  --font-outfit: "Outfit", sans-serif;
   --font-satoshi: "Satoshi", var(--font-outfit), sans-serif;
   --radius: 0.625rem;
   --site-chrome: oklch(0.97 0 0);
