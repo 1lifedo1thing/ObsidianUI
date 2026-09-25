@@ -1,227 +1,157 @@
 "use client";
 
-import { ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react'
-import { motion } from 'motion/react'
+import { ArrowUpRight } from 'lucide-react'
+import { AnimatePresence, LayoutGroup, motion, useReducedMotion } from 'motion/react'
 import Link from 'next/link'
-import { useState, useRef } from 'react'
-import { PreviewVideo } from '@/components/media/preview-video'
+import type { ReactNode } from 'react'
+import { useState } from 'react'
+import { usePrefersFineHover } from '@/hooks/use-prefers-fine-hover'
 import { r2 } from '@/lib/r2'
-import { useReducedMotion } from 'motion/react'
-import { cn } from '@/lib/utils'
 import { EffectPreview } from './effect-preview'
 import { newEffects } from './new-effects'
+import './components-grid.css'
 
-// Import live components for previews
 import FlipText from '@/components/block/flip-text'
-import { PixelatedCarousel } from '@/components/block/pixelated-carousel'
 import { HoverImg } from '@/components/block/hover-img'
 import { SplitShowcase, VercelLogo, TracwellLogo } from '@/components/block/split-showcase'
 
-// Sample images for the retained carousel preview
-const sampleCarouselImages = [
-    "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=300&fit=crop",
-    "https://images.unsplash.com/photo-1511300636408-a63a89df3482?w=400&h=300&fit=crop",
-    "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=400&h=300&fit=crop",
-]
-
-// Live component preview wrappers
-const LivePreviews: Record<string, React.ReactNode> = {
-    ...Object.fromEntries(newEffects.map(effect => [effect.slug, <EffectPreview key={effect.slug} slug={effect.slug} compact />])),
-    "flip-text": (
-        <div className="w-full h-full flex items-center justify-center">
-            <FlipText>ObsidianUI</FlipText>
-        </div>
-    ),
-    "pixelated-carousel": (
-        <div className="w-full h-full flex items-center justify-center overflow-hidden rounded-lg">
-            <PixelatedCarousel images={sampleCarouselImages} pixelSize={50} />
-        </div>
-    ),
-    "hover-img": (
-        <div className="w-full h-full overflow-hidden rounded-lg flex items-center justify-center bg-zinc-950 relative">
-            <div className="w-full h-full flex items-center">
-                <HoverImg
-                    projects={[
-                        { title: "Shree Krishna", label: "Divine", imageSrc: r2("/hover-img/hover-img-img01-alt.jpg") },
-                        { title: "Radha Krishna", label: "Love", imageSrc: r2("/hover-img/hover-img-img02.jpg") },
-                        { title: "Divine Love", label: "Eternal", imageSrc: r2("/hover-img/hover-img-img03.jpg") },
-                    ]}
-                    compact={true}
-                    isContained={true}
-                    className="!bg-transparent w-full"
-                />
-            </div>
-        </div>
-    ),
-    "split-showcase": (
-        <div className="w-full h-full flex items-center justify-center p-2 overflow-hidden">
-            <div className="w-[370px] shrink-0 scale-[0.64] origin-center select-none">
-                <SplitShowcase
-                    compact
-                    items={[
-                        {
-                            id: "vercel",
-                            title: <VercelLogo />,
-                            tag: "Hosting Sponsor",
-                            href: "/docs/split-showcase",
-                            target: "_self",
-                            ariaLabel: "View Split Showcase component",
-                        },
-                        {
-                            id: "tracwell",
-                            title: <TracwellLogo />,
-                            tag: "Analytics Sponsor",
-                            href: "/docs/split-showcase",
-                            target: "_self",
-                            ariaLabel: "View Split Showcase component",
-                        },
-                    ]}
-                />
-            </div>
-        </div>
-    ),
+type ShowcaseItem = {
+    title: string
+    href: string
+    preview: ReactNode
 }
 
-// All components with video previews or live components
-const allComponents = [
-    { title: "Split Showcase", href: "/docs/split-showcase", video: null, livePreview: "split-showcase" },
-    ...newEffects.map(effect => ({ title: effect.title, href: `/docs/${effect.slug}`, video: null, livePreview: effect.slug })),
-    { title: "Hover Image", href: "/docs/hover-img", video: null, livePreview: "hover-img" },
-    { title: "Flip Text", href: "/docs/flip-text", video: null, livePreview: "flip-text" },
-    { title: "Pixelated Carousel", href: "/docs/pixelated-carousel", video: null, livePreview: "pixelated-carousel" },
+const allComponents: ShowcaseItem[] = [
+    { title: 'v-prism', href: '/docs/v-prism', preview: <EffectPreview slug="v-prism" compact /> },
+    {
+        title: 'Split Showcase',
+        href: '/docs/split-showcase',
+        preview: (
+            <div className="flex h-full w-full items-center justify-center overflow-hidden p-2">
+                <div className="w-full max-w-[720px] select-none">
+                    <SplitShowcase compact items={[
+                        { id: 'vercel', title: <VercelLogo />, tag: 'Hosting Sponsor', href: '/docs/split-showcase', target: '_self', ariaLabel: 'View Split Showcase component' },
+                        { id: 'tracwell', title: <TracwellLogo />, tag: 'Analytics Sponsor', href: '/docs/split-showcase', target: '_self', ariaLabel: 'View Split Showcase component' },
+                    ]} />
+                </div>
+            </div>
+        ),
+    },
+    ...newEffects.filter(effect => effect.slug !== 'v-prism').map(effect => ({
+        title: effect.title,
+        href: `/docs/${effect.slug}`,
+        preview: <EffectPreview slug={effect.slug} compact />,
+    })),
+    {
+        title: 'Hover Image',
+        href: '/docs/hover-img',
+        preview: (
+            <div className="relative flex h-full w-full items-center rounded-lg">
+                <HoverImg
+                    projects={[
+                        { title: 'Shree Krishna', label: 'Divine', imageSrc: r2('/hover-img/hover-img-img01-alt.jpg') },
+                        { title: 'Radha Krishna', label: 'Love', imageSrc: r2('/hover-img/hover-img-img02.jpg') },
+                        { title: 'Divine Love', label: 'Eternal', imageSrc: r2('/hover-img/hover-img-img03.jpg') },
+                    ]}
+                    compact
+                    isContained
+                    className="h-full w-full rounded-lg"
+                />
+            </div>
+        ),
+    },
+    { title: 'Flip Text', href: '/docs/flip-text', preview: <div className="flex h-full w-full items-center justify-center"><FlipText className="text-[clamp(1.75rem,2.8vw,3rem)] font-medium tracking-[-0.04em]">ObsidianUI</FlipText></div> },
 ]
 
-const ITEMS_PER_PAGE = 20
-
-export const ComponentsGrid = () => {
-    const [currentPage, setCurrentPage] = useState(1)
-    const containerRef = useRef<HTMLDivElement>(null)
+function ShowcaseCard({ component, index }: { component: ShowcaseItem; index: number }) {
+    const isHoverImage = component.href === '/docs/hover-img'
     const reduceMotion = useReducedMotion()
-    const totalPages = Math.ceil(allComponents.length / ITEMS_PER_PAGE)
-
-    const goToPage = (page: number) => {
-        setCurrentPage(page)
-        containerRef.current?.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' })
-    }
-
-    const startIndex = (currentPage - 1) * ITEMS_PER_PAGE
-    const endIndex = startIndex + ITEMS_PER_PAGE
-    const currentComponents = allComponents.slice(startIndex, endIndex)
+    const fineHover = usePrefersFineHover()
+    const [hovered, setHovered] = useState(false)
+    const [focused, setFocused] = useState(false)
+    const showTitle = hovered || focused
+    const pillLayoutId = `component-showcase-pill-${component.href.replaceAll('/', '-')}`
+    const pillTransition = reduceMotion ? { duration: 0 } : { duration: 0.18, ease: [0.22, 1, 0.36, 1] as const }
 
     return (
-        <div ref={containerRef}>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 my-10">
-                {currentComponents.map((component) => (
-                    <div key={`${component.href}-${component.title}`} className="block group relative">
-                        <motion.div
-                            whileHover={{ y: -4 }}
-                            className="
-                                h-full flex flex-col
-                                rounded-[20px] overflow-hidden
-                                bg-white dark:bg-[#0A0A0A]
-                                border border-neutral-200 dark:border-neutral-800
-                                hover:border-neutral-300 dark:hover:border-neutral-700
-                                hover:shadow-xl hover:shadow-neutral-200/50 dark:hover:shadow-black/60
-                                transition-all duration-500 ease-out
-                                p-2
-                            "
-                        >
-                            {/* Preview Area */}
-                            <div className="
-                                relative w-full aspect-[4/3] rounded-[14px] overflow-hidden
-                                bg-neutral-100 dark:bg-zinc-900
-                                border border-neutral-100 dark:border-white/5
-                                group-hover:border-neutral-200 dark:group-hover:border-white/10
-                                transition-colors
-                            ">
-                                <div className="absolute inset-0 overflow-hidden flex items-center justify-center">
-                                    {component.video ? (
-                                        <PreviewVideo src={component.video} label={`${component.title} preview`} showControls={false} className="h-full w-full" />
-                                    ) : component.livePreview && LivePreviews[component.livePreview] ? (
-                                        LivePreviews[component.livePreview]
-                                    ) : (
-                                        <div className="flex items-center justify-center w-full h-full text-neutral-400 dark:text-neutral-600 text-sm">
-                                            {component.title}
-                                        </div>
-                                    )}
-                                </div>
-
-                                {/* Inner Shadow for depth */}
-                                <div className="absolute inset-0 pointer-events-none shadow-[inset_0_0_20px_rgba(0,0,0,0.02)] dark:shadow-[inset_0_0_40px_rgba(0,0,0,0.4)] rounded-[14px]" />
-                            </div>
-
-                            {/* Details Area */}
-                            <div className="px-3 pt-4 pb-2 flex items-center justify-between">
-                                <div>
-                                    <Link href={component.href} prefetch={false} className="block">
-                                        <h3 className="
-                                            text-sm font-semibold transition-colors
-                                            text-neutral-900 dark:text-neutral-100
-                                            group-hover:text-blue-600 dark:group-hover:text-blue-400
-                                        ">
-                                            {component.title}
-                                        </h3>
-                                    </Link>
-                                </div>
-                                <Link
-                                    href={component.href}
-                                    prefetch={false}
-                                    aria-label={`View ${component.title} documentation`}
-                                    className="
-                                        w-7 h-7 flex items-center justify-center rounded-full transition-all hover:scale-105
-                                        bg-neutral-100 dark:bg-neutral-800/50
-                                        text-neutral-400 dark:text-neutral-500
-                                        hover:bg-neutral-200 dark:hover:bg-neutral-700
-                                        hover:text-neutral-900 dark:hover:text-neutral-100
-                                    "
-                                >
-                                    <ArrowRight className="w-3.5 h-3.5" />
-                                </Link>
-                            </div>
-                        </motion.div>
-                    </div>
-                ))}
-            </div>
-
-            {/* Pagination */}
-            {totalPages > 1 && (
-                <div className="flex items-center justify-center gap-4 py-8">
-                    <button
-                        onClick={() => goToPage(Math.max(1, currentPage - 1))}
-                        disabled={currentPage === 1}
-                        className="flex items-center gap-2 px-4 py-2 rounded-lg bg-neutral-100 dark:bg-neutral-800 hover:bg-neutral-200 dark:hover:bg-neutral-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+        <motion.article
+            className={isHoverImage ? 'component-showcase-card component-showcase-card-hover-image' : 'component-showcase-card'}
+            initial={{ opacity: 0, y: reduceMotion ? 0 : 16, filter: reduceMotion ? 'blur(0px)' : 'blur(8px)' }}
+            whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+            viewport={{ once: true, margin: '0px 0px -100px' }}
+            transition={{ duration: reduceMotion ? 0.2 : 0.42, delay: reduceMotion ? 0 : (index % 3) * 0.055, ease: [0.23, 1, 0.32, 1] }}
+            onPointerEnter={() => { if (fineHover) setHovered(true) }}
+            onPointerLeave={() => setHovered(false)}
+        >
+            <div className="component-showcase-frame">
+                <div className="component-showcase-media">{component.preview}</div>
+                <Link
+                        href={component.href}
+                        prefetch={false}
+                        aria-label={`View ${component.title} documentation`}
+                        className="component-showcase-pill-link group"
+                        onFocus={() => setFocused(true)}
+                        onBlur={() => setFocused(false)}
                     >
-                        <ChevronLeft className="w-4 h-4" />
-                        <span className="text-sm font-medium">Previous</span>
-                    </button>
-
-                    <div className="flex items-center gap-2">
-                        {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
-                            <button
-                                key={page}
-                                onClick={() => goToPage(page)}
-                                aria-label={`Go to page ${page}`}
-                                aria-current={currentPage === page ? 'page' : undefined}
-                                className={cn('w-10 h-10 rounded-lg text-sm font-medium transition-colors', currentPage === page
-                                    ? 'bg-primary text-primary-foreground font-bold'
-                                    : 'bg-neutral-100 dark:bg-neutral-800 hover:bg-neutral-200 dark:hover:bg-neutral-700'
+                        <LayoutGroup id={pillLayoutId}>
+                            <AnimatePresence mode="popLayout" initial={false}>
+                                {showTitle ? (
+                                    <motion.span
+                                        key="title-pill"
+                                        layoutId={pillLayoutId}
+                                        transition={{ layout: pillTransition }}
+                                        style={{ borderRadius: 10 }}
+                                        className="component-showcase-pill"
+                                    >
+                                        <motion.span
+                                            className="component-showcase-pill-content"
+                                            initial={reduceMotion ? false : { opacity: 0 }}
+                                            animate={{ opacity: 1 }}
+                                            exit={reduceMotion ? undefined : { opacity: 0 }}
+                                            transition={{ duration: reduceMotion ? 0 : 0.12, ease: 'easeOut' }}
+                                        >
+                                            <span>{component.title}</span>
+                                            <span className="component-showcase-arrow" aria-hidden="true">
+                                                <ArrowUpRight className="component-showcase-arrow-out" />
+                                                <ArrowUpRight className="component-showcase-arrow-in" />
+                                            </span>
+                                        </motion.span>
+                                    </motion.span>
+                                ) : (
+                                    <motion.span
+                                        key="idle-pill"
+                                        layoutId={pillLayoutId}
+                                        aria-hidden="true"
+                                        style={{ borderRadius: 10 }}
+                                        transition={{ layout: pillTransition }}
+                                        className="component-showcase-idle-pill"
+                                    />
                                 )}
-                            >
-                                {page}
-                            </button>
-                        ))}
-                    </div>
-
-                    <button
-                        onClick={() => goToPage(Math.min(totalPages, currentPage + 1))}
-                        disabled={currentPage === totalPages}
-                        className="flex items-center gap-2 px-4 py-2 rounded-lg bg-neutral-100 dark:bg-neutral-800 hover:bg-neutral-200 dark:hover:bg-neutral-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-                    >
-                        <span className="text-sm font-medium">Next</span>
-                        <ChevronRight className="w-4 h-4" />
-                    </button>
-                </div>
-            )}
-        </div>
+                            </AnimatePresence>
+                        </LayoutGroup>
+                    </Link>
+            </div>
+        </motion.article>
     )
+}
+
+export const ComponentsGrid = ({ featured = false }: { featured?: boolean }) => {
+    const components = featured
+        ? allComponents.filter(component => component.href === '/docs/art-gallery' || component.href === '/docs/hover-img')
+        : allComponents
+
+    if (featured) {
+        return <div className="components-showcase-grid">
+            {components.map((component, index) => <ShowcaseCard key={component.href} component={component} index={index} />)}
+        </div>
+    }
+
+    return <>
+        <div className="component-showcase-featured">
+            <ShowcaseCard component={components[0]} index={0} />
+        </div>
+        <div className="component-showcase-grid">
+            {components.slice(1).map((component, index) => <ShowcaseCard key={component.href} component={component} index={index + 1} />)}
+        </div>
+    </>
 }

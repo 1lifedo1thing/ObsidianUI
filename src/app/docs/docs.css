@@ -83,6 +83,7 @@
 .docs-document { width: 100%; max-width: 1136px; margin-inline: auto; padding: 24px 28px 64px; }
 .docs-document > div { max-width: none; }
 .docs-document article { min-width: 0; width: 100%; max-width: 704px; margin-inline: auto; padding: 0 16px 32px; color: var(--foreground); }
+.docs-document article:has(.split-showcase-preview) { max-width: 840px; }
 .docs-document .nextra-breadcrumb { display: none; }
 .docs-code-block .nextra-code { margin-top: 0; }
 .docs-code-card .nextra-code pre { margin: 0; border: 1px solid var(--border); border-radius: 12px; background: var(--background); box-shadow: none; }

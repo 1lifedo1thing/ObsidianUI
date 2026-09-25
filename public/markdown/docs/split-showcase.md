@@ -218,7 +218,7 @@ export function SplitShowcase({
             compact
               ? "min-h-[7.5rem] gap-3 p-4 sm:p-5"
               : "min-h-[11rem] gap-6 p-6 sm:p-8",
-            "bg-muted/40 dark:bg-muted/20",
+            "bg-zinc-200 dark:bg-zinc-800",
             "transition-[border-radius,box-shadow,border-color] duration-300",
             activeIndex === 0
               ? "rounded-[32px] sm:rounded-[32px] shadow-2xl shadow-black/10 dark:shadow-black/40 border border-border z-10"
@@ -276,7 +276,7 @@ export function SplitShowcase({
             compact
               ? "min-h-[7.5rem] gap-3 p-4 sm:p-5"
               : "min-h-[11rem] gap-6 p-6 sm:p-8",
-            "bg-muted/40 dark:bg-muted/20",
+            "bg-zinc-200 dark:bg-zinc-800",
             "transition-[border-radius,box-shadow,border-color] duration-300",
             activeIndex === 1
               ? "rounded-[32px] sm:rounded-[32px] shadow-2xl shadow-black/10 dark:shadow-black/40 border border-border z-10"

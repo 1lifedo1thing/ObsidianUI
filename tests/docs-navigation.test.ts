@@ -53,7 +53,7 @@ test("component search includes all sections alphabetically without setup pages 
   assert.deepEqual(componentLinks, expected);
   assert.equal(new Set(componentLinks.map(link => link.href)).size, componentLinks.length);
   assert.deepEqual(componentLinks.slice(0, 5).map(link => link.name), [
-    "Art Gallery", "Draggable Marquee", "Flip Text", "Hover Image", "Pixelated Carousel",
+    "Art Gallery", "Draggable Marquee", "Flip Text", "Hover Image", "Split Showcase",
   ]);
   for (const slug of [...installationSlugs, "missing-page", "index", "---1", "---2"]) {
     assert.ok(!componentLinks.some(link => link.href === `/docs/${slug}`));

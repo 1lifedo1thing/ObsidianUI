@@ -1,0 +1,24 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "loaders-gooey-blobs",
+  "type": "registry:ui",
+  "dependencies": [
+    "clsx",
+    "motion",
+    "tailwind-merge"
+  ],
+  "files": [
+    {
+      "path": "components/ui/loaders-gooey-blobs.tsx",
+      "target": "@ui/loaders-gooey-blobs.tsx",
+      "type": "registry:ui",
+      "content": "\"use client\";\n\nimport { useId } from \"react\";\nimport { motion, useReducedMotion, type HTMLMotionProps } from \"motion/react\";\nimport { cn } from \"@/lib/utils\";\n\nexport interface LoaderGooeyBlobsProps extends Omit<HTMLMotionProps<\"div\">, \"children\"> {\n  size?: number;\n  color?: string;\n  duration?: number;\n}\n\nexport function LoaderGooeyBlobs({\n  className,\n  size = 20,\n  color = \"currentColor\",\n  duration = 1.5,\n  style,\n  ...props\n}: LoaderGooeyBlobsProps) {\n  const filterId = `gooey-${useId().replace(/:/g, \"\")}`;\n  const reducedMotion = useReducedMotion();\n\n  return (\n    <motion.div\n      role=\"status\"\n      aria-label=\"Loading\"\n      className={cn(\"flex items-center justify-center\", className)}\n      style={style}\n      {...props}\n    >\n      <svg aria-hidden=\"true\" focusable=\"false\" className=\"absolute h-0 w-0\">\n        <defs>\n          <filter id={filterId}>\n            <feGaussianBlur in=\"SourceGraphic\" stdDeviation=\"3\" result=\"blur\" />\n            <feColorMatrix\n              in=\"blur\"\n              mode=\"matrix\"\n              values=\"1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -7\"\n              result=\"gooey\"\n            />\n            <feBlend in=\"SourceGraphic\" in2=\"gooey\" />\n          </filter>\n        </defs>\n      </svg>\n      <span aria-hidden=\"true\" className=\"flex gap-1\" style={{ filter: `url(#${filterId})` }}>\n        {[0, 1, 2].map((index) => (\n          <motion.span\n            key={index}\n            className=\"rounded-full\"\n            style={{ width: size, height: size, backgroundColor: color }}\n            animate={reducedMotion ? undefined : { x: [0, 15, 0, -15, 0], scale: [1, 1.2, 1, 1.2, 1] }}\n            transition={{ duration, ease: \"easeInOut\", repeat: Infinity, delay: index * 0.2 }}\n          />\n        ))}\n      </span>\n    </motion.div>\n  );\n}\n\nexport default LoaderGooeyBlobs;\n"
+    },
+    {
+      "path": "lib/utils.ts",
+      "target": "@lib/utils.ts",
+      "type": "registry:lib",
+      "content": "import { clsx, type ClassValue } from \"clsx\"\nimport { twMerge } from \"tailwind-merge\"\n\nexport function cn(...inputs: ClassValue[]) {\n  return twMerge(clsx(inputs))\n}\n"
+    }
+  ]
+}

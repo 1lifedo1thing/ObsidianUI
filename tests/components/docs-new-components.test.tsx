@@ -42,7 +42,7 @@ describe("new documentation component markers", () => {
     const user = userEvent.setup();
     const { container } = renderNavigation();
     const marked = Array.from(container.querySelectorAll('.docs-nav-link[data-new="true"]'));
-    expect(newEffects).toHaveLength(3);
+    expect(newEffects).toHaveLength(4);
     expect(marked.map(link => link.getAttribute("href")).sort()).toEqual(
       newEffects.map(({ slug }) => `/docs/${slug}`).sort(),
     );
@@ -70,7 +70,7 @@ describe("new documentation component markers", () => {
     const clicked = screen.getByRole("link", { name: "Art Gallery" });
     expect(clicked).toHaveAttribute("data-new", "false");
     expect(clicked.querySelector(".docs-nav-new-dot")).toHaveAttribute("data-visible", "false");
-    expect(container.querySelectorAll('.docs-nav-link[data-new="true"]')).toHaveLength(2);
+    expect(container.querySelectorAll('.docs-nav-link[data-new="true"]')).toHaveLength(3);
     expect(screen.getByRole("link", { name: "Draggable Marquee, new component" })).toHaveAttribute("data-new", "true");
     expect(JSON.parse(window.localStorage.getItem(STORAGE_KEY)!)).toEqual([magneticHref]);
     expect(onNavigate).toHaveBeenCalledOnce();
@@ -123,11 +123,11 @@ describe("new documentation component markers", () => {
   it("ignores malformed or unknown stored entries and accepts only known new component paths", () => {
     window.localStorage.setItem(STORAGE_KEY, "{not-json");
     const { container } = renderNavigation();
-    expect(container.querySelectorAll('.docs-nav-link[data-new="true"]')).toHaveLength(3);
+    expect(container.querySelectorAll('.docs-nav-link[data-new="true"]')).toHaveLength(4);
     storageChange(JSON.stringify({ seen: [magneticHref] }));
-    expect(container.querySelectorAll('.docs-nav-link[data-new="true"]')).toHaveLength(3);
+    expect(container.querySelectorAll('.docs-nav-link[data-new="true"]')).toHaveLength(4);
     storageChange(JSON.stringify([magneticHref, magneticHref, "/docs/flip-text", "__proto__", 42, null]));
-    expect(container.querySelectorAll('.docs-nav-link[data-new="true"]')).toHaveLength(2);
+    expect(container.querySelectorAll('.docs-nav-link[data-new="true"]')).toHaveLength(3);
     expect(screen.getByRole("link", { name: "Art Gallery" })).toHaveAttribute("data-new", "false");
   });
 

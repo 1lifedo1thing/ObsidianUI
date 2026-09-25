@@ -49,10 +49,10 @@ export default function ComponentsPage() {
         <div className="min-h-screen bg-background text-foreground">
             <main id="main-content">
                 <ShowcaseHero />
-                <section id="component-gallery" aria-labelledby="component-gallery-title" className="showcase-gallery mx-auto max-w-7xl scroll-mt-28 px-4 py-12 sm:px-6">
+                <section id="component-gallery" aria-labelledby="component-gallery-title" className="showcase-gallery mx-auto max-w-[1520px] scroll-mt-28 px-5 py-14 sm:px-8 lg:px-10">
                     <div className="showcase-gallery-heading">
-                        <h2 id="component-gallery-title">Explore the components</h2>
-                        <p>Find your next detail. Preview it, copy the code, and make it yours.</p>
+                        <h2 id="component-gallery-title">Components worth a closer look</h2>
+                        <p>Play with the previews, explore the details, and make each interaction your own.</p>
                     </div>
                     <ComponentsGrid />
                 </section>

@@ -287,8 +287,11 @@ export function HoverImg({ projects = defaultProjects, className, isContained = 
 
             if (isContained && containerRef.current) {
                 const rect = containerRef.current.getBoundingClientRect();
-                x = e.clientX - rect.left;
-                y = e.clientY - rect.top;
+                const halfWidth = projectThumbnail.offsetWidth / 2;
+                const halfHeight = projectThumbnail.offsetHeight / 2;
+                const inset = 16;
+                x = Math.max(halfWidth + inset, Math.min(rect.width - halfWidth - inset, e.clientX - rect.left));
+                y = Math.max(halfHeight + inset, Math.min(rect.height - halfHeight - inset, e.clientY - rect.top));
             }
 
             xToRef.current?.(x);

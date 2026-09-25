@@ -3,7 +3,7 @@
 import dynamic from "next/dynamic";
 import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
-import { RipplePulseLoader } from "@/components/ui/ripple-pulse-loader";
+import { LoaderGooeyBlobs } from "@/components/ui/loaders-gooey-blobs";
 import { newEffects, type NewEffectSlug } from "./new-effects";
 
 const TextStream = dynamic(() => import("@/components/block/text-stream").then(module => module.TextStream));
@@ -47,7 +47,7 @@ function PreviewLoadGate({ children, compact = false }: { children: React.ReactN
             <div className={cn("h-full w-full", !ready && "invisible")}>{children}</div>
             {!ready ? (
                 <div className="absolute inset-0 z-10 flex items-center justify-center bg-muted text-foreground">
-                    <RipplePulseLoader size={compact ? 92 : 132} />
+                    <LoaderGooeyBlobs size={compact ? 16 : 20} />
                 </div>
             ) : null}
         </div>
@@ -90,7 +90,7 @@ export function EffectPreview({ slug, compact = false }: { slug: NewEffectSlug; 
     return <div ref={frame} data-effect-preview={slug} className={cn("relative isolate w-full min-w-0 overflow-hidden rounded-lg bg-muted font-body [container-type:inline-size] [&_*]:[scrollbar-width:thin] [&_*]:[scrollbar-color:var(--border)_transparent]", compact ? "h-full" : "h-[400px]")} aria-label={`${effect.title} interactive preview`}>
         {visible || hasBeenVisible ? <PreviewLoadGate compact={compact}><Effect slug={slug} compact={compact} /></PreviewLoadGate> : (
             <div className="flex h-full items-center justify-center text-foreground">
-                <RipplePulseLoader size={compact ? 92 : 132} />
+                <LoaderGooeyBlobs size={compact ? 16 : 20} />
             </div>
         )}
     </div>;

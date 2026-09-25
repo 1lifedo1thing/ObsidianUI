@@ -124,6 +124,7 @@ export function buildRegistry(projectRoot: string, origin = REGISTRY_ORIGIN): Re
                         if (ts.isIdentifier(node.expression) && node.expression.text === 'fetch' && argument.startsWith('/api/')) requiredEndpoints.add(argument);
                     }
                     if (ts.isStringLiteralLike(node)) {
+                        if (/^https:\/\/cdn-new\.obsidianui\.dev\/.*\.(?:png|jpe?g|webp|gif|glb)(?:[?#].*)?$/.test(node.text)) remoteAssets.add(node.text);
                         const rewritten = assetUrl(node.text);
                         if (rewritten !== node.text) edits.push({ start: node.getStart(ast) + 1, end: node.getEnd() - 1, value: rewritten });
                     }

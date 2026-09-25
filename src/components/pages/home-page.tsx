@@ -1,7 +1,7 @@
 import { HeroSection } from "@/components/landing/herosection";
 import { PlatformSponsors } from "@/components/landing/platform-sponsors";
 import { TestimonialsMarquee } from "@/components/landing/testimonials-marquee";
-import { VideoShowcaseGrid } from "@/components/landing/video-showcase-grid";
+import { ComponentsShowcase } from "@/components/landing/components-showcase";
 import { MobileNotification } from "@/components/landing/mobile-notification";
 import { siteAnnouncement } from "@/lib/site-announcement";
 
@@ -14,8 +14,7 @@ const Page = () => {
                 <p className="sr-only">{siteAnnouncement}</p>
                 <HeroSection />
 
-                {/* Featured videos and interactive effects */}
-                <VideoShowcaseGrid />
+                <ComponentsShowcase />
 
                 <TestimonialsMarquee />
 

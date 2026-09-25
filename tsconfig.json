@@ -38,6 +38,7 @@
   ],
   "exclude": [
     "node_modules",
+    "v-prism-recreate-by-athrix",
     "UK1Sb-ZRte2Iv3pphsfge-files (1)"
   ]
 }

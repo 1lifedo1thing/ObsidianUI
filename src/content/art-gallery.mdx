@@ -4,6 +4,7 @@ import { ComponentPreview } from '@/components/docs/component-preview'
 import { ExpandableBlock } from '@/components/docs/expandable-block'
 import { EffectPreview } from '@/components/catalog/effect-preview'
 import { effectExamples } from '@/components/catalog/effect-examples'
+import { VPrismSettings } from '@/components/docs/v-prism-settings'
 
 # Art Gallery
 
@@ -28,7 +29,7 @@ export default function Demo() {
 ## Install Manually
 
 <Dependencies step={1} title="Install dependencies">
-  <CodeBlock code="npm install clsx tailwind-merge three" />
+  <CodeBlock code="npm install clsx motion tailwind-merge three" />
 </Dependencies>
 
 <Dependencies step={2} title="Copy the source code" className="docs-source-card">
@@ -42,7 +43,7 @@ import { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 import { WebGLSurface, useEffectReducedMotion } from "@/lib/effects/shared/webgl-surface";
 import { cn } from "@/lib/utils";
-import { RipplePulseLoader } from "@/components/ui/ripple-pulse-loader";
+import { LoaderGooeyBlobs } from "@/components/ui/loaders-gooey-blobs";
 
 const defaultConfig = {
   cellSize: 0.75,
@@ -257,6 +258,7 @@ function blankTexture() {
 function loadImageTexture(src) {
   return new Promise((resolve) => {
     const image = new Image();
+    let retries = 0;
     if (/^https?:\/\//.test(src)) image.crossOrigin = "anonymous";
     image.decoding = "async";
     image.onload = async () => {
@@ -270,7 +272,14 @@ function loadImageTexture(src) {
       texture.needsUpdate = true;
       resolve(texture);
     };
-    image.onerror = () => resolve(blankTexture());
+    image.onerror = () => {
+      if (retries === 0) {
+        retries = 1;
+        image.src = `${src}${src.includes("?") ? "&" : "?"}retry=1`;
+        return;
+      }
+      resolve(null);
+    };
     image.src = src;
   });
 }
@@ -287,12 +296,17 @@ function createTextureAtlas(textures, isText = false) {
       ctx.fillStyle = "black";
       ctx.fillRect(0, 0, canvas.width, canvas.height);
     }
+    const fallback = textures.find((texture) => texture.source?.data ?? texture.image);
+    const fallbackSource = fallback?.source?.data ?? fallback?.image;
     textures.forEach((texture, index) => {
       const x = (index % atlasSize) * textureSize;
       const y = Math.floor(index / atlasSize) * textureSize;
       const src = texture.source?.data ?? texture.image;
       if (!src) return;
-      try { ctx.drawImage(src, x, y, textureSize, textureSize); } catch {}
+      try { ctx.drawImage(src, x, y, textureSize, textureSize); }
+      catch {
+        if (fallbackSource) ctx.drawImage(fallbackSource, x, y, textureSize, textureSize);
+      }
     });
   }
   const atlasTexture = new THREE.CanvasTexture(canvas);
@@ -423,12 +437,14 @@ function ArtGalleryScene({ images, items, cellSize, zoomLevel, showHint, reduced
     };
 
     const init = async () => {
-      const imageTiles = await Promise.all(images.map((src) => loadImageTexture(src)));
+      const loadedImages = await Promise.all(images.map((src) => loadImageTexture(src)));
       if (cancelled) {
-        imageTiles.forEach((texture) => texture.dispose());
+        loadedImages.forEach((texture) => texture?.dispose());
         return;
       }
-      loadedTextures.push(...imageTiles);
+      const replacement = loadedImages.find(Boolean) ?? blankTexture();
+      const imageTiles = loadedImages.map((texture) => texture ?? replacement);
+      loadedTextures.push(...new Set(imageTiles));
       const textTextures = items.map((item) => createTextTexture(item.title, item.year, defaultConfig.textColor));
       loadedTextures.push(...textTextures);
       imageAtlas = createTextureAtlas(imageTiles, false);
@@ -490,7 +506,7 @@ function ArtGalleryScene({ images, items, cellSize, zoomLevel, showHint, reduced
       <div ref={containerRef} className="absolute inset-0" style={{ opacity: ready ? 1 : 0 }} />
       {!ready ? (
         <div className="absolute inset-0 z-20 flex items-center justify-center bg-black text-white" role="status" aria-live="polite">
-          <RipplePulseLoader size={150} />
+          <LoaderGooeyBlobs />
         </div>
       ) : null}
       {ready && showHint ? (
@@ -534,44 +550,71 @@ export function ArtGallery({
 </Dependencies>
 
 <Dependencies step={3} title="Add the supporting file" className="docs-source-card">
-  <p className="mb-4 text-sm text-muted-foreground">Copy into <code className="rounded-full bg-muted px-2 py-1 font-mono text-xs text-foreground">components/ui/ripple-pulse-loader.tsx</code></p>
+  <p className="mb-4 text-sm text-muted-foreground">Copy into <code className="rounded-full bg-muted px-2 py-1 font-mono text-xs text-foreground">components/ui/loaders-gooey-blobs.tsx</code></p>
 
 <ExpandableBlock>
-```jsx copy
+```tsx copy
 "use client";
 
-import type { CSSProperties } from "react";
+import { useId } from "react";
+import { motion, useReducedMotion, type HTMLMotionProps } from "motion/react";
 import { cn } from "@/lib/utils";
 
-const logoSrc = "https://cdn-new.obsidianui.dev/logo/bg-less.png?v=3";
-
-type RipplePulseLoaderProps = {
-  className?: string;
+export interface LoaderGooeyBlobsProps extends Omit<HTMLMotionProps<"div">, "children"> {
   size?: number;
-};
+  color?: string;
+  duration?: number;
+}
 
-export function RipplePulseLoader({ className, size = 150 }: RipplePulseLoaderProps) {
+export function LoaderGooeyBlobs({
+  className,
+  size = 20,
+  color = "currentColor",
+  duration = 1.5,
+  style,
+  ...props
+}: LoaderGooeyBlobsProps) {
+  const filterId = `gooey-${useId().replace(/:/g, "")}`;
+  const reducedMotion = useReducedMotion();
+
   return (
-    <div
-      className={cn("ripple-pulse-loader", className)}
-      style={{ "--ripple-size": `${size}px` } as CSSProperties}
+    <motion.div
       role="status"
       aria-label="Loading"
+      className={cn("flex items-center justify-center", className)}
+      style={style}
+      {...props}
     >
-      <div className="box">
-        <div className="logo">
-          <img src={logoSrc} alt="" className="svg" />
-        </div>
-      </div>
-      <div className="box" />
-      <div className="box" />
-      <div className="box" />
-      <div className="box" />
-    </div>
+      <svg aria-hidden="true" focusable="false" className="absolute h-0 w-0">
+        <defs>
+          <filter id={filterId}>
+            <feGaussianBlur in="SourceGraphic" stdDeviation="3" result="blur" />
+            <feColorMatrix
+              in="blur"
+              mode="matrix"
+              values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -7"
+              result="gooey"
+            />
+            <feBlend in="SourceGraphic" in2="gooey" />
+          </filter>
+        </defs>
+      </svg>
+      <span aria-hidden="true" className="flex gap-1" style={{ filter: `url(#${filterId})` }}>
+        {[0, 1, 2].map((index) => (
+          <motion.span
+            key={index}
+            className="rounded-full"
+            style={{ width: size, height: size, backgroundColor: color }}
+            animate={reducedMotion ? undefined : { x: [0, 15, 0, -15, 0], scale: [1, 1.2, 1, 1.2, 1] }}
+            transition={{ duration, ease: "easeInOut", repeat: Infinity, delay: index * 0.2 }}
+          />
+        ))}
+      </span>
+    </motion.div>
   );
 }
 
-export default RipplePulseLoader;
+export default LoaderGooeyBlobs;
 ```
 </ExpandableBlock>
 </Dependencies>
@@ -648,6 +691,8 @@ export function cn(...inputs: ClassValue[]) {
 </Dependencies>
 
 
+
+Default demo media loads from ObsidianUI. Replace these URLs with your own assets for offline use.
 
 ## Preview behavior
 

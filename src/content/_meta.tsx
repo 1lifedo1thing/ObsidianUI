@@ -20,11 +20,11 @@ const meta = {
         "title": "Files & Media"
     },
     "hover-img": "Hover Image",
-    "pixelated-carousel": "Pixelated Carousel",
     "---3": {
         "type": "separator",
         "title": "Components"
     },
+    "v-prism": "v-prism",
     "split-showcase": "Split Showcase",
     "art-gallery": "Art Gallery",
     "---4": {

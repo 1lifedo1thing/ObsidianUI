@@ -24,8 +24,8 @@ vi.mock("@/components/landing/herosection", () => ({ HeroSection: () => <div>Lan
 vi.mock("@/components/landing/landing-faq", () => ({
   LandingFAQ: () => <section aria-label="Frequently Asked Questions" />,
 }));
-vi.mock("@/components/landing/video-showcase-grid", () => ({
-  VideoShowcaseGrid: () => <section aria-label="Featured Components" />,
+vi.mock("@/components/landing/components-showcase", () => ({
+  ComponentsShowcase: () => <section aria-label="Featured Components" />,
 }));
 vi.mock("@/components/landing/landing-page-grid", () => ({
   LandingPageGrid: () => <section aria-label="Old component scrolling section" />,

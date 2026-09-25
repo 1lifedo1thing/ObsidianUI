@@ -7,7 +7,7 @@ Installation guides and complete component source.
 - [Add utilities](https://www.obsidianui.dev/markdown/docs/add-utilities.md)
 - [CLI](https://www.obsidianui.dev/markdown/docs/cli.md)
 - [Hover Image](https://www.obsidianui.dev/markdown/docs/hover-img.md)
-- [Pixelated Carousel](https://www.obsidianui.dev/markdown/docs/pixelated-carousel.md)
+- [v-prism](https://www.obsidianui.dev/markdown/docs/v-prism.md)
 - [Split Showcase](https://www.obsidianui.dev/markdown/docs/split-showcase.md)
 - [Art Gallery](https://www.obsidianui.dev/markdown/docs/art-gallery.md)
 - [Flip Text](https://www.obsidianui.dev/markdown/docs/flip-text.md)

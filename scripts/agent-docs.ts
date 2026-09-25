@@ -8,6 +8,7 @@ import remarkStringify from "remark-stringify";
 import type { Root, RootContent, PhrasingContent } from "mdast";
 import navigation from "../src/content/_meta";
 import { effectExamples } from "../src/components/catalog/effect-examples";
+import { vPrismSettings } from "../src/components/docs/v-prism-settings-data";
 import { developerResources, ORIGIN } from "../src/lib/agent/developer-resources";
 import type { Registry, RegistryItem } from "./registry";
 
@@ -125,6 +126,10 @@ export function cleanDocumentation(source: string, slug: string, item?: Registry
           const values = row as Record<string, unknown>;
           return `| ${["prop", "type", "defaultValue", "description"].map(key => escape(values[key])).join(" | ")} |`;
         })].join("\n") }];
+      }
+      if (name === "VPrismSettings") {
+        const escape = (value: string) => value.replace(/\|/g, "\\|").replace(/\r?\n/g, " ");
+        return [{ type: "html", value: ["| Setting | What it controls | Reference range |", "| --- | --- | --- |", ...vPrismSettings.map(setting => `| ${escape(setting.name)} | ${escape(setting.description)} | ${escape(setting.range)} |`)].join("\n") }];
       }
       if (name === "code") return [{ type: "inlineCode", value: plainText(node) } as unknown as RootContent];
       if (name === "p") return [{ type: "paragraph", children: children() as PhrasingContent[] }];

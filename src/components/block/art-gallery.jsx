@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 import { WebGLSurface, useEffectReducedMotion } from "@/lib/effects/shared/webgl-surface";
 import { cn } from "@/lib/utils";
-import { RipplePulseLoader } from "@/components/ui/ripple-pulse-loader";
+import { LoaderGooeyBlobs } from "@/components/ui/loaders-gooey-blobs";
 
 const defaultConfig = {
   cellSize: 0.75,
@@ -219,6 +219,7 @@ function blankTexture() {
 function loadImageTexture(src) {
   return new Promise((resolve) => {
     const image = new Image();
+    let retries = 0;
     if (/^https?:\/\//.test(src)) image.crossOrigin = "anonymous";
     image.decoding = "async";
     image.onload = async () => {
@@ -232,7 +233,14 @@ function loadImageTexture(src) {
       texture.needsUpdate = true;
       resolve(texture);
     };
-    image.onerror = () => resolve(blankTexture());
+    image.onerror = () => {
+      if (retries === 0) {
+        retries = 1;
+        image.src = `${src}${src.includes("?") ? "&" : "?"}retry=1`;
+        return;
+      }
+      resolve(null);
+    };
     image.src = src;
   });
 }
@@ -249,12 +257,17 @@ function createTextureAtlas(textures, isText = false) {
       ctx.fillStyle = "black";
       ctx.fillRect(0, 0, canvas.width, canvas.height);
     }
+    const fallback = textures.find((texture) => texture.source?.data ?? texture.image);
+    const fallbackSource = fallback?.source?.data ?? fallback?.image;
     textures.forEach((texture, index) => {
       const x = (index % atlasSize) * textureSize;
       const y = Math.floor(index / atlasSize) * textureSize;
       const src = texture.source?.data ?? texture.image;
       if (!src) return;
-      try { ctx.drawImage(src, x, y, textureSize, textureSize); } catch {}
+      try { ctx.drawImage(src, x, y, textureSize, textureSize); }
+      catch {
+        if (fallbackSource) ctx.drawImage(fallbackSource, x, y, textureSize, textureSize);
+      }
     });
   }
   const atlasTexture = new THREE.CanvasTexture(canvas);
@@ -385,12 +398,14 @@ function ArtGalleryScene({ images, items, cellSize, zoomLevel, showHint, reduced
     };
 
     const init = async () => {
-      const imageTiles = await Promise.all(images.map((src) => loadImageTexture(src)));
+      const loadedImages = await Promise.all(images.map((src) => loadImageTexture(src)));
       if (cancelled) {
-        imageTiles.forEach((texture) => texture.dispose());
+        loadedImages.forEach((texture) => texture?.dispose());
         return;
       }
-      loadedTextures.push(...imageTiles);
+      const replacement = loadedImages.find(Boolean) ?? blankTexture();
+      const imageTiles = loadedImages.map((texture) => texture ?? replacement);
+      loadedTextures.push(...new Set(imageTiles));
       const textTextures = items.map((item) => createTextTexture(item.title, item.year, defaultConfig.textColor));
       loadedTextures.push(...textTextures);
       imageAtlas = createTextureAtlas(imageTiles, false);
@@ -452,7 +467,7 @@ function ArtGalleryScene({ images, items, cellSize, zoomLevel, showHint, reduced
       <div ref={containerRef} className="absolute inset-0" style={{ opacity: ready ? 1 : 0 }} />
       {!ready ? (
         <div className="absolute inset-0 z-20 flex items-center justify-center bg-black text-white" role="status" aria-live="polite">
-          <RipplePulseLoader size={150} />
+          <LoaderGooeyBlobs />
         </div>
       ) : null}
       {ready && showHint ? (

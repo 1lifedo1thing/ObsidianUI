@@ -43,3 +43,6 @@ next-env.d.ts
 
 # external temp downloads
 UK1Sb-ZRte2Iv3pphsfge-files*
+
+# local v-prism recreation source kept outside the published repository
+/v-prism-recreate-by-athrix/

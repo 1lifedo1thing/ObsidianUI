@@ -34,7 +34,7 @@ Request any published page with Accept: text/markdown or read its direct Markdow
 ## Components
 
 - [Hover Image](https://www.obsidianui.dev/markdown/docs/hover-img.md): [download all source files](https://www.obsidianui.dev/r/hover-img.json) and [interactive preview](https://www.obsidianui.dev/docs/hover-img).
-- [Pixelated Carousel](https://www.obsidianui.dev/markdown/docs/pixelated-carousel.md): [download all source files](https://www.obsidianui.dev/r/pixelated-carousel.json) and [interactive preview](https://www.obsidianui.dev/docs/pixelated-carousel).
+- [v-prism](https://www.obsidianui.dev/markdown/docs/v-prism.md): [download all source files](https://www.obsidianui.dev/r/v-prism.json) and [interactive preview](https://www.obsidianui.dev/docs/v-prism).
 - [Split Showcase](https://www.obsidianui.dev/markdown/docs/split-showcase.md): [download all source files](https://www.obsidianui.dev/r/split-showcase.json) and [interactive preview](https://www.obsidianui.dev/docs/split-showcase).
 - [Art Gallery](https://www.obsidianui.dev/markdown/docs/art-gallery.md): [download all source files](https://www.obsidianui.dev/r/art-gallery.json) and [interactive preview](https://www.obsidianui.dev/docs/art-gallery).
 - [Flip Text](https://www.obsidianui.dev/markdown/docs/flip-text.md): [download all source files](https://www.obsidianui.dev/r/flip-text.json) and [interactive preview](https://www.obsidianui.dev/docs/flip-text).
@@ -75,6 +75,7 @@ Request any published page with Accept: text/markdown or read its direct Markdow
 - [kbd](https://www.obsidianui.dev/r/kbd.json): Complete registry:ui source and dependencies.
 - [label](https://www.obsidianui.dev/r/label.json): Complete registry:ui source and dependencies.
 - [liquid-metal](https://www.obsidianui.dev/r/liquid-metal.json): Complete registry:block source and dependencies.
+- [loaders-gooey-blobs](https://www.obsidianui.dev/r/loaders-gooey-blobs.json): Complete registry:ui source and dependencies.
 - [menubar](https://www.obsidianui.dev/r/menubar.json): Complete registry:ui source and dependencies.
 - [navigation-menu](https://www.obsidianui.dev/r/navigation-menu.json): Complete registry:ui source and dependencies.
 - [pagination](https://www.obsidianui.dev/r/pagination.json): Complete registry:ui source and dependencies.
@@ -85,7 +86,6 @@ Request any published page with Accept: text/markdown or read its direct Markdow
 - [radio-group](https://www.obsidianui.dev/r/radio-group.json): Complete registry:ui source and dependencies.
 - [raised-button](https://www.obsidianui.dev/r/raised-button.json): Complete registry:ui source and dependencies.
 - [resizable](https://www.obsidianui.dev/r/resizable.json): Complete registry:ui source and dependencies.
-- [ripple-pulse-loader](https://www.obsidianui.dev/r/ripple-pulse-loader.json): Complete registry:ui source and dependencies.
 - [scroll-area](https://www.obsidianui.dev/r/scroll-area.json): Complete registry:ui source and dependencies.
 - [select](https://www.obsidianui.dev/r/select.json): Complete registry:ui source and dependencies.
 - [separator](https://www.obsidianui.dev/r/separator.json): Complete registry:ui source and dependencies.
