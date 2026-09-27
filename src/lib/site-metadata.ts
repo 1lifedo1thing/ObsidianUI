@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { r2 } from "@/lib/r2";
 
 export const siteTitle = "ObsidianUI - React & Tailwind CSS Components Library";
-export const siteDescription = "ObsidianUI is React component library featuring components,blocks, and landing page templates build with Motion and Tailwind CSS.";
+export const siteDescription = "ObsidianUI is React & Tailwind CSS Component Library featuring components, blocks, and landing page templates.";
 
 export const docsDescriptions: Record<string, string> = {
   "installation": "Create a Next.js project with TypeScript, Tailwind CSS, ESLint, and App Router for ObsidianUI components.",
