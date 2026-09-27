@@ -19,10 +19,6 @@ Largest logo on the sponsors page, home page, and README; a shoutout on X; and a
 
 Larger logo on the sponsors page and README, a logo on the home page, a shoutout on X, and a direct line for feedback and requests.
 
-### Silver — $50/month
-
-Logo in the README and a direct line for feedback and requests.
-
 ## How to become a sponsor
 
 [Compare sponsorship tiers](https://www.obsidianui.dev/sponsors#tiers). Select a tier to contact Atharv by email, X, or Telegram. Open sponsor slots link to the pricing section.

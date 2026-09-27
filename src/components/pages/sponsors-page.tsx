@@ -44,22 +44,11 @@ const tiers = [
       "Direct line for feedback and requests",
     ],
   },
-  {
-    id: "silver",
-    name: "Silver",
-    price: 50,
-    featured: false,
-    perks: [
-      "Logo in the README",
-      "Direct line for feedback and requests",
-    ],
-  },
 ] as const;
 
 const pricingTiers = [
-  tiers[1], // Gold ($100/month) - Left box
-  tiers[0], // Platinum ($150/month, "Most impact") - Center box
-  tiers[2], // Silver ($50/month) - Right box
+  tiers[1],
+  tiers[0],
 ] as const;
 
 function SponsorCta({
@@ -439,7 +428,7 @@ export default function SponsorsPage() {
           <span>Sponsors</span>
         </div>
         {tiers.map((tier) => {
-          const count = tier.id === "platinum" ? 2 : tier.id === "gold" ? 3 : 4;
+          const count = tier.id === "platinum" ? 2 : 3;
           return (
             <div className="obsidianui-sponsor-group" key={tier.id}>
               <h2>{tier.name}</h2>

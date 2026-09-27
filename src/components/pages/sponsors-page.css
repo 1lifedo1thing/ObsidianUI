@@ -30,7 +30,6 @@
 .obsidianui-sponsor-hero-slots .obsidianui-sponsor-slot + .obsidianui-sponsor-slot { margin-block-start: 1.5rem; }
 .obsidianui-sponsor-hero-slots .obsidianui-sponsor-slot-platinum { height: 9.5rem; }
 .obsidianui-sponsor-hero-slots .obsidianui-sponsor-slot-gold { width: 88%; justify-self: end; height: 7.5rem; }
-.obsidianui-sponsor-hero-slots .obsidianui-sponsor-slot-silver { width: 76%; justify-self: end; height: 5.75rem; }
 .obsidianui-sponsor-slot { border: 0; cursor: pointer; font: inherit; }
 .obsidianui-sponsor-cta { display: flex; min-height: 3rem; align-items: center; justify-content: center; border-radius: 16px; padding: .75rem 1.5rem; background: var(--sponsor-accent); color: #0f172a; font-size: .875rem; font-weight: 500; text-decoration: none; transition: background-color 150ms ease-out; }
 .obsidianui-sponsor-cta:hover { background: #60a5fa; }
@@ -84,7 +83,6 @@
 .obsidianui-sponsor-slot:hover { background: color-mix(in srgb, var(--sponsor-card), var(--foreground) 4%); }
 .obsidianui-sponsor-slot-platinum { width: calc((100% - 1rem) / 2); height: 11rem; }
 .obsidianui-sponsor-slot-gold { width: calc((100% - 2rem) / 3); height: 8rem; }
-.obsidianui-sponsor-slot-silver { width: calc((100% - 3rem) / 4); height: 6rem; }
 .obsidianui-slot-label { display: grid; overflow: hidden; font-size: .875rem; font-weight: 500; }
 .obsidianui-slot-label > span { grid-area: 1 / 1; display: flex; align-items: center; justify-content: center; gap: .625rem; text-align: center; transition: transform 200ms cubic-bezier(.215,.61,.355,1), opacity 200ms; }
 .obsidianui-slot-label svg { width: 1rem; height: 1rem; flex-shrink: 0; }
@@ -96,7 +94,7 @@
 .obsidianui-sponsor-section-heading { max-width: 42rem; text-align: center; }
 .obsidianui-sponsor-section-heading h2 { margin: 0; font-size: clamp(1.875rem, 3vw, 2.25rem); font-weight: 700; letter-spacing: -.035em; line-height: 1.2; text-wrap: balance; }
 .obsidianui-sponsor-section-heading p { margin: .75rem 0 0; color: var(--muted-foreground); font-size: 1.125rem; font-weight: 500; line-height: 1.6; text-wrap: balance; }
-.obsidianui-sponsor-price-grid { display: grid; width: 100%; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; }
+.obsidianui-sponsor-price-grid { display: grid; width: 100%; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0; }
 .obsidianui-sponsor-price-slot { position: relative; min-width: 0; }
 .obsidianui-sponsor-price-slot + .obsidianui-sponsor-price-slot::before { position: absolute; z-index: 1; inset-block: 1.75rem; inset-inline-start: 0; border-inline-start: 2px dotted #a1a1aa; content: ""; pointer-events: none; transition: opacity 250ms ease-out; }
 .obsidianui-sponsor-price-card { position: relative; display: flex; height: 100%; flex-direction: column; gap: 1.5rem; border-radius: 0; padding: 1.75rem; background: var(--sponsor-card); }
@@ -356,7 +354,6 @@
 .obsidianui-sponsor-contact p { max-width: 36rem; margin: 0; color: var(--muted-foreground); font-weight: 500; line-height: 1.6; text-wrap: balance; }
 .obsidianui-sponsor-contact > div { display: flex; flex-wrap: wrap; justify-content: center; gap: .75rem; margin-top: .5rem; }
 .obsidianui-sponsor-contact .obsidianui-sponsor-cta { min-width: 11rem; }
-@media (max-width: 1023px) { .obsidianui-sponsor-slot-silver { width: 40%; } }
 @media (max-width: 767px) {
   .obsidianui-sponsor-price-grid { grid-template-columns: 1fr; }
   .obsidianui-sponsor-price-slot + .obsidianui-sponsor-price-slot::before { inset: 0 1.75rem auto; border-inline-start: 0; border-top: 2px dotted #a1a1aa; }
@@ -368,7 +365,7 @@
   .obsidianui-sponsor-platform { padding-bottom: 5rem; }
 }
 @media (max-width: 767px) { .obsidianui-sponsor-hero-wrap { padding: 6px 6px 2rem; } .obsidianui-sponsor-hero { min-height: 550px; border-radius: 24px; } .obsidianui-sponsor-hero-content { padding-bottom: 10rem; } .obsidianui-sponsor-hero-partners { top: 3rem; bottom: auto; left: 1rem; right: auto; width: auto; gap: .5rem; justify-items: start; text-align: left; } .obsidianui-sponsor-hero-partners > a { width: 12rem; } .obsidianui-sponsor-hero-slots { top: 3rem; right: 1rem; left: auto; width: 12rem; } .obsidianui-sponsor-watermark { bottom: -10%; } }
-@media (max-width: 639px) { .obsidianui-sponsor-hero-content { gap: .75rem; padding-inline: 1rem; } .obsidianui-sponsor-hero p { font-size: 1rem; } .obsidianui-sponsor-watermark { bottom: -10%; } .obsidianui-sponsor-container { padding-inline: 1.25rem; } .obsidianui-sponsor-stat { padding: 2rem 1rem; } .obsidianui-sponsor-slot { width: 100%; } .obsidianui-sponsor-slot-platinum { height: 8rem; } .obsidianui-sponsor-slot-silver { height: 5rem; } .obsidianui-sponsor-section-heading p { font-size: 1rem; } }
+@media (max-width: 639px) { .obsidianui-sponsor-hero-content { gap: .75rem; padding-inline: 1rem; } .obsidianui-sponsor-hero p { font-size: 1rem; } .obsidianui-sponsor-watermark { bottom: -10%; } .obsidianui-sponsor-container { padding-inline: 1.25rem; } .obsidianui-sponsor-stat { padding: 2rem 1rem; } .obsidianui-sponsor-slot { width: 100%; } .obsidianui-sponsor-slot-platinum { height: 8rem; } .obsidianui-sponsor-section-heading p { font-size: 1rem; } }
 @media (max-width: 1100px) { .obsidianui-sponsor-hero { height: auto; max-height: none; } .obsidianui-sponsor-hero-content { padding-top: 27rem; padding-bottom: 4rem; } .obsidianui-sponsor-hero-partners > span + a { margin-block-start: 2rem; } .obsidianui-sponsor-hero-partners > a + a { margin-block-start: 3rem; } .obsidianui-sponsor-hero-slots > span + .obsidianui-sponsor-slot { margin-block-start: 2rem; } .obsidianui-sponsor-hero-slots .obsidianui-sponsor-slot + .obsidianui-sponsor-slot { margin-block-start: 1.25rem; } }
 @media (max-width: 767px) { .obsidianui-sponsor-hero-content { padding-top: 22rem; } .obsidianui-sponsor-tracwell-logo { gap: .5rem; font-size: 2.1875rem; } .obsidianui-sponsor-tracwell-logo > svg { width: 2.6875rem; height: 2.6875rem; } }
 /* Keep hero groups in flow when the desktop side columns no longer fit. */
@@ -384,7 +381,6 @@
   .obsidianui-sponsor-hero-slots .obsidianui-sponsor-slot { height: auto; padding: 1rem; }
   .obsidianui-sponsor-hero-slots .obsidianui-sponsor-slot-platinum { min-height: 9.5rem; }
   .obsidianui-sponsor-hero-slots .obsidianui-sponsor-slot-gold { min-height: 7.5rem; }
-  .obsidianui-sponsor-hero-slots .obsidianui-sponsor-slot-silver { min-height: 5.75rem; }
 }
 .obsidianui-slot-name-mobile { display: none; }
 .obsidianui-slot-name-desktop { display: inline; }
@@ -400,8 +396,7 @@
   .obsidianui-sponsor-hero-partners > span + a, .obsidianui-sponsor-hero-partners > a + a { margin-block-start: 0; }
   .obsidianui-sponsor-hero-partners .obsidianui-sponsor-tracwell-logo { font-size: 2.35rem; gap: .5rem; line-height: 1; }
   .obsidianui-sponsor-hero-partners .obsidianui-sponsor-tracwell-logo > svg { width: 2.35rem; height: 2.35rem; }
-  .obsidianui-sponsor-hero-slots .obsidianui-sponsor-slot-gold,
-  .obsidianui-sponsor-hero-slots .obsidianui-sponsor-slot-silver {
+  .obsidianui-sponsor-hero-slots .obsidianui-sponsor-slot-gold {
     display: none;
   }
   .obsidianui-slot-name-desktop {

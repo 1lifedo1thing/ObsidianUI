@@ -1,9 +1,9 @@
-import type { Metadata } from "next";
+import { createPageMetadata } from "@/lib/site-metadata";
 
-export const metadata: Metadata = {
-  title: "Component Playground | ObsidianUI",
-  description: "Explore interactive ObsidianUI registry component previews.",
-  alternates: { canonical: "/playground" },
-};
+export const metadata = createPageMetadata(
+  "Component Playground | ObsidianUI",
+  "Try interactive ObsidianUI component previews and explore the source behind each experiment.",
+  "/playground",
+);
 
 export { default } from "@/components/pages/playground-page";

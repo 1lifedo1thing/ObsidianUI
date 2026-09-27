@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { siteAnnouncement } from "@/lib/site-announcement";
 import { Analytics } from "@vercel/analytics/react";
 import { Inter, Geist, Inter_Tight, Pixelify_Sans, Playfair_Display, Six_Caps } from "next/font/google";
 import "./globals.css";
@@ -9,6 +8,7 @@ import Footer from "@/components/landing/footer";
 import { ClickSpark } from "@/components/block/click-spark";
 import { SiteHeader } from "@/components/site/site-header";
 import { r2 } from "@/lib/r2";
+import { siteDescription, siteTitle } from "@/lib/site-metadata";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -53,10 +53,8 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: "ObsidianUI - A New Level of UI",
-  description:
-    "Atharv is taking ObsidianUI in a new direction: a next-level UI library for a world where AI can create familiar components in minutes. Stay tuned.",
-  other: { announcement: siteAnnouncement },
+  title: siteTitle,
+  description: siteDescription,
   keywords: [
     "React",
     "Next.js",
@@ -79,9 +77,8 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     url: "https://www.obsidianui.dev",
-    title: "ObsidianUI - A New Level of UI",
-    description:
-      "Atharv is taking ObsidianUI in a new direction: a next-level UI library for a world where AI can create familiar components in minutes. Stay tuned.",
+    title: siteTitle,
+    description: siteDescription,
     siteName: "ObsidianUI",
     images: [
       {
@@ -90,16 +87,15 @@ export const metadata: Metadata = {
         width: 1917,
         height: 1078,
         type: "image/png",
-        alt: "ObsidianUI - Design Less. Ship Better.",
+        alt: siteTitle,
       },
     ],
     locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
-    title: "ObsidianUI - A New Level of UI",
-    description:
-      "Atharv is taking ObsidianUI in a new direction: a next-level UI library for a world where AI can create familiar components in minutes. Stay tuned.",
+    title: siteTitle,
+    description: siteDescription,
     site: "@athrix_codes",
     creator: "@athrix_codes",
     images: [
@@ -107,7 +103,7 @@ export const metadata: Metadata = {
         url: r2("/og-image.png"),
         width: 1917,
         height: 1078,
-        alt: "ObsidianUI - Design Less. Ship Better.",
+        alt: siteTitle,
       },
     ],
   },
@@ -147,7 +143,7 @@ const jsonLd = {
       "@id": "https://www.obsidianui.dev/#website",
       url: "https://www.obsidianui.dev",
       name: "ObsidianUI",
-      description: "Atharv is taking ObsidianUI in a new direction: a next-level UI library for a world where AI can create familiar components in minutes. Stay tuned.",
+      description: siteDescription,
       publisher: { "@id": "https://www.obsidianui.dev/#organization" },
     },
     {
@@ -170,7 +166,7 @@ const jsonLd = {
       name: "ObsidianUI",
       applicationCategory: "DeveloperApplication",
       operatingSystem: "Web",
-      description: "Atharv is taking ObsidianUI in a new direction: a next-level UI library for a world where AI can create familiar components in minutes. Stay tuned.",
+      description: siteDescription,
       offers: {
         "@type": "Offer",
         price: "0",

@@ -1,3 +1,9 @@
 import { DeveloperResourcePage } from "@/components/pages/developer-resource-page";
-export const metadata = { title: "ObsidianUI MCP Server Documentation", description: "Connect coding agents to ObsidianUI component source through the local stdio MCP resources server.", alternates: { canonical: "/mcp" } };
+import { createPageMetadata } from "@/lib/site-metadata";
+
+export const metadata = createPageMetadata(
+  "MCP Server | ObsidianUI",
+  "Connect coding agents to ObsidianUI component source with the local stdio MCP server.",
+  "/mcp",
+);
 export default function Page() { return <DeveloperResourcePage pathname="/mcp" />; }

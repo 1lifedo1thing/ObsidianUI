@@ -1,20 +1,13 @@
-import type { Metadata } from "next";
 import SponsorsPage from "@/components/pages/sponsors-page";
-import { r2 } from "@/lib/r2";
+import { createPageMetadata } from "@/lib/site-metadata";
 
 const title = "Sponsors | ObsidianUI";
-const description = "Sponsor ObsidianUI, an open-source React UI library. Explore Platinum ($150/month), Gold ($100/month), and Silver ($50/month), or ask about a custom package.";
+const description = "Sponsor ObsidianUI, an open-source React UI library. Explore Platinum ($150/month) and Gold ($100/month), or ask about a custom package.";
 const url = "https://www.obsidianui.dev/sponsors";
 
-export const metadata: Metadata = {
-  title,
-  description,
+export const metadata = {
+  ...createPageMetadata(title, description, "/sponsors"),
   alternates: { canonical: url, types: { "text/markdown": "https://www.obsidianui.dev/markdown/sponsors.md" } },
-  openGraph: {
-    type: "website", title, description, url, siteName: "ObsidianUI",
-    images: [{ url: r2("/og-image.png"), width: 1917, height: 1078, alt: "ObsidianUI — open-source React components" }],
-  },
-  twitter: { card: "summary_large_image", title, description, images: [r2("/og-image.png")] },
 };
 
 export default function Page() {

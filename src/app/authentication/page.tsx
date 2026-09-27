@@ -1,3 +1,9 @@
 import { DeveloperResourcePage } from "@/components/pages/developer-resource-page";
-export const metadata = { title: "ObsidianUI Authentication Documentation", description: "No API key or account is needed to access ObsidianUI public documentation and component downloads.", alternates: { canonical: "/authentication" } };
+import { createPageMetadata } from "@/lib/site-metadata";
+
+export const metadata = createPageMetadata(
+  "Authentication | ObsidianUI",
+  "Access ObsidianUI public documentation and component downloads without an account or API key.",
+  "/authentication",
+);
 export default function Page() { return <DeveloperResourcePage pathname="/authentication" />; }

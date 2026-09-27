@@ -1,3 +1,9 @@
 import { DeveloperResourcePage } from "@/components/pages/developer-resource-page";
-export const metadata = { title: "ObsidianUI API Documentation", description: "Read the ObsidianUI component registry and Markdown documentation with the public API.", alternates: { canonical: "/api" } };
+import { createPageMetadata } from "@/lib/site-metadata";
+
+export const metadata = createPageMetadata(
+  "API Documentation | ObsidianUI",
+  "Read ObsidianUI component source and documentation through the public registry and Markdown API.",
+  "/api",
+);
 export default function Page() { return <DeveloperResourcePage pathname="/api" />; }

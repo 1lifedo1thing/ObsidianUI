@@ -1,9 +1,9 @@
-import type { Metadata } from "next";
+import { createPageMetadata } from "@/lib/site-metadata";
 
-export const metadata: Metadata = {
-  title: "Project One Template | ObsidianUI",
-  description: "Preview Project One, a conceptual fintech and Web3 landing page template.",
-  alternates: { canonical: "/project-one" },
-};
+export const metadata = createPageMetadata(
+  "Project One Template | ObsidianUI",
+  "Preview Project One, a landing page template for the creator economy built with React, Motion, and Tailwind CSS.",
+  "/project-one",
+);
 
 export { default } from "@/components/pages/project-one-page";

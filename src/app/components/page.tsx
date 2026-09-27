@@ -1,48 +1,12 @@
-import type { Metadata } from "next";
 import { ComponentsGrid } from "@/components/catalog/components-grid";
 import { ShowcaseHero } from "@/components/catalog/showcase-hero";
-import { r2 } from "@/lib/r2";
+import { createPageMetadata } from "@/lib/site-metadata";
 
-export const metadata: Metadata = {
-    title: "React UI Components | ObsidianUI",
-    description: "Browse premium React components with Tailwind CSS and Motion. Copy-paste ready, fully customizable UI components for your next project.",
-    openGraph: {
-        title: "React UI Components | ObsidianUI",
-        description: "Browse premium React components with Tailwind CSS and Motion.",
-        url: "https://www.obsidianui.dev/components",
-        siteName: "ObsidianUI",
-        locale: "en_US",
-        type: "website",
-        images: [
-            {
-                url: r2("/og-image.png"),
-                secureUrl: r2("/og-image.png"),
-                width: 1917,
-                height: 1078,
-                type: "image/png",
-                alt: "ObsidianUI - React UI Components",
-            },
-        ],
-    },
-    twitter: {
-        card: "summary_large_image",
-        title: "React UI Components | ObsidianUI",
-        description: "Browse premium React components with Tailwind CSS and Motion.",
-        site: "@athrix_codes",
-        creator: "@athrix_codes",
-        images: [
-            {
-                url: r2("/og-image.png"),
-                width: 1917,
-                height: 1078,
-                alt: "ObsidianUI - React UI Components",
-            },
-        ],
-    },
-    alternates: {
-        canonical: "https://www.obsidianui.dev/components",
-    },
-};
+export const metadata = createPageMetadata(
+    "React Components | ObsidianUI",
+    "Browse interactive React components built with Motion and Tailwind CSS. Preview each component, explore its details, and copy the source.",
+    "/components",
+);
 
 export default function ComponentsPage() {
     return (

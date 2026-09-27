@@ -1,9 +1,9 @@
-import type { Metadata } from "next";
+import { createPageMetadata } from "@/lib/site-metadata";
 
-export const metadata: Metadata = {
-  title: "Templates | ObsidianUI",
-  description: "Explore ObsidianUI website templates and their source code.",
-  alternates: { canonical: "/templates" },
-};
+export const metadata = createPageMetadata(
+  "Landing Page Templates | ObsidianUI",
+  "Explore ObsidianUI landing page templates built with React, Motion, and Tailwind CSS, with live previews and source links.",
+  "/templates",
+);
 
 export { default } from "@/components/pages/templates-page";

@@ -3,7 +3,7 @@ import { redirect } from 'next/navigation';
 import { generateStaticParamsFor, importPage } from 'nextra/pages';
 import { useMDXComponents as getMDXComponents } from '@/mdx-components';
 import { DocsCopyPage } from '@/components/docs/docs-copy-page';
-import { r2 } from '@/lib/r2';
+import { createPageMetadata, docsDescriptions } from '@/lib/site-metadata';
 
 type PageProps = { params: Promise<{ mdxPath?: string[] }> };
 export const generateStaticParams = generateStaticParamsFor('mdxPath');
@@ -17,45 +17,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     const { metadata } = await importPage(mdxPath);
     const pathname = '/docs' + (mdxPath?.length ? '/' + mdxPath.join('/') : '');
     const title = metadata.title ? `${metadata.title} – ObsidianUI` : 'Documentation – ObsidianUI';
-    const description = metadata.description || 'ObsidianUI documentation, component guides, and interactive examples.';
+    const slug = mdxPath?.at(-1) ?? '';
+    const description = metadata.description || docsDescriptions[slug] || 'Browse ObsidianUI documentation and component guides for React and Tailwind CSS.';
     return {
         ...metadata,
-        title,
-        description,
-        alternates: { canonical: pathname },
-        openGraph: {
-            title,
-            description,
-            url: pathname,
-            siteName: 'ObsidianUI',
-            locale: 'en_US',
-            type: 'article',
-            images: [
-                {
-                    url: r2('/og-image.png'),
-                    secureUrl: r2('/og-image.png'),
-                    width: 1917,
-                    height: 1078,
-                    type: 'image/png',
-                    alt: `${title} - ObsidianUI`,
-                },
-            ],
-        },
-        twitter: {
-            card: 'summary_large_image',
-            title,
-            description,
-            site: '@athrix_codes',
-            creator: '@athrix_codes',
-            images: [
-                {
-                    url: r2('/og-image.png'),
-                    width: 1917,
-                    height: 1078,
-                    alt: `${title} - ObsidianUI`,
-                },
-            ],
-        },
+        ...createPageMetadata(title, description, pathname, 'article'),
     };
 }
 
