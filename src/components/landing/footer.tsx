@@ -6,7 +6,7 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import "./footer.css";
 
-const repository = "https://gitlab.com/Atharvsinh-codez/ObsidianUI";
+const repository = "https://github.com/Atharvsinh-codez/ObsidianUI";
 
 const columns = [
   {
@@ -23,15 +23,15 @@ const columns = [
     title: "Socials",
     links: [
       { title: "X / Twitter", href: "https://x.com/athrix_codes" },
-      { title: "GitLab", href: repository },
+      { title: "GitHub", href: repository },
     ],
   },
   {
     title: "Open Source",
     links: [
       { title: "Source code", href: repository },
-      { title: "MIT license", href: `${repository}/-/blob/main/LICENSE` },
-      { title: "Report an issue", href: `${repository}/-/issues` },
+      { title: "MIT license", href: `${repository}/blob/main/LICENSE` },
+      { title: "Report an issue", href: `${repository}/issues` },
     ],
   },
   {

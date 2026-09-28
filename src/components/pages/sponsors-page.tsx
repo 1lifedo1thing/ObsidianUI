@@ -408,7 +408,7 @@ export default function SponsorsPage() {
       <section className="obsidianui-sponsor-container obsidianui-sponsor-stats" aria-label="About ObsidianUI">
         <div ref={statsRef} className="obsidianui-sponsor-stats-grid t-avatar-group" onPointerLeave={() => moveCards(statsRef.current, null)} onPointerCancel={() => moveCards(statsRef.current, null)}>
           {[
-            { value: "Open source", label: "Built in public on GitLab" },
+            { value: "Open source", label: "Built in public on GitHub" },
             { value: "40+", label: "Components" },
             { value: "Free", label: "Available to everyone" },
             { value: "150k+", label: "Pageviews last 7 days" },

@@ -32,8 +32,8 @@ Each registry item includes its source files, local dependencies, installation t
 
 The repository is MIT licensed. Third-party assets and dependencies retain their own licenses; use your own media when adapting examples.
 
-[Source code](https://gitlab.com/Atharvsinh-codez/ObsidianUI)
+[Source code](https://github.com/Atharvsinh-codez/ObsidianUI)
 
-[MIT license](https://gitlab.com/Atharvsinh-codez/ObsidianUI/-/blob/main/LICENSE)
+[MIT license](https://github.com/Atharvsinh-codez/ObsidianUI/blob/main/LICENSE)
 
-[Report an issue](https://gitlab.com/Atharvsinh-codez/ObsidianUI/-/issues)
+[Report an issue](https://github.com/Atharvsinh-codez/ObsidianUI/issues)

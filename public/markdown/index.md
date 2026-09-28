@@ -22,4 +22,4 @@ Read [the agent instructions](https://www.obsidianui.dev/agent-instructions.md) 
 
 ## Open source
 
-ObsidianUI is MIT licensed. Keep the license notice where required; third-party dependencies and external media have their own licenses. [Source repository](https://gitlab.com/Atharvsinh-codez/ObsidianUI).
+ObsidianUI is MIT licensed. Keep the license notice where required; third-party dependencies and external media have their own licenses. [Source repository](https://github.com/Atharvsinh-codez/ObsidianUI).

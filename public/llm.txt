@@ -119,4 +119,4 @@ Request any published page with Accept: text/markdown or read its direct Markdow
 ## Optional
 
 - [All documentation in one file](https://www.obsidianui.dev/llms-full.txt): Complete Markdown documentation and source blocks; use individual documents to keep context small.
-- [Source repository](https://gitlab.com/Atharvsinh-codez/ObsidianUI): Source, contribution history, and MIT license.
+- [Source repository](https://github.com/Atharvsinh-codez/ObsidianUI): Source, contribution history, and MIT license.

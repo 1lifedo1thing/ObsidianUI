@@ -13,14 +13,14 @@ The repository includes an MCP server in scripts/mcp-server.ts. It uses stdio tr
 Clone the repository, install its dependencies, and generate the component registry. Configure your MCP client to launch npm run mcp with this checkout as its working directory.
 
 ```bash
-git clone https://gitlab.com/Atharvsinh-codez/ObsidianUI.git
+git clone https://github.com/Atharvsinh-codez/ObsidianUI.git
 cd ObsidianUI
 npm ci
 npm run registry:build
 npm run mcp
 ```
 
-[MCP server source](https://gitlab.com/Atharvsinh-codez/ObsidianUI/-/blob/main/scripts/mcp-server.ts)
+[MCP server source](https://github.com/Atharvsinh-codez/ObsidianUI/blob/main/scripts/mcp-server.ts)
 
 ## Read component resources
 

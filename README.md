@@ -1,18 +1,19 @@
 <div align="center">
-<a href="https://www.obsidianui.dev">
-  <img
-    src="https://cdn-new.obsidianui.dev/og-image.png"
-    alt="ObsidianUI - React & Tailwind CSS Components Library"
-    width="100%"
-  />
-</a></div>
+  <a href="https://www.obsidianui.dev">
+    <img
+      src="https://cdn-new.obsidianui.dev/og-image.png"
+      alt="ObsidianUI - React & Tailwind CSS Components Library"
+      width="100%"
+    />
+  </a>
+</div>
 
 <div align="center">
 
 # ObsidianUI
 
 **Design Less. Ship Better.**  
-ObsidianUI is React component library featuring 30+ components, blocks, and landing page templates build with Motion and Tailwind CSS.
+ObsidianUI is React & Tailwind CSS Component Library featuring components, blocks, and landing page templates.
 
 <p align="center">
   <img src="https://img.shields.io/badge/Next.js_16-0a0a0a?logo=nextdotjs&logoColor=white" alt="Next.js" />
@@ -27,50 +28,43 @@ ObsidianUI is React component library featuring 30+ components, blocks, and land
 
 </div>
 
-<br />
+## What you can build
 
----
-
-### Highlights & Features
-
-- **Reusable Components, Blocks, and Templates**: Interactive interface effects and complete landing page templates like Project One.
-- **Added AI Agents MCP Server**: Native Model Context Protocol server (`npm run mcp`), `llms.txt`, and markdown endpoints (`Accept: text/markdown`) so AI coding agents (Claude, Cursor, Copilot, Antigravity) can seamlessly discover and install components.
-- **Redesigned UI & Design System**: Sleek obsidian dark/light interface, smooth Lenis scrolling, micro-interactions, and accessible motion controls.
-- **Zero Lock-in & shadcn CLI Compatible**: 100% owned source code installed directly into your project via `npx shadcn add` or copy-paste, restyled with Tailwind CSS.
-
----
+- **Interactive components:** Preview each effect, read its usage guide, and install the complete source in your React project.
+- **Landing page templates:** Explore [Project One](https://www.obsidianui.dev/project-one) and the [template gallery](https://www.obsidianui.dev/templates).
+- **Your own source:** Registry installs add editable files to your project, including the styles and local helpers a component needs.
+- **Agent access:** Use [`llms.txt`](https://www.obsidianui.dev/llms.txt), Markdown documentation, the [public registry](https://www.obsidianui.dev/r/registry.json), or the local MCP server.
 
 ## Quick start
 
-Install any component directly into your project using the shadcn CLI:
+Choose a component from the [showcase](https://www.obsidianui.dev/components), then install it with the shadcn CLI. For example:
 
 ```bash
-npx shadcn@latest add "https://www.obsidianui.dev/r/{component-name}.json"
+npx shadcn@latest add "https://www.obsidianui.dev/r/hover-img.json"
 ```
 
-### Examples
+For the interactive prism:
 
-**Spotlight Card**
 ```bash
-npx shadcn@latest add "https://www.obsidianui.dev/r/spotlight-card.json"
+npx shadcn@latest add "https://www.obsidianui.dev/r/v-prism.json"
 ```
 
-Browse every component, with live interactive previews and props, at [obsidianui.dev/components](https://www.obsidianui.dev/components).
+Each component page includes a preview, installation steps, and source files. Install the listed dependencies when copying files manually.
 
 ## Running locally
 
 ```bash
 git clone https://github.com/Atharvsinh-codez/ObsidianUI.git
 cd ObsidianUI
-npm install
+npm ci
 npm run dev
 ```
 
 Open [localhost:3000](http://localhost:3000) in your browser.
 
-- **Primitives**: `src/components/ui` (shadcn & Radix primitives)
-- **Blocks & Effects**: `src/components/block` (interactive effects, canvas, WebGL, shaders, motion components)
-- **Documentation**: `src/content` (MDX component guides and examples)
+- **Primitives:** `src/components/ui`
+- **Blocks and effects:** `src/components/block`
+- **Documentation:** `src/content`
 
 After updating a component or registry source, rebuild the registry output with `npm run registry:build`.
 
@@ -88,7 +82,17 @@ After updating a component or registry source, rebuild the registry output with 
 | `npm test` | Run unit and component test suites |
 | `npm run check` | Run lint, types, tests, and production build |
 
-## Contributing.
+## Star History
+
+<a href="https://www.star-history.com/?repos=atharvsinh-codez%2Fobsidianui&type=date&legend=top-left">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/chart?repos=atharvsinh-codez/obsidianui&type=date&theme=dark&legend=top-left" />
+    <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/chart?repos=atharvsinh-codez/obsidianui&type=date&legend=top-left" />
+    <img alt="Star History Chart" src="https://api.star-history.com/chart?repos=atharvsinh-codez/obsidianui&type=date&legend=top-left" />
+  </picture>
+</a>
+
+## Contributing
 
 Issues and pull requests are welcome. Read [CONTRIBUTING.md](CONTRIBUTING.md) for the full walkthrough, from creating a component to a working install command.
 

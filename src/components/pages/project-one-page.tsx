@@ -1,7 +1,7 @@
 
 import Link from "next/link";
 import { ArrowUpRight, Check, Zap } from "lucide-react";
-import { FaGithub } from "react-icons/fa";
+import { GitHubIcon } from "@/components/site/github-icon";
 import { PreviewVideo } from "@/components/media/preview-video";
 
 const project = {
@@ -45,7 +45,7 @@ export default function ProjectOnePage() {
                                     className="w-10 h-10 rounded-full border border-zinc-200 dark:border-zinc-800 flex items-center justify-center text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white hover:border-zinc-300 dark:hover:border-zinc-700 transition-colors bg-white dark:bg-zinc-900"
                                     aria-label="View on GitHub"
                                 >
-                                    <FaGithub className="w-5 h-5" />
+                                    <GitHubIcon className="w-5 h-5" />
                                 </Link>
                             </div>
                         </div>

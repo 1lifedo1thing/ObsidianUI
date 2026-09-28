@@ -35,4 +35,4 @@ Use the returned HTTP status. A missing page or component is not a valid empty d
 
 ## License
 
-ObsidianUI's repository is MIT licensed. Preserve the copyright and license notice when required. Third-party packages and media retain their own licenses; a component demo does not transfer rights to external assets. [Repository license](https://gitlab.com/Atharvsinh-codez/ObsidianUI/-/blob/main/LICENSE).
+ObsidianUI's repository is MIT licensed. Preserve the copyright and license notice when required. Third-party packages and media retain their own licenses; a component demo does not transfer rights to external assets. [Repository license](https://github.com/Atharvsinh-codez/ObsidianUI/blob/main/LICENSE).

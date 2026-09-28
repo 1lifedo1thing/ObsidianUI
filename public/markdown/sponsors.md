@@ -33,4 +33,4 @@ Looking for tailored brand placements, co-branded interactive components, or cus
 
 - [Sponsors page](https://www.obsidianui.dev/sponsors)
 - [Explore components](https://www.obsidianui.dev/components)
-- [Source repository](https://gitlab.com/Atharvsinh-codez/ObsidianUI)
+- [Source repository](https://github.com/Atharvsinh-codez/ObsidianUI)

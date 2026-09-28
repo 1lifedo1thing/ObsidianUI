@@ -19,7 +19,7 @@ describe("site footer", () => {
     expect(screen.getByRole("link", { name: "Developers" })).toHaveAttribute("href", "/developers");
     expect(screen.getByRole("link", { name: "CLI" })).toHaveAttribute("href", "/docs/cli");
     expect(screen.getByRole("link", { name: "MIT license" }))
-      .toHaveAttribute("href", "https://gitlab.com/Atharvsinh-codez/ObsidianUI/-/blob/main/LICENSE");
+      .toHaveAttribute("href", "https://github.com/Atharvsinh-codez/ObsidianUI/blob/main/LICENSE");
     expect(screen.getByRole("link", { name: "Built by Atharv" })).toHaveAttribute("href", "https://athrix.me");
     for (const link of screen.getAllByRole("link")) {
       expect(link.getAttribute("href")).not.toBe("#");

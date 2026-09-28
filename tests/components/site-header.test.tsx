@@ -22,7 +22,7 @@ async function renderHeader() {
     // Exercise real Next links and Radix sheets without jsdom page navigation.
     if ((event.target as Element).closest("a")) event.preventDefault();
   }}><SiteHeader /></div>);
-  await screen.findByRole("link", { name: "View ObsidianUI on GitLab, 42 stars" });
+  await screen.findByRole("link", { name: "View ObsidianUI on GitHub, 42 stars" });
   return rendered;
 }
 
@@ -34,13 +34,13 @@ describe("shared site header", () => {
     controls.push.mockClear();
     vi.stubGlobal("fetch", vi.fn().mockResolvedValue({
       ok: true,
-      json: async () => ({ star_count: 42 }),
+      json: async () => ({ stargazers_count: 42 }),
     }));
   });
 
   afterEach(() => vi.unstubAllGlobals());
 
-  it("offers the product destinations and the correct author and GitLab links", async () => {
+  it("offers the product destinations and the correct author and GitHub links", async () => {
     await renderHeader();
     const nav = within(screen.getByRole("navigation", { name: "Main navigation" }));
     expect(nav.getByRole("link", { name: "Home" })).toHaveAttribute("href", "/");
@@ -52,8 +52,8 @@ describe("shared site header", () => {
     expect(author).toHaveAttribute("href", "https://athrix.me");
     expect(author).toHaveAttribute("target", "_blank");
     expect(author).toHaveAttribute("rel", "noopener noreferrer");
-    expect(screen.getByRole("link", { name: "View ObsidianUI on GitLab, 42 stars" }))
-      .toHaveAttribute("href", "https://gitlab.com/Atharvsinh-codez/ObsidianUI");
+    expect(screen.getByRole("link", { name: "View ObsidianUI on GitHub, 42 stars" }))
+      .toHaveAttribute("href", "https://github.com/Atharvsinh-codez/ObsidianUI");
     expect(screen.getByRole("button", { name: "Open command menu" })).toBeEnabled();
   });
 

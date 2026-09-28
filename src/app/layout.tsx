@@ -156,7 +156,7 @@ const jsonLd = {
         url: r2("/logo/bg-less.png"),
       },
       sameAs: [
-        "https://gitlab.com/Atharvsinh-codez/ObsidianUI",
+        "https://github.com/Atharvsinh-codez/ObsidianUI",
         "https://x.com/athrix_codes",
       ],
     },

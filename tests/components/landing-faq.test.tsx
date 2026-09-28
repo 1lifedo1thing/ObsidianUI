@@ -27,7 +27,7 @@ describe("ObsidianUI landing FAQ", () => {
     expect(free).toHaveAttribute("aria-expanded", "true");
     const freeAnswer = screen.getByRole("region", { name: free.textContent! });
     expect(free).toHaveAttribute("aria-controls", freeAnswer.id);
-    expect(within(freeAnswer).getByRole("link", { name: "GitLab" })).toHaveAttribute("href", "https://gitlab.com/Atharvsinh-codez/ObsidianUI");
+    expect(within(freeAnswer).getByRole("link", { name: "GitHub" })).toHaveAttribute("href", "https://github.com/Atharvsinh-codez/ObsidianUI");
 
     await user.click(install);
     expect(free).toHaveAttribute("aria-expanded", "false");
@@ -67,7 +67,7 @@ describe("ObsidianUI landing FAQ", () => {
       expect(panel.textContent!.trim().length).toBeGreaterThan(70);
       for (const link of within(panel).queryAllByRole("link")) {
         const href = link.getAttribute("href")!;
-        expect(href).toMatch(/^(\/components|\/docs\/installation|https:\/\/(gitlab\.com\/Atharvsinh-codez\/ObsidianUI|athrix\.me|x\.com\/athrix_codes))/);
+        expect(href).toMatch(/^(\/components|\/docs\/installation|https:\/\/(github\.com\/Atharvsinh-codez\/ObsidianUI|athrix\.me|x\.com\/athrix_codes))/);
       }
     }
   });

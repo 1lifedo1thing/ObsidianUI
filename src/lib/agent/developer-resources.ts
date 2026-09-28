@@ -1,7 +1,7 @@
 import { siteAnnouncement } from "@/lib/site-announcement";
 
 export const ORIGIN = "https://www.obsidianui.dev";
-const repository = "https://gitlab.com/Atharvsinh-codez/ObsidianUI";
+const repository = "https://github.com/Atharvsinh-codez/ObsidianUI";
 
 export interface DeveloperResource {
   title: string;
@@ -43,7 +43,7 @@ export const developerResources: Record<string, DeveloperResource> = {
       {
         id: "source", title: "Source and support",
         paragraphs: ["The repository is MIT licensed. Third-party assets and dependencies retain their own licenses; use your own media when adapting examples."],
-        links: [{ title: "Source code", href: repository }, { title: "MIT license", href: `${repository}/-/blob/main/LICENSE` }, { title: "Report an issue", href: `${repository}/-/issues` }],
+        links: [{ title: "Source code", href: repository }, { title: "MIT license", href: `${repository}/blob/main/LICENSE` }, { title: "Report an issue", href: `${repository}/issues` }],
       },
     ],
   },
@@ -98,7 +98,7 @@ export const developerResources: Record<string, DeveloperResource> = {
         id: "setup", title: "Run the local MCP server",
         paragraphs: ["The repository includes an MCP server in scripts/mcp-server.ts. It uses stdio transport and exposes read-only resources. This documentation URL is not a hosted HTTP MCP endpoint.", "Clone the repository, install its dependencies, and generate the component registry. Configure your MCP client to launch npm run mcp with this checkout as its working directory."],
         code: `git clone ${repository}.git\ncd ObsidianUI\nnpm ci\nnpm run registry:build\nnpm run mcp`,
-        links: [{ title: "MCP server source", href: `${repository}/-/blob/main/scripts/mcp-server.ts` }],
+        links: [{ title: "MCP server source", href: `${repository}/blob/main/scripts/mcp-server.ts` }],
       },
       {
         id: "resources", title: "Read component resources",

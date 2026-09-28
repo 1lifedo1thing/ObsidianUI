@@ -5,7 +5,7 @@ import Link from "next/link";
 import { Plus } from "lucide-react";
 import "./landing-faq.css";
 
-const REPOSITORY = "https://gitlab.com/Atharvsinh-codez/ObsidianUI";
+const REPOSITORY = "https://github.com/Atharvsinh-codez/ObsidianUI";
 
 const sections = [
   {
@@ -15,12 +15,12 @@ const sections = [
       {
         id: "free",
         question: "Is ObsidianUI free and open source?",
-        answer: <>Yes. ObsidianUI is an open-source component library. Browse the previews, copy the source, and adapt the components to your project. The code is available on <a href={REPOSITORY}>GitLab</a>.</>,
+        answer: <>Yes. ObsidianUI is an open-source component library. Browse the previews, copy the source, and adapt the components to your project. The code is available on <a href={REPOSITORY}>GitHub</a>.</>,
       },
       {
         id: "commercial",
         question: "Can I use ObsidianUI in commercial projects?",
-        answer: <>The repository uses the MIT license. Keep its copyright and permission notice with copies of the software. Third-party assets and dependencies retain their own licenses; check those when using demo media. Read the <a href={`${REPOSITORY}/-/blob/main/LICENSE`}>license</a> for the full terms.</>,
+        answer: <>The repository uses the MIT license. Keep its copyright and permission notice with copies of the software. Third-party assets and dependencies retain their own licenses; check those when using demo media. Read the <a href={`${REPOSITORY}/blob/main/LICENSE`}>license</a> for the full terms.</>,
       },
       {
         id: "account",
@@ -30,7 +30,7 @@ const sections = [
       {
         id: "contribute",
         question: "How can I contribute to ObsidianUI?",
-        answer: <>Share a bug report, suggest a component, or open a merge request on <a href={REPOSITORY}>GitLab</a>. Include a clear description and a small example so others can understand and try your change.</>,
+        answer: <>Share a bug report, suggest a component, or open a pull request on <a href={REPOSITORY}>GitHub</a>. Include a clear description and a small example so others can understand and try your change.</>,
       },
     ],
   },
@@ -67,7 +67,7 @@ const sections = [
       {
         id: "bugs",
         question: "Where can I report a bug or request a component?",
-        answer: <>Open an <a href={`${REPOSITORY}/-/issues`}>issue on GitLab</a>. For bugs, include the component name, browser, framework version, and steps to reproduce the problem.</>,
+        answer: <>Open an <a href={`${REPOSITORY}/issues`}>issue on GitHub</a>. For bugs, include the component name, browser, framework version, and steps to reproduce the problem.</>,
       },
       {
         id: "updates",
