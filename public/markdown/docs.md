@@ -8,6 +8,7 @@ Installation guides and complete component source.
 - [CLI](https://www.obsidianui.dev/markdown/docs/cli.md)
 - [Hover Image](https://www.obsidianui.dev/markdown/docs/hover-img.md)
 - [v-prism](https://www.obsidianui.dev/markdown/docs/v-prism.md)
+- [404](https://www.obsidianui.dev/markdown/docs/404.md)
 - [Split Showcase](https://www.obsidianui.dev/markdown/docs/split-showcase.md)
 - [Art Gallery](https://www.obsidianui.dev/markdown/docs/art-gallery.md)
 - [Flip Text](https://www.obsidianui.dev/markdown/docs/flip-text.md)

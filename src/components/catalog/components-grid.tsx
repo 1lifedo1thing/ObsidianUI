@@ -12,6 +12,7 @@ import { newEffects } from './new-effects'
 import './components-grid.css'
 
 import FlipText from '@/components/block/flip-text'
+import { FourOhFour } from '@/components/block/404'
 import { HoverImg } from '@/components/block/hover-img'
 import { SplitShowcase, VercelLogo, TracwellLogo } from '@/components/block/split-showcase'
 
@@ -21,8 +22,11 @@ type ShowcaseItem = {
     preview: ReactNode
 }
 
+// Keep v-prism featured. Insert each new component immediately after it so the
+// newest card starts the grid and older cards shift right, then wrap in order.
 const allComponents: ShowcaseItem[] = [
     { title: 'v-prism', href: '/docs/v-prism', preview: <EffectPreview slug="v-prism" compact /> },
+    { title: '404', href: '/docs/404', preview: <FourOhFour compact className="h-full" /> },
     {
         title: 'Split Showcase',
         href: '/docs/split-showcase',
@@ -37,11 +41,7 @@ const allComponents: ShowcaseItem[] = [
             </div>
         ),
     },
-    ...newEffects.filter(effect => effect.slug !== 'v-prism').map(effect => ({
-        title: effect.title,
-        href: `/docs/${effect.slug}`,
-        preview: <EffectPreview slug={effect.slug} compact />,
-    })),
+    { title: 'Art Gallery', href: '/docs/art-gallery', preview: <EffectPreview slug="art-gallery" compact /> },
     {
         title: 'Hover Image',
         href: '/docs/hover-img',
@@ -60,6 +60,11 @@ const allComponents: ShowcaseItem[] = [
             </div>
         ),
     },
+    ...newEffects.filter(effect => effect.slug !== 'v-prism' && effect.slug !== 'art-gallery').map(effect => ({
+        title: effect.title,
+        href: `/docs/${effect.slug}`,
+        preview: <EffectPreview slug={effect.slug} compact />,
+    })),
     { title: 'Flip Text', href: '/docs/flip-text', preview: <div className="flex h-full w-full items-center justify-center"><FlipText className="text-[clamp(1.75rem,2.8vw,3rem)] font-medium tracking-[-0.04em]">ObsidianUI</FlipText></div> },
 ]
 

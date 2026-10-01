@@ -15,9 +15,9 @@ vi.mock("motion/react", async importOriginal => {
 
 import { DocsWorkspace } from "@/components/docs/docs-workspace";
 import { animate } from "motion/react";
-import navigation from "@/content/_meta";
+import { documentationEntries } from "@/content/_meta";
 
-const publishedPages = Object.entries(navigation)
+const publishedPages = documentationEntries
   .filter((entry): entry is [string, string] => typeof entry[1] === "string")
   .map(([slug, title]) => ({ href: `/docs/${slug}`, title }));
 
@@ -54,6 +54,7 @@ describe("documentation workspace", () => {
     for (const [category, title] of [
       ["Files & Media", "Hover Image"],
       ["Components", "Split Showcase"],
+      ["Components", "404"],
       ["Text Animations", "Flip Text"],
       ["Scroll Animations", "Draggable Marquee"],
     ]) {

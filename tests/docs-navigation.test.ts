@@ -2,10 +2,10 @@ import assert from "node:assert/strict";
 import { readdir } from "node:fs/promises";
 import test from "node:test";
 import { componentLinks } from "../src/components/site/component-links";
-import navigation from "../src/content/_meta";
+import navigation, { documentationEntries } from "../src/content/_meta";
 
 const installationSlugs = ["installation", "install-tailwind", "add-utilities", "cli"];
-const entries = Object.entries(navigation);
+const entries = documentationEntries;
 
 test("sidebar groups every published documentation file once and keeps installation first", async () => {
   const files = (await readdir(new URL("../src/content/", import.meta.url)))
@@ -31,9 +31,11 @@ test("sidebar groups every published documentation file once and keeps installat
   assert.equal(groups.keys().next().value, "Installation");
   assert.deepEqual(groups.get("Installation"), installationSlugs);
   assert.equal(navigation.index.display, "hidden");
+  assert.equal(navigation["404"], "404");
   for (const [title, slugs] of groups) assert.ok(slugs.length > 0, `${title} must not be empty`);
 
   const expectedCategories: Record<string, string> = {
+    "404": "Components",
     "hover-img": "Files & Media",
     "split-showcase": "Components",
     "text-stream": "Text Animations",
@@ -53,7 +55,7 @@ test("component search includes all sections alphabetically without setup pages 
   assert.deepEqual(componentLinks, expected);
   assert.equal(new Set(componentLinks.map(link => link.href)).size, componentLinks.length);
   assert.deepEqual(componentLinks.slice(0, 5).map(link => link.name), [
-    "Art Gallery", "Draggable Marquee", "Flip Text", "Hover Image", "Split Showcase",
+    "404", "Art Gallery", "Draggable Marquee", "Flip Text", "Hover Image",
   ]);
   for (const slug of [...installationSlugs, "missing-page", "index", "---1", "---2"]) {
     assert.ok(!componentLinks.some(link => link.href === `/docs/${slug}`));

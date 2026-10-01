@@ -6,7 +6,7 @@ import remarkParse from "remark-parse";
 import remarkMdx from "remark-mdx";
 import remarkStringify from "remark-stringify";
 import type { Root, RootContent, PhrasingContent } from "mdast";
-import navigation from "../src/content/_meta";
+import { documentationEntries } from "../src/content/_meta";
 import { effectExamples } from "../src/components/catalog/effect-examples";
 import { vPrismSettings } from "../src/components/docs/v-prism-settings-data";
 import { developerResources, ORIGIN } from "../src/lib/agent/developer-resources";
@@ -227,7 +227,7 @@ export interface AgentDocsBuild { routes: Record<string, string>; files: Record<
 export function buildAgentDocs(projectRoot: string): AgentDocsBuild {
   const registry = JSON.parse(fs.readFileSync(path.join(projectRoot, "public/r/registry.json"), "utf8")) as Registry;
   const items = new Map(registry.items.map(item => [item.name, item]));
-  const docs = Object.entries(navigation).filter((entry): entry is [string, string] => typeof entry[1] === "string");
+  const docs = documentationEntries.filter((entry): entry is [string, string] => typeof entry[1] === "string");
   const components = docs.filter(([slug]) => items.has(slug));
   const componentLinks = components.map(([slug, title]) => `- [${title}](${ORIGIN}/markdown/docs/${slug}.md): [download all source files](${registryUrl(slug)}) and [interactive preview](${ORIGIN}/docs/${slug}).`).join("\n");
   const pages: Record<string, string> = {

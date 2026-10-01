@@ -51,26 +51,34 @@ test("unsupported representation receives 406 rather than incorrect content", as
   assert.equal(response.headers.get("vary"), documentVary);
 });
 
-test("missing document URLs return real concise Markdown 404 recovery, including default Accept", async () => {
-  for (const pathname of ["/missing", "/docs/removed-component", "/docs/missing.md", "/constructor", "/__proto__", "/docs/%2e%2e%2fprivate.md", "/docs/a%5cb.md"]) {
-    for (const accept of ["*/*", "text/html", "text/markdown"]) {
+test("missing document URLs reach the visual 404 for HTML clients", () => {
+  for (const pathname of ["/missing", "/docs/removed-component", "/constructor", "/__proto__"]) {
+    for (const accept of ["*/*", "text/html"]) {
       const response = proxy(request(pathname, accept));
-      assert.equal(response.status, 404, pathname);
-      assert.equal(response.headers.get("content-type"), "text/markdown; charset=utf-8");
-      assert.equal(response.headers.get("cache-control"), "no-store");
-      const body = await response.text();
-      assert.match(body, /^# Page not found/);
-      assert.match(body, /llms\.txt/);
-      assert.match(body, /sitemap\.xml/);
-      assert.match(body, /\/docs\/installation/);
+      assert.equal(response.headers.get("x-middleware-next"), "1", pathname);
+      assert.equal(response.headers.get("content-type"), null);
     }
+  }
+});
+
+test("missing document URLs return concise Markdown 404 recovery to Markdown clients", async () => {
+  for (const pathname of ["/missing", "/docs/removed-component", "/docs/missing.md", "/constructor", "/__proto__", "/docs/%2e%2e%2fprivate.md", "/docs/a%5cb.md"]) {
+    const response = proxy(request(pathname, "text/markdown"));
+    assert.equal(response.status, 404, pathname);
+    assert.equal(response.headers.get("content-type"), "text/markdown; charset=utf-8");
+    assert.equal(response.headers.get("cache-control"), "no-store");
+    const body = await response.text();
+    assert.match(body, /^# Page not found/);
+    assert.match(body, /llms\.txt/);
+    assert.match(body, /sitemap\.xml/);
+    assert.match(body, /\/docs\/installation/);
   }
 });
 
 test("HEAD negotiates the same route and error headers without an error body", async () => {
   const head = proxy(request("/components", "text/markdown", { method: "HEAD" }));
   assert.equal(head.headers.get("x-middleware-rewrite"), "https://www.obsidianui.dev/markdown/components.md");
-  for (const [pathname, accept, status] of [["/missing", "*/*", 404], ["/components", "application/json", 406]] as const) {
+  for (const [pathname, accept, status] of [["/missing", "text/markdown", 404], ["/components", "application/json", 406]] as const) {
     const response = proxy(request(pathname, accept, { method: "HEAD" }));
     assert.equal(response.status, status);
     assert.equal(await response.text(), "");

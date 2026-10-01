@@ -25,6 +25,7 @@ const meta = {
         "title": "Components"
     },
     "v-prism": "v-prism",
+    "404": "404",
     "split-showcase": "Split Showcase",
     "art-gallery": "Art Gallery",
     "---4": {
@@ -39,5 +40,14 @@ const meta = {
     },
     "draggable-marquee": "Draggable Marquee",
 };
+
+// Numeric keys enumerate before other keys. Keep 404 beside v-prism for
+// the sidebar, search catalogue, and generated documentation.
+export const documentationEntries = Object.entries(meta).filter(([slug]) => slug !== "404");
+documentationEntries.splice(
+    documentationEntries.findIndex(([slug]) => slug === "v-prism") + 1,
+    0,
+    ["404", meta["404"]],
+);
 
 export default meta;

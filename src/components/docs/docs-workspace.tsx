@@ -10,7 +10,7 @@ import { PanelLeftClose, PanelLeftOpen } from "lucide-react";
 import { animate, motion, useMotionValue, useReducedMotion, useTransform } from "motion/react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
-import navigation from "@/content/_meta";
+import { documentationEntries } from "@/content/_meta";
 import { cn } from "@/lib/utils";
 import { useNewComponentVisits } from "./use-new-component-visits";
 import "./new-component-dot.css";
@@ -57,7 +57,7 @@ function TocRail({ path, length, distance, height, endX, endY }: TocRailState) {
 }
 
 const groups: NavGroup[] = [];
-for (const [slug, entry] of Object.entries(navigation)) {
+for (const [slug, entry] of documentationEntries) {
   if (typeof entry === "object" && entry.type === "separator") {
     groups.push({ title: entry.title === "Installation" ? "Get started" : entry.title, items: [] });
   } else if (typeof entry === "string") {

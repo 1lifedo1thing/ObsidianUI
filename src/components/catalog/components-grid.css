@@ -13,30 +13,20 @@
 }
 
 .component-showcase-grid {
-  columns: 3;
-  column-gap: 1.25rem;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.25rem;
   margin-block-start: 1.25rem;
 }
 
 .component-showcase-grid .component-showcase-card {
-  display: inline-block;
   width: 100%;
   max-width: none;
-  margin-block-end: 1.25rem;
-  break-inside: avoid;
 }
 
 .component-showcase-grid .component-showcase-frame {
-  height: clamp(320px, 28vw, 410px);
+  height: clamp(330px, 29vw, 430px);
   aspect-ratio: auto;
-}
-
-.component-showcase-grid .component-showcase-card:nth-child(3n + 2) .component-showcase-frame {
-  height: clamp(360px, 31vw, 455px);
-}
-
-.component-showcase-grid .component-showcase-card:nth-child(3n + 3) .component-showcase-frame {
-  height: clamp(340px, 29vw, 430px);
 }
 
 .components-showcase-grid {
@@ -210,7 +200,7 @@
 
 @media (max-width: 1040px) {
   .component-showcase-grid {
-    columns: 2;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
@@ -224,13 +214,10 @@
   }
 
   .component-showcase-grid {
-    columns: 1;
-    column-gap: 0;
+    grid-template-columns: minmax(0, 1fr);
   }
 
-  .component-showcase-grid .component-showcase-frame,
-  .component-showcase-grid .component-showcase-card:nth-child(3n + 2) .component-showcase-frame,
-  .component-showcase-grid .component-showcase-card:nth-child(3n + 3) .component-showcase-frame {
+  .component-showcase-grid .component-showcase-frame {
     height: clamp(280px, 75vw, 400px);
   }
 }

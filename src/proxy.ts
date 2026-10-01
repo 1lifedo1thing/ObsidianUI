@@ -70,6 +70,9 @@ export function proxy(request: NextRequest) {
       (filename.includes(".") && !filename.endsWith(".md")) ||
       pathname === "/agent-instructions.md") return NextResponse.next();
 
+  const representation = negotiateDocument(accept);
+  if (representation === "html" && !pathname.endsWith(".md")) return NextResponse.next();
+  if (representation === null) return markdownResponse(request, "# Not acceptable\n\nRequest this page with Accept: text/html or Accept: text/markdown.\n", 406);
   return markdownResponse(request, recovery, 404);
 }
 
