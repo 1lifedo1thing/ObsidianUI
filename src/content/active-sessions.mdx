@@ -1,0 +1,157 @@
+import { Dependencies } from '@/components/docs/component-installation'
+import { CLICommand } from '@/components/docs/cli-command'
+import { PropsTable } from '@/components/docs/props-table'
+import { ComponentPreview } from '@/components/docs/component-preview'
+import { ActiveSessionsPreview } from '@/components/catalog/active-sessions-preview'
+
+# Active Sessions
+
+A settings list of the devices signed in to an account. Sign out one device and its row folds away. Sign out every other device and the rows fold shut one after another. The current device stays at the top and can't be signed out from the list.
+
+Try it below. Each sign-out waits briefly, like a real request, and **Restore demo sessions** brings the list back.
+
+<ComponentPreview
+  component={<div className="flex min-h-[420px] w-full items-center justify-center px-5 py-10 sm:px-10"><ActiveSessionsPreview className="max-w-[640px]" /></div>}
+  code={`'use client'
+
+import { ActiveSessions, type ActiveSession } from '@/components/block/active-sessions'
+
+const sessions: ActiveSession[] = [
+  { id: 'macbook', device: 'laptop', browser: 'Arc', os: 'macOS', location: 'Ahmedabad, India', ip: '203.0.113.24', lastActiveAt: Date.now(), current: true },
+  { id: 'windows-desktop', device: 'desktop', browser: 'Chrome', os: 'Windows 11', location: 'Mumbai, India', ip: '198.51.100.73', lastActiveAt: Date.now() - 2 * 60_000 },
+  { id: 'linux-laptop', device: 'laptop', browser: 'Firefox', os: 'Linux', location: 'Berlin, Germany', ip: '192.0.2.158', lastActiveAt: Date.now() - 26 * 3_600_000, flag: 'New location' },
+]
+
+export function Demo() {
+  return (
+    <ActiveSessions
+      defaultSessions={sessions}
+      onRevoke={session => fetch('/api/sessions/' + session.id, { method: 'DELETE' })}
+    />
+  )
+}`}
+  previewClassName="p-0 sm:p-0"
+/>
+
+## Install using CLI
+
+<CLICommand componentName="active-sessions" />
+
+## Usage
+
+```tsx copy
+import { ActiveSessions } from '@/components/block/active-sessions'
+
+<ActiveSessions
+  defaultSessions={[
+    { id: 'this-mac', device: 'laptop', browser: 'Chrome', os: 'macOS', lastActiveAt: new Date(), current: true },
+    { id: 'phone', device: 'phone', browser: 'Safari', os: 'iOS 19', location: 'Berlin, Germany', lastActiveAt: '2026-10-03T18:20:00Z' },
+  ]}
+/>
+```
+
+Without `onRevoke` or `onRevokeOthers`, signing out only updates the list on screen. Add those handlers to connect it to your backend.
+
+## Connect your API
+
+`onRevoke` and `onRevokeOthers` can return a promise. The row stays in place with a spinner while the request runs, folds away when it resolves, and shows an error in place when it rejects, so nothing disappears unless the server confirms it.
+
+```tsx copy
+async function deleteSession(id: string) {
+  const response = await fetch(`/api/sessions/${id}`, { method: 'DELETE' })
+  if (!response.ok) throw new Error('Sign-out failed')
+}
+
+<ActiveSessions
+  defaultSessions={sessions}
+  onRevoke={session => deleteSession(session.id)}
+  onRevokeOthers={async others => {
+    const response = await fetch('/api/sessions/others', { method: 'DELETE' })
+    if (!response.ok) throw new Error('Sign-out failed')
+  }}
+/>
+```
+
+When `onRevokeOthers` is missing, **Sign out other sessions** calls `onRevoke` for each session instead. Sessions that sign out leave the list, and any that fail stay behind with an error so the user can try again.
+
+## Control the list
+
+Pass `sessions` and `onSessionsChange` when the list lives in your own state or data cache. Show `loading` during the first request; the skeleton rows match the size of real rows, so the layout doesn't jump when data arrives.
+
+```tsx copy
+const [sessions, setSessions] = useState<ActiveSession[]>([])
+const [loading, setLoading] = useState(true)
+
+useEffect(() => {
+  fetch('/api/sessions')
+    .then(response => response.json())
+    .then(setSessions)
+    .finally(() => setLoading(false))
+}, [])
+
+<ActiveSessions sessions={sessions} onSessionsChange={setSessions} loading={loading} onRevoke={session => deleteSession(session.id)} />
+```
+
+## Behavior
+
+- The current session is listed first, followed by the most recently active.
+- Sessions active within `activeWithin` minutes show **Active now**. Other times read like "Last active 3 hours ago", update every 30 seconds, and render only in the browser, so server and client markup always match.
+- **Sign out other sessions** asks for confirmation first. The confirm button receives focus, and Escape cancels.
+- After a sign-out, focus moves to the next row's button, or to the heading when no rows remain. If focus moved elsewhere while the request ran, it stays there. A screen reader announcement confirms each sign-out.
+- In narrow containers, the action moves under the heading and the status moves to its own line. This uses a container query, so it adapts to the column it sits in, not the window.
+- The fold-away animation becomes a short fade when reduced motion is preferred, and spinners appear only for requests slower than 150ms.
+
+## Customize colors
+
+The list uses your theme's card, border, and text colors. Status colors are CSS variables you can override on the component or any parent:
+
+```css copy
+.obsidian-active-sessions {
+  --obsidian-active-sessions-success: #15803d;
+  --obsidian-active-sessions-warning: #a16207;
+  --obsidian-active-sessions-danger: #b91c1c;
+  --obsidian-active-sessions-danger-solid: #dc2626;
+}
+```
+
+## Install manually
+
+<Dependencies step={1} title="Copy the source code" source="active-sessions">
+  <p className="mt-2 text-sm text-muted-foreground">Add the registry source to <code>components/block/active-sessions.tsx</code> and its stylesheet to <code>components/block/active-sessions.css</code>. Install the listed dependencies from the registry item.</p>
+</Dependencies>
+
+## Props
+
+<PropsTable
+  data={[
+    { prop: 'sessions', type: 'ActiveSession[]', defaultValue: '-', description: 'Controlled list of sessions.' },
+    { prop: 'defaultSessions', type: 'ActiveSession[]', defaultValue: '[]', description: 'Initial sessions when the list is uncontrolled.' },
+    { prop: 'onSessionsChange', type: '(sessions: ActiveSession[]) => void', defaultValue: '-', description: 'Called with the remaining sessions after each sign-out.' },
+    { prop: 'onRevoke', type: '(session: ActiveSession) => void | Promise<unknown>', defaultValue: '-', description: 'Signs out one session. Reject to keep the row and show an error.' },
+    { prop: 'onRevokeOthers', type: '(sessions: ActiveSession[]) => void | Promise<unknown>', defaultValue: '-', description: 'Signs out every session except the current one. Falls back to onRevoke for each.' },
+    { prop: 'loading', type: 'boolean', defaultValue: 'false', description: 'Shows skeleton rows while the first load is in flight.' },
+    { prop: 'heading', type: 'ReactNode', defaultValue: 'Active sessions', description: 'Title above the list.' },
+    { prop: 'headingLevel', type: '2 | 3 | 4', defaultValue: '3', description: 'Heading element for the title, to fit the page outline.' },
+    { prop: 'description', type: 'ReactNode', defaultValue: 'Devices signed in to your account…', description: 'Supporting text under the title. Pass null to hide it.' },
+    { prop: 'activeWithin', type: 'number', defaultValue: '5', description: 'Minutes within which a session counts as Active now.' },
+    { prop: 'locale', type: 'string', defaultValue: 'Browser locale', description: 'Locale for relative and full dates.' },
+    { prop: 'className', type: 'string', defaultValue: '-', description: 'Additional classes for the root section.' },
+  ]}
+/>
+
+## Session fields
+
+<PropsTable
+  data={[
+    { prop: 'id', type: 'string', defaultValue: '-', description: 'Unique, stable session identifier.' },
+    { prop: 'device', type: "'desktop' | 'laptop' | 'phone' | 'tablet'", defaultValue: '-', description: 'Chooses the device icon.' },
+    { prop: 'browser', type: 'string', defaultValue: '-', description: 'Browser or app name, such as Chrome.' },
+    { prop: 'os', type: 'string', defaultValue: '-', description: 'Operating system, such as macOS.' },
+    { prop: 'name', type: 'string', defaultValue: 'Browser on OS', description: 'Overrides the row title.' },
+    { prop: 'location', type: 'string', defaultValue: '-', description: 'Approximate location, such as Berlin, Germany.' },
+    { prop: 'ip', type: 'string', defaultValue: '-', description: 'IP address, shown in monospace and trimmed when space runs out.' },
+    { prop: 'lastActiveAt', type: 'Date | string | number', defaultValue: '-', description: 'When the session was last used.' },
+    { prop: 'current', type: 'boolean', defaultValue: 'false', description: 'Marks this device. It is listed first and cannot be signed out here.' },
+    { prop: 'flag', type: 'string', defaultValue: '-', description: 'A short warning tag, such as New location.' },
+  ]}
+/>

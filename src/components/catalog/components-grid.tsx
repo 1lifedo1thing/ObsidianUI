@@ -9,6 +9,7 @@ import { usePrefersFineHover } from '@/hooks/use-prefers-fine-hover'
 import { r2 } from '@/lib/r2'
 import { EffectPreview } from './effect-preview'
 import { newEffects } from './new-effects'
+import { ActiveSessionsPreview } from './active-sessions-preview'
 import { StatusBarsPreview } from './status-bars-preview'
 import './components-grid.css'
 
@@ -17,20 +18,43 @@ import { DiscoverButton } from '@/components/block/discover-button'
 import { HoverImg } from '@/components/block/hover-img'
 import { SplitShowcase, VercelLogo, TracwellLogo } from '@/components/block/split-showcase'
 
+type ShowcaseSize = 'short' | 'medium' | 'tall'
+
 type ShowcaseItem = {
     title: string
     href: string
     preview: ReactNode
+    /** Masonry height in the gallery grid. Defaults to medium. */
+    size?: ShowcaseSize
+    isNew?: boolean
 }
+
+const effectSizes: Partial<Record<string, ShowcaseSize>> = { 'draggable-marquee': 'tall', 'text-stream': 'short' }
 
 // Keep v-prism featured. Insert each new component immediately after it so the
 // newest card starts the grid and older cards shift right, then wrap in order.
+// Sizes are balanced so the three masonry columns end level; recheck them when adding a card.
 const allComponents: ShowcaseItem[] = [
     { title: 'v-prism', href: '/docs/v-prism', preview: <EffectPreview slug="v-prism" compact /> },
     {
+        title: 'Active Sessions',
+        href: '/docs/active-sessions',
+        size: 'tall',
+        isNew: true,
+        preview: <div className="flex h-full w-full items-center justify-center overflow-hidden px-5 pb-14 pt-12"><ActiveSessionsPreview compact className="max-w-[520px]" /></div>,
+    },
+    {
         title: 'Status Bars',
         href: '/docs/status-bars',
-        preview: <div className="flex h-full w-full items-center justify-center px-6 pb-16 pt-10"><StatusBarsPreview className="max-w-[560px]" /></div>,
+        isNew: true,
+        preview: <div className="flex h-full w-full items-center justify-center px-6 pb-16 pt-12"><StatusBarsPreview className="max-w-[560px]" /></div>,
+    },
+    {
+        title: 'Discover Button',
+        href: '/docs/discover-button',
+        size: 'short',
+        isNew: true,
+        preview: <div className="flex h-full w-full items-center justify-center bg-[#191715] p-5"><DiscoverButton /></div>,
     },
     {
         title: 'Split Showcase',
@@ -46,12 +70,7 @@ const allComponents: ShowcaseItem[] = [
             </div>
         ),
     },
-    {
-        title: 'Discover Button',
-        href: '/docs/discover-button',
-        preview: <div className="flex h-full w-full items-center justify-center bg-[#191715] p-5"><DiscoverButton /></div>,
-    },
-    { title: 'Art Gallery', href: '/docs/art-gallery', preview: <EffectPreview slug="art-gallery" compact /> },
+    { title: 'Art Gallery', href: '/docs/art-gallery', size: 'tall', preview: <EffectPreview slug="art-gallery" compact /> },
     {
         title: 'Hover Image',
         href: '/docs/hover-img',
@@ -73,9 +92,10 @@ const allComponents: ShowcaseItem[] = [
     ...newEffects.filter(effect => effect.slug !== 'v-prism' && effect.slug !== 'art-gallery').map(effect => ({
         title: effect.title,
         href: `/docs/${effect.slug}`,
+        size: effectSizes[effect.slug],
         preview: <EffectPreview slug={effect.slug} compact />,
     })),
-    { title: 'Flip Text', href: '/docs/flip-text', preview: <div className="flex h-full w-full items-center justify-center"><FlipText className="text-[clamp(1.75rem,2.8vw,3rem)] font-medium tracking-[-0.04em]">ObsidianUI</FlipText></div> },
+    { title: 'Flip Text', href: '/docs/flip-text', size: 'short', preview: <div className="flex h-full w-full items-center justify-center"><FlipText className="text-[clamp(1.75rem,2.8vw,3rem)] font-medium tracking-[-0.04em]">ObsidianUI</FlipText></div> },
 ]
 
 function ShowcaseCard({ component, index }: { component: ShowcaseItem; index: number }) {
@@ -91,6 +111,7 @@ function ShowcaseCard({ component, index }: { component: ShowcaseItem; index: nu
     return (
         <motion.article
             className={isHoverImage ? 'component-showcase-card component-showcase-card-hover-image' : 'component-showcase-card'}
+            data-size={component.size ?? 'medium'}
             initial={{ opacity: 0, y: reduceMotion ? 0 : 16, filter: reduceMotion ? 'blur(0px)' : 'blur(8px)' }}
             whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
             viewport={{ once: true, margin: '0px 0px -100px' }}
@@ -99,6 +120,7 @@ function ShowcaseCard({ component, index }: { component: ShowcaseItem; index: nu
             onPointerLeave={() => setHovered(false)}
         >
             <div className="component-showcase-frame">
+                {component.isNew && <span className="component-showcase-badge">New</span>}
                 <div className="component-showcase-media">{component.preview}</div>
                 <Link
                         href={component.href}

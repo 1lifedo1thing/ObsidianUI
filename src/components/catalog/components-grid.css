@@ -12,21 +12,81 @@
   aspect-ratio: auto;
 }
 
+/* Masonry: every card spans a whole number of 10px rows, so auto-placement drops each
+   card into the column that frees up first while the DOM keeps the newest-first order. */
 .component-showcase-grid {
+  --showcase-gap: 0.75rem;
+  --showcase-radius: 22px;
+  --showcase-badge-bg: color-mix(in srgb, var(--foreground) 9%, var(--muted));
+  --showcase-badge-fg: var(--foreground);
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 1.25rem;
-  margin-block-start: 1.25rem;
+  grid-auto-rows: 10px;
+  column-gap: var(--showcase-gap);
+  margin-block-start: var(--showcase-gap);
+}
+
+.dark .component-showcase-grid {
+  --showcase-badge-bg: #373737;
+  --showcase-badge-fg: #f2f2f2;
+}
+
+/* Previews paint with theme tokens, so raising them here lifts every card onto the same surface. */
+.dark .component-showcase-grid .component-showcase-card {
+  --background: #171717;
+  --muted: #171717;
+  --card: #222222;
+  --secondary: #222222;
+  --accent: #2a2a2a;
+  --border: #2e2e2e;
 }
 
 .component-showcase-grid .component-showcase-card {
+  --showcase-rows: 36;
   width: 100%;
   max-width: none;
+  grid-row-end: span var(--showcase-rows);
+  padding-block-end: var(--showcase-gap);
+}
+
+.component-showcase-grid .component-showcase-card[data-size="short"] {
+  --showcase-rows: 28;
+}
+
+.component-showcase-grid .component-showcase-card[data-size="tall"] {
+  --showcase-rows: 46;
 }
 
 .component-showcase-grid .component-showcase-frame {
-  height: clamp(330px, 29vw, 430px);
+  height: 100%;
   aspect-ratio: auto;
+  border-radius: var(--showcase-radius);
+}
+
+.dark .component-showcase-grid .component-showcase-frame::after {
+  box-shadow: none;
+}
+
+.component-showcase-badge {
+  position: absolute;
+  z-index: 3;
+  inset-block-start: 0.875rem;
+  inset-inline-start: 0.875rem;
+  padding: 0.1875rem 0.5rem;
+  border-radius: 0.4375rem;
+  background: var(--showcase-badge-bg);
+  color: var(--showcase-badge-fg);
+  font-size: 0.75rem;
+  font-weight: 500;
+  line-height: 1rem;
+  pointer-events: none;
+}
+
+/* Pointer users get the clean card and the title on hover; touch keeps the bar as the tap target. */
+@media (hover: hover) and (pointer: fine) {
+  .component-showcase-grid .component-showcase-idle-pill {
+    opacity: 0;
+  }
 }
 
 .components-showcase-grid {
@@ -215,10 +275,6 @@
 
   .component-showcase-grid {
     grid-template-columns: minmax(0, 1fr);
-  }
-
-  .component-showcase-grid .component-showcase-frame {
-    height: clamp(280px, 75vw, 400px);
   }
 }
 

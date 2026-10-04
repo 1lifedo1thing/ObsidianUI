@@ -25,6 +25,7 @@ const meta = {
         "title": "Components"
     },
     "v-prism": "v-prism",
+    "active-sessions": "Active Sessions",
     "discover-button": "Discover Button",
     "status-bars": "Status Bars",
     "split-showcase": "Split Showcase",

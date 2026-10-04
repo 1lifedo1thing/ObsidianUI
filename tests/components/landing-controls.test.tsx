@@ -127,10 +127,10 @@ describe("landing controls", () => {
     expect(input).toHaveAttribute("aria-expanded", "true");
     const results = within(screen.getByRole("listbox", { name: "Matching components" }));
     expect(results.getAllByRole("option").map((option) => option.textContent)).toEqual([
-      "Art Gallery", "Discover Button", "Draggable Marquee", "Flip Text",
+      "Active Sessions", "Art Gallery", "Discover Button", "Draggable Marquee",
     ]);
     await user.keyboard("{ArrowDown}{Enter}");
-    expect(controls.push).toHaveBeenCalledExactlyOnceWith("/docs/discover-button");
+    expect(controls.push).toHaveBeenCalledExactlyOnceWith("/docs/art-gallery");
     expect(input).toHaveAttribute("aria-expanded", "false");
     expect(screen.queryByRole("listbox")).not.toBeInTheDocument();
   });

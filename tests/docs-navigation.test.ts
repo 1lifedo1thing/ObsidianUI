@@ -34,6 +34,7 @@ test("sidebar groups every published documentation file once and keeps installat
   for (const [title, slugs] of groups) assert.ok(slugs.length > 0, `${title} must not be empty`);
 
   const expectedCategories: Record<string, string> = {
+    "active-sessions": "Components",
     "status-bars": "Components",
     "hover-img": "Files & Media",
     "split-showcase": "Components",
@@ -54,7 +55,7 @@ test("component search includes all sections alphabetically without setup pages 
   assert.deepEqual(componentLinks, expected);
   assert.equal(new Set(componentLinks.map(link => link.href)).size, componentLinks.length);
   assert.deepEqual(componentLinks.slice(0, 5).map(link => link.name), [
-    "Art Gallery", "Discover Button", "Draggable Marquee", "Flip Text", "Hover Image",
+    "Active Sessions", "Art Gallery", "Discover Button", "Draggable Marquee", "Flip Text",
   ]);
   for (const slug of [...installationSlugs, "missing-page", "index", "---1", "---2"]) {
     assert.ok(!componentLinks.some(link => link.href === `/docs/${slug}`));
