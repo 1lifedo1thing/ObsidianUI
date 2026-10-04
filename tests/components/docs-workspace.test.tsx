@@ -54,7 +54,6 @@ describe("documentation workspace", () => {
     for (const [category, title] of [
       ["Files & Media", "Hover Image"],
       ["Components", "Split Showcase"],
-      ["Components", "404"],
       ["Text Animations", "Flip Text"],
       ["Scroll Animations", "Draggable Marquee"],
     ]) {

@@ -31,11 +31,10 @@ test("sidebar groups every published documentation file once and keeps installat
   assert.equal(groups.keys().next().value, "Installation");
   assert.deepEqual(groups.get("Installation"), installationSlugs);
   assert.equal(navigation.index.display, "hidden");
-  assert.equal(navigation["404"], "404");
   for (const [title, slugs] of groups) assert.ok(slugs.length > 0, `${title} must not be empty`);
 
   const expectedCategories: Record<string, string> = {
-    "404": "Components",
+    "status-bars": "Components",
     "hover-img": "Files & Media",
     "split-showcase": "Components",
     "text-stream": "Text Animations",
@@ -55,7 +54,7 @@ test("component search includes all sections alphabetically without setup pages 
   assert.deepEqual(componentLinks, expected);
   assert.equal(new Set(componentLinks.map(link => link.href)).size, componentLinks.length);
   assert.deepEqual(componentLinks.slice(0, 5).map(link => link.name), [
-    "404", "Art Gallery", "Discover Button", "Draggable Marquee", "Flip Text",
+    "Art Gallery", "Discover Button", "Draggable Marquee", "Flip Text", "Hover Image",
   ]);
   for (const slug of [...installationSlugs, "missing-page", "index", "---1", "---2"]) {
     assert.ok(!componentLinks.some(link => link.href === `/docs/${slug}`));

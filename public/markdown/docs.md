@@ -8,7 +8,6 @@ Installation guides and complete component source.
 - [CLI](https://www.obsidianui.dev/markdown/docs/cli.md)
 - [Hover Image](https://www.obsidianui.dev/markdown/docs/hover-img.md)
 - [v-prism](https://www.obsidianui.dev/markdown/docs/v-prism.md)
-- [404](https://www.obsidianui.dev/markdown/docs/404.md)
 - [Discover Button](https://www.obsidianui.dev/markdown/docs/discover-button.md)
 - [Status Bars](https://www.obsidianui.dev/markdown/docs/status-bars.md)
 - [Split Showcase](https://www.obsidianui.dev/markdown/docs/split-showcase.md)

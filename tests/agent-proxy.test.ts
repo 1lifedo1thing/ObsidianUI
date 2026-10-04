@@ -51,7 +51,7 @@ test("unsupported representation receives 406 rather than incorrect content", as
   assert.equal(response.headers.get("vary"), documentVary);
 });
 
-test("missing document URLs reach the visual 404 for HTML clients", () => {
+test("missing document URLs reach the HTML not-found page for HTML clients", () => {
   for (const pathname of ["/missing", "/docs/removed-component", "/constructor", "/__proto__"]) {
     for (const accept of ["*/*", "text/html"]) {
       const response = proxy(request(pathname, accept));

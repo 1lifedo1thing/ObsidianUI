@@ -13,7 +13,6 @@ import { StatusBarsPreview } from './status-bars-preview'
 import './components-grid.css'
 
 import FlipText from '@/components/block/flip-text'
-import { FourOhFour } from '@/components/block/404'
 import { DiscoverButton } from '@/components/block/discover-button'
 import { HoverImg } from '@/components/block/hover-img'
 import { SplitShowcase, VercelLogo, TracwellLogo } from '@/components/block/split-showcase'
@@ -33,12 +32,6 @@ const allComponents: ShowcaseItem[] = [
         href: '/docs/status-bars',
         preview: <div className="flex h-full w-full items-center justify-center px-6 pb-16 pt-10"><StatusBarsPreview className="max-w-[560px]" /></div>,
     },
-    { title: '404', href: '/docs/404', preview: <FourOhFour compact className="h-full" /> },
-    {
-        title: 'Discover Button',
-        href: '/docs/discover-button',
-        preview: <div className="flex h-full w-full items-center justify-center bg-[#191715] p-5"><DiscoverButton /></div>,
-    },
     {
         title: 'Split Showcase',
         href: '/docs/split-showcase',
@@ -52,6 +45,11 @@ const allComponents: ShowcaseItem[] = [
                 </div>
             </div>
         ),
+    },
+    {
+        title: 'Discover Button',
+        href: '/docs/discover-button',
+        preview: <div className="flex h-full w-full items-center justify-center bg-[#191715] p-5"><DiscoverButton /></div>,
     },
     { title: 'Art Gallery', href: '/docs/art-gallery', preview: <EffectPreview slug="art-gallery" compact /> },
     {
