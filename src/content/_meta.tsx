@@ -26,6 +26,8 @@ const meta = {
     },
     "v-prism": "v-prism",
     "404": "404",
+    "discover-button": "Discover Button",
+    "status-bars": "Status Bars",
     "split-showcase": "Split Showcase",
     "art-gallery": "Art Gallery",
     "---4": {

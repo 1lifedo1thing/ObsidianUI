@@ -21,7 +21,7 @@ Request any published page with Accept: text/markdown or read its direct Markdow
 - [OpenAPI specification](https://www.obsidianui.dev/openapi.json): Machine-readable HTTP API contract.
 - [Authentication](https://www.obsidianui.dev/markdown/authentication.md): Public read access requires no credentials.
 - [MCP server](https://www.obsidianui.dev/markdown/mcp.md): Local stdio resources/list and resources/read at obsidian://{name}.
-- [Registry catalogue](https://www.obsidianui.dev/r/registry.json): 71 complete registry items, including supporting UI primitives.
+- [Registry catalogue](https://www.obsidianui.dev/r/registry.json): 73 complete registry items, including supporting UI primitives.
 - [Sitemap](https://www.obsidianui.dev/sitemap.xml): Published page discovery.
 
 ## Getting started
@@ -36,6 +36,8 @@ Request any published page with Accept: text/markdown or read its direct Markdow
 - [Hover Image](https://www.obsidianui.dev/markdown/docs/hover-img.md): [download all source files](https://www.obsidianui.dev/r/hover-img.json) and [interactive preview](https://www.obsidianui.dev/docs/hover-img).
 - [v-prism](https://www.obsidianui.dev/markdown/docs/v-prism.md): [download all source files](https://www.obsidianui.dev/r/v-prism.json) and [interactive preview](https://www.obsidianui.dev/docs/v-prism).
 - [404](https://www.obsidianui.dev/markdown/docs/404.md): [download all source files](https://www.obsidianui.dev/r/404.json) and [interactive preview](https://www.obsidianui.dev/docs/404).
+- [Discover Button](https://www.obsidianui.dev/markdown/docs/discover-button.md): [download all source files](https://www.obsidianui.dev/r/discover-button.json) and [interactive preview](https://www.obsidianui.dev/docs/discover-button).
+- [Status Bars](https://www.obsidianui.dev/markdown/docs/status-bars.md): [download all source files](https://www.obsidianui.dev/r/status-bars.json) and [interactive preview](https://www.obsidianui.dev/docs/status-bars).
 - [Split Showcase](https://www.obsidianui.dev/markdown/docs/split-showcase.md): [download all source files](https://www.obsidianui.dev/r/split-showcase.json) and [interactive preview](https://www.obsidianui.dev/docs/split-showcase).
 - [Art Gallery](https://www.obsidianui.dev/markdown/docs/art-gallery.md): [download all source files](https://www.obsidianui.dev/r/art-gallery.json) and [interactive preview](https://www.obsidianui.dev/docs/art-gallery).
 - [Flip Text](https://www.obsidianui.dev/markdown/docs/flip-text.md): [download all source files](https://www.obsidianui.dev/r/flip-text.json) and [interactive preview](https://www.obsidianui.dev/docs/flip-text).

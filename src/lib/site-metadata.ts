@@ -12,6 +12,8 @@ export const docsDescriptions: Record<string, string> = {
   "hover-img": "Preview images that follow the cursor when visitors hover over titles. Explore the Hover Image React component and copy its source.",
   "v-prism": "Explore v-prism, an interactive glass prism that splits a movable light beam into a spectrum. View its settings and React source.",
   "404": "Explore 404, a carved canvas effect with interactive numerals, responsive page copy, and links back into your site.",
+  "discover-button": "Preview Discover Button, a pill-shaped React button whose arrow circle expands across the label on hover.",
+  "status-bars": "Preview Status Bars, a daily uptime strip for React with incident tooltips, keyboard navigation, and an animated uptime total.",
   "split-showcase": "Show two interactive partner cards with hover motion and a dotted divider. Preview the Split Showcase React component.",
   "art-gallery": "Explore Art Gallery, a draggable photo grid with lens distortion and an infinite tiled layout.",
   "flip-text": "Preview Flip Text, an animated React component whose characters flip and rotate on hover.",

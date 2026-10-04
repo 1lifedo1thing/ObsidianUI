@@ -9,6 +9,8 @@ Installation guides and complete component source.
 - [Hover Image](https://www.obsidianui.dev/markdown/docs/hover-img.md)
 - [v-prism](https://www.obsidianui.dev/markdown/docs/v-prism.md)
 - [404](https://www.obsidianui.dev/markdown/docs/404.md)
+- [Discover Button](https://www.obsidianui.dev/markdown/docs/discover-button.md)
+- [Status Bars](https://www.obsidianui.dev/markdown/docs/status-bars.md)
 - [Split Showcase](https://www.obsidianui.dev/markdown/docs/split-showcase.md)
 - [Art Gallery](https://www.obsidianui.dev/markdown/docs/art-gallery.md)
 - [Flip Text](https://www.obsidianui.dev/markdown/docs/flip-text.md)

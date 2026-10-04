@@ -1,0 +1,95 @@
+import { Dependencies } from '@/components/docs/component-installation'
+import { CLICommand } from '@/components/docs/cli-command'
+import { PropsTable } from '@/components/docs/props-table'
+import { ComponentPreview } from '@/components/docs/component-preview'
+import { StatusBarsPreview } from '@/components/catalog/status-bars-preview'
+
+# Status Bars
+
+A daily status strip for a service. Each bar is one day, colored by whether the service was operational, degraded, or down. Hover, tap, or use the arrow keys to see that day's uptime and incidents. The uptime total animates as the range changes.
+
+The preview starts on August 1 and adds a new bar each day at UTC midnight.
+
+<ComponentPreview
+  component={<div className="flex min-h-[320px] w-full items-center justify-center px-6 pb-8 pt-16 sm:px-10"><StatusBarsPreview className="max-w-[640px]" /></div>}
+  code={`import { fillStatusDays, StatusBars, useStatusToday } from '@/components/block/status-bars'
+
+const incidents = [
+  { date: '2026-08-19', downtime: 23, incidents: [{ title: 'Registry deploy rolled back', minutes: 23 }] },
+  { date: '2026-09-21', degraded: 6, incidents: [{ title: 'Elevated error rate', minutes: 6 }] },
+]
+
+export function Demo() {
+  const today = useStatusToday()
+  if (!today) return <StatusBars label="Component registry" days={[]} loading />
+
+  const days = fillStatusDays('2026-08-01', today, incidents)
+  return <StatusBars label="Component registry" days={days} maxDays={days.length} />
+}`}
+  previewClassName="p-0 sm:p-0"
+/>
+
+## Install using CLI
+
+<CLICommand componentName="status-bars" />
+
+## Usage
+
+```tsx copy
+import { StatusBars } from '@/components/block/status-bars'
+
+<StatusBars
+  label="API"
+  days={[
+    { date: '2026-09-20' },
+    { date: '2026-09-21', degraded: 6, incidents: [{ title: 'Elevated error rate', minutes: 6 }] },
+  ]}
+/>
+```
+
+Pass one entry per day, oldest first; the last entry is today. Downtime minutes count against uptime, and degraded minutes are shown without reducing it.
+
+## Keep the range current
+
+`useStatusToday()` returns today's UTC date and updates at midnight, so the strip gains a new day while the page stays open. It returns `null` during server rendering; show the `loading` state until it has a value.
+
+`fillStatusDays(from, to, entries)` builds every day in the range and marks days without an entry as operational:
+
+```tsx copy
+const today = useStatusToday()
+const days = today ? fillStatusDays('2026-08-01', today, incidents) : []
+```
+
+## Customize colors
+
+Override the status colors on the component or any parent:
+
+```css copy
+.obsidian-status-bars {
+  --obsidian-status-up: #22c55e;
+  --obsidian-status-degraded: #f59e0b;
+  --obsidian-status-down: #ef4444;
+}
+```
+
+## Install manually
+
+<Dependencies step={1} title="Copy the source code" source="status-bars">
+  <p className="mt-2 text-sm text-muted-foreground">Add the registry source to <code>components/block/status-bars.tsx</code> and its stylesheet to <code>components/block/status-bars.css</code>. Install the listed dependencies from the registry item.</p>
+</Dependencies>
+
+## Props
+
+<PropsTable
+  data={[
+    { prop: 'days', type: 'StatusDay[]', defaultValue: '-', description: 'One entry per day, oldest first. The last entry is today.' },
+    { prop: 'label', type: 'string', defaultValue: '-', description: 'Name of the service being tracked.' },
+    { prop: 'current', type: "'up' | 'degraded' | 'down' | 'none'", defaultValue: "Today's status", description: 'Status shown in the header.' },
+    { prop: 'maxDays', type: 'number', defaultValue: '90', description: 'Most days to show. Narrow containers step down to 60, then 30.' },
+    { prop: 'minBarWidth', type: 'number', defaultValue: '3', description: 'Narrowest bar, in pixels, before fewer days are shown.' },
+    { prop: 'compact', type: 'boolean', defaultValue: 'false', description: 'Hides the name, status, and axis for dense lists.' },
+    { prop: 'loading', type: 'boolean', defaultValue: 'false', description: 'Shows a pulsing placeholder while data loads.' },
+    { prop: 'locale', type: 'string', defaultValue: 'Browser locale', description: 'Locale for dates and percentages.' },
+    { prop: 'className', type: 'string', defaultValue: '-', description: 'Additional classes for the root element.' },
+  ]}
+/>

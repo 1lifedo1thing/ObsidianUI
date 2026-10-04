@@ -9,10 +9,12 @@ import { usePrefersFineHover } from '@/hooks/use-prefers-fine-hover'
 import { r2 } from '@/lib/r2'
 import { EffectPreview } from './effect-preview'
 import { newEffects } from './new-effects'
+import { StatusBarsPreview } from './status-bars-preview'
 import './components-grid.css'
 
 import FlipText from '@/components/block/flip-text'
 import { FourOhFour } from '@/components/block/404'
+import { DiscoverButton } from '@/components/block/discover-button'
 import { HoverImg } from '@/components/block/hover-img'
 import { SplitShowcase, VercelLogo, TracwellLogo } from '@/components/block/split-showcase'
 
@@ -26,7 +28,17 @@ type ShowcaseItem = {
 // newest card starts the grid and older cards shift right, then wrap in order.
 const allComponents: ShowcaseItem[] = [
     { title: 'v-prism', href: '/docs/v-prism', preview: <EffectPreview slug="v-prism" compact /> },
+    {
+        title: 'Status Bars',
+        href: '/docs/status-bars',
+        preview: <div className="flex h-full w-full items-center justify-center px-6 pb-16 pt-10"><StatusBarsPreview className="max-w-[560px]" /></div>,
+    },
     { title: '404', href: '/docs/404', preview: <FourOhFour compact className="h-full" /> },
+    {
+        title: 'Discover Button',
+        href: '/docs/discover-button',
+        preview: <div className="flex h-full w-full items-center justify-center bg-[#191715] p-5"><DiscoverButton /></div>,
+    },
     {
         title: 'Split Showcase',
         href: '/docs/split-showcase',

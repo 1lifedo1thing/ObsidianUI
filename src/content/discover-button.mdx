@@ -1,0 +1,67 @@
+import { Dependencies } from '@/components/docs/component-installation'
+import { CLICommand } from '@/components/docs/cli-command'
+import { PropsTable } from '@/components/docs/props-table'
+import { ComponentPreview } from '@/components/docs/component-preview'
+import { DiscoverButton } from '@/components/block/discover-button'
+
+# Discover Button
+
+A rounded call-to-action with an arrow circle that expands across the label on hover. The default label is **Discover Components**. It works as a link when you provide `href`, or as a button when you provide `onClick`.
+
+<ComponentPreview
+  component={<div className="flex min-h-[320px] w-full items-center justify-center rounded-xl bg-[#191715] p-6"><DiscoverButton href="/components" /></div>}
+  code={`import { DiscoverButton } from '@/components/block/discover-button'
+
+export function Demo() {
+  return <DiscoverButton href="/components" />
+}`}
+  previewClassName="p-0 sm:p-0"
+/>
+
+## Install using CLI
+
+<CLICommand componentName="discover-button" />
+
+## Usage
+
+```tsx copy
+import { DiscoverButton } from '@/components/block/discover-button'
+
+<DiscoverButton href="/components" />
+```
+
+Provide `onClick` instead of `href` to use it as a button. Change the label with the `label` prop. The hover and focus effects respect reduced-motion preferences.
+
+## Customize colors
+
+The button uses neutral ObsidianUI colors by default. Override its CSS variables with `className` when you need a different surface or fill:
+
+```tsx copy
+<DiscoverButton href="/components" className="custom-discover-button" />
+```
+
+```css copy
+.custom-discover-button {
+  --obsidian-discover-surface: #e5e7eb;
+  --obsidian-discover-text: #171717;
+  --obsidian-discover-fill: #171717;
+  --obsidian-discover-active-text: #ffffff;
+}
+```
+
+## Install manually
+
+<Dependencies step={1} title="Copy the source code" source="discover-button">
+  <p className="mt-2 text-sm text-muted-foreground">Add the registry source to <code>components/block/discover-button.tsx</code> and its stylesheet to <code>components/block/discover-button.css</code>. Install the listed dependencies from the registry item.</p>
+</Dependencies>
+
+## Props
+
+<PropsTable
+  data={[
+    { prop: 'label', type: 'string', defaultValue: 'Discover Components', description: 'Text shown beside the arrow.' },
+    { prop: 'href', type: 'string', defaultValue: '-', description: 'Destination when rendered as a link.' },
+    { prop: 'onClick', type: 'MouseEventHandler<HTMLButtonElement>', defaultValue: '-', description: 'Click handler when rendered as a button.' },
+    { prop: 'className', type: 'string', defaultValue: '-', description: 'Additional classes for the outer pill.' },
+  ]}
+/>
