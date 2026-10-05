@@ -37,11 +37,55 @@ ObsidianUI is React & Tailwind CSS Component Library featuring components, block
 
 ## Built with Factory
 
-These components were made using [Factory](https://factory.ai):
+ObsidianUI is built with [Factory](https://factory.com) and Droid, Factory's software development agent. The repository is set up so Droid can take a component from idea to install command: the source, a docs page, tests, and the registry entry. Clone it to build your own components with Droid the same way.
+
+Made with Droid:
 
 - [Active Sessions](https://www.obsidianui.dev/docs/active-sessions)
 - [Status Bars](https://www.obsidianui.dev/docs/status-bars)
 - [Discover Button](https://www.obsidianui.dev/docs/discover-button)
+
+**Now cooking:** a **Dashboard** component, built with Factory. Coming soon.
+
+### How the repository works with Droid
+
+- **[`AGENTS.md`](AGENTS.md):** Droid loads this file at the start of every session. It sets where primitives, blocks, docs, and tests go, forbids hand-editing generated files, and names the checks to run before work counts as done.
+- **[`ACEBUILDER.md`](ACEBUILDER.md) and [`skills/`](skills):** the design conventions `AGENTS.md` points Droid to, covering accessibility, color, layout, typography, transitions, and writing.
+- **Generated output:** `npm run registry:build` and `npm run agent:build` rebuild the shadcn registry, `llms.txt`, and the Markdown docs from source, so a component Droid builds can be installed right away.
+- **Checks:** `npm test` runs the unit and component tests, and `npm run check` adds lint, type checking, and a production build, so Droid can prove a change works.
+
+### Build a component with Droid
+
+1. Install Droid ([quickstart](https://docs.factory.com/droid-cli/quickstart)):
+
+   ```bash
+   # macOS and Linux
+   curl -fsSL https://app.factory.ai/cli | sh
+
+   # Windows (PowerShell)
+   irm https://app.factory.ai/cli/windows | iex
+   ```
+
+2. Clone the repository and start Droid in it:
+
+   ```bash
+   git clone https://github.com/Atharvsinh-codez/ObsidianUI.git
+   cd ObsidianUI
+   npm ci
+   droid
+   ```
+
+3. Describe the component you want. For example:
+
+   ```text
+   Add a pricing toggle component in src/components/block, with a docs page in
+   src/content and a component test in tests/components. Then run
+   npm run registry:build and npm test.
+   ```
+
+4. Review the changes, then run `npm run dev` and open the new docs page at `localhost:3000/docs/<component-name>`.
+
+You can also open the folder in the [Factory App](https://docs.factory.com/factory-app/quickstart) instead of the terminal.
 
 ## Quick start
 
@@ -103,6 +147,10 @@ After updating a component or registry source, rebuild the registry output with 
 ## Contributing
 
 Issues and pull requests are welcome. Read [CONTRIBUTING.md](CONTRIBUTING.md) for the full walkthrough, from creating a component to a working install command.
+
+## License
+
+ObsidianUI is released under the [MIT License](LICENSE).
 
 <div align="center">
   <br />
