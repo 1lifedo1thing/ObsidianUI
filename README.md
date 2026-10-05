@@ -35,6 +35,14 @@ ObsidianUI is React & Tailwind CSS Component Library featuring components, block
 - **Your own source:** Registry installs add editable files to your project, including the styles and local helpers a component needs.
 - **Agent access:** Use [`llms.txt`](https://www.obsidianui.dev/llms.txt), Markdown documentation, the [public registry](https://www.obsidianui.dev/r/registry.json), or the local MCP server.
 
+## Built with Factory
+
+These components were made using [Factory](https://factory.ai):
+
+- [Active Sessions](https://www.obsidianui.dev/docs/active-sessions)
+- [Status Bars](https://www.obsidianui.dev/docs/status-bars)
+- [Discover Button](https://www.obsidianui.dev/docs/discover-button)
+
 ## Quick start
 
 Choose a component from the [showcase](https://www.obsidianui.dev/components), then install it with the shadcn CLI. For example:
