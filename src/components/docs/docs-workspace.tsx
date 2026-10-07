@@ -56,6 +56,11 @@ function TocRail({ path, length, distance, height, endX, endY }: TocRailState) {
   );
 }
 
+const sections: NavItem[] = [
+  { title: "Introduction", href: "/docs" },
+  { title: "Components", href: "/components" },
+];
+
 const groups: NavGroup[] = [];
 for (const [slug, entry] of documentationEntries) {
   if (typeof entry === "object" && entry.type === "separator") {
@@ -70,7 +75,7 @@ export function DocsNavigation({ onNavigate }: { onNavigate?: () => void }) {
   const { isNew, markSeen } = useNewComponentVisits();
   return (
     <nav className="docs-navigation" aria-label="Documentation">
-      {groups.map((group, index) => (
+      {[{ title: "Sections", items: sections }, ...groups].map((group, index) => (
         <section key={group.title} className="docs-nav-group" style={{ "--docs-group-index": Math.min(index, 3) } as CSSProperties}>
           <h2 className="docs-nav-label">{group.title}</h2>
           <ul>
@@ -95,9 +100,11 @@ export function DocsNavigation({ onNavigate }: { onNavigate?: () => void }) {
                     data-new={unread}
                     className={cn("docs-nav-link", active && "is-active")}
                   >
-                    <span className="docs-nav-title">{item.title}</span>
-                    <span className="t-badge docs-nav-new-indicator" data-open={unread} aria-hidden="true">
-                      <span className="t-badge-dot docs-nav-new-dot" data-visible={unread} />
+                    <span className="docs-nav-pill">
+                      <span className="docs-nav-title">{item.title}</span>
+                      <span className="t-badge docs-nav-new-indicator" data-open={unread} aria-hidden="true">
+                        <span className="t-badge-dot docs-nav-new-dot" data-visible={unread} />
+                      </span>
                     </span>
                   </Link>
                 </li>
@@ -127,7 +134,7 @@ function MobileDocsMenu() {
       <SheetContent side="left" className="obsidian-docs docs-mobile-sheet">
         <SheetHeader><SheetTitle><DocsBrand /></SheetTitle><SheetDescription className="sr-only">Browse the ObsidianUI documentation.</SheetDescription></SheetHeader>
         <div className="docs-sidebar-scroll"><DocsNavigation onNavigate={() => setOpen(false)} /></div>
-        <div className="docs-sidebar-footer"><Link href="/components" onClick={() => setOpen(false)}>Component showcase</Link><Link href="/" onClick={() => setOpen(false)}>Back to home</Link></div>
+        <div className="docs-sidebar-fade" aria-hidden="true" />
       </SheetContent>
     </Sheet>
   );
@@ -266,10 +273,7 @@ export function DocsWorkspace({ children }: { children: ReactNode }) {
         </div>
         <div id="docs-desktop-navigation" className="docs-sidebar-content" aria-hidden={collapsed} inert={collapsed}>
           <div className="docs-sidebar-scroll"><DocsNavigation /></div>
-          <div className="docs-sidebar-footer">
-            <Link href="/components">Component showcase</Link>
-            <Link href="/">Back to home</Link>
-          </div>
+          <div className="docs-sidebar-fade" aria-hidden="true" />
         </div>
       </aside>
 

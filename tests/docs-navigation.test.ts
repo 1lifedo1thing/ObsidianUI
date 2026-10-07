@@ -35,12 +35,12 @@ test("sidebar groups every published documentation file once and keeps installat
 
   const expectedCategories: Record<string, string> = {
     "active-sessions": "Components",
-    "dashboard-shell": "Components",
+    "dashboard-shell": "Blocks",
     "status-bars": "Components",
-    "hover-img": "Files & Media",
+    "hover-img": "Components",
     "split-showcase": "Components",
-    "text-stream": "Text Animations",
-    "draggable-marquee": "Scroll Animations",
+    "text-stream": "Components",
+    "draggable-marquee": "Components",
   };
   for (const [slug, group] of Object.entries(expectedCategories)) {
     assert.ok(groups.get(group)?.includes(slug), `${slug} belongs in ${group}`);

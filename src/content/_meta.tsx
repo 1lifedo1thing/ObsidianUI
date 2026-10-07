@@ -17,31 +17,23 @@ const meta = {
     "cli": "CLI",
     "---2": {
         "type": "separator",
-        "title": "Files & Media"
-    },
-    "hover-img": "Hover Image",
-    "---3": {
-        "type": "separator",
         "title": "Components"
     },
-    "v-prism": "v-prism",
-    "dashboard-shell": "Dashboard Shell",
     "active-sessions": "Active Sessions",
-    "discover-button": "Discover Button",
-    "status-bars": "Status Bars",
-    "split-showcase": "Split Showcase",
     "art-gallery": "Art Gallery",
-    "---4": {
-        "type": "separator",
-        "title": "Text Animations"
-    },
-    "flip-text": "Flip Text",
-    "text-stream": "Text reel",
-    "---5": {
-        "type": "separator",
-        "title": "Scroll Animations"
-    },
+    "discover-button": "Discover Button",
     "draggable-marquee": "Draggable Marquee",
+    "flip-text": "Flip Text",
+    "hover-img": "Hover Image",
+    "split-showcase": "Split Showcase",
+    "status-bars": "Status Bars",
+    "text-stream": "Text reel",
+    "v-prism": "v-prism",
+    "---3": {
+        "type": "separator",
+        "title": "Blocks"
+    },
+    "dashboard-shell": "Dashboard Shell",
 };
 
 export const documentationEntries = Object.entries(meta);

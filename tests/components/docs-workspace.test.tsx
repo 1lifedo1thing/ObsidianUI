@@ -20,6 +20,10 @@ import { documentationEntries } from "@/content/_meta";
 const publishedPages = documentationEntries
   .filter((entry): entry is [string, string] => typeof entry[1] === "string")
   .map(([slug, title]) => ({ href: `/docs/${slug}`, title }));
+const sectionLinks = [
+  { href: "/docs", title: "Introduction" },
+  { href: "/components", title: "Components" },
+];
 
 describe("documentation workspace", () => {
   beforeEach(() => {
@@ -35,7 +39,7 @@ describe("documentation workspace", () => {
     expect(nav.getAllByRole("link").map(link => ({
       href: link.getAttribute("href"),
       title: link.textContent,
-    }))).toEqual(publishedPages);
+    }))).toEqual([...sectionLinks, ...publishedPages]);
     expect(nav.getAllByRole("link", { current: "page" })).toEqual([
       nav.getByRole("link", { name: "Flip Text" }),
     ]);
@@ -52,10 +56,11 @@ describe("documentation workspace", () => {
     render(<DocsWorkspace>Article</DocsWorkspace>);
     const nav = within(screen.getByRole("navigation", { name: "Documentation" }));
     for (const [category, title] of [
-      ["Files & Media", "Hover Image"],
-      ["Components", "Split Showcase"],
-      ["Text Animations", "Flip Text"],
-      ["Scroll Animations", "Draggable Marquee"],
+      ["Sections", "Introduction"],
+      ["Get started", "CLI"],
+      ["Components", "Hover Image"],
+      ["Components", "Flip Text"],
+      ["Blocks", "Dashboard Shell"],
     ]) {
       const section = nav.getByRole("heading", { level: 2, name: category }).closest("section")!;
       expect(within(section).getByRole("link", { name: new RegExp(`^${title}(?:, new component)?$`) })).toBeVisible();
@@ -92,7 +97,7 @@ describe("documentation workspace", () => {
     expect(controlledNavigation).toHaveAttribute("aria-hidden", "true");
     expect(screen.queryByRole("searchbox")).not.toBeInTheDocument();
     expect(screen.queryByRole("navigation", { name: "Documentation" })).not.toBeInTheDocument();
-    expect(screen.queryByRole("link", { name: "Component showcase" })).not.toBeInTheDocument();
+    expect(screen.queryByRole("link", { name: "Introduction" })).not.toBeInTheDocument();
 
     await user.click(toggle);
     expect(toggle).toHaveAttribute("aria-expanded", "true");
@@ -107,7 +112,7 @@ describe("documentation workspace", () => {
       expect(link).toBeVisible();
     }
     expect(nav.getByRole("link", { current: "page" })).toHaveAccessibleName("Flip Text");
-    expect(screen.getByRole("link", { name: "Component showcase" })).toHaveAttribute("href", "/components");
+    expect(nav.getByRole("link", { name: "Components" })).toHaveAttribute("href", "/components");
   });
 
   it("opens the mobile sheet and closes it after choosing a real documentation link", async () => {
@@ -126,8 +131,8 @@ describe("documentation workspace", () => {
     expect(within(sheet).queryByRole("searchbox")).not.toBeInTheDocument();
     expect(within(sheet).getByRole("navigation", { name: "Documentation" }).querySelector("svg")).toBeNull();
     const nav = within(within(sheet).getByRole("navigation", { name: "Documentation" }));
-    expect(nav.getAllByRole("link")).toHaveLength(publishedPages.length);
-    for (const category of ["Files & Media", "Components", "Text Animations", "Scroll Animations"]) {
+    expect(nav.getAllByRole("link")).toHaveLength(sectionLinks.length + publishedPages.length);
+    for (const category of ["Sections", "Get started", "Components", "Blocks"]) {
       expect(nav.getByRole("heading", { level: 2, name: category })).toBeVisible();
     }
     expect(nav.getByRole("link", { current: "page" })).toHaveAccessibleName("Flip Text");

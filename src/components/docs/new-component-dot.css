@@ -68,10 +68,17 @@
   position: relative;
   top: auto;
   right: auto;
-  flex: 0 0 6px;
-  width: 6px;
-  height: 6px;
-  margin-inline-start: auto;
+  flex: 0 0 8px;
+  width: 8px;
+  height: 8px;
+  margin-inline-start: 1px;
+}
+
+/* Gives the slot back to the pill once the dot is gone; the dot still scales out because it overflows. */
+.docs-nav-new-indicator.t-badge[data-open="false"] {
+  flex-basis: 0;
+  width: 0;
+  margin-inline-start: -6px;
 }
 
 .docs-nav-new-dot {
