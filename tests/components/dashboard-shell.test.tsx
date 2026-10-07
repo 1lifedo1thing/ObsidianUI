@@ -56,12 +56,12 @@ describe("DashboardShell", () => {
     renderShell({ onSidebarWidthChange });
 
     const handle = screen.getByRole("separator", { name: "Resize sidebar" });
-    expect(handle).toHaveAttribute("aria-valuenow", "254");
+    expect(handle).toHaveAttribute("aria-valuenow", "200");
     handle.focus();
 
     await user.keyboard("{ArrowRight}");
-    expect(onSidebarWidthChange).toHaveBeenLastCalledWith(264);
-    expect(handle).toHaveAttribute("aria-valuenow", "264");
+    expect(onSidebarWidthChange).toHaveBeenLastCalledWith(210);
+    expect(handle).toHaveAttribute("aria-valuenow", "210");
 
     await user.keyboard("{End}");
     expect(handle).toHaveAttribute("aria-valuenow", "400");
@@ -69,10 +69,10 @@ describe("DashboardShell", () => {
     expect(onSidebarWidthChange).toHaveBeenCalledTimes(2);
 
     await user.keyboard("{Home}");
-    expect(onSidebarWidthChange).toHaveBeenLastCalledWith(200);
+    expect(onSidebarWidthChange).toHaveBeenLastCalledWith(180);
     // jsdom has no pointer capture, so skip the pointer events a real double-click would send first.
     fireEvent.doubleClick(handle);
-    expect(handle).toHaveAttribute("aria-valuenow", "254");
+    expect(handle).toHaveAttribute("aria-valuenow", "200");
   });
 
   it("opens the navigation drawer, keeps focus inside it, and returns focus when it closes", async () => {

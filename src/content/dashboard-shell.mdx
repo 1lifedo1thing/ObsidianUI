@@ -172,10 +172,10 @@ import {
 
 ## Sidebar width
 
-The sidebar starts at 254px and resizes between 200px and 400px. Change the limits with `minSidebarWidth` and `maxSidebarWidth`. To remember the width, save it in `onSidebarWidthChange`, which runs once when a drag ends rather than on every frame:
+The sidebar starts at 200px and resizes between 180px and 400px. Change the limits with `minSidebarWidth` and `maxSidebarWidth`. To remember the width, save it in `onSidebarWidthChange`, which runs once when a drag ends rather than on every frame:
 
 ```tsx copy
-const [width, setWidth] = useState(254)
+const [width, setWidth] = useState(200)
 
 useEffect(() => {
   const saved = Number(localStorage.getItem('sidebar-width'))
@@ -257,9 +257,9 @@ The full list, with both palettes, is in `dashboard-shell.css`.
     { prop: 'toolbarActions', type: 'ReactNode', defaultValue: '-', description: 'Right side of the toolbar.' },
     { prop: 'children', type: 'ReactNode', defaultValue: '-', description: 'Page content in the scrolling area.' },
     { prop: 'sidebarWidth', type: 'number', defaultValue: '-', description: 'Controlled sidebar width in pixels.' },
-    { prop: 'defaultSidebarWidth', type: 'number', defaultValue: '254', description: 'Initial width, and the width a double-click resets to.' },
+    { prop: 'defaultSidebarWidth', type: 'number', defaultValue: '200', description: 'Initial width, and the width a double-click resets to.' },
     { prop: 'onSidebarWidthChange', type: '(width: number) => void', defaultValue: '-', description: 'Called when a drag ends or the width changes from the keyboard.' },
-    { prop: 'minSidebarWidth', type: 'number', defaultValue: '200', description: 'Narrowest sidebar width in pixels.' },
+    { prop: 'minSidebarWidth', type: 'number', defaultValue: '180', description: 'Narrowest sidebar width in pixels.' },
     { prop: 'maxSidebarWidth', type: 'number', defaultValue: '400', description: 'Widest sidebar width in pixels.' },
     { prop: 'navigationLabel', type: 'string', defaultValue: 'Navigation', description: 'Accessible name for the navigation and the drawer.' },
     { prop: 'className', type: 'string', defaultValue: '-', description: 'Additional classes for the root element.' },

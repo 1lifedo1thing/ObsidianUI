@@ -169,10 +169,10 @@ import {
 
 ## Sidebar width
 
-The sidebar starts at 254px and resizes between 200px and 400px. Change the limits with `minSidebarWidth` and `maxSidebarWidth`. To remember the width, save it in `onSidebarWidthChange`, which runs once when a drag ends rather than on every frame:
+The sidebar starts at 200px and resizes between 180px and 400px. Change the limits with `minSidebarWidth` and `maxSidebarWidth`. To remember the width, save it in `onSidebarWidthChange`, which runs once when a drag ends rather than on every frame:
 
 ```tsx
-const [width, setWidth] = useState(254)
+const [width, setWidth] = useState(200)
 
 useEffect(() => {
   const saved = Number(localStorage.getItem('sidebar-width'))
@@ -731,9 +731,9 @@ export function DashboardShell({
   toolbarActions,
   children,
   sidebarWidth,
-  defaultSidebarWidth = 254,
+  defaultSidebarWidth = 200,
   onSidebarWidthChange,
-  minSidebarWidth = 200,
+  minSidebarWidth = 180,
   maxSidebarWidth = 400,
   navigationLabel = "Navigation",
   className,
@@ -1336,9 +1336,9 @@ export function cn(...inputs: ClassValue[]) {
 | toolbarActions | ReactNode | - | Right side of the toolbar. |
 | children | ReactNode | - | Page content in the scrolling area. |
 | sidebarWidth | number | - | Controlled sidebar width in pixels. |
-| defaultSidebarWidth | number | 254 | Initial width, and the width a double-click resets to. |
+| defaultSidebarWidth | number | 200 | Initial width, and the width a double-click resets to. |
 | onSidebarWidthChange | (width: number) => void | - | Called when a drag ends or the width changes from the keyboard. |
-| minSidebarWidth | number | 200 | Narrowest sidebar width in pixels. |
+| minSidebarWidth | number | 180 | Narrowest sidebar width in pixels. |
 | maxSidebarWidth | number | 400 | Widest sidebar width in pixels. |
 | navigationLabel | string | Navigation | Accessible name for the navigation and the drawer. |
 | className | string | - | Additional classes for the root element. |
