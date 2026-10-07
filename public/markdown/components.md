@@ -4,10 +4,11 @@ Animated, interactive components for React. Built with Tailwind CSS and animatio
 
 ## Explore the components
 
-Find your next detail. Preview it, read the usage example, and copy all required files from its JSON manifest. 10 components have published documentation. The [complete registry](https://www.obsidianui.dev/r/registry.json) also includes supporting UI primitives.
+Find your next detail. Preview it, read the usage example, and copy all required files from its JSON manifest. 11 components have published documentation. The [complete registry](https://www.obsidianui.dev/r/registry.json) also includes supporting UI primitives.
 
 - [Hover Image](https://www.obsidianui.dev/markdown/docs/hover-img.md): [download all source files](https://www.obsidianui.dev/r/hover-img.json) and [interactive preview](https://www.obsidianui.dev/docs/hover-img).
 - [v-prism](https://www.obsidianui.dev/markdown/docs/v-prism.md): [download all source files](https://www.obsidianui.dev/r/v-prism.json) and [interactive preview](https://www.obsidianui.dev/docs/v-prism).
+- [Dashboard Shell](https://www.obsidianui.dev/markdown/docs/dashboard-shell.md): [download all source files](https://www.obsidianui.dev/r/dashboard-shell.json) and [interactive preview](https://www.obsidianui.dev/docs/dashboard-shell).
 - [Active Sessions](https://www.obsidianui.dev/markdown/docs/active-sessions.md): [download all source files](https://www.obsidianui.dev/r/active-sessions.json) and [interactive preview](https://www.obsidianui.dev/docs/active-sessions).
 - [Discover Button](https://www.obsidianui.dev/markdown/docs/discover-button.md): [download all source files](https://www.obsidianui.dev/r/discover-button.json) and [interactive preview](https://www.obsidianui.dev/docs/discover-button).
 - [Status Bars](https://www.obsidianui.dev/markdown/docs/status-bars.md): [download all source files](https://www.obsidianui.dev/r/status-bars.json) and [interactive preview](https://www.obsidianui.dev/docs/status-bars).

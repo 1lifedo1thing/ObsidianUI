@@ -11,6 +11,7 @@ export const docsDescriptions: Record<string, string> = {
   "cli": "Install ObsidianUI components with the shadcn CLI and connect coding agents through the MCP server.",
   "hover-img": "Preview images that follow the cursor when visitors hover over titles. Explore the Hover Image React component and copy its source.",
   "v-prism": "Explore v-prism, an interactive glass prism that splits a movable light beam into a spectrum. View its settings and React source.",
+  "dashboard-shell": "Preview Dashboard Shell, a React app layout with a resizable sidebar, header actions, tabs, and a filter toolbar that turns into a drawer in narrow containers.",
   "active-sessions": "Preview Active Sessions, a React list of signed-in devices that fold away when you sign them out, one at a time or all at once.",
   "discover-button": "Preview Discover Button, a pill-shaped React button whose arrow circle expands across the label on hover.",
   "status-bars": "Preview Status Bars, a daily uptime strip for React with incident tooltips, keyboard navigation, and an animated uptime total.",

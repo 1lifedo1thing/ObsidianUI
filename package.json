@@ -25,6 +25,7 @@
     "sync:r2-manifest": "node -e \"require('fs').copyFileSync('scripts/r2-manifest.json','src/lib/r2-manifest.json');console.log('r2-manifest synced to src/lib/');\""
   },
   "dependencies": {
+    "@duo-icons/react": "^1.0.1",
     "@hookform/resolvers": "^5.2.2",
     "@modelcontextprotocol/sdk": "^1.25.1",
     "@neondatabase/serverless": "^1.0.2",

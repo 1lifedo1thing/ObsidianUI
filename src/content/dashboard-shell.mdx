@@ -1,0 +1,280 @@
+import { Dependencies } from '@/components/docs/component-installation'
+import { CLICommand } from '@/components/docs/cli-command'
+import { PropsTable } from '@/components/docs/props-table'
+import { ComponentPreview } from '@/components/docs/component-preview'
+import { DashboardShellPreview } from '@/components/catalog/dashboard-shell-preview'
+
+# Dashboard Shell
+
+An app layout for dashboards and admin pages. It has a resizable sidebar with grouped navigation, a header with a title, status, and action buttons, tabs with a sliding pill, and a toolbar for filters and primary actions. Your page content goes in the scrolling area below.
+
+Drag the sidebar edge to resize it, or double-click it to reset. In containers narrower than 672px, the sidebar moves into a drawer that opens from the menu button.
+
+<ComponentPreview
+  className="dashboard-shell-docs-preview"
+  expandable
+  frameClassName="h-[600px] overflow-hidden rounded-xl border"
+  component={<DashboardShellPreview />}
+  code={`'use client'
+
+import { useState } from 'react'
+import { AddCircle, AppDots, Box } from '@duo-icons/react'
+import { Download, Search } from 'lucide-react'
+import { DashboardButton, DashboardFilterMenu, DashboardShell } from '@/components/block/dashboard-shell'
+
+const sortOptions = [
+  { value: 'newest', label: 'Newest first' },
+  { value: 'name', label: 'Name' },
+]
+
+export function Demo() {
+  const [sortBy, setSortBy] = useState('newest')
+
+  return (
+    <div className="h-dvh">
+      <DashboardShell
+        brand={{ name: 'ObsidianUI', description: 'Component library' }}
+        navigation={[
+          {
+            id: 'library',
+            items: [
+              { id: 'components', label: 'Components', icon: AppDots, count: 10 },
+              { id: 'blocks', label: 'Blocks', icon: Box },
+            ],
+          },
+          {
+            id: 'spaces',
+            title: 'Spaces',
+            items: [{ id: 'landing-pages', label: 'Landing pages', color: '#facc15' }],
+          },
+        ]}
+        title="Components"
+        status="Active"
+        headerActions={
+          <DashboardButton variant="secondary" size="icon" aria-label="Search">
+            <Search aria-hidden />
+          </DashboardButton>
+        }
+        tabs={[
+          { value: 'all', label: 'All components' },
+          { value: 'new', label: 'New' },
+        ]}
+        filters={<DashboardFilterMenu label="Sort by" value={sortBy} options={sortOptions} onValueChange={setSortBy} />}
+        toolbarActions={
+          <>
+            <DashboardButton variant="secondary" size="sm"><Download aria-hidden />Export</DashboardButton>
+            <DashboardButton variant="primary" size="sm"><AddCircle aria-hidden />New component</DashboardButton>
+          </>
+        }
+      >
+        <p className="p-4">Your page content</p>
+      </DashboardShell>
+    </div>
+  )
+}`}
+  previewClassName="p-0 sm:p-0"
+/>
+
+## Install using CLI
+
+<CLICommand componentName="dashboard-shell" />
+
+## Usage
+
+```tsx copy
+import { AppDots } from '@duo-icons/react'
+import { DashboardShell } from '@/components/block/dashboard-shell'
+
+<div className="h-dvh">
+  <DashboardShell
+    brand={{ name: 'ObsidianUI' }}
+    navigation={[{ id: 'main', items: [{ id: 'components', label: 'Components', icon: AppDots }] }]}
+    title="Components"
+  >
+    <YourContent />
+  </DashboardShell>
+</div>
+```
+
+The shell fills its parent, so give the parent a height, such as `h-dvh` for a full page. The content area scrolls on its own, and the header, tabs, and toolbar stay in place.
+
+Leave out `tabs`, `filters`, or `toolbarActions` and those rows are not rendered.
+
+## Navigation
+
+Each section has an optional `title` and a list of items. An item shows an `icon`, or a colored dot when you pass `color` instead, and an optional `count` badge. The demo uses duotone icons from [`@duo-icons/react`](https://github.com/fernandcf/duo-icons): their second layer draws at 30% opacity, so one icon color gives a dark shape with a grey fill. Lucide icons work too.
+
+A single hover highlight glides between items as the pointer moves down the list, and the active item's pill slides to whichever item you choose.
+
+Items with `href` render as links. Items without it render as buttons that only change the active item. Track the active item with `activeItemId` and `onActiveItemChange`, or let the shell keep it with `defaultActiveItemId`. The active item gets `aria-current="page"`.
+
+`secondaryNavigation` holds quieter items pinned under the main list, such as Invite or Help. `sidebarFooter` sits at the very bottom, for a plan or account card:
+
+```tsx copy
+<DashboardShell
+  secondaryNavigation={[{ id: 'help', label: 'Help', icon: Info, href: '/help' }]}
+  sidebarFooter={<DashboardButton variant="muted" size="md">Add billing</DashboardButton>}
+  {...props}
+/>
+```
+
+## Buttons and filters
+
+`DashboardButton` matches the shell's look and works anywhere inside it.
+
+- `variant`: `primary` for the main action, `secondary` for everyday buttons, `muted` for buttons on the sidebar's darker panels, and `ghost` for low-emphasis actions.
+- `size`: `sm` for toolbars, `md` for larger buttons, and `icon` for square icon buttons. Give icon buttons an `aria-label`.
+
+`DashboardFilterMenu` is a dropdown that shows its label and current value side by side, like **Sort by | Last updated**:
+
+```tsx copy
+const [team, setTeam] = useState('all')
+
+<DashboardFilterMenu
+  label="Team"
+  value={team}
+  options={[
+    { value: 'all', label: 'All teams' },
+    { value: 'design', label: 'Design' },
+  ]}
+  onValueChange={setTeam}
+/>
+```
+
+## Menus and popovers
+
+The filter menu is built from menu pieces you can use for your own menus, such as an account menu. `DashboardPopover` holds free-form content, like a search field or a notifications list. Both match the buttons: frosted glass with a backdrop blur, the same corners and text size, and a highlight that glides between items as you hover or use the arrow keys. They open with a short spring from the trigger, coming into focus as the blur clears.
+
+```tsx copy
+import {
+  DashboardButton,
+  DashboardMenu,
+  DashboardMenuContent,
+  DashboardMenuItem,
+  DashboardMenuSeparator,
+  DashboardMenuTrigger,
+} from '@/components/block/dashboard-shell'
+
+<DashboardMenu>
+  <DashboardMenuTrigger asChild>
+    <DashboardButton variant="secondary" size="sm">Account</DashboardButton>
+  </DashboardMenuTrigger>
+  <DashboardMenuContent align="end">
+    <DashboardMenuItem>Profile</DashboardMenuItem>
+    <DashboardMenuItem>Settings</DashboardMenuItem>
+    <DashboardMenuSeparator />
+    <DashboardMenuItem>Sign out</DashboardMenuItem>
+  </DashboardMenuContent>
+</DashboardMenu>
+```
+
+`DashboardMenuLabel`, `DashboardMenuRadioGroup`, and `DashboardMenuRadioItem` are also available for headings and single-choice options. `DashboardPopover`, `DashboardPopoverTrigger`, and `DashboardPopoverContent` follow the same pattern. Both are built on Radix, so they keep its keyboard support and focus handling.
+
+## Sidebar width
+
+The sidebar starts at 254px and resizes between 200px and 400px. Change the limits with `minSidebarWidth` and `maxSidebarWidth`. To remember the width, save it in `onSidebarWidthChange`, which runs once when a drag ends rather than on every frame:
+
+```tsx copy
+const [width, setWidth] = useState(254)
+
+useEffect(() => {
+  const saved = Number(localStorage.getItem('sidebar-width'))
+  if (saved) setWidth(saved)
+}, [])
+
+<DashboardShell
+  sidebarWidth={width}
+  onSidebarWidthChange={next => {
+    setWidth(next)
+    localStorage.setItem('sidebar-width', String(next))
+  }}
+  {...props}
+/>
+```
+
+## Behavior
+
+- The resize handle works with the keyboard. Focus it, then press the left and right arrow keys to change the width by 10px, or Home and End to jump to the limits.
+- The layout responds to the width of its container, not the window, so it also works inside a panel or a preview.
+- The sidebar, content area, and menus use a thin 4px scrollbar with no track or arrows. It only appears while the pointer or keyboard focus is inside that area.
+- The drawer moves focus to its close button and keeps Tab inside until it closes. Escape, the backdrop, or choosing an item closes it and returns focus to the menu button.
+- Tabs follow the WAI-ARIA tabs pattern, so the arrow keys move between them. The active pill slides to the tab you choose, the hover highlight glides across the tabs, and the page content fades in. The content stays mounted when the tab changes, so its state and scroll position are kept.
+- With reduced motion, the drawer, hover highlights, and active pills move into place without animating, the content doesn't fade, and menus and popovers appear without the spring or blur. Touch input skips the hover highlight.
+
+## Customize colors
+
+The shell has a light and a dark palette, and switches when a parent has the `dark` class. Menus and popovers render in a portal at the end of the page, so they carry an `obsidian-dashboard-shell-layer` class with the same palette. Include both classes when you override colors:
+
+```css copy
+.obsidian-dashboard-shell,
+.obsidian-dashboard-shell-layer {
+  --obsidian-dashboard-shell-background: #ffffff;
+  --obsidian-dashboard-shell-sidebar: #fafafa;
+  --obsidian-dashboard-shell-panel: #f4f4f4;
+  --obsidian-dashboard-shell-border: #e7e7e7;
+  --obsidian-dashboard-shell-foreground: #161616;
+  --obsidian-dashboard-shell-text-muted: #5c5c5c;
+  --obsidian-dashboard-shell-icon: #161616;
+  --obsidian-dashboard-shell-hover: rgb(0 0 0 / 0.045);
+  --obsidian-dashboard-shell-accent: #2563eb;
+  --obsidian-dashboard-shell-accent-hover: #3b82f6;
+  --obsidian-dashboard-shell-menu: rgb(255 255 255 / 0.82);
+  --obsidian-dashboard-shell-menu-highlight: rgb(0 0 0 / 0.06);
+}
+```
+
+Keep `--obsidian-dashboard-shell-menu` slightly transparent, or the backdrop blur has nothing to show through.
+
+The full list, with both palettes, is in `dashboard-shell.css`.
+
+## Install manually
+
+<Dependencies step={1} title="Copy the source code" source="dashboard-shell">
+  <p className="mt-2 text-sm text-muted-foreground">Add the registry source to <code>components/block/dashboard-shell.tsx</code> and its stylesheet to <code>components/block/dashboard-shell.css</code>. It uses Radix for the tabs, menus, and popovers, <code>motion</code> for animation, and <code>lucide-react</code> for its icons. Install the listed dependencies from the registry item.</p>
+</Dependencies>
+
+## Props
+
+<PropsTable
+  data={[
+    { prop: 'brand', type: '{ name: string; description?: string; logo?: ReactNode }', defaultValue: '-', description: 'Product name, tagline, and logo at the top of the sidebar.' },
+    { prop: 'navigation', type: 'DashboardShellNavSection[]', defaultValue: '-', description: 'Sidebar sections, each with an optional title and its items.' },
+    { prop: 'secondaryNavigation', type: 'DashboardShellNavItem[]', defaultValue: '-', description: 'Quieter items pinned under the main navigation.' },
+    { prop: 'sidebarFooter', type: 'ReactNode', defaultValue: '-', description: 'Content pinned to the bottom of the sidebar.' },
+    { prop: 'activeItemId', type: 'string', defaultValue: '-', description: 'Controlled active navigation item.' },
+    { prop: 'defaultActiveItemId', type: 'string', defaultValue: 'First item', description: 'Initial active item when uncontrolled.' },
+    { prop: 'onActiveItemChange', type: '(id: string) => void', defaultValue: '-', description: 'Called when an item is chosen.' },
+    { prop: 'title', type: 'ReactNode', defaultValue: '-', description: 'Page title in the header.' },
+    { prop: 'headingLevel', type: '1 | 2 | 3', defaultValue: '1', description: 'Heading element for the title, to fit the page outline.' },
+    { prop: 'status', type: 'string', defaultValue: '-', description: 'Short label in a pill beside the title.' },
+    { prop: 'statusTone', type: "'success' | 'warning' | 'neutral'", defaultValue: "'success'", description: 'Color of the status dot.' },
+    { prop: 'headerActions', type: 'ReactNode', defaultValue: '-', description: 'Buttons on the right of the header.' },
+    { prop: 'tabs', type: '{ value: string; label: string }[]', defaultValue: '-', description: 'Tabs under the header.' },
+    { prop: 'tab', type: 'string', defaultValue: '-', description: 'Controlled active tab.' },
+    { prop: 'defaultTab', type: 'string', defaultValue: 'First tab', description: 'Initial tab when uncontrolled.' },
+    { prop: 'onTabChange', type: '(value: string) => void', defaultValue: '-', description: 'Called when the tab changes.' },
+    { prop: 'filters', type: 'ReactNode', defaultValue: '-', description: 'Left side of the toolbar.' },
+    { prop: 'toolbarActions', type: 'ReactNode', defaultValue: '-', description: 'Right side of the toolbar.' },
+    { prop: 'children', type: 'ReactNode', defaultValue: '-', description: 'Page content in the scrolling area.' },
+    { prop: 'sidebarWidth', type: 'number', defaultValue: '-', description: 'Controlled sidebar width in pixels.' },
+    { prop: 'defaultSidebarWidth', type: 'number', defaultValue: '254', description: 'Initial width, and the width a double-click resets to.' },
+    { prop: 'onSidebarWidthChange', type: '(width: number) => void', defaultValue: '-', description: 'Called when a drag ends or the width changes from the keyboard.' },
+    { prop: 'minSidebarWidth', type: 'number', defaultValue: '200', description: 'Narrowest sidebar width in pixels.' },
+    { prop: 'maxSidebarWidth', type: 'number', defaultValue: '400', description: 'Widest sidebar width in pixels.' },
+    { prop: 'navigationLabel', type: 'string', defaultValue: 'Navigation', description: 'Accessible name for the navigation and the drawer.' },
+    { prop: 'className', type: 'string', defaultValue: '-', description: 'Additional classes for the root element.' },
+  ]}
+/>
+
+## Navigation item fields
+
+<PropsTable
+  data={[
+    { prop: 'id', type: 'string', defaultValue: '-', description: 'Unique, stable identifier.' },
+    { prop: 'label', type: 'string', defaultValue: '-', description: 'Visible text.' },
+    { prop: 'icon', type: 'ElementType', defaultValue: '-', description: 'A duo-icons or lucide icon, or any component that accepts className.' },
+    { prop: 'color', type: 'string', defaultValue: '-', description: 'Shows a colored dot when there is no icon.' },
+    { prop: 'count', type: 'number', defaultValue: '-', description: 'Number shown in a badge on the right.' },
+    { prop: 'href', type: 'string', defaultValue: '-', description: 'Renders the item as a link.' },
+  ]}
+/>

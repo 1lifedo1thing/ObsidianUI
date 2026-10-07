@@ -10,6 +10,7 @@ import { r2 } from '@/lib/r2'
 import { EffectPreview } from './effect-preview'
 import { newEffects } from './new-effects'
 import { ActiveSessionsPreview } from './active-sessions-preview'
+import { DashboardShellPreview } from './dashboard-shell-preview'
 import { StatusBarsPreview } from './status-bars-preview'
 import './components-grid.css'
 
@@ -29,13 +30,27 @@ type ShowcaseItem = {
     isNew?: boolean
 }
 
-const effectSizes: Partial<Record<string, ShowcaseSize>> = { 'draggable-marquee': 'tall', 'text-stream': 'short' }
+const effectSizes: Partial<Record<string, ShowcaseSize>> = { 'draggable-marquee': 'tall' }
 
 // Keep v-prism featured. Insert each new component immediately after it so the
 // newest card starts the grid and older cards shift right, then wrap in order.
 // Sizes are balanced so the three masonry columns end level; recheck them when adding a card.
 const allComponents: ShowcaseItem[] = [
     { title: 'v-prism', href: '/docs/v-prism', preview: <EffectPreview slug="v-prism" compact /> },
+    {
+        title: 'Dashboard Shell',
+        href: '/docs/dashboard-shell',
+        size: 'tall',
+        isNew: true,
+        // Rendered at desktop size and scaled down so the card shows the docked sidebar, cropped at the edge.
+        preview: (
+            <div className="relative h-full w-full overflow-hidden">
+                <div className="absolute left-5 top-12 h-[760px] w-[1000px] origin-top-left scale-[0.52] overflow-hidden rounded-[24px] border border-black/10 shadow-[0_24px_60px_rgb(0_0_0/0.18)] dark:border-white/10">
+                    <DashboardShellPreview compact />
+                </div>
+            </div>
+        ),
+    },
     {
         title: 'Active Sessions',
         href: '/docs/active-sessions',

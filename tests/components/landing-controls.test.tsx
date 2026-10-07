@@ -127,7 +127,7 @@ describe("landing controls", () => {
     expect(input).toHaveAttribute("aria-expanded", "true");
     const results = within(screen.getByRole("listbox", { name: "Matching components" }));
     expect(results.getAllByRole("option").map((option) => option.textContent)).toEqual([
-      "Active Sessions", "Art Gallery", "Discover Button", "Draggable Marquee",
+      "Active Sessions", "Art Gallery", "Dashboard Shell", "Discover Button",
     ]);
     await user.keyboard("{ArrowDown}{Enter}");
     expect(controls.push).toHaveBeenCalledExactlyOnceWith("/docs/art-gallery");

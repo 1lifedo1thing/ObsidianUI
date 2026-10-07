@@ -56,6 +56,31 @@ describe("documentation preview and command controls", () => {
         await waitFor(() => expect(navigator.clipboard.writeText).toHaveBeenCalledWith('bunx shadcn@latest add "https://www.obsidianui.dev/r/split-showcase.json"'));
     });
 
+    it("opens an expandable preview full screen and minimizes it back without remounting", async () => {
+        preferences.reduced = true;
+        function Counter() {
+            const [count, setCount] = useState(0);
+            return <button onClick={() => setCount(count + 1)}>Count {count}</button>;
+        }
+        const { container } = render(<ComponentPreview expandable frameClassName="h-[600px]" component={<Counter />} code="<Counter />" />);
+        const card = container.querySelector<HTMLElement>("[data-slot='tabs']")!;
+        fireEvent.click(screen.getByRole("button", { name: "Count 0" }));
+
+        fireEvent.click(screen.getByRole("button", { name: "Open preview full screen" }));
+        expect(screen.getByRole("button", { name: "Minimize preview" })).toBeInTheDocument();
+        expect(card).toHaveAttribute("data-fullscreen");
+        expect(card.style.position).toBe("fixed");
+        expect(document.documentElement.style.overflow).toBe("hidden");
+        expect(screen.getByRole("button", { name: "Count 1" })).toBeInTheDocument();
+
+        fireEvent.keyDown(document, { key: "Escape" });
+        await waitFor(() => expect(card).not.toHaveAttribute("data-fullscreen"));
+        expect(card.style.position).toBe("");
+        expect(document.documentElement.style.overflow).toBe("");
+        expect(screen.getByRole("button", { name: "Open preview full screen" })).toBeInTheDocument();
+        expect(screen.getByRole("button", { name: "Count 1" })).toBeInTheDocument();
+    });
+
     it("shows previews immediately with reduced motion and keeps reload available", () => {
         preferences.reduced = true;
         const { container } = render(<ComponentPreview component={<p>Still preview</p>} code="<Demo />" />);
