@@ -68,7 +68,11 @@ export default function PromptDetailPage({ prompt }: { prompt: Prompt }) {
           <h1>{prompt.title}</h1>
           {prompt.previewUrl ? (
             <a className="prompt-preview" href={prompt.previewUrl} target="_blank" rel="noopener noreferrer">
-              Preview <ArrowUpRight aria-hidden="true" />
+              Preview
+              <span className="prompt-preview-icon" aria-hidden="true">
+                <ArrowUpRight className="prompt-preview-arrow is-out" />
+                <ArrowUpRight className="prompt-preview-arrow is-in" />
+              </span>
             </a>
           ) : null}
         </div>
