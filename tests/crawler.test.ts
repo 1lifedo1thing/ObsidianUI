@@ -3,6 +3,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { test } from 'node:test';
 import sitemap from '../src/app/sitemap';
+import { prompts } from '../src/lib/prompts';
 
 const origin = 'https://www.obsidianui.dev';
 
@@ -51,7 +52,8 @@ test('sitemap covers every published document and static page with canonical, un
     const pageFiles = fs.readdirSync('src/app', { recursive: true })
         .map(String).filter(file => /(^|[\\/])page\.[tj]sx?$/.test(file) && !file.includes('['));
     const pagePaths = pageFiles.map(file => '/' + file.split(path.sep).slice(0, -1).join('/'));
-    const expected = new Set([...documentPaths, ...pagePaths].map(route => new URL(route, origin).href));
+    const promptPaths = prompts.map(prompt => `/prompts/${prompt.slug}`);
+    const expected = new Set([...documentPaths, ...pagePaths, ...promptPaths].map(route => new URL(route, origin).href));
     assert.deepEqual(new Set(urls), expected, 'Every sitemap URL must match a real published page');
     assert.ok(!urls.includes(`${origin}/docs`), 'The redirecting docs root is not canonical');
     for (const url of urls) {

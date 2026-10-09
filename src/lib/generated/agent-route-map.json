@@ -9,6 +9,8 @@
   "/api": "/markdown/api.md",
   "/authentication": "/markdown/authentication.md",
   "/mcp": "/markdown/mcp.md",
+  "/prompts": "/markdown/prompts.md",
+  "/prompts/arix-hero-section": "/markdown/prompts/arix-hero-section.md",
   "/docs/installation": "/markdown/docs/installation.md",
   "/docs/install-tailwind": "/markdown/docs/install-tailwind.md",
   "/docs/add-utilities": "/markdown/docs/add-utilities.md",

@@ -28,7 +28,7 @@ test("agent indexes follow llms structure and include every downloadable item", 
 });
 
 test("every published page has a generated Markdown representation", () => {
-  for (const route of ["/", "/docs", "/components", "/templates", "/project-one", "/playground", "/sponsors", "/developers", "/api", "/authentication", "/mcp"]) {
+  for (const route of ["/", "/docs", "/components", "/templates", "/project-one", "/playground", "/sponsors", "/developers", "/api", "/authentication", "/mcp", "/prompts", "/prompts/arix-hero-section"]) {
     assert.ok(build.routes[route], route);
   }
   for (const [route, file] of Object.entries(build.routes)) {

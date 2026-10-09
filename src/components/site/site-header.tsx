@@ -17,10 +17,12 @@ const destinations = [
   { label: "Home", href: "/" },
   { label: "Components", href: "/components" },
   { label: "Docs", href: "/docs/installation" },
+  { label: "Prompts", href: "/prompts" },
 ];
 
 function isActive(pathname: string, href: string) {
   if (href.startsWith("/docs")) return pathname.startsWith("/docs");
+  if (href === "/prompts") return pathname === href || pathname.startsWith("/prompts/");
   if (href === "/templates") return pathname === href || pathname === "/project-one";
   return pathname === href;
 }

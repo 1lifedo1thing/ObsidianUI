@@ -119,6 +119,7 @@ Request any published page with Accept: text/markdown or read its direct Markdow
 - [Project One](https://www.obsidianui.dev/markdown/project-one.md): Template preview and separate source repository.
 - [Playground](https://www.obsidianui.dev/markdown/playground.md): Experimental navbar and button previews.
 - [Sponsors](https://www.obsidianui.dev/markdown/sponsors.md): Platform sponsors, monthly sponsorship tiers, benefits, and email inquiries.
+- [Prompts](https://www.obsidianui.dev/markdown/prompts.md): Copy-ready prompts for coding agents, each with its own Markdown file.
 
 ## Optional
 

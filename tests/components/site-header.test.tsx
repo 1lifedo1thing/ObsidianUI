@@ -46,6 +46,7 @@ describe("shared site header", () => {
     expect(nav.getByRole("link", { name: "Home" })).toHaveAttribute("href", "/");
     expect(nav.getByRole("link", { name: "Components" })).toHaveAttribute("href", "/components");
     expect(nav.getByRole("link", { name: "Docs" })).toHaveAttribute("href", "/docs/installation");
+    expect(nav.getByRole("link", { name: "Prompts" })).toHaveAttribute("href", "/prompts");
     expect(screen.getByRole("link", { name: "Templates" })).toHaveAttribute("href", "/templates");
     expect(screen.getByRole("link", { name: "ObsidianUI home" })).toHaveAttribute("href", "/");
     const author = screen.getByRole("link", { name: "Built by Atharv" });
@@ -61,6 +62,7 @@ describe("shared site header", () => {
     { pathname: "/", active: "Home" },
     { pathname: "/components", active: "Components" },
     { pathname: "/docs/flip-text", active: "Docs" },
+    { pathname: "/prompts/accessibility-audit", active: "Prompts" },
     { pathname: "/templates", active: "Templates" },
     { pathname: "/project-one", active: "Templates" },
   ])("marks $active as current at $pathname", async ({ pathname, active }) => {
@@ -91,7 +93,7 @@ describe("shared site header", () => {
     expect(dialog).toHaveAccessibleDescription("Explore components, documentation, and templates.");
     const nav = within(within(dialog).getByRole("navigation", { name: "Mobile site navigation" }));
     expect(nav.getAllByRole("link").map(link => link.getAttribute("href")))
-      .toEqual(["/", "/components", "/docs/installation", "/sponsors", "/templates"]);
+      .toEqual(["/", "/components", "/docs/installation", "/prompts", "/sponsors", "/templates"]);
     expect(nav.getByRole("link", { current: "page" })).toHaveAccessibleName("Docs");
     await user.keyboard("{Escape}");
     await waitFor(() => expect(screen.queryByRole("dialog")).not.toBeInTheDocument());

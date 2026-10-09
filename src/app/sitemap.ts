@@ -1,11 +1,15 @@
 import type { MetadataRoute } from 'next';
 import { readdir } from 'node:fs/promises';
 import path from 'node:path';
+import { prompts } from '../lib/prompts';
 
 export const dynamic = 'force-static';
 
 const origin = 'https://www.obsidianui.dev';
-const pagePaths = ['/', '/components', '/templates', '/project-one', '/playground', '/sponsors', '/developers', '/api', '/authentication', '/mcp'];
+const pagePaths = [
+    '/', '/components', '/templates', '/project-one', '/playground', '/sponsors', '/developers', '/api', '/authentication', '/mcp', '/prompts',
+    ...prompts.map(prompt => `/prompts/${prompt.slug}`),
+];
 
 async function documentationPaths(directory: string, segments: string[] = []): Promise<string[]> {
     const entries = await readdir(directory, { withFileTypes: true });
