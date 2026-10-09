@@ -6,6 +6,7 @@ A scroll-driven hero where a rotating ring of tutor tiles scatters, reveals text
 - Published: 2026-10-09
 - Author: Atharv
 - Page: https://www.obsidianui.dev/prompts/arix-hero-section
+- Live preview: https://herosection-v1.athrix.me
 
 > This is the exact prompt behind the Arix hero video. Paste it into a coding agent and it builds the full page in one pass: Next.js 16, React 19, TypeScript, and plain CSS Modules, with no animation libraries. The prompt spells out the assets, the copy, the layout, the scroll math for every phase, accessibility, and Vercel deployment.
 

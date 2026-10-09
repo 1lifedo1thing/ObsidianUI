@@ -21,6 +21,8 @@ export interface Prompt {
   date: string;
   author: string;
   cover: { label: string; tone: "rose" | "red" | "blue" | "violet" | "green" | "amber" | "slate"; image?: string };
+  /** Live demo of what the prompt builds; shown as a Preview button next to the title. */
+  previewUrl?: string;
   blocks: PromptBlock[];
 }
 
@@ -33,6 +35,7 @@ export const prompts: Prompt[] = [
     date: "2026-10-09",
     author: "Atharv",
     cover: { label: "Arix Hero", tone: "rose", image: "/prompts/arix-hero-section.webp" },
+    previewUrl: "https://herosection-v1.athrix.me",
     blocks: [
       { type: "callout", text: "This is the exact prompt behind the Arix hero video. Paste it into a coding agent and it builds the full page in one pass: Next.js 16, React 19, TypeScript, and plain CSS Modules, with no animation libraries. The prompt spells out the assets, the copy, the layout, the scroll math for every phase, accessibility, and Vercel deployment." },
       { type: "heading", text: "What you get" },
@@ -104,7 +107,7 @@ export function promptMarkdown(prompt: Prompt, origin: string) {
   return [
     `# ObsidianUI prompt: ${prompt.title}`,
     `${prompt.summary}`,
-    `- Category: ${prompt.category}\n- Published: ${prompt.date}\n- Author: ${prompt.author}\n- Page: ${origin}/prompts/${prompt.slug}`,
+    `- Category: ${prompt.category}\n- Published: ${prompt.date}\n- Author: ${prompt.author}\n- Page: ${origin}/prompts/${prompt.slug}${prompt.previewUrl ? `\n- Live preview: ${prompt.previewUrl}` : ""}`,
     ...body,
   ].join("\n\n") + "\n";
 }

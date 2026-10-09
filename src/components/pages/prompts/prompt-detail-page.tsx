@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, ArrowUpRight } from "lucide-react";
 import { formatPromptDate, promptReadingMinutes, promptText, type Prompt, type PromptBlock } from "@/lib/prompts";
 import { PromptActions, PromptCodeBlock } from "./prompt-actions";
 import { InlineText, PromptCover } from "./prompt-parts";
@@ -64,7 +64,14 @@ export default function PromptDetailPage({ prompt }: { prompt: Prompt }) {
     <main id="main-content" className="prompts-page prompt-detail">
       <article className="prompt-doc">
         <Link href="/prompts" className="prompt-back"><ArrowLeft aria-hidden="true" /> Go back</Link>
-        <h1>{prompt.title}</h1>
+        <div className="prompt-title-row">
+          <h1>{prompt.title}</h1>
+          {prompt.previewUrl ? (
+            <a className="prompt-preview" href={prompt.previewUrl} target="_blank" rel="noopener noreferrer">
+              Preview <ArrowUpRight aria-hidden="true" />
+            </a>
+          ) : null}
+        </div>
         <div className="prompt-byline">
           <time dateTime={prompt.date}>{formatPromptDate(prompt.date, "long")}</time>
           <span aria-hidden="true">·</span>
