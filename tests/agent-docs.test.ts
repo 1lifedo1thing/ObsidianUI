@@ -11,7 +11,7 @@ const root = process.cwd();
 const build = buildAgentDocs(root);
 const registry = JSON.parse(fs.readFileSync(path.join(root, "public/r/registry.json"), "utf8")) as { items: RegistryItem[] };
 
-test("agent indexes follow llms structure and include every downloadable item", () => {
+test("agent indexes follow llms structure and list only documented components", () => {
   const index = build.files["public/llms.txt"];
   assert.equal(index, build.files["public/llm.txt"]);
   assert.match(index, /^# ObsidianUI\n\n> /);
@@ -21,7 +21,11 @@ test("agent indexes follow llms structure and include every downloadable item", 
     assert.ok(entries.length > 0);
     assert.ok(entries.every(line => /^- \[[^\]]+\]\(https:\/\//.test(line)), section.split("\n")[0]);
   }
-  for (const item of registry.items) assert.ok(index.includes(`/r/${item.name}.json`), item.name);
+  for (const item of registry.items) {
+    const documented = Boolean(build.routes[`/docs/${item.name}`]);
+    assert.equal(index.includes(`/r/${item.name}.json`), documented, item.name);
+  }
+  assert.doesNotMatch(index, /## Supporting registry items/);
   assert.match(index, /## When to use\n/);
   assert.match(index, /components\.json aliases/);
   assert.match(index, /not a hosted HTTP MCP endpoint/);
