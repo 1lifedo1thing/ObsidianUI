@@ -27,7 +27,14 @@ vi.mock("@/components/catalog/effect-preview", () => ({
   ),
 }));
 
+vi.mock("@/components/catalog/dashboard-shell-preview", () => ({ DashboardShellPreview: () => <div data-effect-preview="dashboard-shell" /> }));
+vi.mock("@/components/catalog/active-sessions-preview", () => ({ ActiveSessionsPreview: () => <div data-effect-preview="active-sessions" /> }));
+vi.mock("@/components/catalog/status-bars-preview", () => ({ StatusBarsPreview: () => <div data-effect-preview="status-bars" /> }));
+vi.mock("@/components/block/discover-button", () => ({ DiscoverButton: () => <div data-effect-preview="discover-button" /> }));
+
 import { ShowcaseHero } from "@/components/catalog/showcase-hero";
+
+const tour = ["dashboard-shell", "art-gallery", "active-sessions", "discover-button", "status-bars", "draggable-marquee", "text-stream"];
 
 describe("showcase component tour", () => {
   beforeEach(() => {
@@ -41,43 +48,33 @@ describe("showcase component tour", () => {
   it("focuses the initial card and follows its documentation link", () => {
     const { container } = render(<ShowcaseHero />);
     const previews = container.querySelectorAll("[data-effect-preview]");
-    expect(previews).toHaveLength(3);
+    expect(previews).toHaveLength(tour.length);
     expect(screen.queryByRole("button", { name: /(?:pause|play) component tour/i })).not.toBeInTheDocument();
-    expect(container.querySelector(".showcase-stage-wrap button")).toBeNull();
+    expect(container.querySelector(".showcase-stage")).toHaveAttribute("inert");
     expect(screen.getByRole("link", { name: "Docs" })).toHaveAttribute("href", "/docs/installation");
     expect(screen.getByRole("link", { name: "Docs" })).not.toHaveAttribute("target");
     expect(screen.queryByRole("link", { name: "Star on GitHub" })).not.toBeInTheDocument();
-    expect(screen.getByRole("link", { name: "Explore Draggable Marquee" })).toHaveAttribute("href", "/docs/draggable-marquee");
+    expect(screen.getByRole("link", { name: "Explore Dashboard Shell" })).toHaveAttribute("href", "/docs/dashboard-shell");
     act(() => vi.advanceTimersByTime(7000));
     expect(screen.getByRole("link", { name: "Explore Art Gallery" })).toHaveAttribute("href", "/docs/art-gallery");
   });
 
-  it("includes all three retained effect cards", () => {
+  it("shows the cards in tour order", () => {
     const { container } = render(<ShowcaseHero />);
     const slugs = Array.from(container.querySelectorAll("[data-effect-preview]"), (node) => node.getAttribute("data-effect-preview"));
-    expect(slugs).toEqual(expect.arrayContaining([
-      "draggable-marquee",
-      "art-gallery",
-      "text-stream",
-    ]));
-    expect(new Set(slugs).size).toBe(3);
+    expect(slugs).toEqual(tour);
     expect(container.textContent).not.toMatch(/apple-spotlight|circle-menu|otp-input|folder-preview|masonry-grid|scroll-effect/i);
   });
 
-  it("visits every component once per tour", () => {
+  it("visits every component once per tour, in order", () => {
     render(<ShowcaseHero />);
     const visited: string[] = [];
-    for (let step = 0; step < 3; step += 1) {
+    for (let step = 0; step < tour.length; step += 1) {
       visited.push(screen.getByRole("link", { name: /^Explore / }).getAttribute("href")!);
       act(() => vi.advanceTimersByTime(7000));
     }
-    expect(new Set(visited).size).toBe(3);
-    expect(visited).toEqual(expect.arrayContaining([
-      "/docs/draggable-marquee",
-      "/docs/art-gallery",
-      "/docs/text-stream",
-    ]));
-    expect(screen.getByRole("link", { name: "Explore Draggable Marquee" })).toHaveAttribute("href", visited[0]);
+    expect(visited).toEqual(tour.map(slug => `/docs/${slug}`));
+    expect(screen.getByRole("link", { name: "Explore Dashboard Shell" })).toHaveAttribute("href", visited[0]);
   });
 
   it("pauses the tour offscreen, then resumes when visible", () => {
@@ -85,7 +82,7 @@ describe("showcase component tour", () => {
     state.inView = false;
     rerender(<ShowcaseHero />);
     act(() => vi.advanceTimersByTime(14000));
-    expect(screen.getByRole("link", { name: "Explore Draggable Marquee" })).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "Explore Dashboard Shell" })).toBeInTheDocument();
     state.inView = true;
     rerender(<ShowcaseHero />);
     act(() => vi.advanceTimersByTime(7000));
@@ -102,14 +99,14 @@ describe("showcase component tour", () => {
 
     fireEvent.focus(explore);
     act(() => vi.advanceTimersByTime(7000));
-    expect(screen.getByRole("link", { name: "Explore Text reel" })).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "Explore Active Sessions" })).toBeInTheDocument();
   });
 
   it("does not advance through cards with reduced motion", () => {
     state.reduced = true;
     render(<ShowcaseHero />);
     act(() => vi.advanceTimersByTime(11200));
-    expect(screen.getByRole("link", { name: "Explore Draggable Marquee" })).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "Explore Dashboard Shell" })).toBeInTheDocument();
   });
 
   it("renders the same markup without playback controls before and after the motion preference resolves", () => {

@@ -2,7 +2,7 @@
 
 // Layout and camera motion adapted from EvilCharts (MIT).
 // See THIRD_PARTY_NOTICES.md for the original copyright and license.
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState, type ReactNode } from "react";
 import { animate, cubicBezier, motion, useInView, useReducedMotion } from "motion/react";
 import { ArrowDown, ArrowRight, Component } from "lucide-react";
 import Image from "next/image";
@@ -12,22 +12,48 @@ import { cn } from "@/lib/utils";
 import { r2 } from "@/lib/r2";
 import "./showcase-hero.css";
 
+import { DiscoverButton } from "@/components/block/discover-button";
+import { ActiveSessionsPreview } from "./active-sessions-preview";
+import { DashboardShellPreview } from "./dashboard-shell-preview";
 import { EffectPreview } from "./effect-preview";
-import type { NewEffectSlug } from "./new-effects";
+import { StatusBarsPreview } from "./status-bars-preview";
 
 type StageCard = {
-  slug: NewEffectSlug;
+  slug: string;
   title: string;
   x: number;
   y: number;
   aspect: number;
+  preview: ReactNode;
 };
 
-// Published interactive component effects showcased on the camera stage.
+// The tour follows this order. Cards alternate between the two columns so each
+// pan is short; y positions leave a 40px gap below the card above.
 const CARDS: StageCard[] = [
-  { slug: "draggable-marquee", title: "Draggable Marquee", x: 40, y: 40, aspect: 2034 / 1252 },
-  { slug: "art-gallery", title: "Art Gallery", x: 500, y: 20, aspect: 1264 / 964 },
-  { slug: "text-stream", title: "Text reel", x: 40, y: 460, aspect: 1492 / 1266 },
+  {
+    slug: "dashboard-shell", title: "Dashboard Shell", x: 40, y: 40, aspect: 1000 / 714,
+    // Rendered at desktop size and scaled to the 404px preview so the docked sidebar shows.
+    preview: (
+      <div className="absolute left-0 top-0 h-[714px] w-[1000px] origin-top-left scale-[0.404]">
+        <DashboardShellPreview compact />
+      </div>
+    ),
+  },
+  { slug: "art-gallery", title: "Art Gallery", x: 500, y: 20, aspect: 1264 / 964, preview: <EffectPreview slug="art-gallery" compact /> },
+  {
+    slug: "active-sessions", title: "Active Sessions", x: 40, y: 412, aspect: 1.2,
+    preview: <div className="flex h-full w-full items-center justify-center overflow-hidden px-4"><ActiveSessionsPreview compact className="max-w-[380px]" /></div>,
+  },
+  {
+    slug: "discover-button", title: "Discover Button", x: 500, y: 412, aspect: 2,
+    preview: <div className="flex h-full w-full items-center justify-center bg-[#191715]"><DiscoverButton /></div>,
+  },
+  {
+    slug: "status-bars", title: "Status Bars", x: 40, y: 832, aspect: 1.5,
+    preview: <div className="flex h-full w-full items-center justify-center px-5"><StatusBarsPreview className="max-w-[380px]" /></div>,
+  },
+  { slug: "draggable-marquee", title: "Draggable Marquee", x: 500, y: 697, aspect: 2034 / 1252, preview: <EffectPreview slug="draggable-marquee" compact /> },
+  { slug: "text-stream", title: "Text reel", x: 40, y: 1185, aspect: 1492 / 1266, preview: <EffectPreview slug="text-stream" compact /> },
 ];
 
 const CARD_WIDTH = 420;
@@ -113,7 +139,8 @@ function ComponentsStage() {
 
   return (
     <div className="showcase-stage-wrap">
-      <div ref={viewportRef} className="showcase-stage" aria-hidden="true">
+      {/* Decorative: inert keeps the previews' own buttons out of the tab order. */}
+      <div ref={viewportRef} className="showcase-stage" aria-hidden="true" inert>
         <div ref={canvasRef} className="showcase-canvas">
           {CARDS.map((card, index) => (
             <motion.div
@@ -125,7 +152,7 @@ function ComponentsStage() {
               transition={{ duration: reduce ? 0 : 0.75, ease: "easeInOut" }}
             >
               <div className="showcase-stage-card-title"><Component size={13} /><span>{card.slug}.tsx</span></div>
-              <div className="showcase-stage-card-preview"><EffectPreview slug={card.slug} compact /></div>
+              <div className="showcase-stage-card-preview">{card.preview}</div>
             </motion.div>
           ))}
         </div>
