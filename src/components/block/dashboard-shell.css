@@ -32,7 +32,9 @@
 }
 
 .dark .obsidian-dashboard-shell,
-.dark .obsidian-dashboard-shell-layer {
+.dark .obsidian-dashboard-shell-layer,
+.obsidian-dashboard-shell.dark,
+.obsidian-dashboard-shell-layer.dark {
   --obsidian-dashboard-shell-background: #161616;
   --obsidian-dashboard-shell-sidebar: #171717;
   --obsidian-dashboard-shell-panel: #181818;

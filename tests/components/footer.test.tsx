@@ -16,6 +16,7 @@ describe("site footer", () => {
     expect(within(navigation).getAllByRole("heading").map(heading => heading.textContent))
       .toEqual(["Product", "Socials", "Open Source", "Get started"]);
     expect(screen.getByRole("link", { name: "Sponsors" })).toHaveAttribute("href", "/sponsors");
+    expect(screen.getByRole("link", { name: "Prompts" })).toHaveAttribute("href", "/prompts");
     expect(screen.getByRole("link", { name: "Developers" })).toHaveAttribute("href", "/developers");
     expect(screen.getByRole("link", { name: "CLI" })).toHaveAttribute("href", "/docs/cli");
     expect(screen.getByRole("link", { name: "MIT license" }))

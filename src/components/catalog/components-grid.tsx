@@ -33,25 +33,13 @@ type ShowcaseItem = {
 
 const effectSizes: Partial<Record<string, ShowcaseSize>> = { 'draggable-marquee': 'tall' }
 
-// Keep v-prism featured. Insert each new component immediately after it so the
+// Keep Analytics Dashboard featured. Insert each new component immediately after it so the
 // newest card starts the grid and older cards shift right, then wrap in order.
 // Sizes are balanced so the three masonry columns end level; recheck them when adding a card.
 const allComponents: ShowcaseItem[] = [
-    { title: 'v-prism', href: '/docs/v-prism', preview: <EffectPreview slug="v-prism" compact /> },
-    {
-        title: 'Analytics Dashboard',
-        href: '/docs/analytics-dashboard',
-        size: 'tall',
-        isNew: true,
-        // Rendered wider than the 1180px overlay breakpoint so the details panel stays docked, then scaled down.
-        preview: (
-            <div className="relative h-full w-full overflow-hidden">
-                <div className="absolute left-5 top-12 h-[820px] w-[1240px] origin-top-left scale-[0.42] overflow-hidden rounded-[28px] border border-black/10 shadow-[0_24px_60px_rgb(0_0_0/0.18)] dark:border-white/10">
-                    <AnalyticsDashboardPreview />
-                </div>
-            </div>
-        ),
-    },
+    // Full size and unscaled so the featured card is the live, usable dashboard.
+    { title: 'Analytics Dashboard', href: '/docs/analytics-dashboard', preview: <AnalyticsDashboardPreview /> },
+    { title: 'v-prism', href: '/docs/v-prism', size: 'tall', preview: <EffectPreview slug="v-prism" compact /> },
     {
         title: 'Dashboard Shell',
         href: '/docs/dashboard-shell',

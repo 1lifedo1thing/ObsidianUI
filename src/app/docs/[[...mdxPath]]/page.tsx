@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { redirect } from 'next/navigation';
+import { permanentRedirect } from 'next/navigation';
 import { generateStaticParamsFor, importPage } from 'nextra/pages';
 import { useMDXComponents as getMDXComponents } from '@/mdx-components';
 import { DocsCopyPage } from '@/components/docs/docs-copy-page';
@@ -14,12 +14,18 @@ export const dynamicParams = true;
 const Wrapper = getMDXComponents().wrapper;
 const origin = 'https://www.obsidianui.dev';
 
+// index.mdx only exists so Nextra has a root page; both of its URLs send crawlers to one canonical guide.
+function isDocsRoot(mdxPath?: string[]) {
+    return !mdxPath?.length || (mdxPath.length === 1 && mdxPath[0] === 'index');
+}
+
 function docsDescription(slug: string, description?: string | null) {
     return description || docsDescriptions[slug] || 'Browse ObsidianUI documentation and component guides for React and Tailwind CSS.';
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
     const { mdxPath } = await params;
+    if (isDocsRoot(mdxPath)) return { robots: { index: false, follow: true } };
     const { metadata } = await importPage(mdxPath);
     const pathname = '/docs' + (mdxPath?.length ? '/' + mdxPath.join('/') : '');
     const slug = mdxPath?.at(-1) ?? '';
@@ -36,6 +42,7 @@ function structuredData(slug: string, heading: string, description: string) {
     const search = docsSearchDetails[slug];
     if (!search) return null;
     const url = `${origin}/docs/${slug}`;
+    const hasSource = search.category !== 'guide';
     return {
         '@context': 'https://schema.org',
         '@graph': [
@@ -55,18 +62,20 @@ function structuredData(slug: string, heading: string, description: string) {
                 author: { '@id': `${origin}/#organization` },
                 publisher: { '@id': `${origin}/#organization` },
                 isPartOf: { '@id': `${origin}/#website` },
-                about: { '@id': `${url}#source` },
+                ...(hasSource && { about: { '@id': `${url}#source` } }),
             },
-            {
+            ...(hasSource ? [{
                 '@type': 'SoftwareSourceCode',
                 '@id': `${url}#source`,
                 name: heading,
                 description,
+                url,
                 codeRepository: 'https://github.com/Atharvsinh-codez/ObsidianUI',
                 programmingLanguage: ['TypeScript', 'React'],
+                runtimePlatform: 'Next.js',
                 license: 'https://opensource.org/licenses/MIT',
                 author: { '@id': `${origin}/#organization` },
-            },
+            }] : []),
             {
                 '@type': 'BreadcrumbList',
                 itemListElement: [
@@ -81,13 +90,14 @@ function structuredData(slug: string, heading: string, description: string) {
 
 export default async function DocumentationPage({ params }: PageProps) {
     const resolvedParams = await params;
-    if (!resolvedParams.mdxPath?.length) redirect('/docs/installation');
-    const { default: MDXContent, toc, metadata, sourceCode } = await importPage(resolvedParams.mdxPath);
-    const slug = resolvedParams.mdxPath.at(-1) ?? '';
+    const { mdxPath } = resolvedParams;
+    if (!mdxPath || isDocsRoot(mdxPath)) permanentRedirect('/docs/installation');
+    const { default: MDXContent, toc, metadata, sourceCode } = await importPage(mdxPath);
+    const slug = mdxPath.at(-1) ?? '';
     const jsonLd = structuredData(slug, metadata.title ?? slug, docsDescription(slug, metadata.description));
     return (
         <Wrapper toc={toc} metadata={metadata} sourceCode={sourceCode}>
-            <DocsCopyPage sourceCode={sourceCode} pathname={'/docs/' + resolvedParams.mdxPath.join('/')} />
+            <DocsCopyPage sourceCode={sourceCode} pathname={'/docs/' + mdxPath.join('/')} />
             <div id="main-content" tabIndex={-1}>
                 <MDXContent params={resolvedParams} />
             </div>

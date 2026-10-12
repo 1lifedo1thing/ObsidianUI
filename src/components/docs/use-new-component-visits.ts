@@ -1,11 +1,12 @@
 "use client";
 
 import { useCallback, useMemo, useSyncExternalStore } from "react";
-import { newEffects } from "@/components/catalog/new-effects";
+
+export const NEW_COMPONENT_SLUGS = ["dashboard-shell", "analytics-dashboard", "active-sessions", "discover-button", "status-bars"] as const;
 
 const STORAGE_KEY = "obsidianui:seen-new-components:v1";
 const EMPTY_SNAPSHOT = "[]";
-const newComponentHrefs = new Set<string>(newEffects.map(({ slug }) => `/docs/${slug}`));
+const newComponentHrefs = new Set<string>(NEW_COMPONENT_SLUGS.map(slug => `/docs/${slug}`));
 const listeners = new Set<() => void>();
 const getServerSnapshot = () => null;
 let snapshot = EMPTY_SNAPSHOT;

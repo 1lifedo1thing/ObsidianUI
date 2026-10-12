@@ -63,3 +63,13 @@ test('sitemap covers every published document and static page with canonical, un
         assert.equal(parsed.hash, '');
     }
 });
+
+test('every sitemap entry says when it changed and how much it matters', async () => {
+    const entries = await sitemap();
+    for (const entry of entries) {
+        assert.match(String(entry.lastModified), /^\d{4}-\d{2}-\d{2}$/, `${entry.url} needs a lastModified date`);
+        assert.ok(typeof entry.priority === 'number' && entry.priority > 0 && entry.priority <= 1, `${entry.url} needs a priority`);
+        assert.ok(entry.changeFrequency, `${entry.url} needs a changeFrequency`);
+    }
+    assert.equal(entries.find(entry => entry.url === `${origin}/`)?.priority, 1);
+});

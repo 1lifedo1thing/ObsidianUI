@@ -625,7 +625,9 @@ export function PrDetails({ pr, phase, open, visible, panelRef, hideRef, onHide 
   function scrollToEnd() {
     requestAnimationFrame(() => {
       const el = scrollRef.current;
-      if (el) el.scrollTo({ top: el.scrollHeight, behavior: "smooth" });
+      if (!el) return;
+      if (typeof el.scrollTo === "function") el.scrollTo({ top: el.scrollHeight, behavior: "smooth" });
+      else el.scrollTop = el.scrollHeight;
     });
   }
 
@@ -2439,7 +2441,7 @@ Installation target: `@components/block/analytics-dashboard.css`
 }
 
 .obsidian-analytics-dashboard :focus-visible {
-  outline: 2px solid color-mix(in oklab, var(--accent) 70%, white);
+  outline: 2px solid color-mix(in oklab, var(--accent) 70%, rgb(var(--ad-ink)));
   outline-offset: 2px;
 }
 
@@ -2792,7 +2794,7 @@ Installation target: `@components/block/analytics-dashboard.css`
   height: 22px;
   border-radius: 50%;
   object-fit: cover;
-  outline: 1px solid oklch(1 0 0 / 0.1);
+  outline: 1px solid rgb(var(--ad-ink) / 0.1);
   outline-offset: -1px;
 }
 
@@ -3400,7 +3402,7 @@ Installation target: `@components/block/analytics-dashboard.css`
   display: block;
   border-radius: 50%;
   object-fit: cover;
-  outline: 1px solid oklch(1 0 0 / 0.1);
+  outline: 1px solid rgb(var(--ad-ink) / 0.1);
   outline-offset: -1px;
 }
 
@@ -3572,7 +3574,7 @@ Installation target: `@components/block/analytics-dashboard.css`
 }
 
 .obsidian-analytics-dashboard .search input:focus-visible {
-  background: rgba(255, 255, 255, 0.06);
+  background: rgb(var(--ad-ink) / 0.06);
   box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--accent) 65%, transparent);
 }
 
@@ -3751,8 +3753,8 @@ Installation target: `@components/block/analytics-dashboard.css`
     transparent 0,
     #000 var(--obsidian-analytics-dashboard-fade-top),
     #000 calc(100% - 158px),
-    rgb(0 0 0 / calc(0.36 * var(--ad-shadow))) calc(100% - 124px),
-    rgb(0 0 0 / calc(0.14 * var(--ad-shadow))) calc(100% - 104px),
+    rgb(0 0 0 / 0.36) calc(100% - 124px),
+    rgb(0 0 0 / 0.14) calc(100% - 104px),
     transparent calc(100% - 96px)
   );
   mask-image: linear-gradient(
@@ -3760,8 +3762,8 @@ Installation target: `@components/block/analytics-dashboard.css`
     transparent 0,
     #000 var(--obsidian-analytics-dashboard-fade-top),
     #000 calc(100% - 158px),
-    rgb(0 0 0 / calc(0.36 * var(--ad-shadow))) calc(100% - 124px),
-    rgb(0 0 0 / calc(0.14 * var(--ad-shadow))) calc(100% - 104px),
+    rgb(0 0 0 / 0.36) calc(100% - 124px),
+    rgb(0 0 0 / 0.14) calc(100% - 104px),
     transparent calc(100% - 96px)
   );
   transition: --obsidian-analytics-dashboard-fade-top 200ms ease;
@@ -4922,7 +4924,7 @@ Installation target: `@components/block/analytics-dashboard.css`
 }
 
 .obsidian-analytics-dashboard .field input:focus-visible {
-  background: rgba(255, 255, 255, 0.06);
+  background: rgb(var(--ad-ink) / 0.06);
   box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--accent) 65%, transparent);
 }
 

@@ -21,7 +21,7 @@ const publishedPages = documentationEntries
   .filter((entry): entry is [string, string] => typeof entry[1] === "string")
   .map(([slug, title]) => ({ href: `/docs/${slug}`, title }));
 const sectionLinks = [
-  { href: "/docs", title: "Introduction" },
+  { href: "/docs/installation", title: "Introduction" },
   { href: "/components", title: "Components" },
 ];
 

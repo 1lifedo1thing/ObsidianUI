@@ -57,7 +57,8 @@ function TocRail({ path, length, distance, height, endX, endY }: TocRailState) {
 }
 
 const sections: NavItem[] = [
-  { title: "Introduction", href: "/docs" },
+  // /docs only redirects here, so linking to it directly keeps the active highlight.
+  { title: "Introduction", href: "/docs/installation" },
   { title: "Components", href: "/components" },
 ];
 

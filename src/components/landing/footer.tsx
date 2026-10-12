@@ -14,6 +14,7 @@ const columns = [
     links: [
       { title: "Components", href: "/components" },
       { title: "Templates", href: "/templates" },
+      { title: "Prompts", href: "/prompts" },
       { title: "Documentation", href: "/docs/installation" },
       { title: "Developers", href: "/developers" },
       { title: "Sponsors", href: "/sponsors" },

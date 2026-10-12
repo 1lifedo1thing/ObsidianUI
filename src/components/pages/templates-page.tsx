@@ -3,7 +3,7 @@ import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { PreviewVideo } from "@/components/media/preview-video";
 
-const templates = [
+export const templates = [
     {
         id: "project-one",
         title: "Project One",

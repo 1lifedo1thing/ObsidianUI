@@ -4,15 +4,15 @@ import { act, fireEvent, render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
-const controls = vi.hoisted(() => ({ pathname: "/docs/art-gallery" }));
+const controls = vi.hoisted(() => ({ pathname: "/docs/dashboard-shell" }));
 vi.mock("next/navigation", () => ({ usePathname: () => controls.pathname }));
 
 import { DocsNavigation } from "@/components/docs/docs-workspace";
-import { newEffects } from "@/components/catalog/new-effects";
+import { NEW_COMPONENT_SLUGS } from "@/components/docs/use-new-component-visits";
 
 const STORAGE_KEY = "obsidianui:seen-new-components:v1";
-const magneticHref = "/docs/art-gallery";
-const arrowHref = "/docs/draggable-marquee";
+const magneticHref = "/docs/dashboard-shell";
+const arrowHref = "/docs/status-bars";
 
 function PreventNavigation({ children }: { children: ReactNode }) {
   return <div onClick={event => {
@@ -38,19 +38,19 @@ describe("new documentation component markers", () => {
   });
   afterEach(() => vi.restoreAllMocks());
 
-  it("marks exactly the 4 new effects, including the current page, and excludes older docs", async () => {
+  it("marks exactly the 5 new blocks and components, including the current page, and excludes older docs", async () => {
     const user = userEvent.setup();
     const { container } = renderNavigation();
     const marked = Array.from(container.querySelectorAll('.docs-nav-link[data-new="true"]'));
-    expect(newEffects).toHaveLength(4);
+    expect(NEW_COMPONENT_SLUGS).toHaveLength(5);
     expect(marked.map(link => link.getAttribute("href")).sort()).toEqual(
-      newEffects.map(({ slug }) => `/docs/${slug}`).sort(),
+      NEW_COMPONENT_SLUGS.map(slug => `/docs/${slug}`).sort(),
     );
     for (const link of marked) {
       expect(link.querySelector(".docs-nav-new-dot")).toHaveAttribute("data-visible", "true");
       expect(link).toHaveAccessibleName(`${link.textContent}, new component`);
     }
-    for (const name of ["Flip Text", "Hover Image", "Split Showcase", "Install Next.js"]) {
+    for (const name of ["Art Gallery", "Draggable Marquee", "Flip Text", "Hover Image", "Split Showcase", "Install Next.js"]) {
       expect(screen.getByRole("link", { name })).toHaveAttribute("data-new", "false");
     }
     expect(screen.queryByRole("link", { name: /Inertia Images/i })).not.toBeInTheDocument();
@@ -66,12 +66,12 @@ describe("new documentation component markers", () => {
     const user = userEvent.setup();
     const onNavigate = vi.fn();
     const { container } = renderNavigation(onNavigate);
-    await user.click(screen.getByRole("link", { name: "Art Gallery, new component" }));
-    const clicked = screen.getByRole("link", { name: "Art Gallery" });
+    await user.click(screen.getByRole("link", { name: "Dashboard Shell, new component" }));
+    const clicked = screen.getByRole("link", { name: "Dashboard Shell" });
     expect(clicked).toHaveAttribute("data-new", "false");
     expect(clicked.querySelector(".docs-nav-new-dot")).toHaveAttribute("data-visible", "false");
-    expect(container.querySelectorAll('.docs-nav-link[data-new="true"]')).toHaveLength(3);
-    expect(screen.getByRole("link", { name: "Draggable Marquee, new component" })).toHaveAttribute("data-new", "true");
+    expect(container.querySelectorAll('.docs-nav-link[data-new="true"]')).toHaveLength(4);
+    expect(screen.getByRole("link", { name: "Status Bars, new component" })).toHaveAttribute("data-new", "true");
     expect(JSON.parse(window.localStorage.getItem(STORAGE_KEY)!)).toEqual([magneticHref]);
     expect(onNavigate).toHaveBeenCalledOnce();
   });
@@ -79,39 +79,39 @@ describe("new documentation component markers", () => {
   it("restores persisted visits after the navigation remounts", async () => {
     const user = userEvent.setup();
     const first = renderNavigation();
-    await user.click(screen.getByRole("link", { name: "Draggable Marquee, new component" }));
+    await user.click(screen.getByRole("link", { name: "Status Bars, new component" }));
     first.unmount();
     renderNavigation();
-    expect(screen.getByRole("link", { name: "Draggable Marquee" })).toHaveAttribute("data-new", "false");
-    expect(screen.getByRole("link", { name: "Art Gallery, new component" })).toHaveAttribute("data-new", "true");
+    expect(screen.getByRole("link", { name: "Status Bars" })).toHaveAttribute("data-new", "false");
+    expect(screen.getByRole("link", { name: "Dashboard Shell, new component" })).toHaveAttribute("data-new", "true");
   });
 
   it("updates every mounted navigation instance when one link is clicked", async () => {
     const user = userEvent.setup();
     render(<PreventNavigation><DocsNavigation /><DocsNavigation /></PreventNavigation>);
     const [desktop, mobile] = screen.getAllByRole("navigation", { name: "Documentation" });
-    await user.click(within(mobile).getByRole("link", { name: "Art Gallery, new component" }));
+    await user.click(within(mobile).getByRole("link", { name: "Dashboard Shell, new component" }));
     for (const nav of [desktop, mobile]) {
-      expect(within(nav).getByRole("link", { name: "Art Gallery" })).toHaveAttribute("data-new", "false");
-      expect(within(nav).getByRole("link", { name: "Draggable Marquee, new component" })).toHaveAttribute("data-new", "true");
+      expect(within(nav).getByRole("link", { name: "Dashboard Shell" })).toHaveAttribute("data-new", "false");
+      expect(within(nav).getByRole("link", { name: "Status Bars, new component" })).toHaveAttribute("data-new", "true");
     }
   });
 
   it("synchronizes visits and clearing from another tab while ignoring other storage keys", () => {
     renderNavigation();
     storageChange(JSON.stringify([magneticHref]));
-    expect(screen.getByRole("link", { name: "Art Gallery" })).toHaveAttribute("data-new", "false");
+    expect(screen.getByRole("link", { name: "Dashboard Shell" })).toHaveAttribute("data-new", "false");
     storageChange(JSON.stringify([arrowHref]), "another-preference");
-    expect(screen.getByRole("link", { name: "Draggable Marquee, new component" })).toHaveAttribute("data-new", "true");
+    expect(screen.getByRole("link", { name: "Status Bars, new component" })).toHaveAttribute("data-new", "true");
     storageChange(null, null);
-    expect(screen.getByRole("link", { name: "Art Gallery, new component" })).toHaveAttribute("data-new", "true");
+    expect(screen.getByRole("link", { name: "Dashboard Shell, new component" })).toHaveAttribute("data-new", "true");
   });
 
   it("supports keyboard activation and does not record ordinary documentation links", async () => {
     const user = userEvent.setup();
     const onNavigate = vi.fn();
     renderNavigation(onNavigate);
-    const link = screen.getByRole("link", { name: "Draggable Marquee, new component" });
+    const link = screen.getByRole("link", { name: "Status Bars, new component" });
     act(() => link.focus());
     await user.keyboard("{Enter}");
     expect(link).toHaveAttribute("data-new", "false");
@@ -123,12 +123,12 @@ describe("new documentation component markers", () => {
   it("ignores malformed or unknown stored entries and accepts only known new component paths", () => {
     window.localStorage.setItem(STORAGE_KEY, "{not-json");
     const { container } = renderNavigation();
-    expect(container.querySelectorAll('.docs-nav-link[data-new="true"]')).toHaveLength(4);
+    expect(container.querySelectorAll('.docs-nav-link[data-new="true"]')).toHaveLength(5);
     storageChange(JSON.stringify({ seen: [magneticHref] }));
-    expect(container.querySelectorAll('.docs-nav-link[data-new="true"]')).toHaveLength(4);
+    expect(container.querySelectorAll('.docs-nav-link[data-new="true"]')).toHaveLength(5);
     storageChange(JSON.stringify([magneticHref, magneticHref, "/docs/flip-text", "__proto__", 42, null]));
-    expect(container.querySelectorAll('.docs-nav-link[data-new="true"]')).toHaveLength(3);
-    expect(screen.getByRole("link", { name: "Art Gallery" })).toHaveAttribute("data-new", "false");
+    expect(container.querySelectorAll('.docs-nav-link[data-new="true"]')).toHaveLength(4);
+    expect(screen.getByRole("link", { name: "Dashboard Shell" })).toHaveAttribute("data-new", "false");
   });
 
   it("renders no unread dots on the server before browser preferences are known", () => {
@@ -143,11 +143,11 @@ describe("new documentation component markers", () => {
     const first = renderNavigation();
     vi.spyOn(Storage.prototype, "getItem").mockImplementation(() => { throw new DOMException("Denied", "SecurityError"); });
     vi.spyOn(Storage.prototype, "setItem").mockImplementation(() => { throw new DOMException("Denied", "SecurityError"); });
-    fireEvent.click(screen.getByRole("link", { name: "Art Gallery, new component" }));
-    expect(screen.getByRole("link", { name: "Art Gallery" })).toHaveAttribute("data-new", "false");
+    fireEvent.click(screen.getByRole("link", { name: "Dashboard Shell, new component" }));
+    expect(screen.getByRole("link", { name: "Dashboard Shell" })).toHaveAttribute("data-new", "false");
     first.unmount();
     renderNavigation();
-    expect(screen.getByRole("link", { name: "Art Gallery" })).toHaveAttribute("data-new", "false");
-    expect(screen.getByRole("link", { name: "Draggable Marquee, new component" })).toHaveAttribute("data-new", "true");
+    expect(screen.getByRole("link", { name: "Dashboard Shell" })).toHaveAttribute("data-new", "false");
+    expect(screen.getByRole("link", { name: "Status Bars, new component" })).toHaveAttribute("data-new", "true");
   });
 });

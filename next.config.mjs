@@ -39,7 +39,6 @@ const nextConfig = {
             { source: '/', headers: pageCacheHeaders },
             { source: '/components', headers: pageCacheHeaders },
             { source: '/templates', headers: pageCacheHeaders },
-            { source: '/playground', headers: pageCacheHeaders },
             { source: '/docs', headers: pageCacheHeaders },
             { source: '/docs/:path*', headers: pageCacheHeaders },
         ];

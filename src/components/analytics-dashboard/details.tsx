@@ -45,7 +45,9 @@ export function PrDetails({ pr, phase, open, visible, panelRef, hideRef, onHide 
   function scrollToEnd() {
     requestAnimationFrame(() => {
       const el = scrollRef.current;
-      if (el) el.scrollTo({ top: el.scrollHeight, behavior: "smooth" });
+      if (!el) return;
+      if (typeof el.scrollTo === "function") el.scrollTo({ top: el.scrollHeight, behavior: "smooth" });
+      else el.scrollTop = el.scrollHeight;
     });
   }
 

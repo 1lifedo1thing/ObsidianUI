@@ -1,7 +1,7 @@
 {
   "name": "ObsidianUI",
   "short_name": "ObsidianUI",
-  "description": "ObsidianUI is React component library featuring 30+ components,blocks, and landing page templates build with Motion and Tailwind CSS.",
+  "description": "ObsidianUI is a React component library featuring 30+ components, blocks, and landing page templates built with Motion and Tailwind CSS.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",

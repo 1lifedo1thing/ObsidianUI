@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation"
 import { Command as CommandPrimitive } from "cmdk"
 import * as DialogPrimitive from "@radix-ui/react-dialog"
 import { AnimatePresence, motion, useReducedMotion } from "motion/react"
-import { Search, Moon, Sun, Laptop, FileText, Home, ArrowRight, Sparkles } from "lucide-react"
+import { Search, Moon, Sun, Laptop, FileText, Home, ArrowRight, Sparkles, MessageSquareText } from "lucide-react"
 import { useTheme } from "next-themes"
 
 import { componentLinks as components } from "@/components/site/component-links";
@@ -142,6 +142,13 @@ export function CommandMenu({ open: controlledOpen, onOpenChange }: { open?: boo
                                                 >
                                                     <Sparkles className="mr-2 h-4 w-4" />
                                                     <span>Templates</span>
+                                                </CommandPrimitive.Item>
+                                                <CommandPrimitive.Item
+                                                    onSelect={() => runCommand(() => router.push("/prompts"))}
+                                                    className={itemClass}
+                                                >
+                                                    <MessageSquareText className="mr-2 h-4 w-4" />
+                                                    <span>Prompts</span>
                                                 </CommandPrimitive.Item>
                                             </CommandPrimitive.Group>
 

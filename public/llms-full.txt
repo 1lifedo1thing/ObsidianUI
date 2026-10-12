@@ -52,7 +52,6 @@ Request any published page with Accept: text/markdown or read its direct Markdow
 - [Component showcase](https://www.obsidianui.dev/markdown/components.md): Published component catalogue with Markdown documentation and downloads.
 - [Templates](https://www.obsidianui.dev/markdown/templates.md): Template catalogue.
 - [Project One](https://www.obsidianui.dev/markdown/project-one.md): Template preview and separate source repository.
-- [Playground](https://www.obsidianui.dev/markdown/playground.md): Experimental navbar and button previews.
 - [Sponsors](https://www.obsidianui.dev/markdown/sponsors.md): Platform sponsors, monthly sponsorship tiers, benefits, and email inquiries.
 - [Prompts](https://www.obsidianui.dev/markdown/prompts.md): Copy-ready prompts for coding agents, each with its own Markdown file.
 
@@ -192,20 +191,6 @@ A landing page concept exploring a futuristic visual direction around the creato
 - [All templates](https://www.obsidianui.dev/templates)
 
 Follow the template repository's installation instructions and license. This template has a separate source repository; it is not a component registry item.
-
-
----
-
-# ObsidianUI playground
-
-Explore experimental component previews: an animated responsive navbar and a styled button. Interactive previews require JavaScript.
-
-## Download source
-
-- [Playground navbar](https://www.obsidianui.dev/r/playground-navbar.json)
-- [Playground button](https://www.obsidianui.dev/r/playground-button.json)
-- [Installation guide](https://www.obsidianui.dev/docs/installation)
-- [Published component catalogue](https://www.obsidianui.dev/components)
 
 
 ---
@@ -6690,7 +6675,9 @@ export function PrDetails({ pr, phase, open, visible, panelRef, hideRef, onHide 
   function scrollToEnd() {
     requestAnimationFrame(() => {
       const el = scrollRef.current;
-      if (el) el.scrollTo({ top: el.scrollHeight, behavior: "smooth" });
+      if (!el) return;
+      if (typeof el.scrollTo === "function") el.scrollTo({ top: el.scrollHeight, behavior: "smooth" });
+      else el.scrollTop = el.scrollHeight;
     });
   }
 
@@ -8504,7 +8491,7 @@ Installation target: `@components/block/analytics-dashboard.css`
 }
 
 .obsidian-analytics-dashboard :focus-visible {
-  outline: 2px solid color-mix(in oklab, var(--accent) 70%, white);
+  outline: 2px solid color-mix(in oklab, var(--accent) 70%, rgb(var(--ad-ink)));
   outline-offset: 2px;
 }
 
@@ -8857,7 +8844,7 @@ Installation target: `@components/block/analytics-dashboard.css`
   height: 22px;
   border-radius: 50%;
   object-fit: cover;
-  outline: 1px solid oklch(1 0 0 / 0.1);
+  outline: 1px solid rgb(var(--ad-ink) / 0.1);
   outline-offset: -1px;
 }
 
@@ -9465,7 +9452,7 @@ Installation target: `@components/block/analytics-dashboard.css`
   display: block;
   border-radius: 50%;
   object-fit: cover;
-  outline: 1px solid oklch(1 0 0 / 0.1);
+  outline: 1px solid rgb(var(--ad-ink) / 0.1);
   outline-offset: -1px;
 }
 
@@ -9637,7 +9624,7 @@ Installation target: `@components/block/analytics-dashboard.css`
 }
 
 .obsidian-analytics-dashboard .search input:focus-visible {
-  background: rgba(255, 255, 255, 0.06);
+  background: rgb(var(--ad-ink) / 0.06);
   box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--accent) 65%, transparent);
 }
 
@@ -9816,8 +9803,8 @@ Installation target: `@components/block/analytics-dashboard.css`
     transparent 0,
     #000 var(--obsidian-analytics-dashboard-fade-top),
     #000 calc(100% - 158px),
-    rgb(0 0 0 / calc(0.36 * var(--ad-shadow))) calc(100% - 124px),
-    rgb(0 0 0 / calc(0.14 * var(--ad-shadow))) calc(100% - 104px),
+    rgb(0 0 0 / 0.36) calc(100% - 124px),
+    rgb(0 0 0 / 0.14) calc(100% - 104px),
     transparent calc(100% - 96px)
   );
   mask-image: linear-gradient(
@@ -9825,8 +9812,8 @@ Installation target: `@components/block/analytics-dashboard.css`
     transparent 0,
     #000 var(--obsidian-analytics-dashboard-fade-top),
     #000 calc(100% - 158px),
-    rgb(0 0 0 / calc(0.36 * var(--ad-shadow))) calc(100% - 124px),
-    rgb(0 0 0 / calc(0.14 * var(--ad-shadow))) calc(100% - 104px),
+    rgb(0 0 0 / 0.36) calc(100% - 124px),
+    rgb(0 0 0 / 0.14) calc(100% - 104px),
     transparent calc(100% - 96px)
   );
   transition: --obsidian-analytics-dashboard-fade-top 200ms ease;
@@ -10987,7 +10974,7 @@ Installation target: `@components/block/analytics-dashboard.css`
 }
 
 .obsidian-analytics-dashboard .field input:focus-visible {
-  background: rgba(255, 255, 255, 0.06);
+  background: rgb(var(--ad-ink) / 0.06);
   box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--accent) 65%, transparent);
 }
 
@@ -11836,7 +11823,9 @@ Installation target: `@components/block/dashboard-shell.css`
 }
 
 .dark .obsidian-dashboard-shell,
-.dark .obsidian-dashboard-shell-layer {
+.dark .obsidian-dashboard-shell-layer,
+.obsidian-dashboard-shell.dark,
+.obsidian-dashboard-shell-layer.dark {
   --obsidian-dashboard-shell-background: #161616;
   --obsidian-dashboard-shell-sidebar: #171717;
   --obsidian-dashboard-shell-panel: #181818;
@@ -11923,7 +11912,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { Check, ChevronDown, Menu, X } from "lucide-react";
 import { animate, AnimatePresence, motion, useMotionValue, useReducedMotion } from "motion/react";
 import { createContext, memo, useCallback, useContext, useEffect, useId, useMemo, useRef, useState } from "react";
-import type { ComponentProps, CSSProperties, ElementType, FocusEvent, KeyboardEvent, PointerEvent, ReactNode, Ref } from "react";
+import type { ComponentProps, CSSProperties, ElementType, FocusEvent, KeyboardEvent, PointerEvent, ReactNode, Ref, RefObject } from "react";
 import { cn } from "@/lib/utils";
 import "./dashboard-shell.css";
 
@@ -11992,6 +11981,28 @@ function layerMotion(reduceMotion: boolean) {
 // Exit animations need the open state, since the content stays mounted until it has animated out.
 const LayerOpenContext = createContext(false);
 
+// Portaled layers leave a scoped `.dark` wrapper behind, so the shell passes its theme down to them.
+const ShellDarkContext = createContext(false);
+
+function useScopedDark(ref: RefObject<HTMLElement | null>, className?: string) {
+  const [isDark, setIsDark] = useState(false);
+
+  useEffect(() => {
+    const element = ref.current;
+    if (!element) return;
+    const update = () => setIsDark(element.closest(".dark") !== null);
+    update();
+    if (typeof MutationObserver === "undefined") return;
+    const observer = new MutationObserver(update);
+    for (let node: HTMLElement | null = element; node; node = node.parentElement) {
+      observer.observe(node, { attributes: true, attributeFilter: ["class"] });
+    }
+    return () => observer.disconnect();
+  }, [ref, className]);
+
+  return isDark;
+}
+
 export type DashboardMenuProps = ComponentProps<typeof DropdownMenuPrimitive.Root>;
 
 export function DashboardMenu({ open, defaultOpen = false, onOpenChange, ...props }: DashboardMenuProps) {
@@ -12009,6 +12020,7 @@ export type DashboardMenuContentProps = Omit<ComponentProps<typeof DropdownMenuP
 
 export function DashboardMenuContent({ className, children, sideOffset = 6, ...props }: DashboardMenuContentProps) {
   const isOpen = useContext(LayerOpenContext);
+  const isDark = useContext(ShellDarkContext);
   const reduceMotion = !!useReducedMotion();
 
   return (
@@ -12020,6 +12032,7 @@ export function DashboardMenuContent({ className, children, sideOffset = 6, ...p
               {...layerMotion(reduceMotion)}
               className={cn(
                 layerClassName,
+                isDark && "dark",
                 "obsidian-dashboard-shell-scroll max-h-(--radix-dropdown-menu-content-available-height) min-w-40 origin-(--radix-dropdown-menu-content-transform-origin) overflow-y-auto overscroll-contain",
                 className,
               )}
@@ -12104,6 +12117,7 @@ export type DashboardPopoverContentProps = Omit<ComponentProps<typeof PopoverPri
 
 export function DashboardPopoverContent({ className, children, align = "center", sideOffset = 6, ...props }: DashboardPopoverContentProps) {
   const isOpen = useContext(LayerOpenContext);
+  const isDark = useContext(ShellDarkContext);
   const reduceMotion = !!useReducedMotion();
 
   return (
@@ -12113,7 +12127,7 @@ export function DashboardPopoverContent({ className, children, align = "center",
           <PopoverPrimitive.Content forceMount asChild align={align} sideOffset={sideOffset} {...props}>
             <motion.div
               {...layerMotion(reduceMotion)}
-              className={cn(layerClassName, "w-72 origin-(--radix-popover-content-transform-origin)", className)}
+              className={cn(layerClassName, isDark && "dark", "w-72 origin-(--radix-popover-content-transform-origin)", className)}
             >
               {children}
             </motion.div>
@@ -12320,6 +12334,7 @@ export function DashboardShell({
   const [dragWidth, setDragWidth] = useState<number | null>(null);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const shownTab = useRef(activeTab);
+  const isDark = useScopedDark(rootRef, className);
 
   // The content stays mounted across tabs, so it animates in place rather than remounting and losing its state.
   useEffect(() => {
@@ -12475,105 +12490,107 @@ export function DashboardShell({
   );
 
   return (
-    <div
-      ref={rootRef}
-      {...props}
-      data-resizing={dragWidth !== null ? "" : undefined}
-      className={cn(
-        "obsidian-dashboard-shell @container/dashboard-shell relative flex h-full min-h-0 w-full overflow-hidden bg-(--obsidian-dashboard-shell-background) text-(--obsidian-dashboard-shell-foreground)",
-        className,
-      )}
-      style={{ "--obsidian-dashboard-shell-sidebar-width": `${width}px`, ...style } as CSSProperties}
-    >
-      <aside
-        id={sidebarId}
-        className="relative hidden w-(--obsidian-dashboard-shell-sidebar-width) shrink-0 flex-col border-r border-(--obsidian-dashboard-shell-border) bg-(--obsidian-dashboard-shell-sidebar) @2xl/dashboard-shell:flex"
+    <ShellDarkContext.Provider value={isDark}>
+      <div
+        ref={rootRef}
+        {...props}
+        data-resizing={dragWidth !== null ? "" : undefined}
+        className={cn(
+          "obsidian-dashboard-shell @container/dashboard-shell relative flex h-full min-h-0 w-full overflow-hidden bg-(--obsidian-dashboard-shell-background) text-(--obsidian-dashboard-shell-foreground)",
+          className,
+        )}
+        style={{ "--obsidian-dashboard-shell-sidebar-width": `${width}px`, ...style } as CSSProperties}
       >
-        <SidebarContent {...sidebarProps} onSelect={selectItem} />
-        <div
-          role="separator"
-          aria-orientation="vertical"
-          aria-label="Resize sidebar"
-          aria-controls={sidebarId}
-          aria-valuemin={minSidebarWidth}
-          aria-valuemax={maxSidebarWidth}
-          aria-valuenow={width}
-          tabIndex={0}
-          onPointerDown={handleResizeStart}
-          onPointerMove={handleResizeMove}
-          onPointerUp={handleResizeEnd}
-          onPointerCancel={handleResizeEnd}
-          onDoubleClick={() => commitWidth(defaultSidebarWidth)}
-          onKeyDown={handleResizeKey}
-          className="group absolute inset-y-0 -right-1 z-10 w-2 cursor-col-resize touch-none outline-none select-none"
+        <aside
+          id={sidebarId}
+          className="relative hidden w-(--obsidian-dashboard-shell-sidebar-width) shrink-0 flex-col border-r border-(--obsidian-dashboard-shell-border) bg-(--obsidian-dashboard-shell-sidebar) @2xl/dashboard-shell:flex"
         >
-          <span
-            aria-hidden
-            className="absolute inset-y-0 left-1/2 w-px -translate-x-1/2 transition-colors duration-150 group-hover:bg-(--obsidian-dashboard-shell-border-strong) group-focus-visible:w-0.5 group-focus-visible:bg-(--obsidian-dashboard-shell-ring) group-active:bg-(--obsidian-dashboard-shell-ring)"
-          />
-        </div>
-      </aside>
-
-      <section aria-labelledby={titleId} inert={isDrawerOpen} className="flex min-h-0 min-w-0 flex-1 flex-col">
-        {tabs?.length ? (
-          <TabsPrimitive.Root value={activeTab} onValueChange={setActiveTab} className="flex min-h-0 flex-1 flex-col">
-            {renderHeader(
-              <TabsPrimitive.List aria-labelledby={titleId} className="border-b border-(--obsidian-dashboard-shell-border) px-3 pb-2.5">
-                <HoverHighlightList className="flex flex-wrap items-center gap-1" highlightClassName="rounded-md bg-(--obsidian-dashboard-shell-hover)">
-                  {tabs.map((item) => (
-                    <ShellTab key={item.value} item={item} isActive={item.value === activeTab} pillId={tabPillId} />
-                  ))}
-                </HoverHighlightList>
-              </TabsPrimitive.List>,
-            )}
-            <TabsPrimitive.Content value={activeTab} className="flex min-h-0 flex-1 flex-col outline-none">
-              {body}
-            </TabsPrimitive.Content>
-          </TabsPrimitive.Root>
-        ) : (
-          <>
-            {renderHeader()}
-            {body}
-          </>
-        )}
-      </section>
-
-      <AnimatePresence>
-        {isDrawerOpen && (
-          <motion.div
-            key="drawer"
-            className="absolute inset-0 z-30 @2xl/dashboard-shell:hidden"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: reduceMotion ? 0 : 0.2, ease: EASE_OUT }}
+          <SidebarContent {...sidebarProps} onSelect={selectItem} />
+          <div
+            role="separator"
+            aria-orientation="vertical"
+            aria-label="Resize sidebar"
+            aria-controls={sidebarId}
+            aria-valuemin={minSidebarWidth}
+            aria-valuemax={maxSidebarWidth}
+            aria-valuenow={width}
+            tabIndex={0}
+            onPointerDown={handleResizeStart}
+            onPointerMove={handleResizeMove}
+            onPointerUp={handleResizeEnd}
+            onPointerCancel={handleResizeEnd}
+            onDoubleClick={() => commitWidth(defaultSidebarWidth)}
+            onKeyDown={handleResizeKey}
+            className="group absolute inset-y-0 -right-1 z-10 w-2 cursor-col-resize touch-none outline-none select-none"
           >
-            <div aria-hidden className="absolute inset-0 bg-black/40" onClick={closeDrawer} />
+            <span
+              aria-hidden
+              className="absolute inset-y-0 left-1/2 w-px -translate-x-1/2 transition-colors duration-150 group-hover:bg-(--obsidian-dashboard-shell-border-strong) group-focus-visible:w-0.5 group-focus-visible:bg-(--obsidian-dashboard-shell-ring) group-active:bg-(--obsidian-dashboard-shell-ring)"
+            />
+          </div>
+        </aside>
+
+        <section aria-labelledby={titleId} inert={isDrawerOpen} className="flex min-h-0 min-w-0 flex-1 flex-col">
+          {tabs?.length ? (
+            <TabsPrimitive.Root value={activeTab} onValueChange={setActiveTab} className="flex min-h-0 flex-1 flex-col">
+              {renderHeader(
+                <TabsPrimitive.List aria-labelledby={titleId} className="border-b border-(--obsidian-dashboard-shell-border) px-3 pb-2.5">
+                  <HoverHighlightList className="flex flex-wrap items-center gap-1" highlightClassName="rounded-md bg-(--obsidian-dashboard-shell-hover)">
+                    {tabs.map((item) => (
+                      <ShellTab key={item.value} item={item} isActive={item.value === activeTab} pillId={tabPillId} />
+                    ))}
+                  </HoverHighlightList>
+                </TabsPrimitive.List>,
+              )}
+              <TabsPrimitive.Content value={activeTab} className="flex min-h-0 flex-1 flex-col outline-none">
+                {body}
+              </TabsPrimitive.Content>
+            </TabsPrimitive.Root>
+          ) : (
+            <>
+              {renderHeader()}
+              {body}
+            </>
+          )}
+        </section>
+
+        <AnimatePresence>
+          {isDrawerOpen && (
             <motion.div
-              id={drawerId}
-              role="dialog"
-              aria-modal="true"
-              aria-label={navigationLabel}
-              onKeyDown={(event) => {
-                if (event.key === "Escape") {
-                  event.stopPropagation();
-                  closeDrawer();
-                } else if (event.key === "Tab") {
-                  keepFocusInside(event);
-                }
-              }}
-              className="absolute inset-y-0 left-0 flex w-[254px] max-w-[85%] flex-col border-r border-(--obsidian-dashboard-shell-border) bg-(--obsidian-dashboard-shell-sidebar) shadow-[0_16px_40px_rgb(0_0_0/0.35)]"
-              initial={{ x: reduceMotion ? 0 : "-100%" }}
-              animate={{ x: 0 }}
-              exit={{ x: reduceMotion ? 0 : "-100%" }}
-              transition={{ duration: reduceMotion ? 0 : 0.28, ease: EASE_OUT }}
+              key="drawer"
+              className="absolute inset-0 z-30 @2xl/dashboard-shell:hidden"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: reduceMotion ? 0 : 0.2, ease: EASE_OUT }}
             >
-              <SidebarContent {...sidebarProps} onSelect={selectItemFromDrawer} onClose={closeDrawer} closeButtonRef={closeButtonRef} />
+              <div aria-hidden className="absolute inset-0 bg-black/40" onClick={closeDrawer} />
+              <motion.div
+                id={drawerId}
+                role="dialog"
+                aria-modal="true"
+                aria-label={navigationLabel}
+                onKeyDown={(event) => {
+                  if (event.key === "Escape") {
+                    event.stopPropagation();
+                    closeDrawer();
+                  } else if (event.key === "Tab") {
+                    keepFocusInside(event);
+                  }
+                }}
+                className="absolute inset-y-0 left-0 flex w-[254px] max-w-[85%] flex-col border-r border-(--obsidian-dashboard-shell-border) bg-(--obsidian-dashboard-shell-sidebar) shadow-[0_16px_40px_rgb(0_0_0/0.35)]"
+                initial={{ x: reduceMotion ? 0 : "-100%" }}
+                animate={{ x: 0 }}
+                exit={{ x: reduceMotion ? 0 : "-100%" }}
+                transition={{ duration: reduceMotion ? 0 : 0.28, ease: EASE_OUT }}
+              >
+                <SidebarContent {...sidebarProps} onSelect={selectItemFromDrawer} onClose={closeDrawer} closeButtonRef={closeButtonRef} />
+              </motion.div>
             </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </div>
+          )}
+        </AnimatePresence>
+      </div>
+    </ShellDarkContext.Provider>
   );
 }
 

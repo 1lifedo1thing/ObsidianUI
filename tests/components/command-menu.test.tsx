@@ -62,6 +62,14 @@ describe("animated command menu", () => {
     await waitFor(() => expect(screen.queryByRole("dialog")).not.toBeInTheDocument());
   });
 
+  it("opens the Prompts page from search", async () => {
+    render(<CommandMenu />);
+    const { user, input } = await openSearch();
+    await user.type(input, "prompts");
+    await user.click(screen.getByRole("option", { name: "Prompts" }));
+    expect(controls.push).toHaveBeenCalledExactlyOnceWith("/prompts");
+  });
+
   it("closes on the backdrop and returns focus", async () => {
     render(<CommandMenu />);
     const { user, trigger } = await openSearch();

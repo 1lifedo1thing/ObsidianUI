@@ -52,7 +52,6 @@ Request any published page with Accept: text/markdown or read its direct Markdow
 - [Component showcase](https://www.obsidianui.dev/markdown/components.md): Published component catalogue with Markdown documentation and downloads.
 - [Templates](https://www.obsidianui.dev/markdown/templates.md): Template catalogue.
 - [Project One](https://www.obsidianui.dev/markdown/project-one.md): Template preview and separate source repository.
-- [Playground](https://www.obsidianui.dev/markdown/playground.md): Experimental navbar and button previews.
 - [Sponsors](https://www.obsidianui.dev/markdown/sponsors.md): Platform sponsors, monthly sponsorship tiers, benefits, and email inquiries.
 - [Prompts](https://www.obsidianui.dev/markdown/prompts.md): Copy-ready prompts for coding agents, each with its own Markdown file.
 

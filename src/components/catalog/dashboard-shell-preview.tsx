@@ -42,6 +42,7 @@ type LibraryComponent = { id: string; name: string; category: Category; status: 
 // Newest first, in the same order as the components gallery.
 const INITIAL_COMPONENTS: LibraryComponent[] = [
     { id: 'dashboard-shell', name: 'Dashboard Shell', category: 'Components', status: 'New' },
+    { id: 'analytics-dashboard', name: 'Analytics Dashboard', category: 'Components', status: 'New' },
     { id: 'active-sessions', name: 'Active Sessions', category: 'Components', status: 'New' },
     { id: 'status-bars', name: 'Status Bars', category: 'Components', status: 'New' },
     { id: 'discover-button', name: 'Discover Button', category: 'Components', status: 'New' },
@@ -227,20 +228,20 @@ function ComponentsTable({ components }: { components: LibraryComponent[] }) {
     }
 
     return (
-        <table className="w-full min-w-[480px] border-collapse text-left text-sm">
+        <table className="w-full table-fixed border-collapse text-left text-sm">
             <thead>
                 <tr className="border-y border-(--obsidian-dashboard-shell-border) text-xs text-(--obsidian-dashboard-shell-text-subtle)">
-                    <th scope="col" className="px-4 py-2.5 font-normal">Component</th>
-                    <th scope="col" className="px-4 py-2.5 font-normal">Category</th>
-                    <th scope="col" className="px-4 py-2.5 font-normal">Status</th>
+                    <th scope="col" className="px-3 py-2.5 font-normal sm:px-4">Component</th>
+                    <th scope="col" className="px-3 py-2.5 font-normal sm:px-4">Category</th>
+                    <th scope="col" className="px-3 py-2.5 font-normal sm:px-4">Status</th>
                 </tr>
             </thead>
             <tbody>
                 {components.map(component => (
                     <tr key={component.id} className="border-b border-(--obsidian-dashboard-shell-border) last:border-b-0">
-                        <td className="px-4 py-3 font-medium">{component.name}</td>
-                        <td className="px-4 py-3 text-(--obsidian-dashboard-shell-text-muted)">{component.category}</td>
-                        <td className="px-4 py-3">
+                        <td className="px-3 py-3 font-medium break-words sm:px-4">{component.name}</td>
+                        <td className="px-3 py-3 break-words text-(--obsidian-dashboard-shell-text-muted) sm:px-4">{component.category}</td>
+                        <td className="px-3 py-3 sm:px-4">
                             <span className="inline-flex items-center gap-1.5 text-xs">
                                 <span aria-hidden className="size-1.5 rounded-full" style={{ backgroundColor: STATUS_COLORS[component.status] }} />
                                 {component.status}

@@ -85,7 +85,7 @@ export const HeroSection = () => {
               <WeeklyComponentBadge />
             </div>
 
-            <h1 className="landing-intro landing-intro-title hero-original-title text-[clamp(2.75rem,12vw,5.5rem)] md:text-[clamp(3rem,5.5vw,5.5rem)] whitespace-nowrap font-bold tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-zinc-900 via-zinc-800 to-zinc-600 dark:from-white dark:via-zinc-200 dark:to-zinc-400 mb-4 md:mb-6 leading-[1.1]">
+            <h1 className="landing-intro landing-intro-title hero-original-title text-[clamp(2.25rem,12vw,5.5rem)] md:text-[clamp(3rem,5.5vw,5.5rem)] whitespace-nowrap font-bold tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-zinc-900 via-zinc-800 to-zinc-600 dark:from-white dark:via-zinc-200 dark:to-zinc-400 mb-4 md:mb-6 leading-[1.1]">
               Design less. <br /> Ship Better.
             </h1>
 
