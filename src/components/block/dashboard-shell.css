@@ -2,8 +2,8 @@
 .obsidian-dashboard-shell,
 .obsidian-dashboard-shell-layer {
   --obsidian-dashboard-shell-background: #ffffff;
-  --obsidian-dashboard-shell-sidebar: #fafafa;
-  --obsidian-dashboard-shell-panel: #f4f4f4;
+  --obsidian-dashboard-shell-sidebar: var(--obsidian-dashboard-shell-background);
+  --obsidian-dashboard-shell-panel: var(--obsidian-dashboard-shell-background);
   --obsidian-dashboard-shell-control: #ffffff;
   --obsidian-dashboard-shell-muted: #efefef;
   --obsidian-dashboard-shell-muted-hover: #e6e6e6;
@@ -21,6 +21,9 @@
   --obsidian-dashboard-shell-success: #16a34a;
   --obsidian-dashboard-shell-warning: #d97706;
   --obsidian-dashboard-shell-danger: #e5484d;
+  /* Filled red buttons keep white text readable in both themes. */
+  --obsidian-dashboard-shell-danger-solid: #dc2626;
+  --obsidian-dashboard-shell-danger-solid-hover: #c81e1e;
   --obsidian-dashboard-shell-ring: #8b8b8b;
   --obsidian-dashboard-shell-control-shadow: 0 0 0 1px rgb(0 0 0 / 0.08), 0 1px 2px rgb(0 0 0 / 0.06);
   --obsidian-dashboard-shell-accent-shadow: 0 2px 4px rgb(37 99 235 / 0.24), 0 0 0 1px #1d4ed8, inset 0 4px 6px rgb(255 255 255 / 0.2),
@@ -36,8 +39,8 @@
 .obsidian-dashboard-shell.dark,
 .obsidian-dashboard-shell-layer.dark {
   --obsidian-dashboard-shell-background: #161616;
-  --obsidian-dashboard-shell-sidebar: #171717;
-  --obsidian-dashboard-shell-panel: #181818;
+  --obsidian-dashboard-shell-sidebar: var(--obsidian-dashboard-shell-background);
+  --obsidian-dashboard-shell-panel: var(--obsidian-dashboard-shell-background);
   --obsidian-dashboard-shell-control: #1e1e1e;
   --obsidian-dashboard-shell-muted: #2a2a2a;
   --obsidian-dashboard-shell-muted-hover: #333333;

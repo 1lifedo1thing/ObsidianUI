@@ -26,7 +26,10 @@ describe("DashboardShellPage", () => {
     expect(screen.getByText("selected").parentElement).toHaveTextContent("2 selected");
 
     await user.click(screen.getByRole("button", { name: "Delete" }));
+    const dialog = await screen.findByRole("alertdialog", { name: "Delete 2 components?" });
+    await user.click(within(dialog).getByRole("button", { name: "Delete" }));
     await waitFor(() => expect(rows()).toHaveLength(9));
+    await waitFor(() => expect(screen.queryByRole("alertdialog")).not.toBeInTheDocument());
     expect(rowNames()).not.toContain("Flip Text");
     expect(screen.getByRole("status")).toHaveTextContent("2 components deleted");
 
@@ -107,6 +110,27 @@ describe("DashboardShellPage", () => {
 
     await waitFor(() => expect(screen.getByRole("status")).toHaveTextContent("Install command for Status Bars copied"));
     expect(await navigator.clipboard.readText()).toBe("npx shadcn@latest add https://www.obsidianui.dev/r/status-bars.json");
+  });
+
+  it("asks before deleting from a row's menu and keeps the row when cancelled", async () => {
+    const user = userEvent.setup();
+    render(<DashboardShellPage />);
+
+    await user.click(screen.getByRole("button", { name: "Actions for Status Bars" }));
+    await user.click(await screen.findByRole("menuitem", { name: "Delete" }));
+    const dialog = await screen.findByRole("alertdialog", { name: "Delete Status Bars?" });
+    await waitFor(() => expect(within(dialog).getByRole("button", { name: "Cancel" })).toHaveFocus());
+
+    await user.keyboard("{Escape}");
+    await waitFor(() => expect(screen.queryByRole("alertdialog")).not.toBeInTheDocument());
+    expect(rowNames()).toContain("Status Bars");
+    await waitFor(() => expect(document.body.style.pointerEvents).toBe(""));
+
+    await user.click(screen.getByRole("button", { name: "Actions for Status Bars" }));
+    await user.click(await screen.findByRole("menuitem", { name: "Delete" }));
+    await user.click(within(await screen.findByRole("alertdialog")).getByRole("button", { name: "Delete" }));
+    await waitFor(() => expect(rowNames()).not.toContain("Status Bars"));
+    expect(screen.getByRole("status")).toHaveTextContent("Status Bars deleted");
   });
 
   it("adds a draft row at the top and clears the filters", async () => {

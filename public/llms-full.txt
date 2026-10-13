@@ -11783,7 +11783,7 @@ Items with `href` render as links, through `linkComponent` when you pass one. It
 
 `DashboardButton` matches the shell's look and works anywhere inside it.
 
-- `variant`: `primary` for the main action, `secondary` for everyday buttons, `muted` for buttons on the sidebar's darker panels, and `ghost` for low-emphasis actions.
+- `variant`: `primary` for the main action, `secondary` for everyday buttons, `muted` for a filled grey button, `ghost` for low-emphasis actions, and `danger` for deleting.
 - `size`: `sm` for toolbars, `md` for larger buttons, and `icon` for square icon buttons. Give icon buttons an `aria-label`.
 
 `DashboardFilterMenu` is a dropdown that shows its label and current value side by side, like **Sort by | Last updated**:
@@ -11831,6 +11831,25 @@ import {
 
 `DashboardMenuLabel`, `DashboardMenuRadioGroup`, and `DashboardMenuRadioItem` are also available for headings and single-choice options. `DashboardPopover`, `DashboardPopoverTrigger`, and `DashboardPopoverContent` follow the same pattern. Both are built on Radix, so they keep its keyboard support and focus handling.
 
+## Confirm dialog
+
+`DashboardConfirmDialog` asks before an action you can't easily take back. It follows the shell's palette and theme, focuses **Cancel** first so Enter never deletes by accident, and closes with Escape. Set `tone="danger"` to paint the confirm button red.
+
+```tsx
+const [open, setOpen] = useState(false)
+
+<DashboardButton variant="danger" size="sm" onClick={() => setOpen(true)}>Delete</DashboardButton>
+<DashboardConfirmDialog
+  open={open}
+  onOpenChange={setOpen}
+  tone="danger"
+  title="Delete Status Bars?"
+  description="It's removed from the library. You can undo right after."
+  confirmLabel="Delete"
+  onConfirm={() => deleteComponent('status-bars')}
+/>
+```
+
 ## Sidebar width
 
 The sidebar starts at 200px and resizes between 180px and 400px. Change the limits with `minSidebarWidth` and `maxSidebarWidth`. To remember the width, save it in `onSidebarWidthChange`, which runs once when a drag ends rather than on every frame:
@@ -11870,8 +11889,9 @@ The shell has a light and a dark palette, and switches when a parent has the `da
 .obsidian-dashboard-shell,
 .obsidian-dashboard-shell-layer {
   --obsidian-dashboard-shell-background: #ffffff;
-  --obsidian-dashboard-shell-sidebar: #fafafa;
-  --obsidian-dashboard-shell-panel: #f4f4f4;
+  /* The sidebar and its header and footer use the page background, so the whole shell reads as one surface. */
+  --obsidian-dashboard-shell-sidebar: var(--obsidian-dashboard-shell-background);
+  --obsidian-dashboard-shell-panel: var(--obsidian-dashboard-shell-background);
   --obsidian-dashboard-shell-border: #e7e7e7;
   --obsidian-dashboard-shell-foreground: #161616;
   --obsidian-dashboard-shell-text-muted: #5c5c5c;
@@ -11895,7 +11915,7 @@ Download the complete manifest: [dashboard-shell.json](https://www.obsidianui.de
 Install the listed package dependencies in your React project:
 
 ```bash
-npm install @radix-ui/react-dropdown-menu @radix-ui/react-popover @radix-ui/react-tabs class-variance-authority clsx lucide-react motion tailwind-merge
+npm install @radix-ui/react-alert-dialog @radix-ui/react-dropdown-menu @radix-ui/react-popover @radix-ui/react-tabs class-variance-authority clsx lucide-react motion tailwind-merge
 ```
 
 Resolve @components/, @ui/, @lib/, and @hooks/ targets through your components.json aliases. For example, @components/block/example.tsx maps to src/components/block/example.tsx when components is @/components and @/\* resolves to src/\*. Do not create a literal @components directory. Preserve existing files deliberately and keep the use client directive where present.
@@ -11909,8 +11929,8 @@ Installation target: `@components/block/dashboard-shell.css`
 .obsidian-dashboard-shell,
 .obsidian-dashboard-shell-layer {
   --obsidian-dashboard-shell-background: #ffffff;
-  --obsidian-dashboard-shell-sidebar: #fafafa;
-  --obsidian-dashboard-shell-panel: #f4f4f4;
+  --obsidian-dashboard-shell-sidebar: var(--obsidian-dashboard-shell-background);
+  --obsidian-dashboard-shell-panel: var(--obsidian-dashboard-shell-background);
   --obsidian-dashboard-shell-control: #ffffff;
   --obsidian-dashboard-shell-muted: #efefef;
   --obsidian-dashboard-shell-muted-hover: #e6e6e6;
@@ -11928,6 +11948,9 @@ Installation target: `@components/block/dashboard-shell.css`
   --obsidian-dashboard-shell-success: #16a34a;
   --obsidian-dashboard-shell-warning: #d97706;
   --obsidian-dashboard-shell-danger: #e5484d;
+  /* Filled red buttons keep white text readable in both themes. */
+  --obsidian-dashboard-shell-danger-solid: #dc2626;
+  --obsidian-dashboard-shell-danger-solid-hover: #c81e1e;
   --obsidian-dashboard-shell-ring: #8b8b8b;
   --obsidian-dashboard-shell-control-shadow: 0 0 0 1px rgb(0 0 0 / 0.08), 0 1px 2px rgb(0 0 0 / 0.06);
   --obsidian-dashboard-shell-accent-shadow: 0 2px 4px rgb(37 99 235 / 0.24), 0 0 0 1px #1d4ed8, inset 0 4px 6px rgb(255 255 255 / 0.2),
@@ -11943,8 +11966,8 @@ Installation target: `@components/block/dashboard-shell.css`
 .obsidian-dashboard-shell.dark,
 .obsidian-dashboard-shell-layer.dark {
   --obsidian-dashboard-shell-background: #161616;
-  --obsidian-dashboard-shell-sidebar: #171717;
-  --obsidian-dashboard-shell-panel: #181818;
+  --obsidian-dashboard-shell-sidebar: var(--obsidian-dashboard-shell-background);
+  --obsidian-dashboard-shell-panel: var(--obsidian-dashboard-shell-background);
   --obsidian-dashboard-shell-control: #1e1e1e;
   --obsidian-dashboard-shell-muted: #2a2a2a;
   --obsidian-dashboard-shell-muted-hover: #333333;
@@ -12021,6 +12044,7 @@ Installation target: `@components/block/dashboard-shell.tsx`
 ```tsx
 "use client";
 
+import * as AlertDialogPrimitive from "@radix-ui/react-alert-dialog";
 import * as DropdownMenuPrimitive from "@radix-ui/react-dropdown-menu";
 import * as PopoverPrimitive from "@radix-ui/react-popover";
 import * as TabsPrimitive from "@radix-ui/react-tabs";
@@ -12056,6 +12080,8 @@ export const dashboardButtonVariants = cva(
           "bg-(--obsidian-dashboard-shell-muted) text-(--obsidian-dashboard-shell-foreground) shadow-(--obsidian-dashboard-shell-control-shadow) hover:bg-(--obsidian-dashboard-shell-muted-hover)",
         ghost:
           "text-(--obsidian-dashboard-shell-text-subtle) hover:bg-(--obsidian-dashboard-shell-muted) hover:text-(--obsidian-dashboard-shell-foreground)",
+        danger:
+          "bg-(--obsidian-dashboard-shell-danger-solid) text-white shadow-[0_1px_2px_rgb(0_0_0/0.16),inset_0_1px_0_rgb(255_255_255/0.16),0_0_0_1px_rgb(0_0_0/0.08)] hover:bg-(--obsidian-dashboard-shell-danger-solid-hover)",
       },
       size: {
         sm: "h-[30px] px-[9px] text-xs [&_svg]:size-3",
@@ -12251,6 +12277,86 @@ export function DashboardPopoverContent({ className, children, align = "center",
         </PopoverPrimitive.Portal>
       )}
     </AnimatePresence>
+  );
+}
+
+export type DashboardConfirmDialogProps = {
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
+  title: ReactNode;
+  description?: ReactNode;
+  confirmLabel?: ReactNode;
+  cancelLabel?: ReactNode;
+  /** "danger" paints the confirm button red, for deleting and other actions that remove things. */
+  tone?: "default" | "danger";
+  onConfirm: () => void;
+};
+
+export function DashboardConfirmDialog({
+  open,
+  onOpenChange,
+  title,
+  description,
+  confirmLabel = "Confirm",
+  cancelLabel = "Cancel",
+  tone = "default",
+  onConfirm,
+}: DashboardConfirmDialogProps) {
+  const isDark = useContext(ShellDarkContext);
+  const reduceMotion = !!useReducedMotion();
+
+  return (
+    <AlertDialogPrimitive.Root open={open} onOpenChange={onOpenChange}>
+      <AnimatePresence>
+        {open && (
+          <AlertDialogPrimitive.Portal forceMount>
+            <AlertDialogPrimitive.Overlay forceMount asChild>
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: reduceMotion ? 0 : 0.18, ease: EASE_OUT }}
+                className={cn("fixed inset-0 z-50 backdrop-blur-[2px]", isDark ? "bg-black/50" : "bg-black/25")}
+              />
+            </AlertDialogPrimitive.Overlay>
+            <div className="pointer-events-none fixed inset-0 z-50 grid place-items-center p-4">
+              <AlertDialogPrimitive.Content forceMount asChild>
+                <motion.div
+                  initial={reduceMotion ? { opacity: 0 } : { opacity: 0, scale: 0.94, y: 6, filter: "blur(6px)" }}
+                  animate={{ opacity: 1, scale: 1, y: 0, filter: "blur(0px)", transition: reduceMotion ? { duration: 0 } : { ...LAYER_SPRING, opacity: { duration: 0.16, ease: EASE_OUT }, filter: { duration: 0.2, ease: EASE_OUT } } }}
+                  exit={reduceMotion ? { opacity: 0, transition: { duration: 0 } } : { opacity: 0, scale: 0.97, y: 4, filter: "blur(4px)", transition: { duration: 0.14, ease: EASE_OUT } }}
+                  className={cn(
+                    "obsidian-dashboard-shell-layer pointer-events-auto flex w-full max-w-sm flex-col gap-4 rounded-xl bg-(--obsidian-dashboard-shell-background) p-4 text-(--obsidian-dashboard-shell-foreground) shadow-(--obsidian-dashboard-shell-menu-shadow) outline-none",
+                    isDark && "dark",
+                  )}
+                >
+                  <div className="flex flex-col gap-1.5">
+                    <AlertDialogPrimitive.Title className="text-sm font-medium leading-snug">{title}</AlertDialogPrimitive.Title>
+                    {description ? (
+                      <AlertDialogPrimitive.Description className="text-xs leading-relaxed text-(--obsidian-dashboard-shell-text-muted)">{description}</AlertDialogPrimitive.Description>
+                    ) : (
+                      <AlertDialogPrimitive.Description className="sr-only">{title}</AlertDialogPrimitive.Description>
+                    )}
+                  </div>
+                  <div className="flex justify-end gap-2">
+                    <AlertDialogPrimitive.Cancel asChild>
+                      <DashboardButton variant="secondary" size="sm">
+                        {cancelLabel}
+                      </DashboardButton>
+                    </AlertDialogPrimitive.Cancel>
+                    <AlertDialogPrimitive.Action asChild>
+                      <DashboardButton variant={tone === "danger" ? "danger" : "primary"} size="sm" onClick={onConfirm}>
+                        {confirmLabel}
+                      </DashboardButton>
+                    </AlertDialogPrimitive.Action>
+                  </div>
+                </motion.div>
+              </AlertDialogPrimitive.Content>
+            </div>
+          </AlertDialogPrimitive.Portal>
+        )}
+      </AnimatePresence>
+    </AlertDialogPrimitive.Root>
   );
 }
 

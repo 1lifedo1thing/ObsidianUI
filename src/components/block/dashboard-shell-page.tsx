@@ -6,6 +6,7 @@ import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { useEffect, useMemo, useRef, useState, type MouseEvent, type ReactNode, type Ref } from "react";
 import {
   DashboardButton,
+  DashboardConfirmDialog,
   DashboardFilterMenu,
   DashboardMenu,
   DashboardMenuContent,
@@ -120,6 +121,7 @@ const SECONDARY_NAVIGATION: DashboardShellNavItem[] = [
   { id: "help", label: "Help", icon: Info },
 ];
 
+const EASE_OUT = [0.25, 1, 0.5, 1] as const;
 const WEEKLY_INSTALL_GOAL = 25_000;
 const number = new Intl.NumberFormat("en-US");
 const compactNumber = new Intl.NumberFormat("en-US", { notation: "compact", maximumFractionDigits: 1 });
@@ -175,6 +177,7 @@ export function DashboardShellPage({
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
   const [unreadIds, setUnreadIds] = useState(["review", "comment"]);
   const [toast, setToast] = useState<Toast | null>(null);
+  const [pendingDelete, setPendingDelete] = useState<{ open: boolean; items: LibraryItem[] }>({ open: false, items: [] });
   const draftCount = useRef(0);
 
   useEffect(() => {
@@ -259,6 +262,9 @@ export function DashboardShellPage({
     setSelectedIds((current) => current.filter((id) => !ids.includes(id)));
     notify(ids.length === 1 ? `${previous.find((item) => item.id === ids[0])?.name ?? "Component"} deleted` : `${ids.length} components deleted`, previous);
   };
+
+  // The dialog keeps its own copy of the rows, so its text stays put while it animates out after the rows are gone.
+  const requestDelete = (targets: LibraryItem[]) => setPendingDelete({ open: true, items: targets });
 
   const setStarred = (ids: string[], starred: boolean) => updateItems(ids, (item) => ({ ...item, starred }));
 
@@ -385,7 +391,7 @@ export function DashboardShellPage({
               onStar={(item) => setStarred([item.id], !item.starred)}
               onStatus={(item) => setStatus([item.id], item.status === "Stable" ? "New" : "Stable")}
               onCopy={copyInstall}
-              onDelete={(item) => deleteItems([item.id])}
+              onDelete={(item) => requestDelete([item])}
               docsHref={docsHref}
             />
           )}
@@ -403,7 +409,7 @@ export function DashboardShellPage({
               {selected.length > 0 && (
                 <FloatingBar key="selection">
                   <span className="px-2 text-xs tabular-nums">
-                    <span className="font-medium">{selected.length}</span> selected
+                    <RollingCount value={selected.length} /> selected
                   </span>
                   <BarDivider />
                   <DashboardButton variant="ghost" size="sm" onClick={() => setStarred(selected.map((item) => item.id), !allSelectedStarred)}>
@@ -422,7 +428,7 @@ export function DashboardShellPage({
                     variant="ghost"
                     size="sm"
                     className="text-(--obsidian-dashboard-shell-danger) hover:text-(--obsidian-dashboard-shell-danger)"
-                    onClick={() => deleteItems(selected.map((item) => item.id))}
+                    onClick={() => requestDelete(selected)}
                   >
                     <Trash2 aria-hidden />
                     Delete
@@ -457,6 +463,16 @@ export function DashboardShellPage({
             </div>
           </div>
         </div>
+
+        <DashboardConfirmDialog
+          open={pendingDelete.open}
+          onOpenChange={(open) => setPendingDelete((current) => ({ ...current, open }))}
+          tone="danger"
+          title={pendingDelete.items.length === 1 ? `Delete ${pendingDelete.items[0].name}?` : `Delete ${pendingDelete.items.length} components?`}
+          description={`${pendingDelete.items.length === 1 ? "It's" : "They're"} removed from the library and from your teammates' views. You can undo right after.`}
+          confirmLabel="Delete"
+          onConfirm={() => deleteItems(pendingDelete.items.map((item) => item.id))}
+        />
       </DashboardShell>
     </div>
   );
@@ -523,15 +539,20 @@ function LibraryTable({ items, selectedIds, sort, onSort, onToggle, onToggleAll,
               <motion.tr
                 key={item.id}
                 layout={reduceMotion ? false : "position"}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: reduceMotion ? 0 : 0.18 }}
+                initial={reduceMotion ? { opacity: 0 } : { opacity: 0, y: -6 }}
+                animate={{ opacity: 1, x: 0, y: 0, filter: "blur(0px)" }}
+                exit={
+                  reduceMotion
+                    ? { opacity: 0, transition: { duration: 0 } }
+                    : { opacity: 0, x: 28, filter: "blur(3px)", transition: { duration: 0.22, ease: [0.4, 0, 1, 1] } }
+                }
+                transition={reduceMotion ? { duration: 0 } : { duration: 0.22, ease: EASE_OUT, layout: { type: "spring", stiffness: 500, damping: 40 } }}
                 data-selected={isSelected}
                 onClick={(event) => onRowClick(event, item.id)}
-                className="cursor-pointer border-b border-(--obsidian-dashboard-shell-border) transition-colors duration-150 last:border-b-0 hover:bg-(--obsidian-dashboard-shell-hover) data-[selected=true]:bg-[color-mix(in_oklab,var(--obsidian-dashboard-shell-accent)_9%,transparent)]"
+                className="group/row cursor-pointer border-b border-(--obsidian-dashboard-shell-border) transition-colors duration-200 last:border-b-0 hover:bg-(--obsidian-dashboard-shell-hover) data-[selected=true]:bg-[color-mix(in_oklab,var(--obsidian-dashboard-shell-accent)_9%,transparent)] motion-reduce:transition-none"
               >
-                <td className="w-10 py-2.5 pl-3 pr-0 align-middle @lg/table:pl-4">
+                {/* The accent edge grows in from the middle as the row is selected. */}
+                <td className="relative w-10 py-2.5 pl-3 pr-0 align-middle before:absolute before:inset-y-1 before:left-0 before:w-0.5 before:scale-y-0 before:rounded-full before:bg-(--obsidian-dashboard-shell-accent) before:transition-[scale] before:duration-200 before:ease-[cubic-bezier(0.25,1,0.5,1)] group-data-[selected=true]/row:before:scale-y-100 motion-reduce:before:transition-none @lg/table:pl-4">
                   <Checkbox checked={isSelected} onChange={() => onToggle(item.id)} label={`Select ${item.name}`} />
                 </td>
                 <td className={cell}>
@@ -648,16 +669,30 @@ function SortHeader({ label, sortKey, sort, onSort, className }: { label: string
   );
 }
 
+// A native input underneath keeps keyboard, form, and screen reader behavior; the marks on top only draw the state.
 function Checkbox({ checked, onChange, label, ref }: { checked: boolean; onChange: () => void; label: string; ref?: Ref<HTMLInputElement> }) {
   return (
-    <input
-      ref={ref}
-      type="checkbox"
-      checked={checked}
-      onChange={onChange}
-      aria-label={label}
-      className="block size-3.5 cursor-pointer accent-(--obsidian-dashboard-shell-accent)"
-    />
+    <span className="relative grid size-4 place-items-center">
+      <input
+        ref={ref}
+        type="checkbox"
+        checked={checked}
+        onChange={onChange}
+        aria-label={label}
+        className="peer col-start-1 row-start-1 size-4 cursor-pointer appearance-none rounded-[5px] bg-(--obsidian-dashboard-shell-control) shadow-[0_0_0_1px_var(--obsidian-dashboard-shell-border-strong),0_1px_2px_rgb(0_0_0/0.06)] outline-none transition-[background-color,box-shadow,scale] duration-200 ease-[cubic-bezier(0.25,1,0.5,1)] [&:not(:checked,:indeterminate):hover]:shadow-[0_0_0_1px_var(--obsidian-dashboard-shell-ring),0_1px_2px_rgb(0_0_0/0.06)] focus-visible:ring-2 focus-visible:ring-(--obsidian-dashboard-shell-ring) focus-visible:ring-offset-1 focus-visible:ring-offset-(--obsidian-dashboard-shell-background) active:scale-[0.85] active:duration-75 checked:bg-(--obsidian-dashboard-shell-accent) checked:shadow-[0_0_0_1px_var(--obsidian-dashboard-shell-accent),inset_0_1px_0_rgb(255_255_255/0.2)] indeterminate:bg-(--obsidian-dashboard-shell-accent) indeterminate:shadow-[0_0_0_1px_var(--obsidian-dashboard-shell-accent),inset_0_1px_0_rgb(255_255_255/0.2)] motion-reduce:transition-none"
+      />
+      <svg
+        aria-hidden
+        viewBox="0 0 16 16"
+        className="pointer-events-none col-start-1 row-start-1 size-4 scale-75 text-(--obsidian-dashboard-shell-accent-foreground) opacity-0 transition-[opacity,scale] duration-200 ease-[cubic-bezier(0.34,1.56,0.64,1)] peer-checked:scale-100 peer-checked:opacity-100 motion-reduce:transition-none [&>path]:[stroke-dasharray:1] [&>path]:[stroke-dashoffset:1] [&>path]:transition-[stroke-dashoffset] [&>path]:duration-200 [&>path]:delay-75 [&>path]:ease-out peer-checked:[&>path]:[stroke-dashoffset:0] motion-reduce:[&>path]:transition-none"
+      >
+        <path d="M4.5 8.25 7 10.5l4.5-5" pathLength={1} fill="none" stroke="currentColor" strokeWidth={1.75} strokeLinecap="round" strokeLinejoin="round" />
+      </svg>
+      <span
+        aria-hidden
+        className="pointer-events-none col-start-1 row-start-1 h-[1.75px] w-2 scale-x-0 rounded-full bg-(--obsidian-dashboard-shell-accent-foreground) transition-[scale] duration-200 ease-[cubic-bezier(0.25,1,0.5,1)] peer-indeterminate:scale-x-100 motion-reduce:transition-none"
+      />
+    </span>
   );
 }
 
@@ -717,6 +752,37 @@ function FloatingBar({ children }: { children: ReactNode }) {
     >
       {children}
     </motion.div>
+  );
+}
+
+function RollingCount({ value }: { value: number }) {
+  const reduceMotion = useReducedMotion();
+  // Counting up rolls the number upward, counting down rolls it back.
+  const [shown, setShown] = useState({ value, direction: 1 });
+  if (shown.value !== value) setShown({ value, direction: value > shown.value ? 1 : -1 });
+  const { direction } = shown;
+
+  if (reduceMotion) return <span className="font-medium">{value}</span>;
+  return (
+    <span className="relative inline-flex overflow-hidden align-bottom font-medium">
+      <AnimatePresence mode="popLayout" initial={false} custom={direction}>
+        <motion.span
+          key={value}
+          custom={direction}
+          variants={{
+            enter: (dir: number) => ({ y: dir > 0 ? "80%" : "-80%", opacity: 0 }),
+            center: { y: 0, opacity: 1 },
+            leave: (dir: number) => ({ y: dir > 0 ? "-80%" : "80%", opacity: 0 }),
+          }}
+          initial="enter"
+          animate="center"
+          exit="leave"
+          transition={{ duration: 0.2, ease: EASE_OUT }}
+        >
+          {value}
+        </motion.span>
+      </AnimatePresence>
+    </span>
   );
 }
 

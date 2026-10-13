@@ -159,7 +159,7 @@ Items with `href` render as links, through `linkComponent` when you pass one. It
 
 `DashboardButton` matches the shell's look and works anywhere inside it.
 
-- `variant`: `primary` for the main action, `secondary` for everyday buttons, `muted` for buttons on the sidebar's darker panels, and `ghost` for low-emphasis actions.
+- `variant`: `primary` for the main action, `secondary` for everyday buttons, `muted` for a filled grey button, `ghost` for low-emphasis actions, and `danger` for deleting.
 - `size`: `sm` for toolbars, `md` for larger buttons, and `icon` for square icon buttons. Give icon buttons an `aria-label`.
 
 `DashboardFilterMenu` is a dropdown that shows its label and current value side by side, like **Sort by | Last updated**:
@@ -207,6 +207,25 @@ import {
 
 `DashboardMenuLabel`, `DashboardMenuRadioGroup`, and `DashboardMenuRadioItem` are also available for headings and single-choice options. `DashboardPopover`, `DashboardPopoverTrigger`, and `DashboardPopoverContent` follow the same pattern. Both are built on Radix, so they keep its keyboard support and focus handling.
 
+## Confirm dialog
+
+`DashboardConfirmDialog` asks before an action you can't easily take back. It follows the shell's palette and theme, focuses **Cancel** first so Enter never deletes by accident, and closes with Escape. Set `tone="danger"` to paint the confirm button red.
+
+```tsx copy
+const [open, setOpen] = useState(false)
+
+<DashboardButton variant="danger" size="sm" onClick={() => setOpen(true)}>Delete</DashboardButton>
+<DashboardConfirmDialog
+  open={open}
+  onOpenChange={setOpen}
+  tone="danger"
+  title="Delete Status Bars?"
+  description="It's removed from the library. You can undo right after."
+  confirmLabel="Delete"
+  onConfirm={() => deleteComponent('status-bars')}
+/>
+```
+
 ## Sidebar width
 
 The sidebar starts at 200px and resizes between 180px and 400px. Change the limits with `minSidebarWidth` and `maxSidebarWidth`. To remember the width, save it in `onSidebarWidthChange`, which runs once when a drag ends rather than on every frame:
@@ -246,8 +265,9 @@ The shell has a light and a dark palette, and switches when a parent has the `da
 .obsidian-dashboard-shell,
 .obsidian-dashboard-shell-layer {
   --obsidian-dashboard-shell-background: #ffffff;
-  --obsidian-dashboard-shell-sidebar: #fafafa;
-  --obsidian-dashboard-shell-panel: #f4f4f4;
+  /* The sidebar and its header and footer use the page background, so the whole shell reads as one surface. */
+  --obsidian-dashboard-shell-sidebar: var(--obsidian-dashboard-shell-background);
+  --obsidian-dashboard-shell-panel: var(--obsidian-dashboard-shell-background);
   --obsidian-dashboard-shell-border: #e7e7e7;
   --obsidian-dashboard-shell-foreground: #161616;
   --obsidian-dashboard-shell-text-muted: #5c5c5c;
@@ -267,7 +287,7 @@ The full list, with both palettes, is in `dashboard-shell.css`.
 ## Install manually
 
 <Dependencies step={1} title="Copy the source code" source="dashboard-shell">
-  <p className="mt-2 text-sm text-muted-foreground">Add the registry source to <code>components/block/dashboard-shell.tsx</code> and its stylesheet to <code>components/block/dashboard-shell.css</code>. It uses Radix for the tabs, menus, and popovers, <code>motion</code> for animation, and <code>lucide-react</code> for its icons. Install the listed dependencies from the registry item.</p>
+  <p className="mt-2 text-sm text-muted-foreground">Add the registry source to <code>components/block/dashboard-shell.tsx</code> and its stylesheet to <code>components/block/dashboard-shell.css</code>. It uses Radix for the tabs, menus, popovers, and confirm dialog, <code>motion</code> for animation, and <code>lucide-react</code> for its icons. Install the listed dependencies from the registry item.</p>
 </Dependencies>
 
 ## Props
