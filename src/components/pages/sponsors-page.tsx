@@ -293,7 +293,7 @@ export default function SponsorsPage() {
           {[
             { value: "Open source", label: "Built in public on GitHub" },
             { value: "40+", label: "Components" },
-            { value: "500k+", label: "Pageviews since launch" },
+            { value: "500k+", label: "Pageviews last month" },
             { value: "150k+", label: "Pageviews last 7 days" },
           ].map((stat, index) => (
             <div className="obsidianui-sponsor-stat-slot" key={stat.label} onPointerEnter={(event) => { if (event.pointerType === "mouse") moveCards(statsRef.current, index); }}>
