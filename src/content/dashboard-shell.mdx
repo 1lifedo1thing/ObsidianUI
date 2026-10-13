@@ -10,65 +10,20 @@ An app layout for dashboards and admin pages. It has a resizable sidebar with gr
 
 Drag the sidebar edge to resize it, or double-click it to reset. In containers narrower than 672px, the sidebar moves into a drawer that opens from the menu button.
 
+The preview is the ready-made `/dashboard` page described below. Select rows to open the bulk action bar, sort by the column headers, star components, open a row's menu, or pick a team in the sidebar to filter the table.
+
 <ComponentPreview
   className="dashboard-shell-docs-preview"
   expandable
   frameClassName="h-[600px] overflow-hidden rounded-xl border"
   component={<DashboardShellPreview />}
-  code={`'use client'
+  code={`// app/dashboard/page.tsx
+import { DashboardShellPage } from '@/components/block/dashboard-shell-page'
 
-import { useState } from 'react'
-import { AddCircle, AppDots, Box } from '@duo-icons/react'
-import { Download, Search } from 'lucide-react'
-import { DashboardButton, DashboardFilterMenu, DashboardShell } from '@/components/block/dashboard-shell'
-
-const sortOptions = [
-  { value: 'newest', label: 'Newest first' },
-  { value: 'name', label: 'Name' },
-]
-
-export function Demo() {
-  const [sortBy, setSortBy] = useState('newest')
-
+export default function DashboardPage() {
   return (
     <div className="h-dvh">
-      <DashboardShell
-        brand={{ name: 'ObsidianUI', description: 'Component library' }}
-        navigation={[
-          {
-            id: 'library',
-            items: [
-              { id: 'components', label: 'Components', icon: AppDots, count: 10 },
-              { id: 'blocks', label: 'Blocks', icon: Box },
-            ],
-          },
-          {
-            id: 'spaces',
-            title: 'Spaces',
-            items: [{ id: 'landing-pages', label: 'Landing pages', color: '#facc15' }],
-          },
-        ]}
-        title="Components"
-        status="Active"
-        headerActions={
-          <DashboardButton variant="secondary" size="icon" aria-label="Search">
-            <Search aria-hidden />
-          </DashboardButton>
-        }
-        tabs={[
-          { value: 'all', label: 'All components' },
-          { value: 'new', label: 'New' },
-        ]}
-        filters={<DashboardFilterMenu label="Sort by" value={sortBy} options={sortOptions} onValueChange={setSortBy} />}
-        toolbarActions={
-          <>
-            <DashboardButton variant="secondary" size="sm"><Download aria-hidden />Export</DashboardButton>
-            <DashboardButton variant="primary" size="sm"><AddCircle aria-hidden />New component</DashboardButton>
-          </>
-        }
-      >
-        <p className="p-4">Your page content</p>
-      </DashboardShell>
+      <DashboardShellPage />
     </div>
   )
 }`}
@@ -100,13 +55,95 @@ The shell fills its parent, so give the parent a height, such as `h-dvh` for a f
 
 Leave out `tabs`, `filters`, or `toolbarActions` and those rows are not rendered.
 
+## Ready-made /dashboard page
+
+`dashboard-shell-page` is the complete page from the preview, built on the shell. Install it to get a working dashboard route in one step. It brings `dashboard-shell` with it:
+
+<CLICommand componentName="dashboard-shell-page" />
+
+```tsx copy
+// app/dashboard/page.tsx
+import { DashboardShellPage } from '@/components/block/dashboard-shell-page'
+
+export default function DashboardPage() {
+  return (
+    <div className="h-dvh">
+      <DashboardShellPage />
+    </div>
+  )
+}
+```
+
+The page includes:
+
+- A table with a star, name, category, install trend, last update, owner, and status for each row. Columns hide one by one as the content area narrows, so it fits a phone without scrolling sideways.
+- Row selection. Tick the boxes or click a row, and a floating bar offers Star, Mark stable, Export, and Delete for the selection.
+- Sortable Component, Installs, and Updated headers. Click again to reverse the order. The Sort by menu stays in sync.
+- A menu on each row to copy its install command, open its docs, star it, change its status, or delete it.
+- Undo after a delete, and a short confirmation after every action, announced to screen readers.
+- Sidebar items that filter the table. Blocks shows blocks only, the Teams show what each team owns, and the other items show an empty state.
+- Stats under the table and a weekly installs card in the sidebar footer.
+
+Pass your own rows with `items`. Each row has an `id`, `name`, `category`, `status`, `team`, `installs`, a seven-day `trend`, and `updatedDaysAgo`. Change the copied command with `installCommand`, and the docs link with `docsHref`:
+
+```tsx copy
+<DashboardShellPage
+  items={myComponents}
+  installCommand={item => `npx shadcn@latest add @acme/${item.id}`}
+  docsHref={item => `/docs/${item.id}`}
+/>
+```
+
+It is a regular file in your project after install, so rename the labels, swap the columns, or wire the actions to your API.
+
+## Route-based navigation
+
+To move between real pages, put the shell in a layout, give each item an `href`, and pass Next.js `Link` as `linkComponent` so the sidebar navigates without a full reload. Use the current path as `activeItemId`:
+
+```tsx copy
+// app/dashboard/layout.tsx
+'use client'
+
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
+import { AppDots, Box, Target } from '@duo-icons/react'
+import { DashboardShell } from '@/components/block/dashboard-shell'
+
+const items = [
+  { id: '/dashboard', label: 'Overview', icon: AppDots, href: '/dashboard' },
+  { id: '/dashboard/projects', label: 'Projects', icon: Box, href: '/dashboard/projects' },
+  { id: '/dashboard/analytics', label: 'Analytics', icon: Target, href: '/dashboard/analytics' },
+]
+
+export default function DashboardLayout({ children }: { children: React.ReactNode }) {
+  const pathname = usePathname()
+  const active = items.find(item => item.href === pathname)
+
+  return (
+    <div className="h-dvh">
+      <DashboardShell
+        brand={{ name: 'Acme' }}
+        navigation={[{ id: 'main', items }]}
+        activeItemId={pathname}
+        linkComponent={Link}
+        title={active?.label ?? 'Dashboard'}
+      >
+        {children}
+      </DashboardShell>
+    </div>
+  )
+}
+```
+
+Each page under `app/dashboard` then renders only its content. The layout stays mounted between pages, so the sidebar keeps its width and the active pill slides to the new page.
+
 ## Navigation
 
 Each section has an optional `title` and a list of items. An item shows an `icon`, or a colored dot when you pass `color` instead, and an optional `count` badge. The demo uses duotone icons from [`@duo-icons/react`](https://github.com/fernandcf/duo-icons): their second layer draws at 30% opacity, so one icon color gives a dark shape with a grey fill. Lucide icons work too.
 
 A single hover highlight glides between items as the pointer moves down the list, and the active item's pill slides to whichever item you choose.
 
-Items with `href` render as links. Items without it render as buttons that only change the active item. Track the active item with `activeItemId` and `onActiveItemChange`, or let the shell keep it with `defaultActiveItemId`. The active item gets `aria-current="page"`.
+Items with `href` render as links, through `linkComponent` when you pass one. Items without it render as buttons that only change the active item. Track the active item with `activeItemId` and `onActiveItemChange`, or let the shell keep it with `defaultActiveItemId`. The active item gets `aria-current="page"`.
 
 `secondaryNavigation` holds quieter items pinned under the main list, such as Invite or Help. `sidebarFooter` sits at the very bottom, for a plan or account card:
 
@@ -262,6 +299,7 @@ The full list, with both palettes, is in `dashboard-shell.css`.
     { prop: 'minSidebarWidth', type: 'number', defaultValue: '180', description: 'Narrowest sidebar width in pixels.' },
     { prop: 'maxSidebarWidth', type: 'number', defaultValue: '400', description: 'Widest sidebar width in pixels.' },
     { prop: 'navigationLabel', type: 'string', defaultValue: 'Navigation', description: 'Accessible name for the navigation and the drawer.' },
+    { prop: 'linkComponent', type: 'ElementType', defaultValue: "'a'", description: 'Renders items that have an href, such as Next.js Link for client-side navigation.' },
     { prop: 'className', type: 'string', defaultValue: '-', description: 'Additional classes for the root element.' },
   ]}
 />

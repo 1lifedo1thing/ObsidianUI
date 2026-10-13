@@ -49,4 +49,13 @@ describe("AnalyticsDashboard", () => {
     expect(root.style.getPropertyValue("--obsidian-analytics-dashboard-background")).toBe("#101010");
     expect(screen.getByRole("button", { name: "Acme overview" })).toBeInTheDocument();
   });
+
+  it("defaults to the floating variant and switches to fill for app routes", () => {
+    const { container, rerender } = render(<AnalyticsDashboard />);
+    const root = () => container.querySelector(".obsidian-analytics-dashboard") as HTMLElement;
+    expect(root()).toHaveAttribute("data-variant", "floating");
+
+    rerender(<AnalyticsDashboard variant="fill" />);
+    expect(root()).toHaveAttribute("data-variant", "fill");
+  });
 });

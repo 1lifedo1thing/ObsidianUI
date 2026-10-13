@@ -31,9 +31,16 @@
   font-feature-settings: "cv11";
 }
 
-/* Too narrow for a floating window: it fills the stage edge to edge. */
-.obsidian-analytics-dashboard[data-compact="true"] {
+/* Too narrow for a floating window, or placed in an app route: it fills the stage edge to edge. */
+.obsidian-analytics-dashboard:is([data-compact="true"], [data-variant="fill"]) {
   padding: 0;
+}
+
+.obsidian-analytics-dashboard[data-variant="fill"] .window {
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  animation: none;
 }
 
 .obsidian-analytics-dashboard :is(h1, h2, h3, p, dl, dt, dd, ol, ul, li, figure) {

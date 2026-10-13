@@ -89,6 +89,11 @@ export interface AnalyticsDashboardProps {
   onAsk?: AnswerHandler;
   /** Plain color behind the window. */
   background?: string;
+  /**
+   * `floating` shows the dashboard as a rounded window on a plain background, for previews and marketing pages.
+   * `fill` drops the frame so the dashboard fills its parent edge to edge, for an app route such as `/dashboard`.
+   */
+  variant?: "floating" | "fill";
   className?: string;
   style?: CSSProperties;
 }
@@ -119,6 +124,7 @@ export function AnalyticsDashboard({
   assistantName = "Claude",
   onAsk,
   background,
+  variant = "floating",
   className,
   style,
 }: AnalyticsDashboardProps) {
@@ -253,6 +259,7 @@ export function AnalyticsDashboard({
         ref={rootRef}
         className={cn("obsidian-analytics-dashboard", className)}
         data-compact={compact}
+        data-variant={variant}
         style={{ "--accent": ACCENTS[accent].ui, ...(background ? { "--obsidian-analytics-dashboard-background": background } : null), ...style } as CSSProperties}
         onKeyDown={onKeyDown}
       >

@@ -1,7 +1,7 @@
 import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { FolderKanban, ListTodo } from "lucide-react";
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
 import { describe, expect, it, vi } from "vitest";
 
 vi.mock("motion/react", async importOriginal => ({
@@ -153,5 +153,16 @@ describe("DashboardShell", () => {
     await user.click(within(menu).getByRole("menuitemradio", { name: "Name" }));
     expect(screen.getByRole("button", { name: "Sort by: Name" })).toBeInTheDocument();
     await waitFor(() => expect(screen.queryByRole("menu")).not.toBeInTheDocument());
+  });
+
+  it("renders linked items through a custom link component", () => {
+    function RouterLink({ href, children, ...props }: { href: string; children?: ReactNode }) {
+      return <a data-router-link="" href={href} {...props}>{children}</a>;
+    }
+    renderShell({ linkComponent: RouterLink });
+
+    const link = within(sidebar()).getByRole("link", { name: "Website" });
+    expect(link).toHaveAttribute("data-router-link");
+    expect(link).toHaveAttribute("href", "/spaces/website");
   });
 });

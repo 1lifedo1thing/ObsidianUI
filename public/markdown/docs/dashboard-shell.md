@@ -6,65 +6,20 @@ An app layout for dashboards and admin pages. It has a resizable sidebar with gr
 
 Drag the sidebar edge to resize it, or double-click it to reset. In containers narrower than 672px, the sidebar moves into a drawer that opens from the menu button.
 
+The preview is the ready-made `/dashboard` page described below. Select rows to open the bulk action bar, sort by the column headers, star components, open a row's menu, or pick a team in the sidebar to filter the table.
+
 ## Preview
 
 [Open the interactive component preview](https://www.obsidianui.dev/docs/dashboard-shell)
 
 ```tsx
-'use client'
+// app/dashboard/page.tsx
+import { DashboardShellPage } from '@/components/block/dashboard-shell-page'
 
-import { useState } from 'react'
-import { AddCircle, AppDots, Box } from '@duo-icons/react'
-import { Download, Search } from 'lucide-react'
-import { DashboardButton, DashboardFilterMenu, DashboardShell } from '@/components/block/dashboard-shell'
-
-const sortOptions = [
-{ value: 'newest', label: 'Newest first' },
-{ value: 'name', label: 'Name' },
-]
-
-export function Demo() {
-const [sortBy, setSortBy] = useState('newest')
-
+export default function DashboardPage() {
 return (
   <div className="h-dvh">
-    <DashboardShell
-      brand={{ name: 'ObsidianUI', description: 'Component library' }}
-      navigation={[
-        {
-          id: 'library',
-          items: [
-            { id: 'components', label: 'Components', icon: AppDots, count: 10 },
-            { id: 'blocks', label: 'Blocks', icon: Box },
-          ],
-        },
-        {
-          id: 'spaces',
-          title: 'Spaces',
-          items: [{ id: 'landing-pages', label: 'Landing pages', color: '#facc15' }],
-        },
-      ]}
-      title="Components"
-      status="Active"
-      headerActions={
-        <DashboardButton variant="secondary" size="icon" aria-label="Search">
-          <Search aria-hidden />
-        </DashboardButton>
-      }
-      tabs={[
-        { value: 'all', label: 'All components' },
-        { value: 'new', label: 'New' },
-      ]}
-      filters={<DashboardFilterMenu label="Sort by" value={sortBy} options={sortOptions} onValueChange={setSortBy} />}
-      toolbarActions={
-        <>
-          <DashboardButton variant="secondary" size="sm"><Download aria-hidden />Export</DashboardButton>
-          <DashboardButton variant="primary" size="sm"><AddCircle aria-hidden />New component</DashboardButton>
-        </>
-      }
-    >
-      <p className="p-4">Your page content</p>
-    </DashboardShell>
+    <DashboardShellPage />
   </div>
 )
 }
@@ -97,13 +52,97 @@ The shell fills its parent, so give the parent a height, such as `h-dvh` for a f
 
 Leave out `tabs`, `filters`, or `toolbarActions` and those rows are not rendered.
 
+## Ready-made /dashboard page
+
+`dashboard-shell-page` is the complete page from the preview, built on the shell. Install it to get a working dashboard route in one step. It brings `dashboard-shell` with it:
+
+```bash
+npx shadcn@latest add "https://www.obsidianui.dev/r/dashboard-shell-page.json"
+```
+
+```tsx
+// app/dashboard/page.tsx
+import { DashboardShellPage } from '@/components/block/dashboard-shell-page'
+
+export default function DashboardPage() {
+  return (
+    <div className="h-dvh">
+      <DashboardShellPage />
+    </div>
+  )
+}
+```
+
+The page includes:
+
+- A table with a star, name, category, install trend, last update, owner, and status for each row. Columns hide one by one as the content area narrows, so it fits a phone without scrolling sideways.
+- Row selection. Tick the boxes or click a row, and a floating bar offers Star, Mark stable, Export, and Delete for the selection.
+- Sortable Component, Installs, and Updated headers. Click again to reverse the order. The Sort by menu stays in sync.
+- A menu on each row to copy its install command, open its docs, star it, change its status, or delete it.
+- Undo after a delete, and a short confirmation after every action, announced to screen readers.
+- Sidebar items that filter the table. Blocks shows blocks only, the Teams show what each team owns, and the other items show an empty state.
+- Stats under the table and a weekly installs card in the sidebar footer.
+
+Pass your own rows with `items`. Each row has an `id`, `name`, `category`, `status`, `team`, `installs`, a seven-day `trend`, and `updatedDaysAgo`. Change the copied command with `installCommand`, and the docs link with `docsHref`:
+
+```tsx
+<DashboardShellPage
+  items={myComponents}
+  installCommand={item => `npx shadcn@latest add @acme/${item.id}`}
+  docsHref={item => `/docs/${item.id}`}
+/>
+```
+
+It is a regular file in your project after install, so rename the labels, swap the columns, or wire the actions to your API.
+
+## Route-based navigation
+
+To move between real pages, put the shell in a layout, give each item an `href`, and pass Next.js `Link` as `linkComponent` so the sidebar navigates without a full reload. Use the current path as `activeItemId`:
+
+```tsx
+// app/dashboard/layout.tsx
+'use client'
+
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
+import { AppDots, Box, Target } from '@duo-icons/react'
+import { DashboardShell } from '@/components/block/dashboard-shell'
+
+const items = [
+  { id: '/dashboard', label: 'Overview', icon: AppDots, href: '/dashboard' },
+  { id: '/dashboard/projects', label: 'Projects', icon: Box, href: '/dashboard/projects' },
+  { id: '/dashboard/analytics', label: 'Analytics', icon: Target, href: '/dashboard/analytics' },
+]
+
+export default function DashboardLayout({ children }: { children: React.ReactNode }) {
+  const pathname = usePathname()
+  const active = items.find(item => item.href === pathname)
+
+  return (
+    <div className="h-dvh">
+      <DashboardShell
+        brand={{ name: 'Acme' }}
+        navigation={[{ id: 'main', items }]}
+        activeItemId={pathname}
+        linkComponent={Link}
+        title={active?.label ?? 'Dashboard'}
+      >
+        {children}
+      </DashboardShell>
+    </div>
+  )
+}
+```
+
+Each page under `app/dashboard` then renders only its content. The layout stays mounted between pages, so the sidebar keeps its width and the active pill slides to the new page.
+
 ## Navigation
 
 Each section has an optional `title` and a list of items. An item shows an `icon`, or a colored dot when you pass `color` instead, and an optional `count` badge. The demo uses duotone icons from [`@duo-icons/react`](https://github.com/fernandcf/duo-icons): their second layer draws at 30% opacity, so one icon color gives a dark shape with a grey fill. Lucide icons work too.
 
 A single hover highlight glides between items as the pointer moves down the list, and the active item's pill slides to whichever item you choose.
 
-Items with `href` render as links. Items without it render as buttons that only change the active item. Track the active item with `activeItemId` and `onActiveItemChange`, or let the shell keep it with `defaultActiveItemId`. The active item gets `aria-current="page"`.
+Items with `href` render as links, through `linkComponent` when you pass one. Items without it render as buttons that only change the active item. Track the active item with `activeItemId` and `onActiveItemChange`, or let the shell keep it with `defaultActiveItemId`. The active item gets `aria-current="page"`.
 
 `secondaryNavigation` holds quieter items pinned under the main list, such as Invite or Help. `sidebarFooter` sits at the very bottom, for a plan or account card:
 
@@ -363,7 +402,7 @@ import * as TabsPrimitive from "@radix-ui/react-tabs";
 import { cva, type VariantProps } from "class-variance-authority";
 import { Check, ChevronDown, Menu, X } from "lucide-react";
 import { animate, AnimatePresence, motion, useMotionValue, useReducedMotion } from "motion/react";
-import { createContext, memo, useCallback, useContext, useEffect, useId, useMemo, useRef, useState } from "react";
+import { createContext, createElement, memo, useCallback, useContext, useEffect, useId, useMemo, useRef, useState } from "react";
 import type { ComponentProps, CSSProperties, ElementType, FocusEvent, KeyboardEvent, PointerEvent, ReactNode, Ref, RefObject } from "react";
 import { cn } from "@/lib/utils";
 import "./dashboard-shell.css";
@@ -701,7 +740,11 @@ export type DashboardShellProps = Omit<ComponentProps<"div">, "title" | "childre
   minSidebarWidth?: number;
   maxSidebarWidth?: number;
   navigationLabel?: string;
+  /** Renders navigation items that have an `href`, such as Next.js `Link` for client-side routing. Defaults to `<a>`. */
+  linkComponent?: ElementType;
 };
+
+const ShellLinkContext = createContext<ElementType>("a");
 
 function useControllableState<T>(value: T | undefined, defaultValue: T, onChange?: (next: T) => void) {
   const [uncontrolledValue, setUncontrolledValue] = useState(defaultValue);
@@ -763,6 +806,7 @@ export function DashboardShell({
   minSidebarWidth = 180,
   maxSidebarWidth = 400,
   navigationLabel = "Navigation",
+  linkComponent = "a",
   className,
   style,
   ...props
@@ -943,105 +987,107 @@ export function DashboardShell({
 
   return (
     <ShellDarkContext.Provider value={isDark}>
-      <div
-        ref={rootRef}
-        {...props}
-        data-resizing={dragWidth !== null ? "" : undefined}
-        className={cn(
-          "obsidian-dashboard-shell @container/dashboard-shell relative flex h-full min-h-0 w-full overflow-hidden bg-(--obsidian-dashboard-shell-background) text-(--obsidian-dashboard-shell-foreground)",
-          className,
-        )}
-        style={{ "--obsidian-dashboard-shell-sidebar-width": `${width}px`, ...style } as CSSProperties}
-      >
-        <aside
-          id={sidebarId}
-          className="relative hidden w-(--obsidian-dashboard-shell-sidebar-width) shrink-0 flex-col border-r border-(--obsidian-dashboard-shell-border) bg-(--obsidian-dashboard-shell-sidebar) @2xl/dashboard-shell:flex"
+      <ShellLinkContext.Provider value={linkComponent}>
+        <div
+          ref={rootRef}
+          {...props}
+          data-resizing={dragWidth !== null ? "" : undefined}
+          className={cn(
+            "obsidian-dashboard-shell @container/dashboard-shell relative flex h-full min-h-0 w-full overflow-hidden bg-(--obsidian-dashboard-shell-background) text-(--obsidian-dashboard-shell-foreground)",
+            className,
+          )}
+          style={{ "--obsidian-dashboard-shell-sidebar-width": `${width}px`, ...style } as CSSProperties}
         >
-          <SidebarContent {...sidebarProps} onSelect={selectItem} />
-          <div
-            role="separator"
-            aria-orientation="vertical"
-            aria-label="Resize sidebar"
-            aria-controls={sidebarId}
-            aria-valuemin={minSidebarWidth}
-            aria-valuemax={maxSidebarWidth}
-            aria-valuenow={width}
-            tabIndex={0}
-            onPointerDown={handleResizeStart}
-            onPointerMove={handleResizeMove}
-            onPointerUp={handleResizeEnd}
-            onPointerCancel={handleResizeEnd}
-            onDoubleClick={() => commitWidth(defaultSidebarWidth)}
-            onKeyDown={handleResizeKey}
-            className="group absolute inset-y-0 -right-1 z-10 w-2 cursor-col-resize touch-none outline-none select-none"
+          <aside
+            id={sidebarId}
+            className="relative hidden w-(--obsidian-dashboard-shell-sidebar-width) shrink-0 flex-col border-r border-(--obsidian-dashboard-shell-border) bg-(--obsidian-dashboard-shell-sidebar) @2xl/dashboard-shell:flex"
           >
-            <span
-              aria-hidden
-              className="absolute inset-y-0 left-1/2 w-px -translate-x-1/2 transition-colors duration-150 group-hover:bg-(--obsidian-dashboard-shell-border-strong) group-focus-visible:w-0.5 group-focus-visible:bg-(--obsidian-dashboard-shell-ring) group-active:bg-(--obsidian-dashboard-shell-ring)"
-            />
-          </div>
-        </aside>
-
-        <section aria-labelledby={titleId} inert={isDrawerOpen} className="flex min-h-0 min-w-0 flex-1 flex-col">
-          {tabs?.length ? (
-            <TabsPrimitive.Root value={activeTab} onValueChange={setActiveTab} className="flex min-h-0 flex-1 flex-col">
-              {renderHeader(
-                <TabsPrimitive.List aria-labelledby={titleId} className="border-b border-(--obsidian-dashboard-shell-border) px-3 pb-2.5">
-                  <HoverHighlightList className="flex flex-wrap items-center gap-1" highlightClassName="rounded-md bg-(--obsidian-dashboard-shell-hover)">
-                    {tabs.map((item) => (
-                      <ShellTab key={item.value} item={item} isActive={item.value === activeTab} pillId={tabPillId} />
-                    ))}
-                  </HoverHighlightList>
-                </TabsPrimitive.List>,
-              )}
-              <TabsPrimitive.Content value={activeTab} className="flex min-h-0 flex-1 flex-col outline-none">
-                {body}
-              </TabsPrimitive.Content>
-            </TabsPrimitive.Root>
-          ) : (
-            <>
-              {renderHeader()}
-              {body}
-            </>
-          )}
-        </section>
-
-        <AnimatePresence>
-          {isDrawerOpen && (
-            <motion.div
-              key="drawer"
-              className="absolute inset-0 z-30 @2xl/dashboard-shell:hidden"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: reduceMotion ? 0 : 0.2, ease: EASE_OUT }}
+            <SidebarContent {...sidebarProps} onSelect={selectItem} />
+            <div
+              role="separator"
+              aria-orientation="vertical"
+              aria-label="Resize sidebar"
+              aria-controls={sidebarId}
+              aria-valuemin={minSidebarWidth}
+              aria-valuemax={maxSidebarWidth}
+              aria-valuenow={width}
+              tabIndex={0}
+              onPointerDown={handleResizeStart}
+              onPointerMove={handleResizeMove}
+              onPointerUp={handleResizeEnd}
+              onPointerCancel={handleResizeEnd}
+              onDoubleClick={() => commitWidth(defaultSidebarWidth)}
+              onKeyDown={handleResizeKey}
+              className="group absolute inset-y-0 -right-1 z-10 w-2 cursor-col-resize touch-none outline-none select-none"
             >
-              <div aria-hidden className="absolute inset-0 bg-black/40" onClick={closeDrawer} />
+              <span
+                aria-hidden
+                className="absolute inset-y-0 left-1/2 w-px -translate-x-1/2 transition-colors duration-150 group-hover:bg-(--obsidian-dashboard-shell-border-strong) group-focus-visible:w-0.5 group-focus-visible:bg-(--obsidian-dashboard-shell-ring) group-active:bg-(--obsidian-dashboard-shell-ring)"
+              />
+            </div>
+          </aside>
+
+          <section aria-labelledby={titleId} inert={isDrawerOpen} className="flex min-h-0 min-w-0 flex-1 flex-col">
+            {tabs?.length ? (
+              <TabsPrimitive.Root value={activeTab} onValueChange={setActiveTab} className="flex min-h-0 flex-1 flex-col">
+                {renderHeader(
+                  <TabsPrimitive.List aria-labelledby={titleId} className="border-b border-(--obsidian-dashboard-shell-border) px-3 pb-2.5">
+                    <HoverHighlightList className="flex flex-wrap items-center gap-1" highlightClassName="rounded-md bg-(--obsidian-dashboard-shell-hover)">
+                      {tabs.map((item) => (
+                        <ShellTab key={item.value} item={item} isActive={item.value === activeTab} pillId={tabPillId} />
+                      ))}
+                    </HoverHighlightList>
+                  </TabsPrimitive.List>,
+                )}
+                <TabsPrimitive.Content value={activeTab} className="flex min-h-0 flex-1 flex-col outline-none">
+                  {body}
+                </TabsPrimitive.Content>
+              </TabsPrimitive.Root>
+            ) : (
+              <>
+                {renderHeader()}
+                {body}
+              </>
+            )}
+          </section>
+
+          <AnimatePresence>
+            {isDrawerOpen && (
               <motion.div
-                id={drawerId}
-                role="dialog"
-                aria-modal="true"
-                aria-label={navigationLabel}
-                onKeyDown={(event) => {
-                  if (event.key === "Escape") {
-                    event.stopPropagation();
-                    closeDrawer();
-                  } else if (event.key === "Tab") {
-                    keepFocusInside(event);
-                  }
-                }}
-                className="absolute inset-y-0 left-0 flex w-[254px] max-w-[85%] flex-col border-r border-(--obsidian-dashboard-shell-border) bg-(--obsidian-dashboard-shell-sidebar) shadow-[0_16px_40px_rgb(0_0_0/0.35)]"
-                initial={{ x: reduceMotion ? 0 : "-100%" }}
-                animate={{ x: 0 }}
-                exit={{ x: reduceMotion ? 0 : "-100%" }}
-                transition={{ duration: reduceMotion ? 0 : 0.28, ease: EASE_OUT }}
+                key="drawer"
+                className="absolute inset-0 z-30 @2xl/dashboard-shell:hidden"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: reduceMotion ? 0 : 0.2, ease: EASE_OUT }}
               >
-                <SidebarContent {...sidebarProps} onSelect={selectItemFromDrawer} onClose={closeDrawer} closeButtonRef={closeButtonRef} />
+                <div aria-hidden className="absolute inset-0 bg-black/40" onClick={closeDrawer} />
+                <motion.div
+                  id={drawerId}
+                  role="dialog"
+                  aria-modal="true"
+                  aria-label={navigationLabel}
+                  onKeyDown={(event) => {
+                    if (event.key === "Escape") {
+                      event.stopPropagation();
+                      closeDrawer();
+                    } else if (event.key === "Tab") {
+                      keepFocusInside(event);
+                    }
+                  }}
+                  className="absolute inset-y-0 left-0 flex w-[254px] max-w-[85%] flex-col border-r border-(--obsidian-dashboard-shell-border) bg-(--obsidian-dashboard-shell-sidebar) shadow-[0_16px_40px_rgb(0_0_0/0.35)]"
+                  initial={{ x: reduceMotion ? 0 : "-100%" }}
+                  animate={{ x: 0 }}
+                  exit={{ x: reduceMotion ? 0 : "-100%" }}
+                  transition={{ duration: reduceMotion ? 0 : 0.28, ease: EASE_OUT }}
+                >
+                  <SidebarContent {...sidebarProps} onSelect={selectItemFromDrawer} onClose={closeDrawer} closeButtonRef={closeButtonRef} />
+                </motion.div>
               </motion.div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </div>
+            )}
+          </AnimatePresence>
+        </div>
+      </ShellLinkContext.Provider>
     </ShellDarkContext.Provider>
   );
 }
@@ -1239,6 +1285,7 @@ type NavItemProps = {
 
 function NavItem({ item, isActive, isQuiet, pillId, onSelect }: NavItemProps) {
   const highlight = useContext(HoverHighlightContext);
+  const linkComponent = useContext(ShellLinkContext);
   const reduceMotion = useReducedMotion();
   const Icon = item.icon;
 
@@ -1285,9 +1332,8 @@ function NavItem({ item, isActive, isQuiet, pillId, onSelect }: NavItemProps) {
   return (
     <li>
       {item.href ? (
-        <a href={item.href} {...shared}>
-          {content}
-        </a>
+        // The link component comes from the app, usually next/link, and keeps its identity between renders.
+        createElement(linkComponent, { href: item.href, ...shared }, content)
       ) : (
         <button type="button" {...shared}>
           {content}
@@ -1371,6 +1417,7 @@ export function cn(...inputs: ClassValue[]) {
 | minSidebarWidth | number | 180 | Narrowest sidebar width in pixels. |
 | maxSidebarWidth | number | 400 | Widest sidebar width in pixels. |
 | navigationLabel | string | Navigation | Accessible name for the navigation and the drawer. |
+| linkComponent | ElementType | 'a' | Renders items that have an href, such as Next.js Link for client-side navigation. |
 | className | string | - | Additional classes for the root element. |
 
 ## Navigation item fields

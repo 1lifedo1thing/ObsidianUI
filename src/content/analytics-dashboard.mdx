@@ -45,6 +45,68 @@ import { AnalyticsDashboard } from '@/components/block/analytics-dashboard'
 
 The dashboard fills its parent, so give the parent a height, such as `h-dvh` for a full page. Without a `data` prop it shows demo data, so you can see every page before connecting your own.
 
+## Use it as your /dashboard route
+
+By default the dashboard sits in a rounded, floating window, which suits previews and landing pages. In an app, set `variant="fill"` to drop the frame so it fills the route edge to edge:
+
+```tsx copy
+// app/dashboard/page.tsx
+import { AnalyticsDashboard } from '@/components/block/analytics-dashboard'
+
+export default function DashboardPage() {
+  return (
+    <div className="h-dvh">
+      <AnalyticsDashboard variant="fill" />
+    </div>
+  )
+}
+```
+
+To keep the open page in the URL, so a refresh or a shared link opens the same page, control it with `page` and `onPageChange`. `useSearchParams` needs a `Suspense` boundary, so the dashboard lives in its own client file:
+
+```tsx copy
+// app/dashboard/dashboard.tsx
+'use client'
+
+import { usePathname, useRouter, useSearchParams } from 'next/navigation'
+import { AnalyticsDashboard, type AnalyticsDashboardPage } from '@/components/block/analytics-dashboard'
+
+const pages: AnalyticsDashboardPage[] = ['overview', 'repositories', 'reviews', 'settings']
+
+export function Dashboard() {
+  const router = useRouter()
+  const pathname = usePathname()
+  const requested = useSearchParams().get('page')
+  const page = pages.find(name => name === requested) ?? 'overview'
+
+  return (
+    <div className="h-dvh">
+      <AnalyticsDashboard
+        variant="fill"
+        page={page}
+        onPageChange={next => router.replace(`${pathname}?page=${next}`, { scroll: false })}
+      />
+    </div>
+  )
+}
+```
+
+```tsx copy
+// app/dashboard/page.tsx
+import { Suspense } from 'react'
+import { Dashboard } from './dashboard'
+
+export default function DashboardPage() {
+  return (
+    <Suspense>
+      <Dashboard />
+    </Suspense>
+  )
+}
+```
+
+Then connect your own numbers through `data`, as shown next.
+
 ## Your data
 
 Pass your team, metrics, repositories, and pull requests through `data`. Pull requests and activity refer to people by `handle`, and each person brings an avatar and a chart color:
@@ -124,7 +186,7 @@ The dashboard has a light and a dark palette. It is light by default and switche
 
 ## Background and fonts
 
-The window sits on a plain color: `#f6f6f7` in light mode and `#0b0b0c` in dark mode. Change it with `background`:
+The floating window sits on a plain color: `#f6f6f7` in light mode and `#0b0b0c` in dark mode. With `variant="fill"` there is no frame, so this color doesn't show. Change it with `background`:
 
 ```tsx copy
 <AnalyticsDashboard background="#1c1c1f" />
@@ -171,6 +233,7 @@ Without them, it falls back to the system fonts.
     { prop: 'assistantName', type: 'string', defaultValue: "'Claude'", description: 'Assistant name in the details panel.' },
     { prop: 'onAsk', type: '(question: string, pullRequest: AnalyticsPullRequest) => string | Promise<string>', defaultValue: '-', description: 'Answers questions about the selected pull request.' },
     { prop: 'background', type: 'string', defaultValue: "'#f6f6f7' light, '#0b0b0c' dark", description: 'Plain color behind the window, in both modes.' },
+    { prop: 'variant', type: "'floating' | 'fill'", defaultValue: "'floating'", description: 'floating shows a rounded window on a plain background. fill drops the frame for an app route such as /dashboard.' },
     { prop: 'className', type: 'string', defaultValue: '-', description: 'Additional classes for the root element.' },
   ]}
 />

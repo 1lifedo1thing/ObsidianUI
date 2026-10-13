@@ -42,6 +42,68 @@ import { AnalyticsDashboard } from '@/components/block/analytics-dashboard'
 
 The dashboard fills its parent, so give the parent a height, such as `h-dvh` for a full page. Without a `data` prop it shows demo data, so you can see every page before connecting your own.
 
+## Use it as your /dashboard route
+
+By default the dashboard sits in a rounded, floating window, which suits previews and landing pages. In an app, set `variant="fill"` to drop the frame so it fills the route edge to edge:
+
+```tsx
+// app/dashboard/page.tsx
+import { AnalyticsDashboard } from '@/components/block/analytics-dashboard'
+
+export default function DashboardPage() {
+  return (
+    <div className="h-dvh">
+      <AnalyticsDashboard variant="fill" />
+    </div>
+  )
+}
+```
+
+To keep the open page in the URL, so a refresh or a shared link opens the same page, control it with `page` and `onPageChange`. `useSearchParams` needs a `Suspense` boundary, so the dashboard lives in its own client file:
+
+```tsx
+// app/dashboard/dashboard.tsx
+'use client'
+
+import { usePathname, useRouter, useSearchParams } from 'next/navigation'
+import { AnalyticsDashboard, type AnalyticsDashboardPage } from '@/components/block/analytics-dashboard'
+
+const pages: AnalyticsDashboardPage[] = ['overview', 'repositories', 'reviews', 'settings']
+
+export function Dashboard() {
+  const router = useRouter()
+  const pathname = usePathname()
+  const requested = useSearchParams().get('page')
+  const page = pages.find(name => name === requested) ?? 'overview'
+
+  return (
+    <div className="h-dvh">
+      <AnalyticsDashboard
+        variant="fill"
+        page={page}
+        onPageChange={next => router.replace(`${pathname}?page=${next}`, { scroll: false })}
+      />
+    </div>
+  )
+}
+```
+
+```tsx
+// app/dashboard/page.tsx
+import { Suspense } from 'react'
+import { Dashboard } from './dashboard'
+
+export default function DashboardPage() {
+  return (
+    <Suspense>
+      <Dashboard />
+    </Suspense>
+  )
+}
+```
+
+Then connect your own numbers through `data`, as shown next.
+
 ## Your data
 
 Pass your team, metrics, repositories, and pull requests through `data`. Pull requests and activity refer to people by `handle`, and each person brings an avatar and a chart color:
@@ -121,7 +183,7 @@ The dashboard has a light and a dark palette. It is light by default and switche
 
 ## Background and fonts
 
-The window sits on a plain color: `#f6f6f7` in light mode and `#0b0b0c` in dark mode. Change it with `background`:
+The floating window sits on a plain color: `#f6f6f7` in light mode and `#0b0b0c` in dark mode. With `variant="fill"` there is no frame, so this color doesn't show. Change it with `background`:
 
 ```tsx
 <AnalyticsDashboard background="#1c1c1f" />
@@ -2267,9 +2329,16 @@ Installation target: `@components/block/analytics-dashboard.css`
   font-feature-settings: "cv11";
 }
 
-/* Too narrow for a floating window: it fills the stage edge to edge. */
-.obsidian-analytics-dashboard[data-compact="true"] {
+/* Too narrow for a floating window, or placed in an app route: it fills the stage edge to edge. */
+.obsidian-analytics-dashboard:is([data-compact="true"], [data-variant="fill"]) {
   padding: 0;
+}
+
+.obsidian-analytics-dashboard[data-variant="fill"] .window {
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  animation: none;
 }
 
 .obsidian-analytics-dashboard :is(h1, h2, h3, p, dl, dt, dd, ol, ul, li, figure) {
@@ -5147,6 +5216,11 @@ export interface AnalyticsDashboardProps {
   onAsk?: AnswerHandler;
   /** Plain color behind the window. */
   background?: string;
+  /**
+   * `floating` shows the dashboard as a rounded window on a plain background, for previews and marketing pages.
+   * `fill` drops the frame so the dashboard fills its parent edge to edge, for an app route such as `/dashboard`.
+   */
+  variant?: "floating" | "fill";
   className?: string;
   style?: CSSProperties;
 }
@@ -5177,6 +5251,7 @@ export function AnalyticsDashboard({
   assistantName = "Claude",
   onAsk,
   background,
+  variant = "floating",
   className,
   style,
 }: AnalyticsDashboardProps) {
@@ -5311,6 +5386,7 @@ export function AnalyticsDashboard({
         ref={rootRef}
         className={cn("obsidian-analytics-dashboard", className)}
         data-compact={compact}
+        data-variant={variant}
         style={{ "--accent": ACCENTS[accent].ui, ...(background ? { "--obsidian-analytics-dashboard-background": background } : null), ...style } as CSSProperties}
         onKeyDown={onKeyDown}
       >
@@ -5473,6 +5549,7 @@ export function cn(...inputs: ClassValue[]) {
 | assistantName | string | 'Claude' | Assistant name in the details panel. |
 | onAsk | (question: string, pullRequest: AnalyticsPullRequest) => string \| Promise<string> | - | Answers questions about the selected pull request. |
 | background | string | '#f6f6f7' light, '#0b0b0c' dark | Plain color behind the window, in both modes. |
+| variant | 'floating' \| 'fill' | 'floating' | floating shows a rounded window on a plain background. fill drops the frame for an app route such as /dashboard. |
 | className | string | - | Additional classes for the root element. |
 
 ## Pull request fields

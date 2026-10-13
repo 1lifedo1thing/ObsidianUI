@@ -6,7 +6,7 @@ import * as TabsPrimitive from "@radix-ui/react-tabs";
 import { cva, type VariantProps } from "class-variance-authority";
 import { Check, ChevronDown, Menu, X } from "lucide-react";
 import { animate, AnimatePresence, motion, useMotionValue, useReducedMotion } from "motion/react";
-import { createContext, memo, useCallback, useContext, useEffect, useId, useMemo, useRef, useState } from "react";
+import { createContext, createElement, memo, useCallback, useContext, useEffect, useId, useMemo, useRef, useState } from "react";
 import type { ComponentProps, CSSProperties, ElementType, FocusEvent, KeyboardEvent, PointerEvent, ReactNode, Ref, RefObject } from "react";
 import { cn } from "@/lib/utils";
 import "./dashboard-shell.css";
@@ -344,7 +344,11 @@ export type DashboardShellProps = Omit<ComponentProps<"div">, "title" | "childre
   minSidebarWidth?: number;
   maxSidebarWidth?: number;
   navigationLabel?: string;
+  /** Renders navigation items that have an `href`, such as Next.js `Link` for client-side routing. Defaults to `<a>`. */
+  linkComponent?: ElementType;
 };
+
+const ShellLinkContext = createContext<ElementType>("a");
 
 function useControllableState<T>(value: T | undefined, defaultValue: T, onChange?: (next: T) => void) {
   const [uncontrolledValue, setUncontrolledValue] = useState(defaultValue);
@@ -406,6 +410,7 @@ export function DashboardShell({
   minSidebarWidth = 180,
   maxSidebarWidth = 400,
   navigationLabel = "Navigation",
+  linkComponent = "a",
   className,
   style,
   ...props
@@ -586,105 +591,107 @@ export function DashboardShell({
 
   return (
     <ShellDarkContext.Provider value={isDark}>
-      <div
-        ref={rootRef}
-        {...props}
-        data-resizing={dragWidth !== null ? "" : undefined}
-        className={cn(
-          "obsidian-dashboard-shell @container/dashboard-shell relative flex h-full min-h-0 w-full overflow-hidden bg-(--obsidian-dashboard-shell-background) text-(--obsidian-dashboard-shell-foreground)",
-          className,
-        )}
-        style={{ "--obsidian-dashboard-shell-sidebar-width": `${width}px`, ...style } as CSSProperties}
-      >
-        <aside
-          id={sidebarId}
-          className="relative hidden w-(--obsidian-dashboard-shell-sidebar-width) shrink-0 flex-col border-r border-(--obsidian-dashboard-shell-border) bg-(--obsidian-dashboard-shell-sidebar) @2xl/dashboard-shell:flex"
+      <ShellLinkContext.Provider value={linkComponent}>
+        <div
+          ref={rootRef}
+          {...props}
+          data-resizing={dragWidth !== null ? "" : undefined}
+          className={cn(
+            "obsidian-dashboard-shell @container/dashboard-shell relative flex h-full min-h-0 w-full overflow-hidden bg-(--obsidian-dashboard-shell-background) text-(--obsidian-dashboard-shell-foreground)",
+            className,
+          )}
+          style={{ "--obsidian-dashboard-shell-sidebar-width": `${width}px`, ...style } as CSSProperties}
         >
-          <SidebarContent {...sidebarProps} onSelect={selectItem} />
-          <div
-            role="separator"
-            aria-orientation="vertical"
-            aria-label="Resize sidebar"
-            aria-controls={sidebarId}
-            aria-valuemin={minSidebarWidth}
-            aria-valuemax={maxSidebarWidth}
-            aria-valuenow={width}
-            tabIndex={0}
-            onPointerDown={handleResizeStart}
-            onPointerMove={handleResizeMove}
-            onPointerUp={handleResizeEnd}
-            onPointerCancel={handleResizeEnd}
-            onDoubleClick={() => commitWidth(defaultSidebarWidth)}
-            onKeyDown={handleResizeKey}
-            className="group absolute inset-y-0 -right-1 z-10 w-2 cursor-col-resize touch-none outline-none select-none"
+          <aside
+            id={sidebarId}
+            className="relative hidden w-(--obsidian-dashboard-shell-sidebar-width) shrink-0 flex-col border-r border-(--obsidian-dashboard-shell-border) bg-(--obsidian-dashboard-shell-sidebar) @2xl/dashboard-shell:flex"
           >
-            <span
-              aria-hidden
-              className="absolute inset-y-0 left-1/2 w-px -translate-x-1/2 transition-colors duration-150 group-hover:bg-(--obsidian-dashboard-shell-border-strong) group-focus-visible:w-0.5 group-focus-visible:bg-(--obsidian-dashboard-shell-ring) group-active:bg-(--obsidian-dashboard-shell-ring)"
-            />
-          </div>
-        </aside>
-
-        <section aria-labelledby={titleId} inert={isDrawerOpen} className="flex min-h-0 min-w-0 flex-1 flex-col">
-          {tabs?.length ? (
-            <TabsPrimitive.Root value={activeTab} onValueChange={setActiveTab} className="flex min-h-0 flex-1 flex-col">
-              {renderHeader(
-                <TabsPrimitive.List aria-labelledby={titleId} className="border-b border-(--obsidian-dashboard-shell-border) px-3 pb-2.5">
-                  <HoverHighlightList className="flex flex-wrap items-center gap-1" highlightClassName="rounded-md bg-(--obsidian-dashboard-shell-hover)">
-                    {tabs.map((item) => (
-                      <ShellTab key={item.value} item={item} isActive={item.value === activeTab} pillId={tabPillId} />
-                    ))}
-                  </HoverHighlightList>
-                </TabsPrimitive.List>,
-              )}
-              <TabsPrimitive.Content value={activeTab} className="flex min-h-0 flex-1 flex-col outline-none">
-                {body}
-              </TabsPrimitive.Content>
-            </TabsPrimitive.Root>
-          ) : (
-            <>
-              {renderHeader()}
-              {body}
-            </>
-          )}
-        </section>
-
-        <AnimatePresence>
-          {isDrawerOpen && (
-            <motion.div
-              key="drawer"
-              className="absolute inset-0 z-30 @2xl/dashboard-shell:hidden"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: reduceMotion ? 0 : 0.2, ease: EASE_OUT }}
+            <SidebarContent {...sidebarProps} onSelect={selectItem} />
+            <div
+              role="separator"
+              aria-orientation="vertical"
+              aria-label="Resize sidebar"
+              aria-controls={sidebarId}
+              aria-valuemin={minSidebarWidth}
+              aria-valuemax={maxSidebarWidth}
+              aria-valuenow={width}
+              tabIndex={0}
+              onPointerDown={handleResizeStart}
+              onPointerMove={handleResizeMove}
+              onPointerUp={handleResizeEnd}
+              onPointerCancel={handleResizeEnd}
+              onDoubleClick={() => commitWidth(defaultSidebarWidth)}
+              onKeyDown={handleResizeKey}
+              className="group absolute inset-y-0 -right-1 z-10 w-2 cursor-col-resize touch-none outline-none select-none"
             >
-              <div aria-hidden className="absolute inset-0 bg-black/40" onClick={closeDrawer} />
+              <span
+                aria-hidden
+                className="absolute inset-y-0 left-1/2 w-px -translate-x-1/2 transition-colors duration-150 group-hover:bg-(--obsidian-dashboard-shell-border-strong) group-focus-visible:w-0.5 group-focus-visible:bg-(--obsidian-dashboard-shell-ring) group-active:bg-(--obsidian-dashboard-shell-ring)"
+              />
+            </div>
+          </aside>
+
+          <section aria-labelledby={titleId} inert={isDrawerOpen} className="flex min-h-0 min-w-0 flex-1 flex-col">
+            {tabs?.length ? (
+              <TabsPrimitive.Root value={activeTab} onValueChange={setActiveTab} className="flex min-h-0 flex-1 flex-col">
+                {renderHeader(
+                  <TabsPrimitive.List aria-labelledby={titleId} className="border-b border-(--obsidian-dashboard-shell-border) px-3 pb-2.5">
+                    <HoverHighlightList className="flex flex-wrap items-center gap-1" highlightClassName="rounded-md bg-(--obsidian-dashboard-shell-hover)">
+                      {tabs.map((item) => (
+                        <ShellTab key={item.value} item={item} isActive={item.value === activeTab} pillId={tabPillId} />
+                      ))}
+                    </HoverHighlightList>
+                  </TabsPrimitive.List>,
+                )}
+                <TabsPrimitive.Content value={activeTab} className="flex min-h-0 flex-1 flex-col outline-none">
+                  {body}
+                </TabsPrimitive.Content>
+              </TabsPrimitive.Root>
+            ) : (
+              <>
+                {renderHeader()}
+                {body}
+              </>
+            )}
+          </section>
+
+          <AnimatePresence>
+            {isDrawerOpen && (
               <motion.div
-                id={drawerId}
-                role="dialog"
-                aria-modal="true"
-                aria-label={navigationLabel}
-                onKeyDown={(event) => {
-                  if (event.key === "Escape") {
-                    event.stopPropagation();
-                    closeDrawer();
-                  } else if (event.key === "Tab") {
-                    keepFocusInside(event);
-                  }
-                }}
-                className="absolute inset-y-0 left-0 flex w-[254px] max-w-[85%] flex-col border-r border-(--obsidian-dashboard-shell-border) bg-(--obsidian-dashboard-shell-sidebar) shadow-[0_16px_40px_rgb(0_0_0/0.35)]"
-                initial={{ x: reduceMotion ? 0 : "-100%" }}
-                animate={{ x: 0 }}
-                exit={{ x: reduceMotion ? 0 : "-100%" }}
-                transition={{ duration: reduceMotion ? 0 : 0.28, ease: EASE_OUT }}
+                key="drawer"
+                className="absolute inset-0 z-30 @2xl/dashboard-shell:hidden"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: reduceMotion ? 0 : 0.2, ease: EASE_OUT }}
               >
-                <SidebarContent {...sidebarProps} onSelect={selectItemFromDrawer} onClose={closeDrawer} closeButtonRef={closeButtonRef} />
+                <div aria-hidden className="absolute inset-0 bg-black/40" onClick={closeDrawer} />
+                <motion.div
+                  id={drawerId}
+                  role="dialog"
+                  aria-modal="true"
+                  aria-label={navigationLabel}
+                  onKeyDown={(event) => {
+                    if (event.key === "Escape") {
+                      event.stopPropagation();
+                      closeDrawer();
+                    } else if (event.key === "Tab") {
+                      keepFocusInside(event);
+                    }
+                  }}
+                  className="absolute inset-y-0 left-0 flex w-[254px] max-w-[85%] flex-col border-r border-(--obsidian-dashboard-shell-border) bg-(--obsidian-dashboard-shell-sidebar) shadow-[0_16px_40px_rgb(0_0_0/0.35)]"
+                  initial={{ x: reduceMotion ? 0 : "-100%" }}
+                  animate={{ x: 0 }}
+                  exit={{ x: reduceMotion ? 0 : "-100%" }}
+                  transition={{ duration: reduceMotion ? 0 : 0.28, ease: EASE_OUT }}
+                >
+                  <SidebarContent {...sidebarProps} onSelect={selectItemFromDrawer} onClose={closeDrawer} closeButtonRef={closeButtonRef} />
+                </motion.div>
               </motion.div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </div>
+            )}
+          </AnimatePresence>
+        </div>
+      </ShellLinkContext.Provider>
     </ShellDarkContext.Provider>
   );
 }
@@ -882,6 +889,7 @@ type NavItemProps = {
 
 function NavItem({ item, isActive, isQuiet, pillId, onSelect }: NavItemProps) {
   const highlight = useContext(HoverHighlightContext);
+  const linkComponent = useContext(ShellLinkContext);
   const reduceMotion = useReducedMotion();
   const Icon = item.icon;
 
@@ -928,9 +936,8 @@ function NavItem({ item, isActive, isQuiet, pillId, onSelect }: NavItemProps) {
   return (
     <li>
       {item.href ? (
-        <a href={item.href} {...shared}>
-          {content}
-        </a>
+        // The link component comes from the app, usually next/link, and keeps its identity between renders.
+        createElement(linkComponent, { href: item.href, ...shared }, content)
       ) : (
         <button type="button" {...shared}>
           {content}
