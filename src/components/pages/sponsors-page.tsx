@@ -5,51 +5,20 @@ import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import Link from "next/link";
 import { RaisedButton } from "@/components/ui/raised-button";
-import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent, DialogDescription, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { CLICommand } from "@/components/docs/cli-command";
+import { HeroSponsorPill } from "@/components/landing/hero-sponsor-pill";
+import { sponsorContact, sponsorTiers, type SponsorTier } from "@/lib/sponsors";
 import "./sponsors-page.css";
 
 const sponsorshipInquiry =
-  "mailto:jadavatharv2010@gmail.com?subject=ObsidianUI%20sponsorship%20inquiry";
+  `mailto:${sponsorContact.email}?subject=ObsidianUI%20sponsorship%20inquiry`;
 const platformLinks = {
   vercel: "http://vercel.com?utm_source=obsidianui.dev&utm_medium=web&utm_campaign=obsidianui-sponsor",
   tracwell: "https://tracwell.app?utm_source=obsidianui.dev&utm_medium=web&utm_campaign=obsidianui-sponsor",
 };
 
-const tiers = [
-  {
-    id: "platinum",
-    name: "Platinum",
-    price: 150,
-    featured: true,
-    perks: [
-      "Largest logo on the sponsors page",
-      "Largest logo on the home page",
-      "Largest logo in the README",
-      "Shoutout on X",
-      "Direct line for feedback and requests",
-    ],
-  },
-  {
-    id: "gold",
-    name: "Gold",
-    price: 100,
-    featured: false,
-    perks: [
-      "Larger logo on the sponsors page",
-      "Logo on the home page",
-      "Larger logo in the README",
-      "Shoutout on X",
-      "Direct line for feedback and requests",
-    ],
-  },
-] as const;
-
-const pricingTiers = [
-  tiers[1],
-  tiers[0],
-] as const;
+const tiers = sponsorTiers;
+const pricingTiers = [...sponsorTiers].reverse();
 
 function SponsorCta({
   href,
@@ -86,92 +55,24 @@ function SponsorCta({
   );
 }
 
-function ContactIcon({ kind }: { kind: "email" | "x" | "telegram" }) {
-  if (kind === "email") {
-    return (
-      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-        <path opacity=".5" d="M14.2 3H9.8C5.65164 3 3.57746 3 2.28873 4.31802C1 5.63604 1 7.75736 1 12C1 16.2426 1 18.364 2.28873 19.682C3.57746 21 5.65164 21 9.8 21H14.2C18.3484 21 20.4225 21 21.7113 19.682C23 18.364 23 16.2426 23 12C23 7.75736 23 5.63604 21.7113 4.31802C20.4225 3 18.3484 3 14.2 3Z" fill="currentColor" />
-        <path d="M19.1284 8.03302C19.4784 7.74133 19.5257 7.22112 19.234 6.87109C18.9423 6.52106 18.4221 6.47377 18.0721 6.76546L15.6973 8.74444C14.671 9.59966 13.9585 10.1915 13.357 10.5784C12.7747 10.9529 12.3798 11.0786 12.0002 11.0786C11.6206 11.0786 11.2258 10.9529 10.6435 10.5784C10.0419 10.1915 9.32941 9.59966 8.30315 8.74444L5.92837 6.76546C5.57834 6.47377 5.05812 6.52106 4.76643 6.87109C4.47474 7.22112 4.52204 7.74133 4.87206 8.03302L7.28821 10.0465C8.2632 10.859 9.05344 11.5176 9.75091 11.9661C10.4775 12.4334 11.185 12.7286 12.0002 12.7286C12.8154 12.7286 13.523 12.4334 14.2495 11.9661C14.947 11.5176 15.7372 10.859 16.7122 10.0465L19.1284 8.03302Z" fill="currentColor" />
-      </svg>
-    );
-  }
-
-  if (kind === "x") {
-    return (
-      <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
-        <path d="M12.6.75h2.454l-5.36 6.142L16 15.25h-4.937l-3.867-5.07-4.425 5.07H.316l5.733-6.57L0 .75h5.063l3.495 4.633L12.601.75Zm-.86 13.028h1.36L4.323 2.145H2.865z" />
-      </svg>
-    );
-  }
-
+function SponsorCheckout({ tier }: { tier: SponsorTier }) {
   return (
-    <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.8" aria-hidden="true">
-      <path d="M40.83 8.48c1.14 0 2 1 1.54 2.86l-5.58 26.3c-.39 1.87-1.52 2.32-3.08 1.45L20.4 29.26a.4.4 0 0 1 0-.65L35.77 14.73c.7-.62-.15-.92-1.07-.36L15.41 26.54a.46.46 0 0 1-.4.05L6.82 24C5 23.47 5 22.22 7.23 21.33L40 8.69a2.16 2.16 0 0 1 .83-.21Z" />
-    </svg>
+    <a
+      href={tier.checkoutUrl}
+      className={`obsidianui-sponsor-cta obsidianui-sponsor-checkout${tier.featured ? "" : " obsidianui-sponsor-cta-subtle"}`}
+    >
+      Sponsor with {tier.name}
+    </a>
   );
 }
 
-function InquiryDialog({ name, children }: { name: string; children: ReactNode }) {
-  return (
-    <Dialog>
-      <DialogTrigger asChild>{children}</DialogTrigger>
-      <DialogContent className="obsidianui-sponsor-inquiry-dialog" overlayClassName="obsidianui-sponsor-inquiry-overlay">
-        <DialogTitle>Let’s talk for {name}</DialogTitle>
-        <DialogDescription>Choose where you’d like to chat about sponsoring ObsidianUI.</DialogDescription>
-        <div className="obsidianui-sponsor-contact-options">
-          <div className="obsidianui-sponsor-contact-option">
-            <a href={`mailto:jadavatharv2010@gmail.com?subject=${encodeURIComponent(`ObsidianUI ${name} sponsorship`)}`}>
-              <ContactIcon kind="email" /><span>Email me</span>
-            </a>
-          </div>
-          <div className="obsidianui-sponsor-contact-option">
-            <a href="https://x.com/athrix_codes" target="_blank" rel="noreferrer">
-              <ContactIcon kind="x" /><span>DM on X</span>
-            </a>
-          </div>
-          <div className="obsidianui-sponsor-contact-option">
-            <a href="https://t.me/athrix" target="_blank" rel="noreferrer">
-              <ContactIcon kind="telegram" /><span>Telegram</span>
-            </a>
-          </div>
-        </div>
-      </DialogContent>
-    </Dialog>
-  );
-}
-
-function SponsorInquiry({ name, featured }: { name: string; featured: boolean }) {
-  return (
-    <InquiryDialog name={name}>
-      <Button className={`obsidianui-sponsor-cta obsidianui-sponsor-inquiry${featured ? "" : " obsidianui-sponsor-cta-subtle"}`}>
-        Enquire about {name}
-      </Button>
-    </InquiryDialog>
-  );
-}
-
-function OpenSlot({
-  name,
-  tier,
-  mobileLabel,
-}: {
-  name: string;
-  tier: string;
-  mobileLabel?: string;
-}) {
+function OpenSlot({ name, tier }: { name: string; tier: string }) {
   return (
     <a href="#tiers" className={`obsidianui-sponsor-slot obsidianui-sponsor-slot-${tier}`}>
       <span className="obsidianui-slot-label">
         <span>
           <Plus aria-hidden="true" />
-          {mobileLabel ? (
-            <>
-              <span className="obsidianui-slot-name-desktop">Be the first {name} sponsor</span>
-              <span className="obsidianui-slot-name-mobile">{mobileLabel}</span>
-            </>
-          ) : (
-            `Be the first ${name} sponsor`
-          )}
+          {`Be the first ${name} sponsor`}
         </span>
         <span aria-hidden="true">
           <Plus />
@@ -373,35 +274,17 @@ export default function SponsorsPage() {
             ObsidianUI
           </span>
           <div className="obsidianui-sponsor-hero-content">
-            <motion.h1 {...heroMotion(0)}>Sponsors</motion.h1>
-            <motion.p {...heroMotion(1)}>
+            <motion.div {...heroMotion(0)} className="obsidianui-sponsor-hero-pill">
+              <HeroSponsorPill href="#tiers" text="Become the first sponsor" />
+            </motion.div>
+            <motion.h1 {...heroMotion(1)}>Sponsors</motion.h1>
+            <motion.p {...heroMotion(2)}>
               Your support keeps ObsidianUI free and open-source for developers everywhere.
             </motion.p>
-            <motion.div {...heroMotion(2)} className="obsidianui-sponsor-hero-action">
+            <motion.div {...heroMotion(3)} className="obsidianui-sponsor-hero-action">
               <SponsorCta href="#tiers" raised>Become a Sponsor</SponsorCta>
             </motion.div>
           </div>
-          <motion.aside {...heroMotion(3)} className="obsidianui-sponsor-hero-partners" aria-label="Platform Partners">
-            <span>Platform Partners</span>
-            <span className="sr-only">Platform Partners - Vercel [ Hosting Sponsor ] &amp; Tracwell [Analytics Sponsor ]</span>
-            <a href={platformLinks.vercel} target="_blank" rel="noreferrer" aria-label="Vercel">
-              <VercelLogo />
-            </a>
-            <a href={platformLinks.tracwell} target="_blank" rel="noreferrer" aria-label="Tracwell">
-              <TracwellLogo />
-            </a>
-          </motion.aside>
-          <motion.aside {...heroMotion(4)} className="obsidianui-sponsor-hero-slots" aria-label="Sponsors of ObsidianUI">
-            <span>Sponsors of ObsidianUI</span>
-            {tiers.map((tier) => (
-              <OpenSlot
-                key={tier.id}
-                name={tier.name}
-                tier={tier.id}
-                mobileLabel={tier.id === "platinum" ? "Be the first Sponsor" : undefined}
-              />
-            ))}
-          </motion.aside>
         </div>
       </section>
 
@@ -410,7 +293,7 @@ export default function SponsorsPage() {
           {[
             { value: "Open source", label: "Built in public on GitHub" },
             { value: "40+", label: "Components" },
-            { value: "Free", label: "Available to everyone" },
+            { value: "500k+", label: "Pageviews since launch" },
             { value: "150k+", label: "Pageviews last 7 days" },
           ].map((stat, index) => (
             <div className="obsidianui-sponsor-stat-slot" key={stat.label} onPointerEnter={(event) => { if (event.pointerType === "mouse") moveCards(statsRef.current, index); }}>
@@ -428,7 +311,7 @@ export default function SponsorsPage() {
           <span>Sponsors</span>
         </div>
         {tiers.map((tier) => {
-          const count = tier.id === "platinum" ? 2 : 3;
+          const count = tier.id === "diamond" ? 2 : 3;
           return (
             <div className="obsidianui-sponsor-group" key={tier.id}>
               <h2>{tier.name}</h2>
@@ -514,11 +397,15 @@ export default function SponsorsPage() {
                   </li>
                 ))}
               </ul>
-              <SponsorInquiry name={tier.name} featured={tier.featured} />
+              <SponsorCheckout tier={tier} />
             </article>
             </div>
           ))}
         </div>
+        <p className="obsidianui-sponsor-note">
+          Billed monthly through Dodo Payments until you cancel. Payments are non-refundable. Cancel any time from your
+          billing portal or by DM. <Link href="/terms#sponsorships">Sponsorship terms</Link>
+        </p>
       </section>
 
       <section className="obsidianui-sponsor-container obsidianui-sponsor-contact">
@@ -528,7 +415,7 @@ export default function SponsorsPage() {
           <SponsorCta href={sponsorshipInquiry} subtle>
             Get in touch
           </SponsorCta>
-          <SponsorCta href="https://x.com/athrix_codes" subtle>
+          <SponsorCta href={sponsorContact.x} subtle>
             DM on X
           </SponsorCta>
         </div>

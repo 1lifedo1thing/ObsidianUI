@@ -33,6 +33,7 @@
   .landing-intro-title { --intro-delay: 40ms; }
   .landing-intro-copy { --intro-delay: 100ms; }
   .landing-intro-actions { --intro-delay: 160ms; }
+  .landing-intro-sponsor { --intro-delay: 0ms; }
 
   .landing-typography .landing-arrow-link svg {
     transition: transform 200ms cubic-bezier(0.22, 1, 0.36, 1);

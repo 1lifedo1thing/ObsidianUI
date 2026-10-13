@@ -50,7 +50,9 @@ test('sitemap covers every published document and static page with canonical, un
         return '/docs/' + segments.map(encodeURIComponent).join('/');
     });
     const pageFiles = fs.readdirSync('src/app', { recursive: true })
-        .map(String).filter(file => /(^|[\\/])page\.[tj]sx?$/.test(file) && !file.includes('['));
+        .map(String).filter(file => /(^|[\\/])page\.[tj]sx?$/.test(file) && !file.includes('['))
+        // noindex pages (for example the post-checkout thank-you page) stay out of the sitemap.
+        .filter(file => !/robots:\s*\{\s*index:\s*false/.test(fs.readFileSync(path.join('src/app', file), 'utf8')));
     const pagePaths = pageFiles.map(file => '/' + file.split(path.sep).slice(0, -1).join('/'));
     const promptPaths = prompts.map(prompt => `/prompts/${prompt.slug}`);
     const expected = new Set([...documentPaths, ...pagePaths, ...promptPaths].map(route => new URL(route, origin).href));

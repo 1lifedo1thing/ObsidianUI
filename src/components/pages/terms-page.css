@@ -1,0 +1,832 @@
+.obsidianui-terms {
+  --terms-card: #f4f4f5;
+  --terms-ring: rgb(0 0 0 / 0.04);
+  --terms-line: rgb(0 0 0 / 0.07);
+  --terms-dots: rgb(0 0 0 / 0.16);
+  --terms-copy: color-mix(in oklab, var(--foreground) 74%, var(--background));
+  --terms-quiet: color-mix(in oklab, var(--foreground) 46%, var(--background));
+  --terms-warn: #b45309;
+  --terms-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --terms-anchor-offset: calc(var(--site-header-height, 72px) + 1.5rem);
+  width: 100%;
+  max-width: 72rem;
+  margin-inline: auto;
+  padding: 1.5rem 1.5rem 7rem;
+  color: var(--foreground);
+  font-family: var(--font-inter), sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.dark .obsidianui-terms {
+  --terms-card: #111113;
+  --terms-ring: rgb(255 255 255 / 0.07);
+  --terms-line: rgb(255 255 255 / 0.08);
+  --terms-dots: rgb(255 255 255 / 0.14);
+  --terms-copy: color-mix(in oklab, var(--foreground) 70%, var(--background));
+  --terms-quiet: color-mix(in oklab, var(--foreground) 42%, var(--background));
+  --terms-warn: #fbbf24;
+}
+
+html:has(.obsidianui-terms) {
+  scroll-behavior: smooth;
+}
+
+/* Entrance effects animate only opacity and transforms so they stay on the compositor. */
+@keyframes terms-rise {
+  from { opacity: 0; translate: 0 10px; }
+}
+
+/* Hero */
+
+.obsidianui-terms-hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 4.25rem 1.5rem 3rem;
+  border-radius: 24px;
+  background:
+    radial-gradient(520px circle at 50% 0%, rgb(0 0 0 / 0.025), transparent 70%),
+    linear-gradient(to bottom, #fff 0%, #f9fafb 60%, #f6f7f9 100%);
+  box-shadow: inset 0 0 0 1px var(--terms-line);
+  text-align: center;
+}
+
+.dark .obsidianui-terms-hero {
+  background:
+    radial-gradient(520px circle at 50% 0%, rgb(255 255 255 / 0.04), transparent 70%),
+    linear-gradient(to bottom, #131315 0%, #0e0e10 55%, #0a0a0b 100%);
+  box-shadow:
+    inset 0 0 0 1px var(--terms-line),
+    inset 0 1px 0 rgb(255 255 255 / 0.06);
+}
+
+.obsidianui-terms-hero > * { animation: terms-rise 520ms var(--terms-ease) backwards; }
+.obsidianui-terms-hero > :nth-child(2) { animation-delay: 60ms; }
+.obsidianui-terms-hero > :nth-child(3) { animation-delay: 120ms; }
+.obsidianui-terms-hero > :nth-child(4) { animation-delay: 180ms; }
+.obsidianui-terms-hero > :nth-child(5) { animation-delay: 240ms; }
+
+.obsidianui-terms-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4375rem;
+  padding: 0.3125rem 0.8125rem 0.3125rem 0.6875rem;
+  border-radius: 999px;
+  background: var(--background);
+  box-shadow: inset 0 0 0 1px var(--terms-line), 0 1px 2px rgb(0 0 0 / 0.04);
+  color: var(--muted-foreground);
+  font-size: 0.8125rem;
+  font-weight: 500;
+}
+
+.dark .obsidianui-terms-eyebrow {
+  background: #18181a;
+}
+
+.obsidianui-terms-eyebrow svg {
+  width: 0.875rem;
+  height: 0.875rem;
+}
+
+.obsidianui-terms-hero h1 {
+  margin: 0.25rem 0 0;
+  font-size: clamp(2.5rem, 6vw, 3.75rem);
+  font-weight: 400;
+  letter-spacing: -0.05em;
+  line-height: 1.05;
+}
+
+.obsidianui-terms-hero > p {
+  max-width: 30rem;
+  margin: 0;
+  color: var(--muted-foreground);
+  font-size: 1rem;
+  line-height: 1.6;
+  text-wrap: balance;
+}
+
+.obsidianui-terms-hero > .obsidianui-terms-meta {
+  display: inline-flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
+  color: var(--muted-foreground);
+  font-size: 0.8125rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.obsidianui-terms-meta time {
+  color: var(--foreground);
+  font-weight: 500;
+}
+
+.obsidianui-terms-jump {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+.obsidianui-terms-jump a {
+  display: inline-flex;
+  min-height: 2.25rem;
+  align-items: center;
+  padding-inline: 0.875rem;
+  border-radius: 10px;
+  background: rgb(0 0 0 / 0.05);
+  color: var(--foreground);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition-property: background-color, scale;
+  transition-duration: 150ms;
+  transition-timing-function: ease-out;
+}
+
+.obsidianui-terms-jump a:hover {
+  background: rgb(0 0 0 / 0.09);
+}
+
+.obsidianui-terms-jump a:active {
+  scale: 0.96;
+}
+
+.dark .obsidianui-terms-jump a {
+  background: #1a1a1c;
+  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.07);
+}
+
+.dark .obsidianui-terms-jump a:hover {
+  background: #232326;
+}
+
+/* Short version: one joined card, three cells over two, split by inset dotted rules. */
+
+.obsidianui-terms-summary {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  margin-top: 4.5rem;
+}
+
+.obsidianui-terms-summary-heading h2 {
+  margin: 0 0 0.25rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: -0.025em;
+}
+
+.obsidianui-terms-summary-heading p {
+  margin: 0;
+  color: var(--muted-foreground);
+  font-size: 0.875rem;
+}
+
+.obsidianui-terms-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  border-radius: 20px;
+  background: var(--terms-card);
+  box-shadow: inset 0 0 0 1px var(--terms-ring);
+  list-style: none;
+}
+
+.obsidianui-terms-summary-grid li {
+  position: relative;
+  display: flex;
+  grid-column: span 2;
+  flex-direction: column;
+  gap: 0.3125rem;
+  padding: 1.5rem;
+  animation: terms-rise 480ms var(--terms-ease) backwards;
+  animation-delay: calc(200ms + var(--i, 0) * 60ms);
+}
+
+.obsidianui-terms-summary-grid li:nth-child(n + 4) {
+  grid-column: span 3;
+}
+
+.obsidianui-terms-summary-grid li::before,
+.obsidianui-terms-summary-grid li::after {
+  position: absolute;
+  content: "";
+  pointer-events: none;
+}
+
+.obsidianui-terms-summary-grid li:nth-child(n + 4)::before {
+  top: 0;
+  right: 1.5rem;
+  left: 1.5rem;
+  border-top: 2px dotted var(--terms-dots);
+}
+
+.obsidianui-terms-summary-grid li:is(:nth-child(2), :nth-child(3), :nth-child(5))::after {
+  top: 1.5rem;
+  bottom: 1.5rem;
+  left: 0;
+  border-left: 2px dotted var(--terms-dots);
+}
+
+.obsidianui-terms-summary-icon {
+  width: 1.125rem;
+  height: 1.125rem;
+  margin-bottom: 0.625rem;
+  color: var(--terms-quiet);
+}
+
+.obsidianui-terms-summary-grid strong {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.obsidianui-terms-summary-grid li > span {
+  max-width: 34ch;
+  color: var(--muted-foreground);
+  font-size: 0.875rem;
+  line-height: 1.55;
+  text-wrap: pretty;
+}
+
+/* Body with sticky contents */
+
+.obsidianui-terms-layout {
+  display: grid;
+  grid-template-columns: 15rem minmax(0, 1fr);
+  align-items: start;
+  gap: 4.5rem;
+  margin-top: 5rem;
+}
+
+.obsidianui-terms-aside {
+  position: sticky;
+  top: var(--terms-anchor-offset);
+}
+
+.obsidianui-terms-toc {
+  max-height: calc(100svh - var(--terms-anchor-offset) - 1.5rem);
+  overflow-y: auto;
+  scrollbar-width: none;
+  overscroll-behavior: contain;
+}
+
+.obsidianui-terms-toc::-webkit-scrollbar {
+  display: none;
+}
+
+.obsidianui-terms-toc > p {
+  margin: 0 0 0.875rem 1.375rem;
+  color: var(--muted-foreground);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* The rail, its progress fill, the active bar and the pill all follow --toc-y / --toc-h set from the active link. */
+.obsidianui-terms-toc-track {
+  --toc-move: 480ms var(--terms-ease);
+  position: relative;
+  padding-left: 0.75rem;
+}
+
+.obsidianui-terms-toc-rail,
+.obsidianui-terms-toc-fill,
+.obsidianui-terms-toc-bar,
+.obsidianui-terms-toc-pill {
+  position: absolute;
+  top: 0;
+  pointer-events: none;
+}
+
+.obsidianui-terms-toc-rail,
+.obsidianui-terms-toc-fill {
+  bottom: 0;
+  left: 0;
+  width: 1px;
+  background: var(--terms-line);
+}
+
+.obsidianui-terms-toc-fill {
+  background: color-mix(in oklab, var(--foreground) 22%, transparent);
+  transform: scaleY(var(--toc-progress, 0));
+  transform-origin: top;
+  transition: transform var(--toc-move);
+}
+
+.obsidianui-terms-toc-bar {
+  left: -0.5px;
+  width: 2px;
+  height: var(--toc-h, 0);
+  border-radius: 2px;
+  background: var(--foreground);
+  transform: translateY(var(--toc-y, 0));
+  transition: transform var(--toc-move), height var(--toc-move);
+}
+
+.obsidianui-terms-toc-pill {
+  right: 0;
+  left: 0.75rem;
+  height: var(--toc-h, 0);
+  border-radius: 8px;
+  background: var(--terms-card);
+  box-shadow: inset 0 0 0 1px var(--terms-ring);
+  transform: translateY(var(--toc-y, 0));
+  transition: transform var(--toc-move), height var(--toc-move);
+}
+
+/* Nothing slides in from the top on load; the first placement is instant. */
+.obsidianui-terms-toc-track:not([data-ready]) > span {
+  opacity: 0;
+  transition: none;
+}
+
+.obsidianui-terms-toc-track > span {
+  transition-property: transform, height, opacity;
+}
+
+.obsidianui-terms-toc ol,
+.obsidianui-terms-toc-mobile ol {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.obsidianui-terms-toc a,
+.obsidianui-terms-toc-mobile a {
+  display: flex;
+  align-items: baseline;
+  gap: 0.625rem;
+  padding: 0.375rem 0.625rem;
+  border-radius: 8px;
+  color: var(--muted-foreground);
+  font-size: 0.8125rem;
+  line-height: 1.4;
+  text-decoration: none;
+  transition: color 200ms ease-out;
+}
+
+.obsidianui-terms-toc a > span:first-child,
+.obsidianui-terms-toc-mobile a > span:first-child {
+  flex-shrink: 0;
+  font-size: 0.6875rem;
+  font-variant-numeric: tabular-nums;
+  opacity: 0.7;
+}
+
+.obsidianui-terms-toc a > span:last-child {
+  transition: translate 300ms var(--terms-ease);
+}
+
+.obsidianui-terms-toc a[data-state="read"] {
+  color: var(--terms-copy);
+}
+
+.obsidianui-terms-toc a:hover,
+.obsidianui-terms-toc-mobile a:hover {
+  color: var(--foreground);
+}
+
+.obsidianui-terms-toc a:hover > span:last-child {
+  translate: 2px 0;
+}
+
+.obsidianui-terms-toc a[aria-current="location"] {
+  color: var(--foreground);
+}
+
+.obsidianui-terms-toc a[aria-current="location"] > span:first-child {
+  opacity: 1;
+}
+
+.obsidianui-terms-toc a[aria-current="location"] > span:last-child {
+  translate: 3px 0;
+}
+
+.obsidianui-terms-toc-mobile {
+  display: none;
+  margin-bottom: 2.5rem;
+  border-radius: 16px;
+  background: var(--terms-card);
+  box-shadow: inset 0 0 0 1px var(--terms-ring);
+}
+
+.obsidianui-terms-toc-mobile summary {
+  display: flex;
+  min-height: 3.25rem;
+  align-items: center;
+  justify-content: space-between;
+  padding-inline: 1.25rem;
+  cursor: pointer;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  list-style: none;
+}
+
+.obsidianui-terms-toc-mobile summary::-webkit-details-marker {
+  display: none;
+}
+
+.obsidianui-terms-toc-mobile summary svg {
+  width: 1rem;
+  height: 1rem;
+  color: var(--muted-foreground);
+  transition: rotate 200ms var(--terms-ease);
+}
+
+.obsidianui-terms-toc-mobile[open] summary svg {
+  rotate: 180deg;
+}
+
+.obsidianui-terms-toc-mobile ol {
+  padding: 0 0.625rem 0.875rem;
+}
+
+/* Sections: the number hangs in a gutter so headings and prose share one left edge. */
+
+.obsidianui-terms-body {
+  max-width: 46rem;
+}
+
+.obsidianui-terms-section {
+  display: grid;
+  grid-template-columns: 2.5rem minmax(0, 1fr);
+  align-items: baseline;
+  row-gap: 1rem;
+  padding-block: 2.75rem;
+  border-top: 1px solid var(--terms-line);
+  scroll-margin-top: var(--terms-anchor-offset);
+}
+
+.obsidianui-terms-section:first-of-type {
+  padding-top: 0;
+  border-top: 0;
+}
+
+.obsidianui-terms-number {
+  color: var(--terms-quiet);
+  font-size: 0.8125rem;
+  font-variant-numeric: tabular-nums;
+  font-weight: 500;
+}
+
+.obsidianui-terms-section h2 {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  line-height: 1.35;
+  text-wrap: balance;
+}
+
+.obsidianui-terms-anchor {
+  margin-left: 0.5rem;
+  color: var(--terms-quiet);
+  font-weight: 400;
+  text-decoration: none;
+  opacity: 0;
+  transition: opacity 150ms ease-out;
+}
+
+.obsidianui-terms-section h2:hover .obsidianui-terms-anchor,
+.obsidianui-terms-anchor:focus-visible {
+  opacity: 1;
+}
+
+.obsidianui-terms-prose {
+  display: flex;
+  grid-column: 2;
+  flex-direction: column;
+  gap: 0.875rem;
+  max-width: 40rem;
+  color: var(--terms-copy);
+  font-size: 0.9375rem;
+  line-height: 1.75;
+}
+
+.obsidianui-terms-prose p {
+  margin: 0;
+  text-wrap: pretty;
+}
+
+.obsidianui-terms-prose h3 {
+  margin: 0.875rem 0 -0.375rem;
+  color: var(--foreground);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.5;
+}
+
+.obsidianui-terms-prose ul {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.obsidianui-terms-prose li {
+  position: relative;
+  padding-left: 1.125rem;
+  text-wrap: pretty;
+}
+
+.obsidianui-terms-prose li::before {
+  position: absolute;
+  top: 0.78em;
+  left: 0.125rem;
+  width: 0.3125rem;
+  height: 0.3125rem;
+  border-radius: 50%;
+  background: var(--terms-quiet);
+  content: "";
+}
+
+.obsidianui-terms-prose strong {
+  color: var(--foreground);
+  font-weight: 600;
+}
+
+.obsidianui-terms a:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
+.obsidianui-terms-prose a:not([class]) {
+  color: var(--foreground);
+  text-decoration: underline;
+  text-decoration-color: color-mix(in oklab, var(--foreground) 22%, transparent);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  transition: text-decoration-color 150ms ease-out;
+}
+
+.obsidianui-terms-prose a:not([class]):hover {
+  text-decoration-color: var(--foreground);
+}
+
+/* Callouts */
+
+.obsidianui-terms-callout {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  margin-block: 0.125rem;
+  padding: 1.125rem 1.25rem;
+  border-radius: 16px;
+  background: var(--terms-card);
+  box-shadow: inset 0 0 0 1px var(--terms-ring);
+}
+
+.obsidianui-terms-callout-icon {
+  flex-shrink: 0;
+  width: 1.125rem;
+  height: 1.125rem;
+  margin-top: 0.1875rem;
+  color: var(--terms-quiet);
+}
+
+.obsidianui-terms-callout[data-tone="warning"] .obsidianui-terms-callout-icon {
+  color: var(--terms-warn);
+}
+
+.obsidianui-terms-callout > div {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.obsidianui-terms-callout strong {
+  font-size: 0.9375rem;
+  line-height: 1.5;
+}
+
+.obsidianui-terms-callout p {
+  font-size: 0.875rem;
+  line-height: 1.65;
+}
+
+.obsidianui-terms-callout .obsidianui-terms-actions {
+  margin-top: 0.75rem;
+}
+
+/* Actions */
+
+.obsidianui-terms-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.625rem;
+  margin-top: 0.5rem;
+}
+
+.obsidianui-terms-actions svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+/* RaisedButton sets its colours inline; the dark theme needs a light fill to stand off the black page. */
+.dark .obsidianui-terms-primary {
+  border-color: rgb(255 255 255 / 0.6) !important;
+  background-color: #f4f4f5 !important;
+  color: #09090b !important;
+  box-shadow: 0 4px 14px -4px rgb(255 255 255 / 0.18) !important;
+}
+
+.dark .obsidianui-terms-primary:hover {
+  background-color: #fff !important;
+}
+
+.obsidianui-terms-secondary {
+  display: inline-flex;
+  min-height: 2.5rem;
+  align-items: center;
+  gap: 0.5rem;
+  padding-inline: 1rem;
+  border-radius: 12px;
+  background: rgb(0 0 0 / 0.06);
+  color: var(--foreground);
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1;
+  text-decoration: none;
+  transition-property: background-color, scale;
+  transition-duration: 150ms;
+  transition-timing-function: ease-out;
+}
+
+.obsidianui-terms-secondary:hover {
+  background: rgb(0 0 0 / 0.1);
+}
+
+.obsidianui-terms-callout .obsidianui-terms-secondary {
+  background: var(--background);
+  box-shadow: inset 0 0 0 1px var(--terms-line);
+}
+
+.obsidianui-terms-callout .obsidianui-terms-secondary:hover {
+  background: color-mix(in oklab, var(--foreground) 4%, var(--background));
+}
+
+.dark .obsidianui-terms-secondary,
+.dark .obsidianui-terms-callout .obsidianui-terms-secondary {
+  background: #1a1a1c;
+  box-shadow:
+    inset 0 0 0 1px rgb(255 255 255 / 0.07),
+    inset 0 1px 0 rgb(255 255 255 / 0.05);
+}
+
+.dark .obsidianui-terms-secondary:hover,
+.dark .obsidianui-terms-callout .obsidianui-terms-secondary:hover {
+  background: #232326;
+}
+
+.obsidianui-terms-secondary:active {
+  scale: 0.96;
+}
+
+@media (max-width: 960px) {
+  .obsidianui-terms-layout {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0;
+    margin-top: 4rem;
+  }
+
+  .obsidianui-terms-aside {
+    display: none;
+  }
+
+  .obsidianui-terms-toc-mobile {
+    display: block;
+  }
+
+  .obsidianui-terms-body {
+    max-width: none;
+  }
+
+  .obsidianui-terms-summary-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .obsidianui-terms-summary-grid li:nth-child(n) {
+    grid-column: span 1;
+  }
+
+  .obsidianui-terms-summary-grid li:last-child {
+    grid-column: 1 / -1;
+  }
+
+  .obsidianui-terms-summary-grid li:nth-child(n)::before,
+  .obsidianui-terms-summary-grid li:nth-child(n)::after {
+    border: 0;
+  }
+
+  .obsidianui-terms-summary-grid li:nth-child(n + 3)::before {
+    top: 0;
+    right: 1.5rem;
+    left: 1.5rem;
+    border-top: 2px dotted var(--terms-dots);
+  }
+
+  .obsidianui-terms-summary-grid li:is(:nth-child(2), :nth-child(4))::after {
+    top: 1.5rem;
+    bottom: 1.5rem;
+    left: 0;
+    border-left: 2px dotted var(--terms-dots);
+  }
+}
+
+@media (max-width: 639px) {
+  .obsidianui-terms {
+    padding: 0.75rem 1rem 5rem;
+  }
+
+  .obsidianui-terms-hero {
+    padding: 3.25rem 1.25rem 2.25rem;
+    border-radius: 20px;
+  }
+
+  .obsidianui-terms-hero > .obsidianui-terms-meta {
+    flex-direction: column;
+    gap: 0.125rem;
+  }
+
+  .obsidianui-terms-meta-dot {
+    display: none;
+  }
+
+  .obsidianui-terms-summary {
+    margin-top: 3.5rem;
+  }
+
+  .obsidianui-terms-summary-grid {
+    grid-template-columns: minmax(0, 1fr);
+    border-radius: 18px;
+  }
+
+  .obsidianui-terms-summary-grid li {
+    padding: 1.25rem;
+  }
+
+  .obsidianui-terms-summary-grid li:nth-child(n)::after {
+    border: 0;
+  }
+
+  .obsidianui-terms-summary-grid li:nth-child(n + 2)::before {
+    top: 0;
+    right: 1.25rem;
+    left: 1.25rem;
+    border-top: 2px dotted var(--terms-dots);
+  }
+
+  .obsidianui-terms-section {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: 0.5rem;
+    padding-block: 2.25rem;
+  }
+
+  .obsidianui-terms-prose {
+    grid-column: 1;
+    margin-top: 0.5rem;
+  }
+
+  .obsidianui-terms-callout {
+    padding: 1rem;
+  }
+
+  .obsidianui-terms-actions > * {
+    flex: 1 1 auto;
+    justify-content: center;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html:has(.obsidianui-terms) {
+    scroll-behavior: auto;
+  }
+
+  .obsidianui-terms *,
+  .obsidianui-terms *::before,
+  .obsidianui-terms *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  .obsidianui-terms-secondary:active,
+  .obsidianui-terms-jump a:active {
+    scale: none;
+  }
+}

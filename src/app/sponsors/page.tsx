@@ -2,7 +2,7 @@ import SponsorsPage from "@/components/pages/sponsors-page";
 import { createPageMetadata } from "@/lib/site-metadata";
 
 const title = "Sponsors | ObsidianUI";
-const description = "Sponsor ObsidianUI, an open-source React UI library. Explore Platinum ($150/month) and Gold ($100/month), or ask about a custom package.";
+const description = "Sponsor ObsidianUI, an open-source React UI library. Explore Diamond ($200/month) and Gold ($100/month), or ask about a custom package.";
 const url = "https://www.obsidianui.dev/sponsors";
 
 export const metadata = {

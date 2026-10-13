@@ -6,6 +6,7 @@ import { motion, useReducedMotion } from "motion/react";
 import { WeeklyComponentBadge } from "@/components/landing/weekly-component-badge";
 import GlassSearchBar from "@/components/landing/glass-search-bar";
 import { RaisedButton } from "@/components/ui/raised-button";
+import { HeroSponsorPill } from "@/components/landing/hero-sponsor-pill";
 import "./landing-motion.css";
 
 export const HeroSection = () => {
@@ -77,8 +78,12 @@ export const HeroSection = () => {
           }}
         />
 
+        <div className="landing-intro landing-intro-sponsor relative z-10 flex justify-center px-4 pt-10 md:pt-0">
+          <HeroSponsorPill text="Become the first sponsor" />
+        </div>
+
         {/* Hero Content */}
-        <div className="w-full max-w-7xl z-10 flex flex-col md:flex-row items-center justify-center mb-12 px-4 pt-16 md:pt-0">
+        <div className="w-full max-w-7xl z-10 flex flex-col md:flex-row items-center justify-center mb-12 px-4 pt-2 md:pt-6">
           {/* Left Column */}
           <div className="flex flex-col items-start justify-center w-full md:w-1/2 px-4 sm:px-6 py-8 md:p-6 lg:p-12 md:pt-0 z-10 text-pretty">
             <div className="landing-intro mb-4 md:mb-6">

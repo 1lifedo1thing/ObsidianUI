@@ -1,0 +1,484 @@
+.obsidianui-thanks {
+  --thanks-surface: #fafafa;
+  --thanks-card: #f4f4f5;
+  --thanks-card-ring: rgb(0 0 0 / 0.04);
+  --thanks-line: rgb(0 0 0 / 0.08);
+  --thanks-dots: rgb(0 0 0 / 0.18);
+  --thanks-marker: rgb(0 0 0 / 0.06);
+  --thanks-done: #16a34a;
+  --thanks-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  display: flex;
+  width: 100%;
+  max-width: 44rem;
+  flex-direction: column;
+  gap: 3.5rem;
+  margin-inline: auto;
+  padding: 3rem 1.25rem 7rem;
+  font-family: var(--font-inter), sans-serif;
+}
+
+.dark .obsidianui-thanks {
+  --thanks-surface: #0f0f10;
+  --thanks-card: #111113;
+  --thanks-card-ring: rgb(255 255 255 / 0.07);
+  --thanks-line: rgb(255 255 255 / 0.09);
+  --thanks-dots: rgb(255 255 255 / 0.16);
+  --thanks-marker: rgb(255 255 255 / 0.09);
+  --thanks-done: #4ade80;
+}
+
+/* Entrance effects animate only opacity and transforms so they stay on the compositor. */
+@keyframes thanks-rise {
+  from { opacity: 0; translate: 0 12px; }
+}
+
+@keyframes thanks-pop {
+  from { opacity: 0; scale: 0.4; }
+}
+
+@keyframes thanks-draw {
+  from { stroke-dashoffset: 24; }
+}
+
+@keyframes thanks-ripple {
+  from { opacity: 0.6; scale: 1; }
+  to { opacity: 0; scale: 1.7; }
+}
+
+@keyframes thanks-sheen {
+  from { translate: -100% 0; }
+  to { translate: 100% 0; }
+}
+
+@keyframes thanks-fill {
+  from { scale: 0 1; }
+}
+
+/* Hero */
+
+.obsidianui-thanks-hero {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+  overflow: hidden;
+  padding: 3rem 1.5rem 2rem;
+  border-radius: 24px;
+  background:
+    radial-gradient(420px circle at 50% 0%, color-mix(in oklab, var(--thanks-done) 9%, transparent), transparent 70%),
+    linear-gradient(to bottom, #fff 0%, #f9fafb 60%, #f6f7f9 100%);
+  box-shadow: inset 0 0 0 1px var(--thanks-line);
+  text-align: center;
+  isolation: isolate;
+  animation: thanks-rise 560ms var(--thanks-ease) backwards;
+}
+
+.dark .obsidianui-thanks-hero {
+  background:
+    radial-gradient(440px circle at 50% 0%, color-mix(in oklab, var(--thanks-done) 11%, transparent), transparent 70%),
+    linear-gradient(to bottom, #131315 0%, #0e0e10 55%, #0a0a0b 100%);
+  box-shadow:
+    inset 0 0 0 1px var(--thanks-line),
+    inset 0 1px 0 rgb(255 255 255 / 0.06);
+}
+
+/* One light sweep across the card after it lands. */
+.obsidianui-thanks-hero::after {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(105deg, transparent 35%, rgb(255 255 255 / 0.9) 50%, transparent 65%);
+  content: "";
+  pointer-events: none;
+  translate: -100% 0;
+  will-change: translate;
+  animation: thanks-sheen 1400ms ease-out 450ms forwards;
+}
+
+.dark .obsidianui-thanks-hero::after {
+  background: linear-gradient(105deg, transparent 35%, rgb(255 255 255 / 0.05) 50%, transparent 65%);
+}
+
+.obsidianui-thanks-hero > * { animation: thanks-rise 520ms var(--thanks-ease) backwards; }
+.obsidianui-thanks-hero > :nth-child(1) { animation-delay: 60ms; }
+.obsidianui-thanks-hero > :nth-child(2) { animation-delay: 130ms; }
+.obsidianui-thanks-hero > :nth-child(3) { animation-delay: 200ms; }
+.obsidianui-thanks-hero > :nth-child(4) { animation-delay: 270ms; }
+
+.obsidianui-thanks-hero > .obsidianui-thanks-badge {
+  animation: thanks-pop 480ms var(--thanks-ease) 100ms backwards;
+}
+
+.obsidianui-thanks-badge {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 16px;
+  background: color-mix(in oklab, var(--thanks-done) 14%, transparent);
+  color: var(--thanks-done);
+}
+
+.dark .obsidianui-thanks-badge {
+  background: color-mix(in oklab, var(--thanks-done) 12%, transparent);
+  box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--thanks-done) 22%, transparent);
+}
+
+.obsidianui-thanks-badge::after {
+  position: absolute;
+  inset: 0;
+  border: 2px solid var(--thanks-done);
+  border-radius: inherit;
+  content: "";
+  opacity: 0;
+  pointer-events: none;
+  animation: thanks-ripple 1100ms ease-out 550ms;
+}
+
+.obsidianui-thanks-badge svg {
+  width: 1.75rem;
+  height: 1.75rem;
+}
+
+.obsidianui-thanks-badge svg path {
+  stroke-dasharray: 24;
+  animation: thanks-draw 480ms ease-out 380ms backwards;
+}
+
+.obsidianui-thanks h1 {
+  max-width: 32rem;
+  margin: 0;
+  font-size: clamp(1.875rem, 5vw, 2.75rem);
+  font-weight: 500;
+  letter-spacing: -0.045em;
+  line-height: 1.1;
+  text-wrap: balance;
+}
+
+.obsidianui-thanks-hero > p {
+  max-width: 30rem;
+  margin: 0;
+  color: var(--muted-foreground);
+  font-size: 1rem;
+  line-height: 1.6;
+  text-wrap: balance;
+}
+
+/* Progress steps */
+
+.obsidianui-thanks-steps {
+  --step-col: calc((100% - 2.25rem) / 4);
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.75rem;
+  width: 100%;
+  margin: 1.25rem 0 0;
+  padding: 1.5rem 0 0;
+  border-top: 1px solid var(--thanks-line);
+  list-style: none;
+  text-align: left;
+}
+
+/* Track between the step markers, filled up to the current step. */
+.obsidianui-thanks-steps::before,
+.obsidianui-thanks-steps::after {
+  position: absolute;
+  top: calc(1.5rem + 0.875rem - 1px);
+  left: 0.875rem;
+  height: 2px;
+  border-radius: 2px;
+  content: "";
+}
+
+.obsidianui-thanks-steps::before {
+  width: calc(3 * (var(--step-col) + 0.75rem));
+  background: var(--thanks-line);
+}
+
+.obsidianui-thanks-steps::after {
+  width: calc(2 * (var(--step-col) + 0.75rem));
+  background: linear-gradient(90deg, var(--thanks-done), color-mix(in oklab, var(--thanks-done) 40%, var(--foreground)));
+  transform-origin: left center;
+  animation: thanks-fill 800ms var(--thanks-ease) 600ms backwards;
+}
+
+.obsidianui-thanks-steps li {
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+}
+
+.obsidianui-thanks-step-marker {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  flex-shrink: 0;
+  place-items: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: 8px;
+  background: var(--thanks-marker);
+  color: var(--muted-foreground);
+  font-size: 0.75rem;
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+}
+
+.obsidianui-thanks-step-marker svg {
+  width: 0.875rem;
+  height: 0.875rem;
+}
+
+/* Opaque so the progress track passes behind the markers. */
+.obsidianui-thanks-steps .obsidianui-thanks-step-marker {
+  background: color-mix(in oklab, var(--foreground) 7%, var(--thanks-surface));
+}
+
+.obsidianui-thanks-steps li[data-state="done"] .obsidianui-thanks-step-marker {
+  background: color-mix(in oklab, var(--thanks-done) 16%, var(--thanks-surface));
+  color: var(--thanks-done);
+  animation: thanks-pop 420ms var(--thanks-ease) backwards;
+  animation-delay: calc(450ms + var(--i, 0) * 100ms);
+}
+
+.obsidianui-thanks-steps li[data-state="current"] .obsidianui-thanks-step-marker {
+  background: var(--foreground);
+  color: var(--background);
+}
+
+.obsidianui-thanks-step-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.obsidianui-thanks-step-text strong {
+  color: var(--foreground);
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.obsidianui-thanks-step-text > span {
+  color: var(--muted-foreground);
+  font-size: 0.8125rem;
+  line-height: 1.5;
+}
+
+.obsidianui-thanks-steps li[data-state="next"] strong {
+  color: var(--muted-foreground);
+}
+
+/* Sections */
+
+.obsidianui-thanks > section:not(.obsidianui-thanks-hero) {
+  animation: thanks-rise 560ms var(--thanks-ease) 380ms backwards;
+}
+
+.obsidianui-thanks > .obsidianui-thanks-note {
+  animation-delay: 480ms;
+}
+
+.obsidianui-thanks-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.obsidianui-thanks-heading h2 {
+  margin: 0 0 0.375rem;
+  font-size: 1.375rem;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+}
+
+.obsidianui-thanks-heading p {
+  margin: 0;
+  color: var(--muted-foreground);
+  font-size: 0.9375rem;
+  line-height: 1.6;
+}
+
+/* Asset checklist: one joined card, rows split by dotted rules. */
+
+.obsidianui-thanks-checklist {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  border-radius: 20px;
+  background: var(--thanks-card);
+  box-shadow: inset 0 0 0 1px var(--thanks-card-ring);
+  list-style: none;
+}
+
+.obsidianui-thanks-checklist li {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1.125rem 1.25rem;
+}
+
+.obsidianui-thanks-checklist li + li::before {
+  position: absolute;
+  top: 0;
+  right: 1.25rem;
+  left: 1.25rem;
+  border-top: 2px dotted var(--thanks-dots);
+  content: "";
+}
+
+/* Actions */
+
+.obsidianui-thanks-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+}
+
+.obsidianui-thanks-section .obsidianui-thanks-actions {
+  justify-content: flex-start;
+}
+
+.obsidianui-thanks-actions svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+/* RaisedButton sets its colours inline; the dark theme needs a light fill to stand off the black page. */
+.dark .obsidianui-thanks-primary {
+  border-color: rgb(255 255 255 / 0.6) !important;
+  background-color: #f4f4f5 !important;
+  color: #09090b !important;
+  box-shadow: 0 4px 14px -4px rgb(255 255 255 / 0.18) !important;
+}
+
+.dark .obsidianui-thanks-primary:hover {
+  background-color: #fff !important;
+}
+
+.obsidianui-thanks-secondary {
+  display: inline-flex;
+  min-height: 2.75rem;
+  align-items: center;
+  gap: 0.5rem;
+  padding-inline: 1.25rem;
+  border-radius: 12px;
+  background: rgb(0 0 0 / 0.06);
+  color: var(--foreground);
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition-property: background-color, scale;
+  transition-duration: 150ms;
+  transition-timing-function: ease-out;
+}
+
+.obsidianui-thanks-secondary:hover {
+  background: rgb(0 0 0 / 0.1);
+}
+
+.dark .obsidianui-thanks-secondary {
+  background: #1a1a1c;
+  box-shadow:
+    inset 0 0 0 1px rgb(255 255 255 / 0.07),
+    inset 0 1px 0 rgb(255 255 255 / 0.05);
+}
+
+.dark .obsidianui-thanks-secondary:hover {
+  background: #232326;
+}
+
+.obsidianui-thanks-secondary:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
+.obsidianui-thanks-secondary:active {
+  scale: 0.96;
+}
+
+/* Footer note */
+
+.obsidianui-thanks-note {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--thanks-line);
+  color: var(--muted-foreground);
+  font-size: 0.875rem;
+  line-height: 1.65;
+}
+
+.obsidianui-thanks-note p {
+  margin: 0;
+}
+
+.obsidianui-thanks-note a {
+  color: var(--foreground);
+  text-decoration: underline;
+  text-decoration-color: color-mix(in oklab, var(--foreground) 25%, transparent);
+  text-underline-offset: 4px;
+  transition: text-decoration-color 150ms ease-out;
+}
+
+.obsidianui-thanks-note a:hover {
+  text-decoration-color: var(--foreground);
+}
+
+@media (max-width: 639px) {
+  .obsidianui-thanks {
+    gap: 2.5rem;
+    padding-top: 1.5rem;
+  }
+
+  .obsidianui-thanks-hero {
+    padding: 2.25rem 1.25rem 1.5rem;
+    border-radius: 20px;
+  }
+
+  .obsidianui-thanks-checklist {
+    border-radius: 18px;
+  }
+
+  .obsidianui-thanks-steps {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .obsidianui-thanks-steps::before,
+  .obsidianui-thanks-steps::after {
+    display: none;
+  }
+
+  .obsidianui-thanks-steps li {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 0.875rem;
+  }
+
+  .obsidianui-thanks-actions > * {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .obsidianui-thanks,
+  .obsidianui-thanks *,
+  .obsidianui-thanks *::before,
+  .obsidianui-thanks *::after {
+    animation: none !important;
+  }
+
+  .obsidianui-thanks-secondary:active {
+    scale: none;
+  }
+}

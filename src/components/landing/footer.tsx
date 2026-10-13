@@ -43,6 +43,15 @@ const columns = [
       { title: "CLI", href: "/docs/cli" },
     ],
   },
+  {
+    title: "Legal",
+    links: [
+      { title: "Terms of Service", href: "/terms" },
+      { title: "Refund policy", href: "/terms#refunds" },
+      { title: "Cancellation", href: "/terms#cancellation" },
+      { title: "Privacy", href: "/terms#privacy" },
+    ],
+  },
 ];
 
 export default function Footer() {

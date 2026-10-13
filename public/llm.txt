@@ -54,6 +54,7 @@ Request any published page with Accept: text/markdown or read its direct Markdow
 - [Project One](https://www.obsidianui.dev/markdown/project-one.md): Template preview and separate source repository.
 - [Sponsors](https://www.obsidianui.dev/markdown/sponsors.md): Platform sponsors, monthly sponsorship tiers, benefits, and email inquiries.
 - [Prompts](https://www.obsidianui.dev/markdown/prompts.md): Copy-ready prompts for coding agents, each with its own Markdown file.
+- [Terms of Service](https://www.obsidianui.dev/markdown/terms.md): Website use, MIT-licensed code, sponsorship billing, no refunds, and cancellation.
 
 ## Optional
 

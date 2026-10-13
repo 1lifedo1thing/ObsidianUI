@@ -3,6 +3,7 @@ import { readdir } from 'node:fs/promises';
 import path from 'node:path';
 import { prompts } from '../lib/prompts';
 import { docsSearchDetails } from '../lib/site-metadata';
+import { termsUpdated } from '../lib/terms';
 
 export const dynamic = 'force-static';
 
@@ -19,11 +20,12 @@ const pages: Record<string, PageDetails> = {
     '/templates': { lastModified: '2026-10-13', priority: 0.8, changeFrequency: 'monthly' },
     '/prompts': { lastModified: latestPromptDate, priority: 0.7, changeFrequency: 'weekly' },
     '/project-one': { lastModified: '2026-09-27', priority: 0.6, changeFrequency: 'monthly' },
-    '/sponsors': { lastModified: '2026-09-28', priority: 0.5, changeFrequency: 'monthly' },
+    '/sponsors': { lastModified: '2026-10-13', priority: 0.5, changeFrequency: 'monthly' },
     '/developers': { lastModified: '2026-09-27', priority: 0.5, changeFrequency: 'monthly' },
     '/api': { lastModified: '2026-09-27', priority: 0.5, changeFrequency: 'monthly' },
     '/authentication': { lastModified: '2026-09-27', priority: 0.5, changeFrequency: 'monthly' },
     '/mcp': { lastModified: '2026-09-27', priority: 0.5, changeFrequency: 'monthly' },
+    '/terms': { lastModified: termsUpdated.iso, priority: 0.3, changeFrequency: 'yearly' },
     ...Object.fromEntries(prompts.map(prompt => [
         `/prompts/${prompt.slug}`,
         { lastModified: prompt.date, priority: 0.6, changeFrequency: 'monthly' } satisfies PageDetails,

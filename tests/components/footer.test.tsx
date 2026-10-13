@@ -10,11 +10,14 @@ import Footer from "@/components/landing/footer";
 describe("site footer", () => {
   beforeEach(() => { route.pathname = "/"; });
 
-  it("adapts the four reference columns to real ObsidianUI destinations", () => {
+  it("links every footer column to real ObsidianUI destinations", () => {
     render(<Footer />);
     const navigation = screen.getByRole("navigation", { name: "Footer" });
     expect(within(navigation).getAllByRole("heading").map(heading => heading.textContent))
-      .toEqual(["Product", "Socials", "Open Source", "Get started"]);
+      .toEqual(["Product", "Socials", "Open Source", "Get started", "Legal"]);
+    expect(screen.getByRole("link", { name: "Terms of Service" })).toHaveAttribute("href", "/terms");
+    expect(screen.getByRole("link", { name: "Refund policy" })).toHaveAttribute("href", "/terms#refunds");
+    expect(screen.getByRole("link", { name: "Cancellation" })).toHaveAttribute("href", "/terms#cancellation");
     expect(screen.getByRole("link", { name: "Sponsors" })).toHaveAttribute("href", "/sponsors");
     expect(screen.getByRole("link", { name: "Prompts" })).toHaveAttribute("href", "/prompts");
     expect(screen.getByRole("link", { name: "Developers" })).toHaveAttribute("href", "/developers");

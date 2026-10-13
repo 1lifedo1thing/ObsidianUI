@@ -8,6 +8,7 @@
   "/api": "/markdown/api.md",
   "/authentication": "/markdown/authentication.md",
   "/mcp": "/markdown/mcp.md",
+  "/terms": "/markdown/terms.md",
   "/prompts": "/markdown/prompts.md",
   "/prompts/arix-hero-section": "/markdown/prompts/arix-hero-section.md",
   "/docs/installation": "/markdown/docs/installation.md",

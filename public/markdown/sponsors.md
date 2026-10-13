@@ -11,17 +11,19 @@ Platform Partners - Vercel [ Hosting Sponsor ] & Tracwell [Analytics Sponsor ]
 
 ## Monthly sponsorship tiers
 
-### Platinum — $150/month
+### Diamond — $200/month
 
 Largest logo on the sponsors page, home page, and README; a shoutout on X; and a direct line for feedback and requests.
 
 ### Gold — $100/month
 
-Larger logo on the sponsors page and README, a logo on the home page, a shoutout on X, and a direct line for feedback and requests.
+Larger logo on the sponsors page and README, a logo on the home page, and a shoutout on X.
 
 ## How to become a sponsor
 
-[Compare sponsorship tiers](https://www.obsidianui.dev/sponsors#tiers). Select a tier to contact Atharv by email, X, or Telegram. Open sponsor slots link to the pricing section.
+[Compare sponsorship tiers](https://www.obsidianui.dev/sponsors#tiers). Select a tier to pay through Dodo Payments hosted checkout. After payment, the tier's welcome page lists the logo, link, and handles to send to Atharv by email, X, or Telegram, and the placement is added by hand. Open sponsor slots link to the pricing section.
+
+Sponsorships renew monthly until cancelled and payments are non-refundable. To cancel or update the card, use the billing portal link in the Dodo Payments receipt, or DM Atharv on X or Telegram, or send an email; the placement stays live until the end of the paid period. Read the [Terms of Service](https://www.obsidianui.dev/terms#sponsorships) for details.
 
 - [Email jadavatharv2010@gmail.com](mailto:jadavatharv2010@gmail.com?subject=ObsidianUI%20sponsorship%20inquiry)
 - [DM on X](https://x.com/athrix_codes)

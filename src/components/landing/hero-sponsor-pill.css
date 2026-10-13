@@ -1,0 +1,179 @@
+/* Raised surface mirrors RaisedButton's top sheen and hairline edge, without a drop shadow. */
+.hero-sponsor {
+  --sponsor-fill: linear-gradient(180deg, #f7f7f8 0%, #eeeef0 100%);
+  --sponsor-fill-hover: linear-gradient(180deg, #f2f2f3 0%, #e8e8eb 100%);
+  --sponsor-edge: rgb(0 0 0 / 0.07);
+  --sponsor-sheen-top: rgb(255 255 255 / 0.95);
+  --sponsor-sheen: rgb(255 255 255 / 0.55);
+  --sponsor-label: #6b6b73;
+  --sponsor-name: #18181b;
+  --sponsor-divider: rgb(0 0 0 / 0.12);
+  position: relative;
+  isolation: isolate;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  height: 42px;
+  padding-inline: 18px 15px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: var(--sponsor-fill);
+  box-shadow: inset 0 0 0 1px var(--sponsor-edge);
+  font-family: var(--font-geist), sans-serif;
+  font-size: 15px;
+  line-height: 1;
+  white-space: nowrap;
+  text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
+  transition-property: scale;
+  transition-duration: 200ms;
+  transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.dark .hero-sponsor {
+  --sponsor-fill: linear-gradient(180deg, #2c2c2e 0%, #18181a 100%);
+  --sponsor-fill-hover: linear-gradient(180deg, #323234 0%, #1d1d1f 100%);
+  --sponsor-edge: rgb(255 255 255 / 0.07);
+  /* A bright top border reads as a harsh line on dark; the soft sheen alone carries the lift. */
+  --sponsor-sheen-top: transparent;
+  --sponsor-sheen: rgb(255 255 255 / 0.07);
+  --sponsor-label: #8f8f96;
+  --sponsor-name: #fafafa;
+  --sponsor-divider: rgb(255 255 255 / 0.14);
+}
+
+.hero-sponsor::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  border-top: 1px solid var(--sponsor-sheen-top);
+  background: linear-gradient(180deg, var(--sponsor-sheen) 0%, transparent 55%);
+  pointer-events: none;
+}
+
+.dark .hero-sponsor {
+  box-shadow:
+    inset 0 0 0 1px var(--sponsor-edge),
+    inset 0 -1px 0 rgb(0 0 0 / 0.45);
+}
+
+.hero-sponsor:hover {
+  background: var(--sponsor-fill-hover);
+}
+
+.hero-sponsor:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 3px;
+}
+
+.hero-sponsor:active {
+  scale: 0.96;
+}
+
+.hero-sponsor-label {
+  color: var(--sponsor-name);
+  font-weight: 500;
+}
+
+.hero-sponsor-divider {
+  width: 1px;
+  height: 15px;
+  background: var(--sponsor-divider);
+}
+
+.hero-sponsor-name {
+  color: var(--sponsor-name);
+  font-weight: 600;
+  letter-spacing: -0.015em;
+}
+
+/* Two stacked arrows: one leaves up-right while its twin slides in from bottom-left. */
+.hero-sponsor-arrow {
+  position: relative;
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  overflow: hidden;
+  color: var(--sponsor-label);
+  transition: color 200ms ease-out;
+}
+
+.hero-sponsor-arrow svg {
+  position: absolute;
+  inset: 0;
+  width: 15px;
+  height: 15px;
+  transition: translate 300ms ease-out;
+}
+
+.hero-sponsor-arrow-in {
+  translate: -15px 15px;
+}
+
+.hero-sponsor:is(:hover, :focus-visible) .hero-sponsor-arrow {
+  color: var(--sponsor-name);
+}
+
+.hero-sponsor:is(:hover, :focus-visible) .hero-sponsor-arrow-out {
+  translate: 15px -15px;
+}
+
+.hero-sponsor:is(:hover, :focus-visible) .hero-sponsor-arrow-in {
+  translate: 0 0;
+}
+
+.hero-sponsor .hero-sponsor-text {
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+.hero-sponsor[data-size="sm"] {
+  gap: 7px;
+  height: 32px;
+  padding-inline: 13px 11px;
+  font-size: 13px;
+}
+
+.hero-sponsor[data-size="sm"] .hero-sponsor-name {
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+.hero-sponsor[data-size="sm"] .hero-sponsor-arrow,
+.hero-sponsor[data-size="sm"] .hero-sponsor-arrow svg {
+  width: 13px;
+  height: 13px;
+}
+
+.hero-sponsor[data-size="sm"] .hero-sponsor-arrow-in {
+  translate: -13px 13px;
+}
+
+.hero-sponsor[data-size="sm"]:is(:hover, :focus-visible) .hero-sponsor-arrow-out {
+  translate: 13px -13px;
+}
+
+.hero-sponsor[data-size="sm"]:is(:hover, :focus-visible) .hero-sponsor-arrow-in {
+  translate: 0 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-sponsor-arrow svg {
+    transition: none;
+  }
+
+  .hero-sponsor:active {
+    scale: none;
+  }
+}
+
+@media (width < 24rem) {
+  .hero-sponsor {
+    gap: 10px;
+    height: 40px;
+    padding-inline: 15px 13px;
+    font-size: 14px;
+  }
+}
