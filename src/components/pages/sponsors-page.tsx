@@ -292,7 +292,7 @@ export default function SponsorsPage() {
         <div ref={statsRef} className="obsidianui-sponsor-stats-grid t-avatar-group" onPointerLeave={() => moveCards(statsRef.current, null)} onPointerCancel={() => moveCards(statsRef.current, null)}>
           {[
             { value: "Open source", label: "Built in public on GitHub" },
-            { value: "40+", label: "Components" },
+            { value: "10+", label: "Components" },
             { value: "500k+", label: "Pageviews last month" },
             { value: "150k+", label: "Pageviews last 7 days" },
           ].map((stat, index) => (
